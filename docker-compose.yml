@@ -1,0 +1,10 @@
+services:
+  dts:
+    build: .
+    restart: unless-stopped
+    ports: ["127.0.0.1:3000:3000"]
+    volumes: ["./data:/data"]
+    environment:
+      TZ: Asia/Manila
+      TRUST_PROXY: "1"      # the proxy in front terminates HTTPS
+      COOKIE_SECURE: "1"

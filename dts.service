@@ -1,0 +1,16 @@
+[Unit]
+Description=Document Tracking & Routing System
+After=network.target
+
+[Service]
+User=dts
+WorkingDirectory=/opt/dts
+Environment=PORT=3000 HOST=127.0.0.1 DATA_DIR=/var/lib/dts TZ=Asia/Manila TRUST_PROXY=1 COOKIE_SECURE=1
+ExecStart=/usr/bin/node --disable-warning=ExperimentalWarning server.js
+Restart=on-failure
+NoNewPrivileges=true
+ProtectSystem=full
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

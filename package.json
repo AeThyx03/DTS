@@ -1,0 +1,10 @@
+{
+  "name": "document-tracking-routing-system",
+  "version": "1.0.0",
+  "description": "Multi-user document tracking and routing system (Node.js + SQLite, no dependencies)",
+  "main": "server.js",
+  "scripts": { "start": "node server.js", "demo": "SEED_DEMO=1 DATA_DIR=./demo-data node server.js", "test": "node test/api.test.js" },
+  "engines": { "node": ">=22.13" },
+  "license": "UNLICENSED",
+  "private": true
+}
