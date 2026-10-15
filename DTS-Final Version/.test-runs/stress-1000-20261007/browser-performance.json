@@ -1,0 +1,320 @@
+{
+  "samples": [
+    {
+      "operation": "Login to usable dashboard",
+      "ms": 1782.3389000000002
+    },
+    {
+      "operation": "Dashboard reload",
+      "ms": 1573.0666
+    },
+    {
+      "operation": "Search 1,000 records",
+      "ms": 50.91290000000026
+    },
+    {
+      "operation": "Sort by subject",
+      "ms": 70.84699999999975
+    },
+    {
+      "operation": "Next page",
+      "ms": 97.2498000000005
+    },
+    {
+      "operation": "Overdue filter",
+      "ms": 154.3708000000006
+    },
+    {
+      "operation": "Document details with history",
+      "ms": 69.68039999999928
+    },
+    {
+      "operation": "Dashboard reload",
+      "ms": 1519.0872999999992
+    },
+    {
+      "operation": "Search 1,000 records",
+      "ms": 50.35460000000057
+    },
+    {
+      "operation": "Sort by subject",
+      "ms": 74.68199999999888
+    },
+    {
+      "operation": "Next page",
+      "ms": 129.61059999999998
+    },
+    {
+      "operation": "Overdue filter",
+      "ms": 172.6993999999995
+    },
+    {
+      "operation": "Document details with history",
+      "ms": 59.037899999999354
+    },
+    {
+      "operation": "Dashboard reload",
+      "ms": 1523.7291000000005
+    },
+    {
+      "operation": "Search 1,000 records",
+      "ms": 49.87580000000162
+    },
+    {
+      "operation": "Sort by subject",
+      "ms": 69.28249999999935
+    },
+    {
+      "operation": "Next page",
+      "ms": 124.82600000000093
+    },
+    {
+      "operation": "Overdue filter",
+      "ms": 155.5591000000004
+    },
+    {
+      "operation": "Document details with history",
+      "ms": 63.45260000000053
+    },
+    {
+      "operation": "Dashboard reload",
+      "ms": 1517.1806000000015
+    },
+    {
+      "operation": "Search 1,000 records",
+      "ms": 49.86279999999897
+    },
+    {
+      "operation": "Sort by subject",
+      "ms": 87.38030000000072
+    },
+    {
+      "operation": "Next page",
+      "ms": 85.44709999999941
+    },
+    {
+      "operation": "Overdue filter",
+      "ms": 162.0036999999993
+    },
+    {
+      "operation": "Document details with history",
+      "ms": 60.79000000000087
+    },
+    {
+      "operation": "Dashboard reload",
+      "ms": 1522.7228999999988
+    },
+    {
+      "operation": "Search 1,000 records",
+      "ms": 70.01430000000255
+    },
+    {
+      "operation": "Sort by subject",
+      "ms": 81.20889999999781
+    },
+    {
+      "operation": "Next page",
+      "ms": 89.5669999999991
+    },
+    {
+      "operation": "Overdue filter",
+      "ms": 197.70250000000306
+    },
+    {
+      "operation": "Document details with history",
+      "ms": 61.28200000000288
+    },
+    {
+      "operation": "analytics navigation",
+      "ms": 98.25150000000212
+    },
+    {
+      "operation": "graphs navigation",
+      "ms": 119.1882000000005
+    },
+    {
+      "operation": "reports navigation",
+      "ms": 784.2417999999998
+    },
+    {
+      "operation": "audit navigation",
+      "ms": 116.98879999999917
+    },
+    {
+      "operation": "Dashboard JS render",
+      "ms": 51.19999999925494
+    },
+    {
+      "operation": "Search JS filter and render",
+      "ms": 3.399999998509884
+    },
+    {
+      "operation": "Dashboard JS render",
+      "ms": 45.5
+    },
+    {
+      "operation": "Search JS filter and render",
+      "ms": 2.900000002235174
+    },
+    {
+      "operation": "Dashboard JS render",
+      "ms": 45.5
+    },
+    {
+      "operation": "Search JS filter and render",
+      "ms": 3.399999998509884
+    },
+    {
+      "operation": "Dashboard JS render",
+      "ms": 47.5
+    },
+    {
+      "operation": "Search JS filter and render",
+      "ms": 2.800000000745058
+    },
+    {
+      "operation": "Dashboard JS render",
+      "ms": 44.899999998509884
+    },
+    {
+      "operation": "Search JS filter and render",
+      "ms": 2.900000002235174
+    },
+    {
+      "operation": "Dashboard JS render",
+      "ms": 45.30000000074506
+    },
+    {
+      "operation": "Search JS filter and render",
+      "ms": 2.899999998509884
+    },
+    {
+      "operation": "Dashboard JS render",
+      "ms": 45.399999998509884
+    },
+    {
+      "operation": "Search JS filter and render",
+      "ms": 3.300000000745058
+    },
+    {
+      "operation": "Dashboard JS render",
+      "ms": 44.30000000074506
+    },
+    {
+      "operation": "Search JS filter and render",
+      "ms": 3.199999999254942
+    },
+    {
+      "operation": "Dashboard JS render",
+      "ms": 44.5
+    },
+    {
+      "operation": "Search JS filter and render",
+      "ms": 2.800000000745058
+    },
+    {
+      "operation": "Dashboard JS render",
+      "ms": 45.5
+    },
+    {
+      "operation": "Search JS filter and render",
+      "ms": 2.800000000745058
+    },
+    {
+      "operation": "Staff For My Action",
+      "ms": 99.63790000000154
+    }
+  ],
+  "summaries": [
+    {
+      "operation": "Login to usable dashboard",
+      "samples": 1,
+      "medianMs": 1782.3389000000002,
+      "maxMs": 1782.3389000000002
+    },
+    {
+      "operation": "Dashboard reload",
+      "samples": 5,
+      "medianMs": 1522.7228999999988,
+      "maxMs": 1573.0666
+    },
+    {
+      "operation": "Search 1,000 records",
+      "samples": 5,
+      "medianMs": 50.35460000000057,
+      "maxMs": 70.01430000000255
+    },
+    {
+      "operation": "Sort by subject",
+      "samples": 5,
+      "medianMs": 74.68199999999888,
+      "maxMs": 87.38030000000072
+    },
+    {
+      "operation": "Next page",
+      "samples": 5,
+      "medianMs": 97.2498000000005,
+      "maxMs": 129.61059999999998
+    },
+    {
+      "operation": "Overdue filter",
+      "samples": 5,
+      "medianMs": 162.0036999999993,
+      "maxMs": 197.70250000000306
+    },
+    {
+      "operation": "Document details with history",
+      "samples": 5,
+      "medianMs": 61.28200000000288,
+      "maxMs": 69.68039999999928
+    },
+    {
+      "operation": "analytics navigation",
+      "samples": 1,
+      "medianMs": 98.25150000000212,
+      "maxMs": 98.25150000000212
+    },
+    {
+      "operation": "graphs navigation",
+      "samples": 1,
+      "medianMs": 119.1882000000005,
+      "maxMs": 119.1882000000005
+    },
+    {
+      "operation": "reports navigation",
+      "samples": 1,
+      "medianMs": 784.2417999999998,
+      "maxMs": 784.2417999999998
+    },
+    {
+      "operation": "audit navigation",
+      "samples": 1,
+      "medianMs": 116.98879999999917,
+      "maxMs": 116.98879999999917
+    },
+    {
+      "operation": "Dashboard JS render",
+      "samples": 10,
+      "medianMs": 45.5,
+      "maxMs": 51.19999999925494
+    },
+    {
+      "operation": "Search JS filter and render",
+      "samples": 10,
+      "medianMs": 2.900000002235174,
+      "maxMs": 3.399999998509884
+    },
+    {
+      "operation": "Staff For My Action",
+      "samples": 1,
+      "medianMs": 99.63790000000154,
+      "maxMs": 99.63790000000154
+    }
+  ],
+  "memory": {
+    "usedJSHeapMiB": 22.22935199737549,
+    "totalJSHeapMiB": 80.33868885040283
+  },
+  "staffActionCount": 140,
+  "errors": []
+}

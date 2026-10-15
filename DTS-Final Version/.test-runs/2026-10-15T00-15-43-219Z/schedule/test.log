@@ -1,0 +1,78 @@
+PASS state carries schedules and leave types
+PASS starting leave types exist and are active
+PASS personnel are the existing users (no second personnel table)
+PASS a user without the permission cannot add (403)
+PASS a user without the permission can still view
+PASS a user without config.manage cannot change leave types (403)
+PASS csrf header still required
+PASS Test 1: inspection saved
+PASS Test 1: ONE record holds both inspectors
+PASS audit fields recorded (created by / at, updated by / at)
+PASS Test 2: leave saved with no conflict
+PASS Test 2: leave spans Sept 30 to Oct 2
+PASS Test 3/4: meeting on a day Engr. A is on leave warns first (409 conflict, nothing saved)
+PASS the warning is worded for the person
+PASS nothing was saved by the refused attempt
+PASS Test 3: an authorised user can review and confirm (warn, then allow)
+PASS Test 3: meeting stored with organizer, participants, link and location
+PASS Test 4: inspection on a leave day is flagged
+PASS Test 5: a meeting inside an inspection window is flagged
+PASS a meeting that only starts when the inspection ends is NOT a conflict (touching times)
+PASS sick leave saved
+PASS Example 3: a meeting at 2 PM on a sick-leave day is flagged
+PASS multi-day inspection saved
+PASS a meeting on the middle day of a multi-day inspection is flagged
+PASS inspection needs personnel
+PASS inspection needs a title
+PASS inspection needs a date
+PASS inspection needs a start time
+PASS inspection end time must be after start
+PASS inspection needs a project or a location
+PASS inspection end date cannot be before the start date
+PASS inspection personnel must be existing users
+PASS leave needs a leave type
+PASS leave type must exist
+PASS leave needs a person
+PASS leave is for exactly one person
+PASS leave needs a start date
+PASS leave end date cannot be before start date
+PASS meeting needs a title
+PASS meeting needs a date
+PASS meeting end time cannot be earlier than start time
+PASS meeting link must be a web address (scripts refused)
+PASS meeting needs an organizer or a participant
+PASS unknown schedule type refused
+PASS meeting links: Google Meet, Teams and Zoom addresses are accepted
+PASS edit keeps ONE record, adds the third inspector and changes the title
+PASS edit keeps who created it, records who updated it
+PASS the type of an existing schedule cannot be changed by an edit
+PASS a schedule does not conflict with itself when edited
+PASS editing into a clash warns
+PASS a user without the permission cannot edit (403)
+PASS a user without the permission cannot delete (403)
+PASS unknown schedule id is 404
+PASS delete removes a real schedule
+PASS the permission can be granted to a role on the Roles page
+PASS a role with the permission can add schedules
+PASS but it still cannot manage leave types (needs config.manage)
+PASS add a leave type
+PASS new leave type got its own id
+PASS a duplicate name is refused
+PASS a blank name is refused
+PASS a leave type cannot be removed
+PASS edit (rename) a leave type
+PASS a leave using it saves
+PASS the rename is stored on the leave type itself (leave records point to it by id)
+PASS deactivate a leave type
+PASS an inactive leave type cannot be chosen for a NEW leave
+PASS but an existing leave that already uses it can still be edited
+PASS schedule changes are in the audit log
+PASS a confirmed conflict is noted in the audit log
+PASS leave type changes are in the audit log
+PASS backup contains schedules and leave types
+PASS restore brings the schedules back
+PASS restoring an older backup (no schedules) leaves current schedules alone and re-seeds leave types
+PASS documents, users and reference lists are still served
+PASS no password hashes leaked in the state
+
+76 passed, 0 failed

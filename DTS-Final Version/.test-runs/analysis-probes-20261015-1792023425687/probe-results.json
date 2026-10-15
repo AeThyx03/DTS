@@ -1,0 +1,16 @@
+{
+  "duplicateUserCreation": {
+    "statuses": [
+      200,
+      200
+    ],
+    "duplicateCount": 2
+  },
+  "malformedRestore": {
+    "status": 500,
+    "persistedInvalidHolidays": [
+      null
+    ]
+  },
+  "isolatedDirectory": "D:\\test server\\staging-dts\\New folder\\dts-final version-workflow\\DTS-Final Version\\.test-runs\\analysis-probes-20261015-1792023425687"
+}

@@ -1,0 +1,16 @@
+PASS empty log form refuses to create a document
+PASS browser log creates and forwards exactly one mock document
+PASS unrelated staff can view without assign, review or release controls
+PASS processing saved
+PASS sup_review saved
+PASS compliance saved
+PASS empty compliance is rejected and remains at staff
+PASS sup_review saved
+PASS div_review saved
+PASS dept_review saved
+PASS cleared saved
+PASS out saved
+PASS history retains compliance response and release destination
+PASS completed document survives reload
+PASS no browser JavaScript errors
+15 passed, 0 failed

@@ -1,0 +1,32 @@
+PASS docs created for two non-CMR types
+PASS new records start with empty draft/revised fields
+PASS External Communication: draft+revised saved
+PASS External Communication: values persisted
+PASS new document type created (reference list)
+PASS doc of the new type created
+PASS newly created type: draft+revised saved
+PASS newly created type: values persisted
+PASS draft only saves
+PASS draft only: revised stays empty
+PASS remove draft (empty string) saves
+PASS revised only saves
+PASS revised only: draft empty
+PASS neither: clear both
+PASS neither: both empty, record intact
+PASS malformed draft URL rejected
+PASS javascript: URL rejected
+PASS rejected values did not overwrite
+PASS non-authorised user cannot modify links
+PASS unauthorised attempt left values unchanged
+PASS create with draft URL only
+PASS created record keeps draft, empty revised
+PASS create with bad URL rejected
+PASS edit action rejects bad URL
+PASS edit action updates and removes links
+PASS edit result: draft removed, revised set
+PASS CMR/PPR record exists
+PASS CMR/PPR: draft+revised saved
+PASS CMR/PPR: URLs persisted
+PASS CMR/PPR: reporting period, region and deadline untouched
+
+30 passed, 0 failed

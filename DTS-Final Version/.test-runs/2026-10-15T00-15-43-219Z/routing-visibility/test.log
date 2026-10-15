@@ -1,0 +1,28 @@
+PASS Scenario A: doc logged and forwarded to Mary (CMSD focal)
+PASS Mary assigns the document to Rey
+PASS Rey is now the assignee, status=processing
+PASS isMyTurn-equivalent: it is now Rey's turn, not Mary's
+PASS It is no longer Mary's turn (she is not the assignee or reviewer)
+PASS An unrelated staff member (Cruz) is not the assignee either
+PASS Judy (div manager) approves, forwarding to Department Manager
+PASS Document is now at dept_review, Oscar's stage
+PASS It is no longer Judy's active turn (status moved past div_review)
+PASS Oscar clears the document for out
+PASS Status is now cleared
+PASS A second, different Admin Staff user (Pacaanas) also sees it as cleared/actionable
+PASS Any Admin Staff (Paling) can log it out, not a hardcoded specific user
+PASS Document is fully out; no longer anyone's active turn
+PASS Cruz is the assignee
+PASS Mojica is not the assignee of Cruz's document
+PASS Martinez (unrelated division manager) is not the assignee either
+PASS Cruz cannot act on a document assigned to someone else (server-enforced, not just hidden)
+PASS Assignment/status survives a fresh state fetch (reload-equivalent)
+PASS Christian Joyce N. Aprochevado can authenticate
+PASS Her name matches exactly
+PASS Her role is Staff
+PASS Her division is CMSD
+PASS She can see the shared registry (participates like any Staff user)
+PASS The new staff member can be assigned a document like any other Staff user
+PASS She can act on her own assigned document (participates fully in the Staff workflow)
+
+26 passed, 0 failed

@@ -1,0 +1,29 @@
+[
+  {
+    "suite": "workflow.ui",
+    "exitCode": 0,
+    "directory": "D:\\test server\\staging-dts\\New folder\\dts-final version-workflow\\DTS-Final Version\\.test-runs\\2026-10-07T05-38-07-404Z\\workflow.ui"
+  },
+  {
+    "suite": "phase11.ui",
+    "exitCode": 1,
+    "directory": "D:\\test server\\staging-dts\\New folder\\dts-final version-workflow\\DTS-Final Version\\.test-runs\\2026-10-07T05-38-07-404Z\\phase11.ui"
+  },
+  {
+    "suite": "schedule.ui",
+    "exitCode": 2,
+    "directory": "D:\\test server\\staging-dts\\New folder\\dts-final version-workflow\\DTS-Final Version\\.test-runs\\2026-10-07T05-38-07-404Z\\schedule.ui"
+  },
+  {
+    "suite": "schedule.attack.ui",
+    "exitCode": 0,
+    "summary": "89 passed, 0 failed",
+    "directory": "D:\\test server\\staging-dts\\New folder\\dts-final version-workflow\\DTS-Final Version\\.test-runs\\2026-10-07T05-38-07-404Z\\schedule.attack.ui"
+  },
+  {
+    "suite": "splash",
+    "exitCode": 0,
+    "summary": "34 passed, 0 failed",
+    "directory": "D:\\test server\\staging-dts\\New folder\\dts-final version-workflow\\DTS-Final Version\\.test-runs\\2026-10-07T05-38-07-404Z\\splash"
+  }
+]

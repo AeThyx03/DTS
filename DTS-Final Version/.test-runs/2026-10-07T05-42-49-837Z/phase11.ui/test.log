@@ -1,0 +1,34 @@
+PASS configured Summary of CMR
+PASS configured PPA to COA
+PASS generated for Feb 2026
+PASS Special Reports lives within Reference lists
+PASS schedule table lists all five reports
+PASS table shows the required columns
+PASS unassigned schedules are flagged
+PASS PPA to COA shows its exact months
+PASS empty form shows a clear validation message
+PASS generated reports tab lists both
+PASS admin has no For My Action entry
+PASS assigned person: For My Action count badge includes the 2 Special Reports
+PASS For My Action shows the Special Report cards
+PASS card shows badge, name, period, deadline, days remaining, status, action
+PASS dashboard registry includes both generated reports
+PASS unrelated person: no Special Reports in For My Action
+PASS unrelated person still sees them on the Dashboard
+PASS unrelated viewer has no workflow action buttons
+PASS no admin menu / route for staff
+PASS stage persisted: sup_review
+PASS stage persisted: compliance
+PASS stage persisted: sup_review
+PASS stage persisted: div_review
+PASS stage persisted: dept_review
+PASS stage persisted: cleared
+PASS stage persisted: out
+PASS completed report retains compliance and release history
+PASS completed report leaves staff action list
+PASS completed report stays in dashboard registry
+PASS reassigned person now sees it in For My Action
+PASS previous person no longer has it as an action (the other one was completed)
+PASS no JavaScript errors in any session
+
+32 passed, 0 failed

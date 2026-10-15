@@ -1,0 +1,3085 @@
+{
+  "counts": {
+    "Available": 104,
+    "Partial": 170,
+    "Equivalent": 40,
+    "Missing": 122,
+    "Unverified": 3
+  },
+  "total": 439,
+  "rows": [
+    {
+      "id": "A1",
+      "section": "Document intake and registration",
+      "requirement": "Register incoming documents.",
+      "status": "Available",
+      "assessment": "Incoming registration is implemented."
+    },
+    {
+      "id": "A2",
+      "section": "Document intake and registration",
+      "requirement": "Automatically generate a unique tracking number.",
+      "status": "Partial",
+      "assessment": "Sequential prefix-year-counter numbers exist for ordinary documents; Special Report display codes omit schedule identity and can repeat."
+    },
+    {
+      "id": "A3",
+      "section": "Document intake and registration",
+      "requirement": "Record date and time received.",
+      "status": "Available",
+      "assessment": "Received timestamp is stored and displayed."
+    },
+    {
+      "id": "A4",
+      "section": "Document intake and registration",
+      "requirement": "Capture sender, originating office, organization, or individual.",
+      "status": "Equivalent",
+      "assessment": "A source text field records sender or originating office; there is no separate sender directory."
+    },
+    {
+      "id": "A5",
+      "section": "Document intake and registration",
+      "requirement": "Record document subject and description.",
+      "status": "Equivalent",
+      "assessment": "Subject and remarks provide subject and description."
+    },
+    {
+      "id": "A6",
+      "section": "Document intake and registration",
+      "requirement": "Select document type, category, and subcategory.",
+      "status": "Partial",
+      "assessment": "Document and communication types and transaction classification exist; no category/subcategory taxonomy."
+    },
+    {
+      "id": "A7",
+      "section": "Document intake and registration",
+      "requirement": "Record reference number and reference date.",
+      "status": "Partial",
+      "assessment": "Reference number exists; no dedicated reference-date field."
+    },
+    {
+      "id": "A8",
+      "section": "Document intake and registration",
+      "requirement": "Identify intended division, focal person, and responsible staff.",
+      "status": "Available",
+      "assessment": "Division, configured focal, assignee and reviewer are tracked."
+    },
+    {
+      "id": "A9",
+      "section": "Document intake and registration",
+      "requirement": "Record the source and method of receipt: physical, email, courier, or digital.",
+      "status": "Partial",
+      "assessment": "Source and communication type exist; receipt channel is not a separate configurable field."
+    },
+    {
+      "id": "A10",
+      "section": "Document intake and registration",
+      "requirement": "Upload scanned documents, PDFs, and supporting files.",
+      "status": "Missing",
+      "assessment": "No binary file upload or attachment storage endpoint."
+    },
+    {
+      "id": "A11",
+      "section": "Document intake and registration",
+      "requirement": "Record the physical folder, box, or cabinet location.",
+      "status": "Missing",
+      "assessment": "No physical storage-location fields."
+    },
+    {
+      "id": "A12",
+      "section": "Document intake and registration",
+      "requirement": "Flag confidential, urgent, or restricted documents.",
+      "status": "Partial",
+      "assessment": "Normal/Urgent priority exists; no confidentiality or restricted-access classification."
+    },
+    {
+      "id": "A13",
+      "section": "Document intake and registration",
+      "requirement": "Duplicate document detection using reference numbers and file hashes.",
+      "status": "Missing",
+      "assessment": "No reference-number duplicate warning or file-hash detection."
+    },
+    {
+      "id": "A14",
+      "section": "Document intake and registration",
+      "requirement": "Bulk registration of multiple documents.",
+      "status": "Missing",
+      "assessment": "Bulk forwarding/release exists, but registration is one document at a time."
+    },
+    {
+      "id": "A15",
+      "section": "Document intake and registration",
+      "requirement": "CSV/Excel import with column mapping and validation.",
+      "status": "Missing",
+      "assessment": "Only whole-system JSON backup restore; no CSV/Excel mapping importer."
+    },
+    {
+      "id": "A16",
+      "section": "Document intake and registration",
+      "requirement": "Email-to-DTS intake or a dedicated upload inbox.",
+      "status": "Missing",
+      "assessment": "No mail intake or upload inbox."
+    },
+    {
+      "id": "A17",
+      "section": "Document intake and registration",
+      "requirement": "QR code or barcode generation for physical folders.",
+      "status": "Missing",
+      "assessment": "No QR/barcode generation."
+    },
+    {
+      "id": "A18",
+      "section": "Document intake and registration",
+      "requirement": "Batch scanning and attachment association.",
+      "status": "Missing",
+      "assessment": "No scanning or attachment ingestion."
+    },
+    {
+      "id": "A19",
+      "section": "Document intake and registration",
+      "requirement": "Automatic acknowledgment receipts.",
+      "status": "Missing",
+      "assessment": "No acknowledgment receipt generation."
+    },
+    {
+      "id": "A20",
+      "section": "Document intake and registration",
+      "requirement": "Registration templates for frequently received document types.",
+      "status": "Missing",
+      "assessment": "Configured reference types are not saved registration form templates."
+    },
+    {
+      "id": "A21",
+      "section": "Document intake and registration",
+      "requirement": "Validation of mandatory fields before submission.",
+      "status": "Available",
+      "assessment": "Required fields and active reference values are checked before logging."
+    },
+    {
+      "id": "A22",
+      "section": "Document intake and registration",
+      "requirement": "Draft registration that can be completed later.",
+      "status": "Partial",
+      "assessment": "A valid received record can be saved without forwarding; there is no incomplete draft/autosave state."
+    },
+    {
+      "id": "A23",
+      "section": "Document intake and registration",
+      "requirement": "Record linking for related documents, attachments, and previous submissions.",
+      "status": "Partial",
+      "assessment": "External document URLs exist; no related-record links or previous-submission relationship model."
+    },
+    {
+      "id": "B1",
+      "section": "Document tracking and lifecycle",
+      "requirement": "Unique tracking number for every document.",
+      "status": "Partial",
+      "assessment": "Ordinary documents have sequential DTS codes; Special Reports generated by different schedules can share SR-year-month labels."
+    },
+    {
+      "id": "B2",
+      "section": "Document tracking and lifecycle",
+      "requirement": "Current status and current location or responsible office.",
+      "status": "Available",
+      "assessment": "Status, current desk, responsible users and division are shown."
+    },
+    {
+      "id": "B3",
+      "section": "Document tracking and lifecycle",
+      "requirement": "Assigned employee and supervising focal person.",
+      "status": "Available",
+      "assessment": "Assignee, division focal, reviewer and manager information is shown."
+    },
+    {
+      "id": "B4",
+      "section": "Document tracking and lifecycle",
+      "requirement": "Complete chronological movement history.",
+      "status": "Available",
+      "assessment": "Operational movements retain timestamp, actor, resulting status, desk and remarks."
+    },
+    {
+      "id": "B5",
+      "section": "Document tracking and lifecycle",
+      "requirement": "Date received, assigned, acted upon, reviewed, approved, and dispatched.",
+      "status": "Available",
+      "assessment": "Movement history records registration, assignment, review, clearance and release times."
+    },
+    {
+      "id": "B6",
+      "section": "Document tracking and lifecycle",
+      "requirement": "Age of document in the current stage.",
+      "status": "Available",
+      "assessment": "Stage entry time drives the current-desk age display."
+    },
+    {
+      "id": "B7",
+      "section": "Document tracking and lifecycle",
+      "requirement": "Total processing time from receipt to closure.",
+      "status": "Partial",
+      "assessment": "Elapsed/current-stage and working-day turnaround are available; the principal turnaround KPI starts at assignment and stops at clearance, not receipt-to-final-release."
+    },
+    {
+      "id": "B8",
+      "section": "Document tracking and lifecycle",
+      "requirement": "Days pending and days overdue.",
+      "status": "Available",
+      "assessment": "Working-day pending and overdue indicators are calculated."
+    },
+    {
+      "id": "B9",
+      "section": "Document tracking and lifecycle",
+      "requirement": "Previous and next workflow steps.",
+      "status": "Equivalent",
+      "assessment": "Lifecycle steps, history and action panel show progress and the permitted next action."
+    },
+    {
+      "id": "B10",
+      "section": "Document tracking and lifecycle",
+      "requirement": "Reason for return, rejection, cancellation, or reassignment.",
+      "status": "Partial",
+      "assessment": "Return reasons are required and reassignment notes are supported; cancellation/rejection states and universally mandatory reassignment reasons are absent."
+    },
+    {
+      "id": "B11",
+      "section": "Document tracking and lifecycle",
+      "requirement": "Related-document links and parent-child relationships.",
+      "status": "Missing",
+      "assessment": "No parent-child or related-document records."
+    },
+    {
+      "id": "B12",
+      "section": "Document tracking and lifecycle",
+      "requirement": "Document status timeline.",
+      "status": "Available",
+      "assessment": "Lifecycle timeline and detailed history are implemented."
+    },
+    {
+      "id": "B13",
+      "section": "Document tracking and lifecycle",
+      "requirement": "Search by tracking number, subject, sender, reference number, or assigned employee.",
+      "status": "Available",
+      "assessment": "Registry metadata search covers these fields."
+    },
+    {
+      "id": "B14",
+      "section": "Document tracking and lifecycle",
+      "requirement": "Archived, closed, cancelled, and reopened records.",
+      "status": "Partial",
+      "assessment": "Released records remain searchable; no archive/cancel/reopen lifecycle."
+    },
+    {
+      "id": "B15",
+      "section": "Document tracking and lifecycle",
+      "requirement": "Physical-document location tracking.",
+      "status": "Missing",
+      "assessment": "No cabinet/folder/physical-location model."
+    },
+    {
+      "id": "B16",
+      "section": "Document tracking and lifecycle",
+      "requirement": "Viewable movement receipt for every handoff.",
+      "status": "Partial",
+      "assessment": "Printable routing slip contains movements; there is no separate acknowledged receipt per handoff."
+    },
+    {
+      "id": "C1",
+      "section": "Workflow and routing engine",
+      "requirement": "Assign documents to a division, focal person, or staff member.",
+      "status": "Available",
+      "assessment": "Division/focal routing and staff assignment are implemented."
+    },
+    {
+      "id": "C2",
+      "section": "Workflow and routing engine",
+      "requirement": "Forward documents between offices and employees.",
+      "status": "Partial",
+      "assessment": "The defined Admin-to-Focal-to-Staff/reviewer chain works; unrestricted office-to-office routing is absent."
+    },
+    {
+      "id": "C3",
+      "section": "Workflow and routing engine",
+      "requirement": "Accept or acknowledge receipt of a forwarded document.",
+      "status": "Missing",
+      "assessment": "No recipient accept/acknowledge action."
+    },
+    {
+      "id": "C4",
+      "section": "Workflow and routing engine",
+      "requirement": "Return documents with comments and required corrections.",
+      "status": "Available",
+      "assessment": "Reviewers return records with required correction comments."
+    },
+    {
+      "id": "C5",
+      "section": "Workflow and routing engine",
+      "requirement": "Resubmit corrected documents to the reviewer.",
+      "status": "Available",
+      "assessment": "Compliance resubmission uses the configured returner or restart path."
+    },
+    {
+      "id": "C6",
+      "section": "Workflow and routing engine",
+      "requirement": "Send documents to multiple reviewers when necessary.",
+      "status": "Partial",
+      "assessment": "Several reviewers act sequentially; no selected multi-reviewer task set."
+    },
+    {
+      "id": "C7",
+      "section": "Workflow and routing engine",
+      "requirement": "Require sequential reviews or allow parallel reviews.",
+      "status": "Partial",
+      "assessment": "Sequential reviews exist; parallel reviews do not."
+    },
+    {
+      "id": "C8",
+      "section": "Workflow and routing engine",
+      "requirement": "Define approval hierarchies.",
+      "status": "Partial",
+      "assessment": "The live hierarchy exists, but arbitrary hierarchies are not configurable through the designer."
+    },
+    {
+      "id": "C9",
+      "section": "Workflow and routing engine",
+      "requirement": "Support OIC or authorized alternate routing.",
+      "status": "Available",
+      "assessment": "Present manager, fallback manager and nominated OIC rules are operational."
+    },
+    {
+      "id": "C10",
+      "section": "Workflow and routing engine",
+      "requirement": "Delegate work during leave or official travel.",
+      "status": "Partial",
+      "assessment": "Manager presence/OIC can be set manually; personnel leave does not automatically trigger delegation."
+    },
+    {
+      "id": "C11",
+      "section": "Workflow and routing engine",
+      "requirement": "Reassign work when an employee is unavailable.",
+      "status": "Available",
+      "assessment": "Authorized reassignment changes the assignee and records the movement."
+    },
+    {
+      "id": "C12",
+      "section": "Workflow and routing engine",
+      "requirement": "Configure routing by document type, source, urgency, or amount/category.",
+      "status": "Partial",
+      "assessment": "Reporting-period documents route through configured region/office designations; arbitrary source/urgency/amount rules exist only as designer simulation, if supported there."
+    },
+    {
+      "id": "C13",
+      "section": "Workflow and routing engine",
+      "requirement": "Require supporting files before allowing a workflow transition.",
+      "status": "Missing",
+      "assessment": "No mandatory supporting-file gate."
+    },
+    {
+      "id": "C14",
+      "section": "Workflow and routing engine",
+      "requirement": "Require a reason when rejecting, cancelling, or bypassing a step.",
+      "status": "Partial",
+      "assessment": "Return-to-sender/correction reasons are required; bypass clear can lack a required reason, and cancel/reject actions do not exist."
+    },
+    {
+      "id": "C15",
+      "section": "Workflow and routing engine",
+      "requirement": "Configure exceptional routing with proper authorization.",
+      "status": "Partial",
+      "assessment": "Override/OIC and reporting designations exist; generic executable exception-rule configuration is absent."
+    },
+    {
+      "id": "C16",
+      "section": "Workflow and routing engine",
+      "requirement": "Automatically update the status when an action is completed.",
+      "status": "Available",
+      "assessment": "Operational actions update status and movement history."
+    },
+    {
+      "id": "C17",
+      "section": "Workflow and routing engine",
+      "requirement": "Prevent unauthorized or invalid workflow transitions.",
+      "status": "Available",
+      "assessment": "The server invokes stage and actor authorization rules before actions; known override behavior is deliberate."
+    },
+    {
+      "id": "C18",
+      "section": "Workflow and routing engine",
+      "requirement": "Preserve the original assignee and full routing history after reassignment.",
+      "status": "Partial",
+      "assessment": "History names the original and replacement assignees; a dedicated immutable original-assignee ID is not maintained."
+    },
+    {
+      "id": "C19",
+      "section": "Workflow and routing engine",
+      "requirement": "Provide a workflow preview showing the next responsible person.",
+      "status": "Partial",
+      "assessment": "Current-desk/lifecycle information and designer simulation show candidates; there is no fully integrated preview of all next operational tasks."
+    },
+    {
+      "id": "C20",
+      "section": "Workflow and routing engine",
+      "requirement": "Support escalation to a supervisor when a task becomes overdue.",
+      "status": "Missing",
+      "assessment": "No time-triggered escalation action."
+    },
+    {
+      "id": "D1",
+      "section": "Task and action management",
+      "requirement": "Personal task inbox.",
+      "status": "Equivalent",
+      "assessment": "For My Action is a document-driven personal task inbox."
+    },
+    {
+      "id": "D2",
+      "section": "Task and action management",
+      "requirement": "Tasks assigned to me.",
+      "status": "Equivalent",
+      "assessment": "The queue and assignee filter show documents requiring the user's action."
+    },
+    {
+      "id": "D3",
+      "section": "Task and action management",
+      "requirement": "Tasks assigned by me.",
+      "status": "Partial",
+      "assessment": "assignedBy is stored/displayed; no dedicated Assigned by me view or filter."
+    },
+    {
+      "id": "D4",
+      "section": "Task and action management",
+      "requirement": "Tasks I submitted for review.",
+      "status": "Equivalent",
+      "assessment": "Assignee plus review-status filters can show the user's submissions."
+    },
+    {
+      "id": "D5",
+      "section": "Task and action management",
+      "requirement": "Tasks awaiting my approval.",
+      "status": "Equivalent",
+      "assessment": "The personal action queue includes documents this user may review or clear."
+    },
+    {
+      "id": "D6",
+      "section": "Task and action management",
+      "requirement": "Returned tasks requiring correction.",
+      "status": "Equivalent",
+      "assessment": "Compliance records return to the assignee and appear in the queue."
+    },
+    {
+      "id": "D7",
+      "section": "Task and action management",
+      "requirement": "Upcoming deadlines and overdue tasks.",
+      "status": "Available",
+      "assessment": "Due dates, due-soon and overdue states are displayed and filterable."
+    },
+    {
+      "id": "D8",
+      "section": "Task and action management",
+      "requirement": "Task priority: low, normal, high, urgent.",
+      "status": "Partial",
+      "assessment": "Normal/Urgent exists; Low/High levels are absent."
+    },
+    {
+      "id": "D9",
+      "section": "Task and action management",
+      "requirement": "Task instructions and specific deliverables.",
+      "status": "Partial",
+      "assessment": "Remarks, review instructions and notes exist; no structured deliverable/task specification."
+    },
+    {
+      "id": "D10",
+      "section": "Task and action management",
+      "requirement": "Internal comments and reviewer notes.",
+      "status": "Available",
+      "assessment": "Reviewer comments and routing-history notes exist."
+    },
+    {
+      "id": "D11",
+      "section": "Task and action management",
+      "requirement": "Checklists for required processing steps.",
+      "status": "Missing",
+      "assessment": "No processing-step checklist model."
+    },
+    {
+      "id": "D12",
+      "section": "Task and action management",
+      "requirement": "Due date and expected completion date.",
+      "status": "Partial",
+      "assessment": "Calculated due date exists; no independent estimated completion date."
+    },
+    {
+      "id": "D13",
+      "section": "Task and action management",
+      "requirement": "Task reassignment with reason.",
+      "status": "Partial",
+      "assessment": "Reassignment accepts a note but does not require a reason in every case."
+    },
+    {
+      "id": "D14",
+      "section": "Task and action management",
+      "requirement": "Mark task as completed with action notes.",
+      "status": "Equivalent",
+      "assessment": "Submission, clearance and release record action notes; no separate generic task completion model."
+    },
+    {
+      "id": "D15",
+      "section": "Task and action management",
+      "requirement": "Attach the resulting document or output.",
+      "status": "Partial",
+      "assessment": "Draft/revised URLs can reference output files; direct output upload is absent."
+    },
+    {
+      "id": "D16",
+      "section": "Task and action management",
+      "requirement": "Record time spent on a task, if required.",
+      "status": "Partial",
+      "assessment": "Elapsed stage time exists; no actual effort/timesheet entry."
+    },
+    {
+      "id": "D17",
+      "section": "Task and action management",
+      "requirement": "Create follow-up tasks linked to the original document.",
+      "status": "Missing",
+      "assessment": "No linked follow-up task objects."
+    },
+    {
+      "id": "D18",
+      "section": "Task and action management",
+      "requirement": "Reminders for tasks approaching their deadline.",
+      "status": "Partial",
+      "assessment": "Due-soon badges and a queue bell are visible; no scheduled reminder delivery."
+    },
+    {
+      "id": "D19",
+      "section": "Task and action management",
+      "requirement": "Supervisor visibility over pending staff tasks.",
+      "status": "Equivalent",
+      "assessment": "Supervisors can inspect staff documents, filters and workload reports; viewing is currently department-wide."
+    },
+    {
+      "id": "E1",
+      "section": "SLA, deadlines, and overdue monitoring",
+      "requirement": "Define processing time limits by document type.",
+      "status": "Available",
+      "assessment": "Document-type thresholds and transaction thresholds are configurable."
+    },
+    {
+      "id": "E2",
+      "section": "SLA, deadlines, and overdue monitoring",
+      "requirement": "Configure separate deadlines for each workflow stage.",
+      "status": "Partial",
+      "assessment": "Admin/Focal desk limits exist; no independently configured processing/review/approval SLA for every stage."
+    },
+    {
+      "id": "E3",
+      "section": "SLA, deadlines, and overdue monitoring",
+      "requirement": "Calculate due dates automatically.",
+      "status": "Available",
+      "assessment": "The shared computeDeadline routine calculates due dates."
+    },
+    {
+      "id": "E4",
+      "section": "SLA, deadlines, and overdue monitoring",
+      "requirement": "Use working days instead of calendar days where applicable.",
+      "status": "Available",
+      "assessment": "Working-day and calendar-day bases are supported."
+    },
+    {
+      "id": "E5",
+      "section": "SLA, deadlines, and overdue monitoring",
+      "requirement": "Maintain a configurable holiday calendar.",
+      "status": "Available",
+      "assessment": "Holiday reference lists are editable."
+    },
+    {
+      "id": "E6",
+      "section": "SLA, deadlines, and overdue monitoring",
+      "requirement": "Define cut-off times and rules for documents received after office hours.",
+      "status": "Missing",
+      "assessment": "No office-hour cutoff or after-hours intake rule."
+    },
+    {
+      "id": "E7",
+      "section": "SLA, deadlines, and overdue monitoring",
+      "requirement": "Configure urgency-based deadlines.",
+      "status": "Missing",
+      "assessment": "Urgent is a label; no separate urgency-based deadline rule."
+    },
+    {
+      "id": "E8",
+      "section": "SLA, deadlines, and overdue monitoring",
+      "requirement": "Show countdowns until deadlines.",
+      "status": "Available",
+      "assessment": "Days remaining and deadline status are displayed."
+    },
+    {
+      "id": "E9",
+      "section": "SLA, deadlines, and overdue monitoring",
+      "requirement": "Flag documents nearing their deadline.",
+      "status": "Available",
+      "assessment": "Configurable dueSoonDays determines the approaching-deadline indicator."
+    },
+    {
+      "id": "E10",
+      "section": "SLA, deadlines, and overdue monitoring",
+      "requirement": "Flag overdue documents.",
+      "status": "Available",
+      "assessment": "Overdue dates and counts are calculated."
+    },
+    {
+      "id": "E11",
+      "section": "SLA, deadlines, and overdue monitoring",
+      "requirement": "Escalate overdue documents to the focal person or supervisor.",
+      "status": "Missing",
+      "assessment": "No automatic supervisory escalation."
+    },
+    {
+      "id": "E12",
+      "section": "SLA, deadlines, and overdue monitoring",
+      "requirement": "Configure reminder intervals.",
+      "status": "Partial",
+      "assessment": "Due-soon display threshold is configurable; repeating notification intervals are absent."
+    },
+    {
+      "id": "E13",
+      "section": "SLA, deadlines, and overdue monitoring",
+      "requirement": "Record reasons for approved extensions.",
+      "status": "Missing",
+      "assessment": "No approval-backed extension action/reason history."
+    },
+    {
+      "id": "E14",
+      "section": "SLA, deadlines, and overdue monitoring",
+      "requirement": "Distinguish active processing time from time awaiting an external party.",
+      "status": "Missing",
+      "assessment": "No external-wait state or auditable SLA pause/resume model."
+    },
+    {
+      "id": "E15",
+      "section": "SLA, deadlines, and overdue monitoring",
+      "requirement": "Track time spent at every stage.",
+      "status": "Equivalent",
+      "assessment": "Movement timestamps and routing-slip interval calculations show desk durations; structured stage-duration analytics are limited."
+    },
+    {
+      "id": "E16",
+      "section": "SLA, deadlines, and overdue monitoring",
+      "requirement": "Generate SLA compliance reports.",
+      "status": "Equivalent",
+      "assessment": "Turnaround and on-time-rate reports provide basic SLA reporting."
+    },
+    {
+      "id": "E17",
+      "section": "SLA, deadlines, and overdue monitoring",
+      "requirement": "Calculate average processing time and percentage completed within SLA.",
+      "status": "Available",
+      "assessment": "Average working-day turnaround and on-time percentage exist."
+    },
+    {
+      "id": "E18",
+      "section": "SLA, deadlines, and overdue monitoring",
+      "requirement": "Identify bottleneck stages.",
+      "status": "Partial",
+      "assessment": "Desk counts, age bands and stalled records help manual analysis; no historical per-stage bottleneck diagnosis."
+    },
+    {
+      "id": "E19",
+      "section": "SLA, deadlines, and overdue monitoring",
+      "requirement": "Track repeated overdue cases by office, document type, or assigned person.",
+      "status": "Partial",
+      "assessment": "Current overdue workload is grouped/filterable; no dedicated repeated-overdue case history metric."
+    },
+    {
+      "id": "F1",
+      "section": "Document processing and review tools",
+      "requirement": "Upload working drafts and final outputs.",
+      "status": "Partial",
+      "assessment": "Working/revised external file URLs exist; files are not uploaded into DTS."
+    },
+    {
+      "id": "F2",
+      "section": "Document processing and review tools",
+      "requirement": "Store multiple versions of the same document.",
+      "status": "Missing",
+      "assessment": "Only current URLs and a counter; no stored historical file versions."
+    },
+    {
+      "id": "F3",
+      "section": "Document processing and review tools",
+      "requirement": "Identify the latest version clearly.",
+      "status": "Partial",
+      "assessment": "Current draft/revised links are explicit; no version list or latest/final version state."
+    },
+    {
+      "id": "F4",
+      "section": "Document processing and review tools",
+      "requirement": "Record who uploaded or revised each version.",
+      "status": "Partial",
+      "assessment": "URL edits have actor/time events; no uploader or per-version file record."
+    },
+    {
+      "id": "F5",
+      "section": "Document processing and review tools",
+      "requirement": "Record revision dates and descriptions.",
+      "status": "Partial",
+      "assessment": "Revision counter and URL-change events exist; old file links, version descriptions and version metadata are not retained."
+    },
+    {
+      "id": "F6",
+      "section": "Document processing and review tools",
+      "requirement": "Compare two versions to identify changes.",
+      "status": "Missing",
+      "assessment": "No file/text comparison tool."
+    },
+    {
+      "id": "F7",
+      "section": "Document processing and review tools",
+      "requirement": "Add reviewer comments and correction instructions.",
+      "status": "Available",
+      "assessment": "Reviewer comments, instructions and compliance responses are stored."
+    },
+    {
+      "id": "F8",
+      "section": "Document processing and review tools",
+      "requirement": "Mark individual comments as resolved.",
+      "status": "Partial",
+      "assessment": "Resubmission resolves all outstanding review comments together; no individual comment-resolution control."
+    },
+    {
+      "id": "F9",
+      "section": "Document processing and review tools",
+      "requirement": "Maintain a checklist of required attachments.",
+      "status": "Missing",
+      "assessment": "No attachment checklist."
+    },
+    {
+      "id": "F10",
+      "section": "Document processing and review tools",
+      "requirement": "Add internal annotations without altering the original file.",
+      "status": "Equivalent",
+      "assessment": "Record-level notes are stored separately from linked source files; no page/region annotation tool."
+    },
+    {
+      "id": "F11",
+      "section": "Document processing and review tools",
+      "requirement": "Preview PDFs and common office documents where supported.",
+      "status": "Partial",
+      "assessment": "External URL hover attempts an iframe preview; CSP restricts external frames and there is no native PDF/Office renderer."
+    },
+    {
+      "id": "F12",
+      "section": "Document processing and review tools",
+      "requirement": "Open attachments in a new tab.",
+      "status": "Equivalent",
+      "assessment": "Linked documents open in a separate tab."
+    },
+    {
+      "id": "F13",
+      "section": "Document processing and review tools",
+      "requirement": "Link related memoranda, reports, letters, and references.",
+      "status": "Partial",
+      "assessment": "External URLs can point to references; no related-record relationship or multi-reference list."
+    },
+    {
+      "id": "F14",
+      "section": "Document processing and review tools",
+      "requirement": "Record review, endorsement, approval, and signature dates separately.",
+      "status": "Partial",
+      "assessment": "Review and clearance dates exist; endorsement and actual signature dates are not separate fields."
+    },
+    {
+      "id": "F15",
+      "section": "Document processing and review tools",
+      "requirement": "Record the final action taken.",
+      "status": "Available",
+      "assessment": "Clearance, return-to-sender and release are recorded."
+    },
+    {
+      "id": "F16",
+      "section": "Document processing and review tools",
+      "requirement": "Attach signed copies and proof of completion.",
+      "status": "Partial",
+      "assessment": "A URL can point to a signed/output file; no dedicated signed-copy or proof-of-completion attachment slot."
+    },
+    {
+      "id": "F17",
+      "section": "Document processing and review tools",
+      "requirement": "Generate transmittal sheets and routing slips.",
+      "status": "Partial",
+      "assessment": "Routing slips are printable; no separate numbered transmittal sheet generator."
+    },
+    {
+      "id": "F18",
+      "section": "Document processing and review tools",
+      "requirement": "Prevent accidental overwriting of final or approved files.",
+      "status": "Missing",
+      "assessment": "No final-file lock/version protection; permitted users can replace linked files even after approval."
+    },
+    {
+      "id": "F19",
+      "section": "Document processing and review tools",
+      "requirement": "Identify incomplete submissions before sending them for approval.",
+      "status": "Partial",
+      "assessment": "Form/action validation covers required metadata and reviewer selection; no attachment/deliverable completeness gate."
+    },
+    {
+      "id": "G1",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Receiving register",
+      "status": "Equivalent",
+      "assessment": "Dashboard registry with intake filters serves as the receiving register."
+    },
+    {
+      "id": "G2",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Sender and origin",
+      "status": "Available",
+      "assessment": "Source/sender data is stored."
+    },
+    {
+      "id": "G3",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Receipt acknowledgment",
+      "status": "Missing",
+      "assessment": "No acknowledgment receipt."
+    },
+    {
+      "id": "G4",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Incoming reference number",
+      "status": "Available",
+      "assessment": "Reference number field exists."
+    },
+    {
+      "id": "G5",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Initial routing",
+      "status": "Available",
+      "assessment": "Forwarding and initial region/office auto-routing exist."
+    },
+    {
+      "id": "G6",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Attachments checklist",
+      "status": "Missing",
+      "assessment": "No attachment checklist."
+    },
+    {
+      "id": "G7",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Priority classification",
+      "status": "Partial",
+      "assessment": "Normal/Urgent classification exists; broader priority levels are absent."
+    },
+    {
+      "id": "G8",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Outgoing registry",
+      "status": "Equivalent",
+      "assessment": "Released-status filters and release history provide a basic outgoing register."
+    },
+    {
+      "id": "G9",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Document control number",
+      "status": "Partial",
+      "assessment": "Existing DTS tracking number remains on release; no separate outgoing control/transmittal numbering."
+    },
+    {
+      "id": "G10",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Recipient and destination",
+      "status": "Available",
+      "assessment": "Released-to destination is stored and displayed."
+    },
+    {
+      "id": "G11",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Date signed and dispatched",
+      "status": "Partial",
+      "assessment": "Clearance and dispatch times exist; actual signature date is absent."
+    },
+    {
+      "id": "G12",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Delivery method",
+      "status": "Missing",
+      "assessment": "No structured delivery-channel field."
+    },
+    {
+      "id": "G13",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Proof of dispatch",
+      "status": "Missing",
+      "assessment": "A release event is recorded, but no proof-of-dispatch file/receipt."
+    },
+    {
+      "id": "G14",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Acknowledgment of receipt",
+      "status": "Missing",
+      "assessment": "No external receipt acknowledgment."
+    },
+    {
+      "id": "G15",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Interoffice memoranda",
+      "status": "Equivalent",
+      "assessment": "A memorandum can be registered and processed in the existing document workflow."
+    },
+    {
+      "id": "G16",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Endorsements",
+      "status": "Partial",
+      "assessment": "Review forwarding and notes can represent endorsement; no endorsement action/status."
+    },
+    {
+      "id": "G17",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Requests for comments",
+      "status": "Equivalent",
+      "assessment": "Submission for review plus comments supports internal requests for comments."
+    },
+    {
+      "id": "G18",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Internal approvals",
+      "status": "Available",
+      "assessment": "Internal approval/clearance actions exist."
+    },
+    {
+      "id": "G19",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Office-to-office handoffs",
+      "status": "Partial",
+      "assessment": "Division/focal/staff routing exists; arbitrary interoffice handoff/receipt tracking is absent."
+    },
+    {
+      "id": "G20",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Return correspondence",
+      "status": "Equivalent",
+      "assessment": "Return-for-compliance and instructed return-to-sender are operational."
+    },
+    {
+      "id": "G21",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Records classification",
+      "status": "Partial",
+      "assessment": "Document/communication/transaction types exist; no formal records classification/retention taxonomy."
+    },
+    {
+      "id": "G22",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Retention schedules",
+      "status": "Missing",
+      "assessment": "No retention schedule."
+    },
+    {
+      "id": "G23",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Archive and retrieval",
+      "status": "Partial",
+      "assessment": "Released records remain searchable; no archive repository/lifecycle."
+    },
+    {
+      "id": "G24",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Records disposition",
+      "status": "Missing",
+      "assessment": "No records-disposition workflow."
+    },
+    {
+      "id": "G25",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Physical file location",
+      "status": "Missing",
+      "assessment": "No physical location field."
+    },
+    {
+      "id": "G26",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Authorized disposal logs",
+      "status": "Partial",
+      "assessment": "Document deletion is authorized/audited; no retention-based disposal authorization/log model."
+    },
+    {
+      "id": "G27",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Separate incoming and outgoing registries with cross-references.",
+      "status": "Partial",
+      "assessment": "Incoming/outgoing subsets share one record; no separate linked registry records."
+    },
+    {
+      "id": "G28",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Automatically associate a reply with the original incoming document.",
+      "status": "Missing",
+      "assessment": "No automatic reply-to-original relationship."
+    },
+    {
+      "id": "G29",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Generate a transmittal number for batches of outgoing documents.",
+      "status": "Missing",
+      "assessment": "No batch transmittal numbering."
+    },
+    {
+      "id": "G30",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Track delivery by courier, email, personal service, or other configured channels.",
+      "status": "Missing",
+      "assessment": "No courier/email/personal-service delivery tracking."
+    },
+    {
+      "id": "G31",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Record returned or undelivered outgoing correspondence.",
+      "status": "Partial",
+      "assessment": "Return-to-sender before release exists; no post-dispatch undelivered/returned-delivery state."
+    },
+    {
+      "id": "G32",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Link documents to a case, project, program, or transaction.",
+      "status": "Missing",
+      "assessment": "Document records have no case/project/program relationship; personnel inspection project text is separate."
+    },
+    {
+      "id": "G33",
+      "section": "Incoming, outgoing, and internal communications",
+      "requirement": "Maintain a list of documents received from external offices that are still awaiting their response.",
+      "status": "Missing",
+      "assessment": "No awaiting-external-response lifecycle or queue."
+    },
+    {
+      "id": "H1",
+      "section": "User accounts, roles, and permissions",
+      "requirement": "Role-based access control (RBAC).",
+      "status": "Available",
+      "assessment": "Fixed role types have configurable permission grants."
+    },
+    {
+      "id": "H2",
+      "section": "User accounts, roles, and permissions",
+      "requirement": "Permissions at module, record, and action levels.",
+      "status": "Partial",
+      "assessment": "Module/action/stage and division action gates exist; record viewing is universal for signed-in users."
+    },
+    {
+      "id": "H3",
+      "section": "User accounts, roles, and permissions",
+      "requirement": "Division-level data restrictions.",
+      "status": "Missing",
+      "assessment": "Ordinary documents are not restricted to the user's division."
+    },
+    {
+      "id": "H4",
+      "section": "User accounts, roles, and permissions",
+      "requirement": "Confidentiality classifications.",
+      "status": "Missing",
+      "assessment": "No confidential/restricted classification."
+    },
+    {
+      "id": "H5",
+      "section": "User accounts, roles, and permissions",
+      "requirement": "Separate permission to view, edit, assign, approve, export, and delete.",
+      "status": "Partial",
+      "assessment": "Edit/assign/review/export/delete permissions exist; no independent document-view permission."
+    },
+    {
+      "id": "H6",
+      "section": "User accounts, roles, and permissions",
+      "requirement": "Prevent users from approving documents outside their authority.",
+      "status": "Available",
+      "assessment": "Server actions enforce assignee/reviewer/division-manager authority with defined fallback and override rules."
+    },
+    {
+      "id": "H7",
+      "section": "User accounts, roles, and permissions",
+      "requirement": "Restrict administrator access to sensitive document content where appropriate.",
+      "status": "Missing",
+      "assessment": "System administrators have broad access; no sensitive-content exclusion."
+    },
+    {
+      "id": "H8",
+      "section": "User accounts, roles, and permissions",
+      "requirement": "OIC or alternate-officer delegation with start and end dates.",
+      "status": "Partial",
+      "assessment": "OIC enablement and manager presence exist; no start/end-dated delegation."
+    },
+    {
+      "id": "H9",
+      "section": "User accounts, roles, and permissions",
+      "requirement": "Automatic expiration of temporary delegation.",
+      "status": "Missing",
+      "assessment": "Delegation does not expire automatically."
+    },
+    {
+      "id": "H10",
+      "section": "User accounts, roles, and permissions",
+      "requirement": "Account activation, deactivation, and password reset.",
+      "status": "Available",
+      "assessment": "Create/edit, activate/deactivate and password reset APIs exist; concurrent duplicate usernames remain a confirmed gap."
+    },
+    {
+      "id": "H11",
+      "section": "User accounts, roles, and permissions",
+      "requirement": "Session expiration and optional multi-factor authentication.",
+      "status": "Partial",
+      "assessment": "Idle/absolute session expiration exists; optional MFA is absent."
+    },
+    {
+      "id": "H12",
+      "section": "User accounts, roles, and permissions",
+      "requirement": "Login history and failed-login monitoring.",
+      "status": "Available",
+      "assessment": "Successful/failed sign-ins and last-login information are recorded."
+    },
+    {
+      "id": "H13",
+      "section": "User accounts, roles, and permissions",
+      "requirement": "Prevention of self-approval where policy requires separation of duties.",
+      "status": "Partial",
+      "assessment": "Submission prevents selecting oneself as reviewer; there is no universal separation-of-duties rule across manager/override actions."
+    },
+    {
+      "id": "H14",
+      "section": "User accounts, roles, and permissions",
+      "requirement": "Controlled emergency access with an audit record.",
+      "status": "Equivalent",
+      "assessment": "doc.override supplies controlled emergency actions and audit events; no break-glass reason/approval/session mechanism."
+    },
+    {
+      "id": "I1",
+      "section": "Dashboard and command center",
+      "requirement": "Total documents received this month.",
+      "status": "Equivalent",
+      "assessment": "Graphs/report period filters provide monthly receipt counts; main dashboard is a shared layout."
+    },
+    {
+      "id": "I2",
+      "section": "Dashboard and command center",
+      "requirement": "Total documents processed and closed.",
+      "status": "Equivalent",
+      "assessment": "Completed/released counts are available through registry filters, graphs and reports."
+    },
+    {
+      "id": "I3",
+      "section": "Dashboard and command center",
+      "requirement": "Documents currently in progress.",
+      "status": "Available",
+      "assessment": "Ongoing tile and lifecycle/status filters exist."
+    },
+    {
+      "id": "I4",
+      "section": "Dashboard and command center",
+      "requirement": "Documents awaiting classification.",
+      "status": "Equivalent",
+      "assessment": "Received/at-focal states identify intake/classification work."
+    },
+    {
+      "id": "I5",
+      "section": "Dashboard and command center",
+      "requirement": "Documents awaiting assignment.",
+      "status": "Equivalent",
+      "assessment": "Focal-desk status and queue identify unassigned work."
+    },
+    {
+      "id": "I6",
+      "section": "Dashboard and command center",
+      "requirement": "Documents awaiting review.",
+      "status": "Equivalent",
+      "assessment": "Review statuses, queues and graph desk counts identify pending reviews."
+    },
+    {
+      "id": "I7",
+      "section": "Dashboard and command center",
+      "requirement": "Documents awaiting approval or signature.",
+      "status": "Partial",
+      "assessment": "Department review/clearance queues exist; signature itself is not separately tracked."
+    },
+    {
+      "id": "I8",
+      "section": "Dashboard and command center",
+      "requirement": "Returned documents requiring revision.",
+      "status": "Available",
+      "assessment": "Compliance status identifies returned work."
+    },
+    {
+      "id": "I9",
+      "section": "Dashboard and command center",
+      "requirement": "Overdue documents.",
+      "status": "Available",
+      "assessment": "Overdue tile and filters exist."
+    },
+    {
+      "id": "I10",
+      "section": "Dashboard and command center",
+      "requirement": "Documents approaching their deadline.",
+      "status": "Available",
+      "assessment": "Due-soon indicators, queue ordering and reports exist."
+    },
+    {
+      "id": "I11",
+      "section": "Dashboard and command center",
+      "requirement": "Documents pending dispatch.",
+      "status": "Available",
+      "assessment": "Cleared/return-out filters and action queue identify pending release."
+    },
+    {
+      "id": "I12",
+      "section": "Dashboard and command center",
+      "requirement": "Documents with no activity for a configurable period.",
+      "status": "Partial",
+      "assessment": "Admin/Focal desk age limits exist; no universal last-activity inactivity threshold across all stages."
+    },
+    {
+      "id": "I13",
+      "section": "Dashboard and command center",
+      "requirement": "Average processing time.",
+      "status": "Available",
+      "assessment": "Average working-day turnaround is in Analytics and Reports."
+    },
+    {
+      "id": "I14",
+      "section": "Dashboard and command center",
+      "requirement": "SLA compliance percentage.",
+      "status": "Available",
+      "assessment": "On-time completion percentage is available."
+    },
+    {
+      "id": "I15",
+      "section": "Dashboard and command center",
+      "requirement": "Documents received versus completed over time.",
+      "status": "Available",
+      "assessment": "Monthly received/released and on-time/late charts exist; cross-cohort correctness needs review (see warning)."
+    },
+    {
+      "id": "I16",
+      "section": "Dashboard and command center",
+      "requirement": "Workload by division and employee.",
+      "status": "Available",
+      "assessment": "Division and staff workload charts/tables exist."
+    },
+    {
+      "id": "I17",
+      "section": "Dashboard and command center",
+      "requirement": "Processing bottlenecks by stage.",
+      "status": "Partial",
+      "assessment": "Current desks and age bands are visible; no historical stage-duration bottleneck analysis."
+    },
+    {
+      "id": "I18",
+      "section": "Dashboard and command center",
+      "requirement": "Recently updated documents.",
+      "status": "Partial",
+      "assessment": "History updates and recent-action flashes exist; no dedicated recent-updates feed/widget."
+    },
+    {
+      "id": "I19",
+      "section": "Dashboard and command center",
+      "requirement": "Upcoming deadlines.",
+      "status": "Available",
+      "assessment": "Due-soon list/report and deadline sorting exist."
+    },
+    {
+      "id": "I20",
+      "section": "Dashboard and command center",
+      "requirement": "Recently completed or archived documents.",
+      "status": "Partial",
+      "assessment": "Released status and received-date reporting exist; no archive view or dedicated recently-completed widget."
+    },
+    {
+      "id": "J1",
+      "section": "Search, filtering, and saved views",
+      "requirement": "Global search across document metadata.",
+      "status": "Available",
+      "assessment": "Header/registry metadata search exists."
+    },
+    {
+      "id": "J2",
+      "section": "Search, filtering, and saved views",
+      "requirement": "Exact search by tracking number.",
+      "status": "Partial",
+      "assessment": "Entering a tracking code finds matches through substring search; no exact-match-only search mode."
+    },
+    {
+      "id": "J3",
+      "section": "Search, filtering, and saved views",
+      "requirement": "Search by sender, recipient, subject, reference number, or office.",
+      "status": "Partial",
+      "assessment": "Sender/subject/reference/office are searchable; outgoing recipient is not included in the search haystack."
+    },
+    {
+      "id": "J4",
+      "section": "Search, filtering, and saved views",
+      "requirement": "Search by assigned staff, focal person, or division.",
+      "status": "Partial",
+      "assessment": "Assignee/division/current desk users are searchable; no dedicated focal-person filter."
+    },
+    {
+      "id": "J5",
+      "section": "Search, filtering, and saved views",
+      "requirement": "Search by date received, date assigned, deadline, or date completed.",
+      "status": "Partial",
+      "assessment": "Received dates, release-from date and deadline states exist; assigned-date and exact completion/deadline range filters are incomplete."
+    },
+    {
+      "id": "J6",
+      "section": "Search, filtering, and saved views",
+      "requirement": "Filter by status, priority, document type, confidentiality, and source.",
+      "status": "Partial",
+      "assessment": "Status/priority/type/communication filters exist; confidentiality and structured source-channel filters are absent."
+    },
+    {
+      "id": "J7",
+      "section": "Search, filtering, and saved views",
+      "requirement": "Filter by overdue, approaching deadline, or no recent activity.",
+      "status": "Partial",
+      "assessment": "Overdue/due-soon and stalled desk filters exist; general no-recent-activity filtering is absent."
+    },
+    {
+      "id": "J8",
+      "section": "Search, filtering, and saved views",
+      "requirement": "Filter by month, quarter, year, or custom date range.",
+      "status": "Equivalent",
+      "assessment": "Received date ranges and month/multi-month reporting can represent quarters or years; no separate quarter preset."
+    },
+    {
+      "id": "J9",
+      "section": "Search, filtering, and saved views",
+      "requirement": "Search across attachment filenames and metadata.",
+      "status": "Missing",
+      "assessment": "No attachment metadata index."
+    },
+    {
+      "id": "J10",
+      "section": "Search, filtering, and saved views",
+      "requirement": "Full-text search inside document contents where supported.",
+      "status": "Missing",
+      "assessment": "No content extraction/full-text index."
+    },
+    {
+      "id": "J11",
+      "section": "Search, filtering, and saved views",
+      "requirement": "OCR-based search for scanned PDFs and images.",
+      "status": "Missing",
+      "assessment": "No OCR search."
+    },
+    {
+      "id": "J12",
+      "section": "Search, filtering, and saved views",
+      "requirement": "Combine several filters.",
+      "status": "Available",
+      "assessment": "Registry combines multiple filters."
+    },
+    {
+      "id": "J13",
+      "section": "Search, filtering, and saved views",
+      "requirement": "Save frequently used filters as personal or shared views.",
+      "status": "Missing",
+      "assessment": "No named personal/shared saved views."
+    },
+    {
+      "id": "J14",
+      "section": "Search, filtering, and saved views",
+      "requirement": "Pin frequently accessed searches.",
+      "status": "Missing",
+      "assessment": "No pinned search feature."
+    },
+    {
+      "id": "J15",
+      "section": "Search, filtering, and saved views",
+      "requirement": "Sort by deadline, age, date received, or last activity.",
+      "status": "Partial",
+      "assessment": "Due date, received date and current-stage age sort exist; no stored last-modified sort field."
+    },
+    {
+      "id": "J16",
+      "section": "Search, filtering, and saved views",
+      "requirement": "Preserve filters when opening a document and returning to the list.",
+      "status": "Available",
+      "assessment": "Registry filters remain in UI state while opening/returning from a document within the session."
+    },
+    {
+      "id": "J17",
+      "section": "Search, filtering, and saved views",
+      "requirement": "Provide pagination or virtualized lists for large datasets.",
+      "status": "Available",
+      "assessment": "25/50/100-row browser pagination exists; server pagination does not."
+    },
+    {
+      "id": "J18",
+      "section": "Search, filtering, and saved views",
+      "requirement": "Support keyboard shortcuts for frequent actions.",
+      "status": "Available",
+      "assessment": "Search/navigation/logging/clear shortcuts are implemented."
+    },
+    {
+      "id": "K1",
+      "section": "Notifications and reminders",
+      "requirement": "In-app notification center.",
+      "status": "Partial",
+      "assessment": "The bell opens current actionable documents; it is not a persistent event notification center."
+    },
+    {
+      "id": "K2",
+      "section": "Notifications and reminders",
+      "requirement": "Notification badge showing unread items.",
+      "status": "Partial",
+      "assessment": "Badge counts waiting documents, not unread notifications."
+    },
+    {
+      "id": "K3",
+      "section": "Notifications and reminders",
+      "requirement": "Assignment notifications.",
+      "status": "Partial",
+      "assessment": "Assignments appear in the queue/bell after refresh; no event-specific notification record."
+    },
+    {
+      "id": "K4",
+      "section": "Notifications and reminders",
+      "requirement": "Notifications when a document is forwarded.",
+      "status": "Partial",
+      "assessment": "Forwarded documents appear for the next actor; no persistent forwarding alert."
+    },
+    {
+      "id": "K5",
+      "section": "Notifications and reminders",
+      "requirement": "Notifications when a reviewer returns a document.",
+      "status": "Partial",
+      "assessment": "Returned documents appear for staff action; no persistent return alert."
+    },
+    {
+      "id": "K6",
+      "section": "Notifications and reminders",
+      "requirement": "Notifications when comments are added.",
+      "status": "Missing",
+      "assessment": "No comment-added notification delivery or unread event."
+    },
+    {
+      "id": "K7",
+      "section": "Notifications and reminders",
+      "requirement": "Notifications when a document is approved.",
+      "status": "Partial",
+      "assessment": "Approved work appears at the next desk; no persistent approval alert."
+    },
+    {
+      "id": "K8",
+      "section": "Notifications and reminders",
+      "requirement": "Deadline reminders at configurable intervals.",
+      "status": "Missing",
+      "assessment": "No scheduled reminder interval engine."
+    },
+    {
+      "id": "K9",
+      "section": "Notifications and reminders",
+      "requirement": "Overdue and escalation alerts.",
+      "status": "Partial",
+      "assessment": "Visible overdue badges/counts exist; no escalation alerts/delivery."
+    },
+    {
+      "id": "K10",
+      "section": "Notifications and reminders",
+      "requirement": "Notifications when a delegated assignment expires.",
+      "status": "Missing",
+      "assessment": "No expiring delegation or expiry alert."
+    },
+    {
+      "id": "K11",
+      "section": "Notifications and reminders",
+      "requirement": "Notification when an external response is received.",
+      "status": "Missing",
+      "assessment": "No external-response event notification."
+    },
+    {
+      "id": "K12",
+      "section": "Notifications and reminders",
+      "requirement": "Daily digest of pending and overdue work.",
+      "status": "Missing",
+      "assessment": "No daily digest."
+    },
+    {
+      "id": "K13",
+      "section": "Notifications and reminders",
+      "requirement": "Weekly summary for supervisors.",
+      "status": "Missing",
+      "assessment": "No weekly supervisor digest."
+    },
+    {
+      "id": "K14",
+      "section": "Notifications and reminders",
+      "requirement": "Read/unread state and notification history.",
+      "status": "Missing",
+      "assessment": "No notification read state/history."
+    },
+    {
+      "id": "K15",
+      "section": "Notifications and reminders",
+      "requirement": "User-configurable notification preferences.",
+      "status": "Missing",
+      "assessment": "No notification preference settings."
+    },
+    {
+      "id": "K16",
+      "section": "Notifications and reminders",
+      "requirement": "Email notifications through an approved mail server, if available.",
+      "status": "Missing",
+      "assessment": "No SMTP/mail delivery."
+    },
+    {
+      "id": "L1",
+      "section": "Reports and analytics",
+      "requirement": "Incoming Documents Register.",
+      "status": "Equivalent",
+      "assessment": "Filtered registry export/print supplies incoming records."
+    },
+    {
+      "id": "L2",
+      "section": "Reports and analytics",
+      "requirement": "Outgoing Documents Register.",
+      "status": "Partial",
+      "assessment": "Released registry subset exists; fixed CSV omits outgoing recipient and release remarks required for a richer outgoing register."
+    },
+    {
+      "id": "L3",
+      "section": "Reports and analytics",
+      "requirement": "Document Tracking and Movement Report.",
+      "status": "Equivalent",
+      "assessment": "Printable document routing slip contains movement history; no consolidated multi-document movement dataset export."
+    },
+    {
+      "id": "L4",
+      "section": "Reports and analytics",
+      "requirement": "Pending Documents Report.",
+      "status": "Equivalent",
+      "assessment": "Ongoing/status filters and registry export provide pending records."
+    },
+    {
+      "id": "L5",
+      "section": "Reports and analytics",
+      "requirement": "Overdue Documents Report.",
+      "status": "Available",
+      "assessment": "Dedicated overdue/due-soon report exists."
+    },
+    {
+      "id": "L6",
+      "section": "Reports and analytics",
+      "requirement": "Documents for Review and Approval.",
+      "status": "Equivalent",
+      "assessment": "Review/department-review filters can be printed/exported."
+    },
+    {
+      "id": "L7",
+      "section": "Reports and analytics",
+      "requirement": "Returned Documents and Revision Report.",
+      "status": "Partial",
+      "assessment": "Compliance filter and per-document cycles/comments exist; no dedicated consolidated revision report."
+    },
+    {
+      "id": "L8",
+      "section": "Reports and analytics",
+      "requirement": "Completed Documents Report.",
+      "status": "Equivalent",
+      "assessment": "Released-status filter and exports provide completed records."
+    },
+    {
+      "id": "L9",
+      "section": "Reports and analytics",
+      "requirement": "Unassigned Documents Report.",
+      "status": "Equivalent",
+      "assessment": "Focal-desk queue/status filter provides the unassigned set."
+    },
+    {
+      "id": "L10",
+      "section": "Reports and analytics",
+      "requirement": "Documents Awaiting Dispatch.",
+      "status": "Equivalent",
+      "assessment": "Cleared/return-out filters identify records awaiting release."
+    },
+    {
+      "id": "L11",
+      "section": "Reports and analytics",
+      "requirement": "Documents with No Recent Activity.",
+      "status": "Partial",
+      "assessment": "Stalled Admin/Focal records are available; arbitrary inactivity reporting is absent."
+    },
+    {
+      "id": "L12",
+      "section": "Reports and analytics",
+      "requirement": "Daily, weekly, and monthly accomplishment reports.",
+      "status": "Partial",
+      "assessment": "Date-range reports and monthly graphs exist; no dedicated action-date accomplishment summary template."
+    },
+    {
+      "id": "L13",
+      "section": "Reports and analytics",
+      "requirement": "Staff Workload Report.",
+      "status": "Available",
+      "assessment": "Staff workload report exists."
+    },
+    {
+      "id": "L14",
+      "section": "Reports and analytics",
+      "requirement": "Division Workload Report.",
+      "status": "Equivalent",
+      "assessment": "Division analytics and graphs provide workload counts."
+    },
+    {
+      "id": "L15",
+      "section": "Reports and analytics",
+      "requirement": "Document Type and Volume Report.",
+      "status": "Available",
+      "assessment": "Document-type and transaction volume analytics exist."
+    },
+    {
+      "id": "L16",
+      "section": "Reports and analytics",
+      "requirement": "SLA Compliance Report.",
+      "status": "Equivalent",
+      "assessment": "Turnaround/on-time report supplies basic SLA results."
+    },
+    {
+      "id": "L17",
+      "section": "Reports and analytics",
+      "requirement": "Processing Time and Bottleneck Report.",
+      "status": "Partial",
+      "assessment": "Average turnaround and current desk ages exist; no complete historical stage bottleneck report."
+    },
+    {
+      "id": "L18",
+      "section": "Reports and analytics",
+      "requirement": "Reassignment and Delegation Report.",
+      "status": "Partial",
+      "assessment": "Reassignment/delegation audit events can be searched; no dedicated report."
+    },
+    {
+      "id": "L19",
+      "section": "Reports and analytics",
+      "requirement": "Audit Trail Report.",
+      "status": "Available",
+      "assessment": "Audit log can be searched, printed and exported."
+    },
+    {
+      "id": "L20",
+      "section": "Reports and analytics",
+      "requirement": "Archive and Retention Report.",
+      "status": "Missing",
+      "assessment": "No archive/retention model or report."
+    },
+    {
+      "id": "L21",
+      "section": "Reports and analytics",
+      "requirement": "Received versus completed documents by month.",
+      "status": "Partial",
+      "assessment": "Monthly charts exist, but records are first filtered by received month, which can omit old-backlog documents released in the selected month."
+    },
+    {
+      "id": "L22",
+      "section": "Reports and analytics",
+      "requirement": "Opening backlog, new receipts, completed records, and closing backlog.",
+      "status": "Missing",
+      "assessment": "No opening/closing backlog reconciliation report."
+    },
+    {
+      "id": "L23",
+      "section": "Reports and analytics",
+      "requirement": "Average, median, and maximum processing time.",
+      "status": "Partial",
+      "assessment": "Average turnaround exists; median/maximum turnaround are absent from app reports."
+    },
+    {
+      "id": "L24",
+      "section": "Reports and analytics",
+      "requirement": "Percentage completed within SLA.",
+      "status": "Available",
+      "assessment": "On-time percentage exists."
+    },
+    {
+      "id": "L25",
+      "section": "Reports and analytics",
+      "requirement": "Percentage overdue.",
+      "status": "Equivalent",
+      "assessment": "Deadline health chart provides overdue counts/mix; no separately named overdue-percentage KPI."
+    },
+    {
+      "id": "L26",
+      "section": "Reports and analytics",
+      "requirement": "Average time per workflow stage.",
+      "status": "Missing",
+      "assessment": "No aggregate average-duration metric for each historical stage."
+    },
+    {
+      "id": "L27",
+      "section": "Reports and analytics",
+      "requirement": "Return-for-revision rate.",
+      "status": "Partial",
+      "assessment": "Average compliance cycles for finished documents exist; no explicit returned-document percentage."
+    },
+    {
+      "id": "L28",
+      "section": "Reports and analytics",
+      "requirement": "Number of review cycles per document.",
+      "status": "Available",
+      "assessment": "Per-document cycle count exists."
+    },
+    {
+      "id": "L29",
+      "section": "Reports and analytics",
+      "requirement": "Volume by source, document type, and division.",
+      "status": "Partial",
+      "assessment": "Type/division volumes exist; source grouping is not supplied as a report."
+    },
+    {
+      "id": "L30",
+      "section": "Reports and analytics",
+      "requirement": "Staff workload and pending task distribution.",
+      "status": "Available",
+      "assessment": "Staff open/overdue/workload distribution exists."
+    },
+    {
+      "id": "L31",
+      "section": "Reports and analytics",
+      "requirement": "Trend comparisons between selected months or years.",
+      "status": "Available",
+      "assessment": "Multiple months and ranges display time trends; no dedicated variance-comparison calculation."
+    },
+    {
+      "id": "L32",
+      "section": "Reports and analytics",
+      "requirement": "Drill-down from charts to the underlying document records.",
+      "status": "Partial",
+      "assessment": "Many graph bars/desk counts open registry filters; age-band drill-down drops its specific age selection (see warning)."
+    },
+    {
+      "id": "L33",
+      "section": "Reports and analytics",
+      "requirement": "Exportable report data with filters and a report generation timestamp.",
+      "status": "Partial",
+      "assessment": "Filtered CSV exists and print headers contain timestamp; CSV does not consistently carry generation metadata."
+    },
+    {
+      "id": "L34",
+      "section": "Reports and analytics",
+      "requirement": "Filter by a specific month or multiple selected months.",
+      "status": "Available",
+      "assessment": "One month, month range and multiple selected months are supported."
+    },
+    {
+      "id": "L35",
+      "section": "Reports and analytics",
+      "requirement": "Filter by division, document type, status, employee, and urgency.",
+      "status": "Partial",
+      "assessment": "Registry supports these filters; Analytics/Reports offer narrower filters and exports differ by screen."
+    },
+    {
+      "id": "L36",
+      "section": "Reports and analytics",
+      "requirement": "Select visible columns.",
+      "status": "Available",
+      "assessment": "Registry column visibility is configurable."
+    },
+    {
+      "id": "L37",
+      "section": "Reports and analytics",
+      "requirement": "Configure grouping and sorting.",
+      "status": "Partial",
+      "assessment": "Fixed report groups and registry sorting exist; arbitrary grouping/report layout configuration is absent."
+    },
+    {
+      "id": "L38",
+      "section": "Reports and analytics",
+      "requirement": "Generate Excel, CSV, and PDF reports.",
+      "status": "Equivalent",
+      "assessment": "CSV opens in Excel; browser print can save PDF. No native XLSX or server-generated PDF report endpoint."
+    },
+    {
+      "id": "L39",
+      "section": "Reports and analytics",
+      "requirement": "Save frequently used report configurations.",
+      "status": "Missing",
+      "assessment": "No saved report configurations."
+    },
+    {
+      "id": "L40",
+      "section": "Reports and analytics",
+      "requirement": "Schedule recurring report generation.",
+      "status": "Partial",
+      "assessment": "Recurring Special Report work items are generated; scheduled exports of operational reports are absent."
+    },
+    {
+      "id": "L41",
+      "section": "Reports and analytics",
+      "requirement": "Include generated-by, generated-on, and reporting-period information.",
+      "status": "Partial",
+      "assessment": "Print header includes user/time/period; CSV metadata is inconsistent."
+    },
+    {
+      "id": "L42",
+      "section": "Reports and analytics",
+      "requirement": "Apply permissions to exported data, not just the on-screen view.",
+      "status": "Partial",
+      "assessment": "Data comes through authenticated state, but export/print restrictions are often browser UI gates; no server-side export endpoint checks or confidential-row filtering."
+    },
+    {
+      "id": "M1",
+      "section": "File management and Google Drive integration",
+      "requirement": "Multiple attachments per document.",
+      "status": "Partial",
+      "assessment": "Three URL fields can reference files; no arbitrary list of uploaded attachments."
+    },
+    {
+      "id": "M2",
+      "section": "File management and Google Drive integration",
+      "requirement": "Dedicated Google Drive Storage, Files & URLs tab.",
+      "status": "Partial",
+      "assessment": "Files / Document Links card exists; no dedicated Drive storage browser/tab."
+    },
+    {
+      "id": "M3",
+      "section": "File management and Google Drive integration",
+      "requirement": "Store Google Drive links to drafts, revised files, and final outputs.",
+      "status": "Equivalent",
+      "assessment": "Generic document/draft/revised URL fields accept Drive links; final outputs have no dedicated field."
+    },
+    {
+      "id": "M4",
+      "section": "File management and Google Drive integration",
+      "requirement": "Separate fields for source files, working drafts, and signed copies.",
+      "status": "Partial",
+      "assessment": "Source/draft/revised URLs exist; no signed-copy field or file-role model."
+    },
+    {
+      "id": "M5",
+      "section": "File management and Google Drive integration",
+      "requirement": "Link to external repositories and network folders.",
+      "status": "Partial",
+      "assessment": "HTTP(S) repositories can be linked; file/network-share schemes are not supported by normal validation."
+    },
+    {
+      "id": "M6",
+      "section": "File management and Google Drive integration",
+      "requirement": "Preview uploaded attachments.",
+      "status": "Missing",
+      "assessment": "No uploaded attachment store or renderer."
+    },
+    {
+      "id": "M7",
+      "section": "File management and Google Drive integration",
+      "requirement": "Display filename, file type, size, upload date, and uploader.",
+      "status": "Missing",
+      "assessment": "No attachment metadata records."
+    },
+    {
+      "id": "M8",
+      "section": "File management and Google Drive integration",
+      "requirement": "Track file versions.",
+      "status": "Partial",
+      "assessment": "A revised-link counter exists; historical file versions are absent."
+    },
+    {
+      "id": "M9",
+      "section": "File management and Google Drive integration",
+      "requirement": "Validate file type and maximum upload size.",
+      "status": "Missing",
+      "assessment": "No file upload/type/size validation because uploads are absent."
+    },
+    {
+      "id": "M10",
+      "section": "File management and Google Drive integration",
+      "requirement": "Detect duplicate uploads.",
+      "status": "Missing",
+      "assessment": "No file-hash duplicate upload detection."
+    },
+    {
+      "id": "M11",
+      "section": "File management and Google Drive integration",
+      "requirement": "Generate secure download links.",
+      "status": "Missing",
+      "assessment": "No signed/expiring DTS download URL service."
+    },
+    {
+      "id": "M12",
+      "section": "File management and Google Drive integration",
+      "requirement": "Check whether linked files are accessible, where integration permits.",
+      "status": "Missing",
+      "assessment": "No authenticated Drive/repository accessibility check."
+    },
+    {
+      "id": "M13",
+      "section": "File management and Google Drive integration",
+      "requirement": "Identify missing, broken, or inaccessible file links.",
+      "status": "Partial",
+      "assessment": "Empty URLs can be seen in the form; no broken-link/missing-required-file validator."
+    },
+    {
+      "id": "M14",
+      "section": "File management and Google Drive integration",
+      "requirement": "Record the relationship between a file and the relevant document.",
+      "status": "Partial",
+      "assessment": "Current URLs are associated with a document; no separate file entity/relation."
+    },
+    {
+      "id": "M15",
+      "section": "File management and Google Drive integration",
+      "requirement": "Retain metadata when a file is replaced or archived.",
+      "status": "Missing",
+      "assessment": "Old URLs and file metadata are not retained on replacement."
+    },
+    {
+      "id": "M16",
+      "section": "File management and Google Drive integration",
+      "requirement": "Enforce attachment access permissions.",
+      "status": "Missing",
+      "assessment": "DTS does not mediate external file permissions; ordinary record links are visible to all signed-in users."
+    },
+    {
+      "id": "M17",
+      "section": "File management and Google Drive integration",
+      "requirement": "Record downloads or exports of sensitive documents where appropriate.",
+      "status": "Partial",
+      "assessment": "System backup export is audited; ordinary file opening/download and report CSV exports are not logged."
+    },
+    {
+      "id": "N1",
+      "section": "Audit trail and accountability",
+      "requirement": "Record who created a document.",
+      "status": "Available",
+      "assessment": "createdBy and receipt/history actors are retained."
+    },
+    {
+      "id": "N2",
+      "section": "Audit trail and accountability",
+      "requirement": "Record who viewed, edited, assigned, forwarded, returned, approved, or closed it, where appropriate.",
+      "status": "Partial",
+      "assessment": "Successful mutations/actions are logged; document views are not individually logged."
+    },
+    {
+      "id": "N3",
+      "section": "Audit trail and accountability",
+      "requirement": "Record timestamps for every significant action.",
+      "status": "Available",
+      "assessment": "Operational history and audit have timestamps."
+    },
+    {
+      "id": "N4",
+      "section": "Audit trail and accountability",
+      "requirement": "Store previous and new values for important metadata changes.",
+      "status": "Partial",
+      "assessment": "Some Special Report configuration differences record old/new values; ordinary metadata edits only record a generic Details edited event."
+    },
+    {
+      "id": "N5",
+      "section": "Audit trail and accountability",
+      "requirement": "Record status transitions.",
+      "status": "Available",
+      "assessment": "Resulting statuses are retained in movement history."
+    },
+    {
+      "id": "N6",
+      "section": "Audit trail and accountability",
+      "requirement": "Record the reason for reassignment, cancellation, or exceptional routing.",
+      "status": "Partial",
+      "assessment": "Return instructions/optional reassignment notes exist; not every exception requires a reason and cancellation is absent."
+    },
+    {
+      "id": "N7",
+      "section": "Audit trail and accountability",
+      "requirement": "Record reviewer comments and decisions.",
+      "status": "Available",
+      "assessment": "Review comments, compliance and decisions are retained."
+    },
+    {
+      "id": "N8",
+      "section": "Audit trail and accountability",
+      "requirement": "Record changes to deadlines and workflow configuration.",
+      "status": "Partial",
+      "assessment": "Configuration/workflow events are audited; no complete per-document old/new deadline ledger or pause/extension reasons."
+    },
+    {
+      "id": "N9",
+      "section": "Audit trail and accountability",
+      "requirement": "Record role and permission changes.",
+      "status": "Available",
+      "assessment": "Permission and role updates are audited."
+    },
+    {
+      "id": "N10",
+      "section": "Audit trail and accountability",
+      "requirement": "Record document and attachment deletion attempts.",
+      "status": "Partial",
+      "assessment": "Successful document deletes are audited; denied deletion attempts and attachment deletion are not comprehensively recorded."
+    },
+    {
+      "id": "N11",
+      "section": "Audit trail and accountability",
+      "requirement": "Record administrative actions and security events.",
+      "status": "Available",
+      "assessment": "Sign-in failures/success and admin changes are logged."
+    },
+    {
+      "id": "N12",
+      "section": "Audit trail and accountability",
+      "requirement": "Provide a searchable audit history.",
+      "status": "Available",
+      "assessment": "Searchable audit endpoint/UI exists, capped to a recent window."
+    },
+    {
+      "id": "N13",
+      "section": "Audit trail and accountability",
+      "requirement": "Allow authorized export of audit reports.",
+      "status": "Available",
+      "assessment": "Authorized UI supports audit CSV/print; API exposes audit to audit.view users."
+    },
+    {
+      "id": "N14",
+      "section": "Audit trail and accountability",
+      "requirement": "Prevent ordinary users from editing or deleting audit records.",
+      "status": "Available",
+      "assessment": "Ordinary users have no audit edit/delete endpoint; administrator restore can replace audit data."
+    },
+    {
+      "id": "N15",
+      "section": "Audit trail and accountability",
+      "requirement": "Restrict and log access to sensitive records.",
+      "status": "Missing",
+      "assessment": "No sensitive classification/access log model."
+    },
+    {
+      "id": "O1",
+      "section": "Security, privacy, and data protection",
+      "requirement": "Secure authentication and password hashing.",
+      "status": "Available",
+      "assessment": "Salted scrypt password hashing and authenticated login exist; this is not a comprehensive security certification."
+    },
+    {
+      "id": "O2",
+      "section": "Security, privacy, and data protection",
+      "requirement": "Role-based and record-level authorization.",
+      "status": "Partial",
+      "assessment": "Action/stage authorization exists; confidential/division record-view authorization does not."
+    },
+    {
+      "id": "O3",
+      "section": "Security, privacy, and data protection",
+      "requirement": "Protection against SQL injection, cross-site scripting, and cross-site request forgery where applicable.",
+      "status": "Partial",
+      "assessment": "Prepared SQL, HTML escaping, CSP and custom-header CSRF checks exist; CSV formula safety and broader attack coverage still need work."
+    },
+    {
+      "id": "O4",
+      "section": "Security, privacy, and data protection",
+      "requirement": "Input validation on both client and server.",
+      "status": "Partial",
+      "assessment": "Validation exists, but restore nested data and some action-field consistency are incomplete."
+    },
+    {
+      "id": "O5",
+      "section": "Security, privacy, and data protection",
+      "requirement": "Secure session management.",
+      "status": "Available",
+      "assessment": "Random session tokens are hashed in SQLite and cookies are HttpOnly/SameSite with optional Secure."
+    },
+    {
+      "id": "O6",
+      "section": "Security, privacy, and data protection",
+      "requirement": "Rate limiting and login attempt controls.",
+      "status": "Partial",
+      "assessment": "Failed-login throttling exists; no general API/IP rate limiter and login keys are held in memory."
+    },
+    {
+      "id": "O7",
+      "section": "Security, privacy, and data protection",
+      "requirement": "HTTPS for remote access.",
+      "status": "Unverified",
+      "assessment": "HTTPS reverse-proxy deployment is supported; actual certificate, network exposure and proxy configuration were not verified."
+    },
+    {
+      "id": "O8",
+      "section": "Security, privacy, and data protection",
+      "requirement": "Encryption for sensitive data at rest where appropriate.",
+      "status": "Unverified",
+      "assessment": "No application database encryption; host disk encryption was not inspected."
+    },
+    {
+      "id": "O9",
+      "section": "Security, privacy, and data protection",
+      "requirement": "Secure attachment handling and file type validation.",
+      "status": "Missing",
+      "assessment": "No managed attachment processing/type validation."
+    },
+    {
+      "id": "O10",
+      "section": "Security, privacy, and data protection",
+      "requirement": "File upload size limits.",
+      "status": "Missing",
+      "assessment": "JSON request size caps exist; they are not attachment upload size limits."
+    },
+    {
+      "id": "O11",
+      "section": "Security, privacy, and data protection",
+      "requirement": "Protection against unauthorized direct file access.",
+      "status": "Partial",
+      "assessment": "Static serving uses an explicit allowlist; external file access is controlled by the external host, not DTS."
+    },
+    {
+      "id": "O12",
+      "section": "Security, privacy, and data protection",
+      "requirement": "Restricted access to confidential records.",
+      "status": "Missing",
+      "assessment": "No confidential-record restrictions."
+    },
+    {
+      "id": "O13",
+      "section": "Security, privacy, and data protection",
+      "requirement": "Automatic session timeout.",
+      "status": "Available",
+      "assessment": "Idle and absolute session expiration exist."
+    },
+    {
+      "id": "O14",
+      "section": "Security, privacy, and data protection",
+      "requirement": "Security event logs.",
+      "status": "Available",
+      "assessment": "Successful/failed sign-ins and related security/admin events are logged."
+    },
+    {
+      "id": "O15",
+      "section": "Security, privacy, and data protection",
+      "requirement": "Dependency updates and vulnerability checks.",
+      "status": "Partial",
+      "assessment": "No third-party app dependencies; no automated Node/container/browser vulnerability/update process is provided."
+    },
+    {
+      "id": "O16",
+      "section": "Security, privacy, and data protection",
+      "requirement": "Data retention and authorized disposal policies.",
+      "status": "Missing",
+      "assessment": "No retention/disposal policy engine."
+    },
+    {
+      "id": "O17",
+      "section": "Security, privacy, and data protection",
+      "requirement": "Privacy notice and appropriate personal-data handling.",
+      "status": "Unverified",
+      "assessment": "No privacy-notice screen found; agency personal-data policy/procedures were not supplied or assessed."
+    },
+    {
+      "id": "O18",
+      "section": "Security, privacy, and data protection",
+      "requirement": "Incident response and recovery procedures.",
+      "status": "Missing",
+      "assessment": "No documented incident response or tested disaster recovery runbook."
+    },
+    {
+      "id": "P1",
+      "section": "Backup, recovery, and system administration",
+      "requirement": "Automatic scheduled database backups.",
+      "status": "Available",
+      "assessment": "VACUUM INTO database backup runs at startup and daily; fourteen copies are retained."
+    },
+    {
+      "id": "P2",
+      "section": "Backup, recovery, and system administration",
+      "requirement": "Attachment backups.",
+      "status": "Missing",
+      "assessment": "Externally linked files are not copied/backed up."
+    },
+    {
+      "id": "P3",
+      "section": "Backup, recovery, and system administration",
+      "requirement": "Backup verification and restore testing.",
+      "status": "Partial",
+      "assessment": "JSON round-trip tests exist; automated daily SQLite snapshot verification is absent and malformed restore can persist invalid state."
+    },
+    {
+      "id": "P4",
+      "section": "Backup, recovery, and system administration",
+      "requirement": "One-click authorized backup creation.",
+      "status": "Available",
+      "assessment": "Authorized JSON backup download exists."
+    },
+    {
+      "id": "P5",
+      "section": "Backup, recovery, and system administration",
+      "requirement": "Database and attachment restore procedures.",
+      "status": "Partial",
+      "assessment": "JSON database restore exists; no attachment recovery or complete disaster-recovery procedure."
+    },
+    {
+      "id": "P6",
+      "section": "Backup, recovery, and system administration",
+      "requirement": "Backup retention settings.",
+      "status": "Partial",
+      "assessment": "Retention is hard-coded to fourteen files; no setting."
+    },
+    {
+      "id": "P7",
+      "section": "Backup, recovery, and system administration",
+      "requirement": "Off-device or separate-server backup copies.",
+      "status": "Missing",
+      "assessment": "README advises off-machine copies, but no automated off-device backup implementation exists."
+    },
+    {
+      "id": "P8",
+      "section": "Backup, recovery, and system administration",
+      "requirement": "System health and disk-space monitoring.",
+      "status": "Partial",
+      "assessment": "healthz checks server response; no disk-space/storage monitoring."
+    },
+    {
+      "id": "P9",
+      "section": "Backup, recovery, and system administration",
+      "requirement": "Database connection and application error logs.",
+      "status": "Partial",
+      "assessment": "Server writes console errors; no durable structured log/diagnostic viewer."
+    },
+    {
+      "id": "P10",
+      "section": "Backup, recovery, and system administration",
+      "requirement": "Failed job and notification monitoring.",
+      "status": "Partial",
+      "assessment": "Special Report schedule generation issues are stored/shown; no generalized failed-job or notification monitor."
+    },
+    {
+      "id": "P11",
+      "section": "Backup, recovery, and system administration",
+      "requirement": "Import and export history.",
+      "status": "Partial",
+      "assessment": "Backup export/restore audit events exist; normal report/file exports and general imports lack a history model."
+    },
+    {
+      "id": "P12",
+      "section": "Backup, recovery, and system administration",
+      "requirement": "Master-data management.",
+      "status": "Available",
+      "assessment": "Divisions, reference types, holidays, designations, leave types and Special Report schedules are managed."
+    },
+    {
+      "id": "P13",
+      "section": "Backup, recovery, and system administration",
+      "requirement": "User account and role management.",
+      "status": "Available",
+      "assessment": "Accounts and role permission grants are managed; fixed role names and duplicate-username race remain limitations."
+    },
+    {
+      "id": "P14",
+      "section": "Backup, recovery, and system administration",
+      "requirement": "Configurable document types, priorities, and statuses.",
+      "status": "Partial",
+      "assessment": "Types are configurable; priority set and operational statuses are fixed."
+    },
+    {
+      "id": "P15",
+      "section": "Backup, recovery, and system administration",
+      "requirement": "Configurable working days and holidays.",
+      "status": "Partial",
+      "assessment": "Holidays are configurable; working weekdays are fixed to Monday-Friday."
+    },
+    {
+      "id": "P16",
+      "section": "Backup, recovery, and system administration",
+      "requirement": "Configurable tracking number formats.",
+      "status": "Partial",
+      "assessment": "Prefix is configurable; year/counter structure is fixed."
+    },
+    {
+      "id": "P17",
+      "section": "Backup, recovery, and system administration",
+      "requirement": "System version and update history.",
+      "status": "Partial",
+      "assessment": "package.json version and engineering notes exist; no user-facing deployment/update history."
+    },
+    {
+      "id": "P18",
+      "section": "Backup, recovery, and system administration",
+      "requirement": "Maintenance mode and controlled deployments.",
+      "status": "Missing",
+      "assessment": "No maintenance switch or staged deployment/rollback system."
+    },
+    {
+      "id": "P19",
+      "section": "Backup, recovery, and system administration",
+      "requirement": "System settings export and recovery.",
+      "status": "Partial",
+      "assessment": "JSON backups include settings; recovery still has the validation defect."
+    },
+    {
+      "id": "Q1",
+      "section": "Bulk operations and data portability",
+      "requirement": "CSV/Excel import templates.",
+      "status": "Missing",
+      "assessment": "No CSV/Excel import templates."
+    },
+    {
+      "id": "Q2",
+      "section": "Bulk operations and data portability",
+      "requirement": "Import preview before committing data.",
+      "status": "Missing",
+      "assessment": "Restore shows counts/confirmation, not row-level import preview."
+    },
+    {
+      "id": "Q3",
+      "section": "Bulk operations and data portability",
+      "requirement": "Field mapping.",
+      "status": "Missing",
+      "assessment": "No import column mapping."
+    },
+    {
+      "id": "Q4",
+      "section": "Bulk operations and data portability",
+      "requirement": "Duplicate detection and validation.",
+      "status": "Partial",
+      "assessment": "Mandatory/relationship validation exists in selected endpoints; no incoming document duplicate detector and restore validation is incomplete."
+    },
+    {
+      "id": "Q5",
+      "section": "Bulk operations and data portability",
+      "requirement": "Row-level error reports.",
+      "status": "Missing",
+      "assessment": "No row-level import error report."
+    },
+    {
+      "id": "Q6",
+      "section": "Bulk operations and data portability",
+      "requirement": "Import history and rollback where feasible.",
+      "status": "Partial",
+      "assessment": "Backup restore is audited and SQL writes use a transaction; no general import rollback/history tool, and post-commit load can fail."
+    },
+    {
+      "id": "Q7",
+      "section": "Bulk operations and data portability",
+      "requirement": "Bulk assignment.",
+      "status": "Missing",
+      "assessment": "Batch options are forward/release/delete/print/CSV; staff assignment remains per document."
+    },
+    {
+      "id": "Q8",
+      "section": "Bulk operations and data portability",
+      "requirement": "Bulk categorization.",
+      "status": "Missing",
+      "assessment": "No bulk document-type/category update."
+    },
+    {
+      "id": "Q9",
+      "section": "Bulk operations and data portability",
+      "requirement": "Bulk archival for authorized users.",
+      "status": "Missing",
+      "assessment": "No archive lifecycle or bulk archive."
+    },
+    {
+      "id": "Q10",
+      "section": "Bulk operations and data portability",
+      "requirement": "Bulk export of filtered records.",
+      "status": "Available",
+      "assessment": "Filtered/selected records export as CSV."
+    },
+    {
+      "id": "Q11",
+      "section": "Bulk operations and data portability",
+      "requirement": "Export of selected fields only.",
+      "status": "Missing",
+      "assessment": "Hidden columns do not change fixed CSV export columns."
+    },
+    {
+      "id": "Q12",
+      "section": "Bulk operations and data portability",
+      "requirement": "Export attachments as a controlled ZIP package, if needed.",
+      "status": "Missing",
+      "assessment": "No attachment ZIP export."
+    },
+    {
+      "id": "Q13",
+      "section": "Bulk operations and data portability",
+      "requirement": "Backup and restore of reference/master data.",
+      "status": "Available",
+      "assessment": "Reference/master data are included in JSON backup/restore."
+    },
+    {
+      "id": "Q14",
+      "section": "Bulk operations and data portability",
+      "requirement": "Migration utilities from the existing DTS.",
+      "status": "Partial",
+      "assessment": "Automatic compatibility upgrades and JSON restore exist; no cross-system migration/import wizard."
+    },
+    {
+      "id": "Q15",
+      "section": "Bulk operations and data portability",
+      "requirement": "Data integrity checks after migration.",
+      "status": "Partial",
+      "assessment": "Selected checks/tests exist; no explicit post-migration integrity validation report."
+    },
+    {
+      "id": "Q16",
+      "section": "Bulk operations and data portability",
+      "requirement": "Stable identifiers that remain unchanged when a document is renamed or moved.",
+      "status": "Available",
+      "assessment": "Record IDs remain stable across ordinary metadata/routing changes."
+    },
+    {
+      "id": "R1",
+      "section": "User experience and interface design",
+      "requirement": "Responsive layout for desktop, laptop, tablet, and mobile.",
+      "status": "Available",
+      "assessment": "Responsive styles and prior browser checks cover desktop/mobile widths; not rerun in this checklist review."
+    },
+    {
+      "id": "R2",
+      "section": "User experience and interface design",
+      "requirement": "Consistent sidebar navigation.",
+      "status": "Available",
+      "assessment": "Shared sidebar navigation is consistent and permission-aware."
+    },
+    {
+      "id": "R3",
+      "section": "User experience and interface design",
+      "requirement": "Global search in the header.",
+      "status": "Available",
+      "assessment": "Header metadata search exists."
+    },
+    {
+      "id": "R4",
+      "section": "User experience and interface design",
+      "requirement": "Breadcrumbs showing the current location.",
+      "status": "Partial",
+      "assessment": "A back-to-dashboard link exists; no hierarchical breadcrumb trail."
+    },
+    {
+      "id": "R5",
+      "section": "User experience and interface design",
+      "requirement": "Clear document status badges.",
+      "status": "Available",
+      "assessment": "Status/deadline/priority badges exist."
+    },
+    {
+      "id": "R6",
+      "section": "User experience and interface design",
+      "requirement": "Dense but readable tables.",
+      "status": "Available",
+      "assessment": "Dense tables with responsive containment are implemented."
+    },
+    {
+      "id": "R7",
+      "section": "User experience and interface design",
+      "requirement": "Resizable columns and configurable column visibility.",
+      "status": "Partial",
+      "assessment": "Column visibility is saved; draggable/resizable column widths are absent."
+    },
+    {
+      "id": "R8",
+      "section": "User experience and interface design",
+      "requirement": "Sticky table headers.",
+      "status": "Available",
+      "assessment": "Table header CSS is sticky."
+    },
+    {
+      "id": "R9",
+      "section": "User experience and interface design",
+      "requirement": "Saved filters and sorting preferences.",
+      "status": "Partial",
+      "assessment": "Filters/sort survive within UI session; named/persisted filter and sort presets are absent."
+    },
+    {
+      "id": "R10",
+      "section": "User experience and interface design",
+      "requirement": "Pagination and page-size settings.",
+      "status": "Available",
+      "assessment": "Pagination and 25/50/100-row controls exist."
+    },
+    {
+      "id": "R11",
+      "section": "User experience and interface design",
+      "requirement": "Detail page organized into tabs.",
+      "status": "Missing",
+      "assessment": "Document detail uses stacked cards/history rather than tabbed detail sections."
+    },
+    {
+      "id": "R12",
+      "section": "User experience and interface design",
+      "requirement": "Timeline view for document movement.",
+      "status": "Available",
+      "assessment": "Lifecycle and movement timeline exist."
+    },
+    {
+      "id": "R13",
+      "section": "User experience and interface design",
+      "requirement": "Quick-action buttons for frequent tasks.",
+      "status": "Available",
+      "assessment": "Contextual action panels and batch/toolbar actions exist."
+    },
+    {
+      "id": "R14",
+      "section": "User experience and interface design",
+      "requirement": "Keyboard shortcuts.",
+      "status": "Available",
+      "assessment": "Keyboard shortcut handler and help modal exist."
+    },
+    {
+      "id": "R15",
+      "section": "User experience and interface design",
+      "requirement": "Confirmation for destructive or irreversible actions.",
+      "status": "Partial",
+      "assessment": "Delete/restore/batch actions confirm; some consequential individual transitions do not universally confirm."
+    },
+    {
+      "id": "R16",
+      "section": "User experience and interface design",
+      "requirement": "Unsaved-change warnings.",
+      "status": "Partial",
+      "assessment": "Workflow designer warns on unsaved changes; ordinary document forms lack a general dirty-form warning/autosave."
+    },
+    {
+      "id": "R17",
+      "section": "User experience and interface design",
+      "requirement": "Loading, empty, success, and error states.",
+      "status": "Available",
+      "assessment": "Splash/retry, loading, empty-state, toast and error displays exist."
+    },
+    {
+      "id": "R18",
+      "section": "User experience and interface design",
+      "requirement": "Consistent date and time formats.",
+      "status": "Partial",
+      "assessment": "Shared formatters exist; client uses its local timezone while server defaults to Asia/Manila, so cross-timezone consistency is not guaranteed."
+    },
+    {
+      "id": "R19",
+      "section": "User experience and interface design",
+      "requirement": "Accessible color contrast and keyboard navigation.",
+      "status": "Partial",
+      "assessment": "Labels, native controls and shortcuts exist; no comprehensive contrast/keyboard accessibility audit was supplied."
+    },
+    {
+      "id": "R20",
+      "section": "User experience and interface design",
+      "requirement": "Light and dark modes.",
+      "status": "Available",
+      "assessment": "Automatic/light/dark themes exist."
+    },
+    {
+      "id": "R21",
+      "section": "User experience and interface design",
+      "requirement": "Custom agency logo and branding.",
+      "status": "Partial",
+      "assessment": "Agency image assets and configurable organization name exist; logo replacement is a file edit, not an upload setting."
+    },
+    {
+      "id": "R22",
+      "section": "User experience and interface design",
+      "requirement": "Print-friendly views where operationally required.",
+      "status": "Available",
+      "assessment": "Routing slips, tables, reports, graphs and schedules have print views."
+    },
+    {
+      "id": "R23",
+      "section": "User experience and interface design",
+      "requirement": "Excel export as the primary data extraction feature where preferred.",
+      "status": "Equivalent",
+      "assessment": "CSV is the extraction format and can be opened in Excel; native XLSX is absent."
+    },
+    {
+      "id": "R24",
+      "section": "User experience and interface design",
+      "requirement": "User preferences for table density and default landing page.",
+      "status": "Missing",
+      "assessment": "No density/default-landing-page preference."
+    },
+    {
+      "id": "S1",
+      "section": "Automation and productivity features",
+      "requirement": "Automatically assign documents based on document type or originating office.",
+      "status": "Partial",
+      "assessment": "Configured reporting-period document types route by region/office designation; arbitrary rule-based auto-assignment is absent."
+    },
+    {
+      "id": "S2",
+      "section": "Automation and productivity features",
+      "requirement": "Automatically calculate deadlines based on configurable rules.",
+      "status": "Available",
+      "assessment": "Configured deadline rules calculate dates."
+    },
+    {
+      "id": "S3",
+      "section": "Automation and productivity features",
+      "requirement": "Automatically generate tracking numbers.",
+      "status": "Partial",
+      "assessment": "Ordinary tracking numbers are generated automatically; Special Report display-number uniqueness needs correction."
+    },
+    {
+      "id": "S4",
+      "section": "Automation and productivity features",
+      "requirement": "Automatically notify the next responsible person after forwarding.",
+      "status": "Partial",
+      "assessment": "The next actor's queue/bell updates; no persistent event notification or delivery."
+    },
+    {
+      "id": "S5",
+      "section": "Automation and productivity features",
+      "requirement": "Automatically escalate overdue documents.",
+      "status": "Missing",
+      "assessment": "No escalation engine."
+    },
+    {
+      "id": "S6",
+      "section": "Automation and productivity features",
+      "requirement": "Automatically generate daily pending-document summaries.",
+      "status": "Missing",
+      "assessment": "No scheduled pending-document digest."
+    },
+    {
+      "id": "S7",
+      "section": "Automation and productivity features",
+      "requirement": "Automatically flag documents missing mandatory attachments.",
+      "status": "Missing",
+      "assessment": "No required-attachment model/validator."
+    },
+    {
+      "id": "S8",
+      "section": "Automation and productivity features",
+      "requirement": "Automatically create follow-up tasks.",
+      "status": "Missing",
+      "assessment": "No follow-up task creation."
+    },
+    {
+      "id": "S9",
+      "section": "Automation and productivity features",
+      "requirement": "Automatically generate transmittal sheets.",
+      "status": "Partial",
+      "assessment": "Routing slips are generated on demand; no automatic transmittal numbering/sheet job."
+    },
+    {
+      "id": "S10",
+      "section": "Automation and productivity features",
+      "requirement": "Automatically update dashboard counts after transactions.",
+      "status": "Available",
+      "assessment": "Mutations refresh state and other sessions poll version changes about every fifteen seconds."
+    },
+    {
+      "id": "S11",
+      "section": "Automation and productivity features",
+      "requirement": "Automatically archive eligible completed records, subject to policy.",
+      "status": "Missing",
+      "assessment": "No automatic archive/retention job."
+    },
+    {
+      "id": "S12",
+      "section": "Automation and productivity features",
+      "requirement": "Automatically remind users about documents awaiting their action.",
+      "status": "Partial",
+      "assessment": "Queue and due-soon indicators exist; no active scheduled reminders."
+    },
+    {
+      "id": "S13",
+      "section": "Automation and productivity features",
+      "requirement": "Automatically generate recurring reports.",
+      "status": "Available",
+      "assessment": "Special Reports generate on configured recurring schedules with catch-up and uniqueness constraints."
+    },
+    {
+      "id": "S14",
+      "section": "Automation and productivity features",
+      "requirement": "Automatically flag unusual inactivity or repeated returns.",
+      "status": "Partial",
+      "assessment": "Admin/Focal stalled thresholds and revision cycle counts exist; no generalized inactivity/repeated-return anomaly rules."
+    },
+    {
+      "id": "S15",
+      "section": "Automation and productivity features",
+      "requirement": "Provide configurable rules for exceptional situations.",
+      "status": "Partial",
+      "assessment": "OIC/override/resubmission/reference rules exist; designer conditions do not execute production workflows."
+    },
+    {
+      "id": "T1",
+      "section": "Collaboration and team coordination",
+      "requirement": "Internal discussion threads attached to documents.",
+      "status": "Partial",
+      "assessment": "Timestamped notes and reviewer comments exist; no nested threaded discussions."
+    },
+    {
+      "id": "T2",
+      "section": "Collaboration and team coordination",
+      "requirement": "@mentions for authorized users.",
+      "status": "Missing",
+      "assessment": "No mentions or mention notifications."
+    },
+    {
+      "id": "T3",
+      "section": "Collaboration and team coordination",
+      "requirement": "Private internal notes separated from official correspondence.",
+      "status": "Partial",
+      "assessment": "Notes are separate from the external file, but have no private visibility tier."
+    },
+    {
+      "id": "T4",
+      "section": "Collaboration and team coordination",
+      "requirement": "Shared task lists.",
+      "status": "Partial",
+      "assessment": "Staff/workload views share document action lists; no independent shared task-list objects."
+    },
+    {
+      "id": "T5",
+      "section": "Collaboration and team coordination",
+      "requirement": "Team workload view.",
+      "status": "Available",
+      "assessment": "Team/staff workload reports and charts exist."
+    },
+    {
+      "id": "T6",
+      "section": "Collaboration and team coordination",
+      "requirement": "Staff availability and temporary unavailability.",
+      "status": "Partial",
+      "assessment": "Manager present/away flags and personnel leave calendar exist; staff leave is not automatically integrated into routing availability."
+    },
+    {
+      "id": "T7",
+      "section": "Collaboration and team coordination",
+      "requirement": "Delegation during leave or official travel.",
+      "status": "Partial",
+      "assessment": "Manual manager/OIC delegation exists; no general timed staff substitution linked to leave."
+    },
+    {
+      "id": "T8",
+      "section": "Collaboration and team coordination",
+      "requirement": "Follow-up reminders.",
+      "status": "Missing",
+      "assessment": "No follow-up reminder scheduler."
+    },
+    {
+      "id": "T9",
+      "section": "Collaboration and team coordination",
+      "requirement": "Related-document linking.",
+      "status": "Missing",
+      "assessment": "No linked related-document records."
+    },
+    {
+      "id": "T10",
+      "section": "Collaboration and team coordination",
+      "requirement": "Team announcements.",
+      "status": "Missing",
+      "assessment": "No team announcement module."
+    },
+    {
+      "id": "T11",
+      "section": "Collaboration and team coordination",
+      "requirement": "Handover notes when an employee leaves or changes assignment.",
+      "status": "Partial",
+      "assessment": "Reassignment accepts a note; no structured employee departure/handover record."
+    },
+    {
+      "id": "T12",
+      "section": "Collaboration and team coordination",
+      "requirement": "Activity feed showing recent team actions.",
+      "status": "Partial",
+      "assessment": "Authorized audit/history can show actions; no separate recent team activity feed."
+    },
+    {
+      "id": "T13",
+      "section": "Collaboration and team coordination",
+      "requirement": "Comments with timestamps and author identity.",
+      "status": "Available",
+      "assessment": "Comments/history include actor and timestamp."
+    },
+    {
+      "id": "T14",
+      "section": "Collaboration and team coordination",
+      "requirement": "Explicit acknowledgment of important instructions.",
+      "status": "Missing",
+      "assessment": "No instruction acknowledgment/read receipt."
+    },
+    {
+      "id": "U1",
+      "section": "Integrations",
+      "requirement": "Google Drive links or API integration.",
+      "status": "Partial",
+      "assessment": "Drive URLs can be stored; no authenticated Drive API integration."
+    },
+    {
+      "id": "U2",
+      "section": "Integrations",
+      "requirement": "SMTP email notifications.",
+      "status": "Missing",
+      "assessment": "No SMTP integration."
+    },
+    {
+      "id": "U3",
+      "section": "Integrations",
+      "requirement": "LDAP or Active Directory authentication, if available.",
+      "status": "Missing",
+      "assessment": "No directory/LDAP authentication."
+    },
+    {
+      "id": "U4",
+      "section": "Integrations",
+      "requirement": "Agency single sign-on, if supported.",
+      "status": "Missing",
+      "assessment": "No agency SSO/OIDC/SAML integration."
+    },
+    {
+      "id": "U5",
+      "section": "Integrations",
+      "requirement": "Microsoft Office document preview or conversion.",
+      "status": "Missing",
+      "assessment": "No native Office conversion/preview integration."
+    },
+    {
+      "id": "U6",
+      "section": "Integrations",
+      "requirement": "Excel report generation.",
+      "status": "Equivalent",
+      "assessment": "CSV opens in Excel; native XLSX generation is absent."
+    },
+    {
+      "id": "U7",
+      "section": "Integrations",
+      "requirement": "QR code generation for physical documents.",
+      "status": "Missing",
+      "assessment": "No QR generation."
+    },
+    {
+      "id": "U8",
+      "section": "Integrations",
+      "requirement": "Barcode scanning.",
+      "status": "Missing",
+      "assessment": "No barcode scan input workflow."
+    },
+    {
+      "id": "U9",
+      "section": "Integrations",
+      "requirement": "Scanner-assisted intake.",
+      "status": "Missing",
+      "assessment": "No scanner integration."
+    },
+    {
+      "id": "U10",
+      "section": "Integrations",
+      "requirement": "Calendar integration for deadlines and reminders.",
+      "status": "Partial",
+      "assessment": "Personnel calendar is implemented; document-deadline calendar/sync/reminders are absent."
+    },
+    {
+      "id": "U11",
+      "section": "Integrations",
+      "requirement": "Approved e-signature service.",
+      "status": "Missing",
+      "assessment": "No e-signature integration."
+    },
+    {
+      "id": "U12",
+      "section": "Integrations",
+      "requirement": "Internal API for future agency systems.",
+      "status": "Partial",
+      "assessment": "Internal cookie-authenticated APIs exist; no published service API/auth contract for other agency systems."
+    },
+    {
+      "id": "U13",
+      "section": "Integrations",
+      "requirement": "Webhooks for configured workflow events.",
+      "status": "Missing",
+      "assessment": "No event webhooks."
+    },
+    {
+      "id": "U14",
+      "section": "Integrations",
+      "requirement": "OCR service for scanned documents.",
+      "status": "Missing",
+      "assessment": "No OCR service."
+    },
+    {
+      "id": "U15",
+      "section": "Integrations",
+      "requirement": "Export to existing departmental reporting templates.",
+      "status": "Partial",
+      "assessment": "Generic reports/routing slips exist; no agency template import/mapping/export integration."
+    },
+    {
+      "id": "V1",
+      "section": "Advanced and experimental features",
+      "requirement": "OCR and full-text indexing.",
+      "status": "Missing",
+      "assessment": "No OCR/content extraction/index."
+    },
+    {
+      "id": "V2",
+      "section": "Advanced and experimental features",
+      "requirement": "Document comparison.",
+      "status": "Missing",
+      "assessment": "No version comparison tool."
+    },
+    {
+      "id": "V3",
+      "section": "Advanced and experimental features",
+      "requirement": "AI-assisted classification.",
+      "status": "Missing",
+      "assessment": "Manual classification only; no AI suggestions."
+    },
+    {
+      "id": "V4",
+      "section": "Advanced and experimental features",
+      "requirement": "Bottleneck and workload analysis.",
+      "status": "Partial",
+      "assessment": "Workload, desk-age and return-cycle indicators exist; no historical process mining or automatic workload balancing."
+    },
+    {
+      "id": "V5",
+      "section": "Advanced and experimental features",
+      "requirement": "Semantic document search.",
+      "status": "Missing",
+      "assessment": "Only literal metadata search."
+    },
+    {
+      "id": "V6",
+      "section": "Advanced and experimental features",
+      "requirement": "Automatic metadata extraction.",
+      "status": "Missing",
+      "assessment": "No file metadata/text extraction."
+    },
+    {
+      "id": "V7",
+      "section": "Advanced and experimental features",
+      "requirement": "Duplicate-content detection.",
+      "status": "Missing",
+      "assessment": "No content hash or similarity duplicate detection."
+    },
+    {
+      "id": "V8",
+      "section": "Advanced and experimental features",
+      "requirement": "Suggested responses.",
+      "status": "Missing",
+      "assessment": "No generated response suggestions."
+    },
+    {
+      "id": "V9",
+      "section": "Advanced and experimental features",
+      "requirement": "Document summarization.",
+      "status": "Missing",
+      "assessment": "No document summarization."
+    },
+    {
+      "id": "V10",
+      "section": "Advanced and experimental features",
+      "requirement": "Anomaly detection.",
+      "status": "Partial",
+      "assessment": "Simple Admin/Focal stall thresholds exist; no statistical/anomaly model."
+    },
+    {
+      "id": "V11",
+      "section": "Advanced and experimental features",
+      "requirement": "Estimated completion dates.",
+      "status": "Missing",
+      "assessment": "No predicted completion-date model."
+    },
+    {
+      "id": "W1",
+      "section": "Performance and technical reliability",
+      "requirement": "Indexed database columns for common searches.",
+      "status": "Partial",
+      "assessment": "IDs and workflow/report lookup indexes exist; ordinary searchable document metadata is JSON and is searched in browser memory."
+    },
+    {
+      "id": "W2",
+      "section": "Performance and technical reliability",
+      "requirement": "Efficient server-side filtering, sorting, and pagination.",
+      "status": "Missing",
+      "assessment": "Ordinary document filtering/sorting/pagination happen in the browser after downloading state."
+    },
+    {
+      "id": "W3",
+      "section": "Performance and technical reliability",
+      "requirement": "Transactions for critical workflow operations.",
+      "status": "Partial",
+      "assessment": "Graph/report/restore operations use SQL transactions; ordinary document mutation, sequence and audit writes are not one combined transaction."
+    },
+    {
+      "id": "W4",
+      "section": "Performance and technical reliability",
+      "requirement": "Prevention of duplicate submissions and conflicting updates.",
+      "status": "Partial",
+      "assessment": "Workflow drafts have revision conflict checks and recurring reports have unique keys; ordinary updates lack general revision/idempotency protection and user creation has a confirmed race."
+    },
+    {
+      "id": "W5",
+      "section": "Performance and technical reliability",
+      "requirement": "Database constraints for important relationships.",
+      "status": "Partial",
+      "assessment": "Workflow foreign keys and recurring-report uniqueness exist; many user/document/division references inside JSON have no database constraints."
+    },
+    {
+      "id": "W6",
+      "section": "Performance and technical reliability",
+      "requirement": "Background jobs for scheduled reports and bulk processing.",
+      "status": "Partial",
+      "assessment": "In-process timers generate recurring reports; no durable worker queue or bulk-processing job system."
+    },
+    {
+      "id": "W7",
+      "section": "Performance and technical reliability",
+      "requirement": "Centralized error logging.",
+      "status": "Partial",
+      "assessment": "Console error logging exists; no centralized persistent error service/view."
+    },
+    {
+      "id": "W8",
+      "section": "Performance and technical reliability",
+      "requirement": "Health checks and uptime monitoring.",
+      "status": "Partial",
+      "assessment": "healthz exists; no uptime monitor/alerts."
+    },
+    {
+      "id": "W9",
+      "section": "Performance and technical reliability",
+      "requirement": "Graceful handling of interrupted uploads.",
+      "status": "Missing",
+      "assessment": "No resumable/interrupted upload handling; binary uploads are absent."
+    },
+    {
+      "id": "W10",
+      "section": "Performance and technical reliability",
+      "requirement": "File size and storage usage monitoring.",
+      "status": "Missing",
+      "assessment": "No storage usage/file-size monitor."
+    },
+    {
+      "id": "W11",
+      "section": "Performance and technical reliability",
+      "requirement": "Database migration versioning.",
+      "status": "Partial",
+      "assessment": "CREATE IF NOT EXISTS and compatibility upgrades exist; no numbered migration ledger."
+    },
+    {
+      "id": "W12",
+      "section": "Performance and technical reliability",
+      "requirement": "Automated tests for workflow transitions and permissions.",
+      "status": "Available",
+      "assessment": "API regression tests cover document rules, roles, fallback/OIC, schedules and designer behavior."
+    },
+    {
+      "id": "W13",
+      "section": "Performance and technical reliability",
+      "requirement": "Concurrent-user testing.",
+      "status": "Partial",
+      "assessment": "Concurrent requests are tested; independent simultaneous user-session soak testing is absent."
+    },
+    {
+      "id": "W14",
+      "section": "Performance and technical reliability",
+      "requirement": "Backup restoration testing.",
+      "status": "Partial",
+      "assessment": "JSON restore round trips are tested; full snapshot disaster recovery and malformed restore rejection are incomplete."
+    },
+    {
+      "id": "W15",
+      "section": "Performance and technical reliability",
+      "requirement": "Recovery procedures for failed deployments.",
+      "status": "Missing",
+      "assessment": "No failed-deployment rollback/recovery runbook."
+    },
+    {
+      "id": "W16",
+      "section": "Performance and technical reliability",
+      "requirement": "Separation of development, testing, and production environments.",
+      "status": "Partial",
+      "assessment": "DATA_DIR and isolated test runner separate databases; no formal development/staging/production deployment configuration."
+    }
+  ]
+}

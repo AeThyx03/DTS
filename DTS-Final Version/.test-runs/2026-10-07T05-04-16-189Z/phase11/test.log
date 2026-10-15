@@ -1,0 +1,120 @@
+PASS holidays saved
+PASS five schedules seeded
+PASS seeded frequency / months / threshold exact
+PASS List of Terminated months are Mar, Jun, Sep, Dec
+PASS PPA to COA months are exactly Jan, Mar, Jun, Sep, Dec
+PASS seeded schedules start inactive with nobody assigned
+PASS nothing generated while inactive
+PASS cannot activate without an assignee
+PASS staff receive no schedules in state
+PASS staff cannot create a schedule
+PASS staff cannot run generation
+PASS staff cannot edit a schedule
+PASS rejected: missing name
+PASS rejected: missing frequency
+PASS rejected: unknown frequency
+PASS rejected: no months
+PASS rejected: threshold missing
+PASS rejected: threshold zero
+PASS rejected: threshold fractional
+PASS rejected: threshold text
+PASS rejected: unknown basis
+PASS rejected: no assignee
+PASS rejected: system administrator as assignee
+PASS rejected: unknown user
+PASS rejected: unknown division
+PASS rejected: monthly with only some months
+PASS rejected: quarterly not 3 months apart
+PASS rejected: annual with two months
+PASS rejected: bad first period
+PASS rejected: unknown document type
+PASS rejected: duplicate name
+PASS assign + activate Summary of CMR
+PASS assign + activate Summary of PPR
+PASS assign + activate List of Terminated
+PASS assign + activate PPA to COA
+PASS assign + activate CMR and PPR Tracking
+PASS Feb 1 2026: Jan reports generated for CMR, PPR, Tracking and PPA to COA (not Terminated)
+PASS title reads "Summary of CMR as of January 2026", period January 2026
+PASS starts Pending, generated 1 Feb 2026, no completion
+PASS CMR deadline: 25 working days from 1 Feb 2026 carried into March (Feb has 20 working days)
+PASS CMR deadline skips the listed holiday and weekends (2026-03-09)
+PASS PPA to COA Jan 2026 due 17th working day of Feb 2026
+PASS Tracking Jan 2026 due 15th working day of Feb 2026
+PASS assigned to Personnel A only
+PASS Personnel B is not assigned (For My Action for B is empty)
+PASS every user can see the report on the dashboard data
+PASS no ordinary document was created
+PASS Summary of CMR: 12 reports (Jan to Dec 2026)
+PASS Summary of PPR: 12 reports
+PASS CMR and PPR Tracking: 12 reports
+PASS List of Terminated: 4 reports (Mar, Jun, Sep, Dec)
+PASS PPA to COA only Jan, Mar, Jun, Sep, Dec — never Feb, Apr, May, Jul, Aug, Oct, Nov
+PASS exactly one report per schedule + month + year (repeated runs create no duplicates)
+PASS exactly one assignment per report (no duplicate assignments)
+PASS List of Terminated: period range and "as of" designation
+PASS List of Terminated generated the month after each quarter (Apr, Jul, Oct, Jan 2027)
+PASS every deadline matches an independent working-day count
+PASS spec examples: PPR Aug 2026 -> 20th working day of Sep; CMR/Tracking Sep 2026 -> Oct; LoT Q3 -> Oct 17th
+PASS year rollover: Dec 2026 PPA to COA generated Jan 2027, due 17th working day of Jan 2027 (1 Jan 2027 is a holiday)
+PASS year rollover: Dec 2026 List of Terminated likewise, deadline not in December 2026
+PASS deadlines are never on a weekend or listed holiday
+PASS assignment changed A -> B
+PASS existing reports keep their assignee and deadline after the schedule change
+PASS next report (Jan 2027) goes to B only
+PASS A does not receive the new report
+PASS old reports still assigned to A (history untouched)
+PASS changed deadline affects only future reports
+PASS two assignees saved
+PASS exactly one Special Report for two assignees
+PASS both A and B have an active assignment
+PASS re-running does not add assignments
+PASS C is not assigned
+PASS non-admin cannot reassign
+PASS reassign to nobody refused
+PASS reassign to the system administrator refused
+PASS reassign A -> B
+PASS same report, not duplicated
+PASS B has the active assignment; A is history (reassigned)
+PASS same reassignment twice is refused
+PASS reassign back to A works (history kept)
+PASS A active again, B reassigned, three assignment rows
+FAIL C cannot complete a report that is not assigned to them
+FAIL B (reassigned away) cannot complete it
+FAIL A completes it
+FAIL completed: status, time, by and note kept; assignment completed
+FAIL completed report cannot be completed or reassigned again
+PASS completed record is kept
+FAIL one of two assignees completing closes the other assignment
+PASS schedule created
+PASS nothing before its first period is due
+PASS run on 3 Feb creates the January report that should have been made on 1 Feb
+PASS recovered report is assigned and visible to C
+PASS several missed months are all recovered (Feb, Mar, Apr) without duplicates
+PASS no report is created when nobody active can be assigned
+PASS recovers on the next run once someone is assignable
+PASS division can be the assignee
+PASS division assignment resolves to the current focal
+PASS deactivate
+PASS inactive schedule generates nothing
+PASS reactivate skips the months it was off
+PASS reactivation does not back-fill (fromPeriod moved up, so at most the latest report is created)
+  missing audit action: Special Report completed
+FAIL audit: schedules set up, created, changed, deactivated, generated, reassigned, completed
+PASS audit records the assignee change (who to who)
+PASS backup contains schedules and reports
+PASS restore succeeds
+FAIL restore keeps reports, assignments, history
+PASS generation after restore creates no duplicates
+PASS documents untouched by generation
+PASS document type deadlines unchanged (Consolidated CMR and PPR still 6th working day after the reporting period)
+PASS 1st of month on a Saturday (Aug 2026 report -> Sep 2026? use Oct 2026 report -> Nov 2026 starts Sunday): 1st working day is Mon 2 Nov
+PASS 1st of month on a Saturday (Jan 2026 report -> Feb 2026 starts Sunday; Aug 2026 report -> Sep starts Tuesday; Jan 2027 report -> Feb 2027 Monday); March 2026 starts Sunday -> 1st working day Mon 2 Mar
+PASS month starting on a Saturday: 1 Aug 2026 (July report) -> first working day Mon 3 Aug
+PASS several consecutive holidays at the start of the month are skipped
+PASS a holiday inside the count pushes the deadline one working day
+PASS holidays plus a weekend in a row are all skipped
+PASS threshold beyond the month carries into the next month and stays on a working day
+PASS quarter labels: Nov 2025–Jan 2026 for a quarter ending in January
+
+109 passed, 8 failed

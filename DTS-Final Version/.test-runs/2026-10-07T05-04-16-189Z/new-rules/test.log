@@ -1,0 +1,14 @@
+PASS global access: cruz state includes every doc
+PASS for-info doc logged
+PASS for-info: cannot assign to staff
+PASS for-info: can assign to a Division Focal
+PASS non-for-info: staff assignment fine
+PASS supervisor (unrelated, Nieva) can reassign after assignment
+PASS division manager can reassign
+PASS department manager can reassign
+PASS random staff cannot reassign
+PASS salvador submits to his supervisor (torino)
+PASS torino (supervisor) can approve as reviewer
+PASS designations list is not filtered server-side (client applies the region scope)
+
+12 passed, 0 failed

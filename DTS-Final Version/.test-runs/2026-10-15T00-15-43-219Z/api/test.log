@@ -1,0 +1,53 @@
+PASS state needs auth
+PASS csrf header required
+PASS bad login
+PASS state has docs
+PASS no password hashes leaked
+PASS divisions per request
+PASS cabrera CMED / aquino CMSD
+PASS global access: staff sees every document
+PASS logged all
+PASS cruz can view but cannot act (not authorised, not hidden)
+PASS wrong focal refused (aquino on CMED)
+PASS Cabrera assigns CMED
+PASS Aquino assigns CMSD
+PASS Judy Ann (Admin focal) assigns Admin doc
+PASS Oscar (Department focal) assigns Department doc
+PASS staff cannot assign via API
+PASS assign to non-staff refused
+PASS submit
+PASS non-reviewer cannot approve
+PASS reviewer returns
+PASS comply
+PASS reviewer approves
+PASS other-division manager blocked? (Villarete on CMED)
+PASS Martinez div approve
+PASS cruz cannot clear
+PASS Hanova clears
+PASS cleared docs need admin to log out; cruz cannot
+PASS Admin staff logs out
+PASS paling cannot change perms
+PASS paling cannot create users
+PASS cruz cannot read audit
+PASS admin reads audit
+PASS admin creates user
+PASS new user must change password
+PASS blocked until password changed
+PASS weak password refused
+PASS password change ok
+PASS state after change
+PASS admin deactivates
+PASS session dead after deactivation
+PASS cannot deactivate last sysadmin
+PASS config: oic needs manage
+PASS admin sets OIC
+PASS divisions validation
+PASS settings validation
+PASS version bumps
+PASS non-string subject rejected
+PASS lockout after repeated failures
+PASS locked key stays locked
+PASS logout
+PASS session dead after logout
+
+51 passed, 0 failed

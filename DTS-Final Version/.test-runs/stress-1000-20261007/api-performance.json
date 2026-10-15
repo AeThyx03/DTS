@@ -1,0 +1,100 @@
+{
+  "base": "http://127.0.0.1:3131",
+  "date": "2026-10-07T06:15:30.535Z",
+  "node": "v24.21.0",
+  "mix": {
+    "ongoingOnTime": 400,
+    "ongoingOverdue": 300,
+    "completedOnTime": 225,
+    "completedLate": 75,
+    "total": 1000,
+    "movementEvents": 5620
+  },
+  "seedMs": 568.5806,
+  "measurements": [
+    {
+      "label": "Before seeding (20 documents)",
+      "endpoint": "/api/state",
+      "concurrency": 1,
+      "requests": 30,
+      "errors": [],
+      "averageMs": 1.591446666666666,
+      "medianMs": 1.3770999999999844,
+      "p95Ms": 2.581400000000002,
+      "maxMs": 2.870100000000008,
+      "ttfbP95Ms": 2.069500000000005,
+      "requestsPerSecond": 627.0273885563322,
+      "payloadKiB": 47.880859375
+    },
+    {
+      "label": "1,000 documents",
+      "endpoint": "/api/state",
+      "concurrency": 1,
+      "requests": 60,
+      "errors": [],
+      "averageMs": 29.50317833333332,
+      "medianMs": 28.902300000000196,
+      "p95Ms": 33.615299999999934,
+      "maxMs": 38.66980000000012,
+      "ttfbP95Ms": 17.73869999999988,
+      "requestsPerSecond": 33.892625676397955,
+      "payloadKiB": 2038.5400390625
+    },
+    {
+      "label": "1,000 documents",
+      "endpoint": "/api/state",
+      "concurrency": 5,
+      "requests": 60,
+      "errors": [],
+      "averageMs": 80.68511833333329,
+      "medianMs": 80.94849999999997,
+      "p95Ms": 94.21229999999969,
+      "maxMs": 103.2844,
+      "ttfbP95Ms": 78.58170000000018,
+      "requestsPerSecond": 59.99880002399953,
+      "payloadKiB": 2038.5400390625
+    },
+    {
+      "label": "1,000 documents",
+      "endpoint": "/api/state",
+      "concurrency": 20,
+      "requests": 60,
+      "errors": [],
+      "averageMs": 311.22280333333333,
+      "medianMs": 353.52990000000045,
+      "p95Ms": 384.0477000000001,
+      "maxMs": 391.2951000000003,
+      "ttfbP95Ms": 366.41139999999996,
+      "requestsPerSecond": 54.51151369479135,
+      "payloadKiB": 2038.5400390625
+    },
+    {
+      "label": "Polling version endpoint",
+      "endpoint": "/api/version",
+      "concurrency": 20,
+      "requests": 100,
+      "errors": [],
+      "averageMs": 6.550920000000006,
+      "medianMs": 4.753199999999197,
+      "p95Ms": 12.724100000000362,
+      "maxMs": 15.08220000000074,
+      "ttfbP95Ms": 12.683899999999994,
+      "requestsPerSecond": 2887.0443883074095,
+      "payloadKiB": 0.0283203125
+    },
+    {
+      "label": "Audit/history writes",
+      "endpoint": "/api/docs/jrj8flkr7w4/act",
+      "concurrency": 5,
+      "requests": 30,
+      "errors": [],
+      "averageMs": 182.50578666666667,
+      "medianMs": 183.46320000000014,
+      "p95Ms": 208.38960000000043,
+      "maxMs": 236.05000000000018,
+      "ttfbP95Ms": 208.3150000000005,
+      "requestsPerSecond": 25.43712426187825,
+      "payloadKiB": 0.0458984375
+    }
+  ]
+}

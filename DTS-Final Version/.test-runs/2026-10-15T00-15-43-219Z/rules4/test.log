@@ -1,0 +1,58 @@
+PASS Consolidated CMR and PPR documents have a calculated deadline
+PASS the deadline is stored with its source and label
+PASS each one carries a reporting period
+PASS deadline month is the month after the reporting period
+PASS calculated deadline falls on a working day
+PASS calculated deadline is the 6th working day of its month
+PASS doc logged with URL
+PASS url field exists on doc
+PASS url field persisted correctly
+PASS invalid URL rejected at server via set_urls
+PASS regular doc exists for URL test
+PASS non-assignee staff cannot set report URLs
+PASS assignee can set draft URL
+PASS assignee can set revised URL
+PASS second revised URL bumps revision counter
+PASS revCount is 1 after replacing revised URL
+PASS supervisor (via REVIEW_LINE) can update URLs
+PASS doc created for hierarchy test
+PASS cabrera can submit to martinez (manager as reviewer)
+PASS martinez approves as reviewer
+PASS doc for override created
+PASS dept manager override-clears from sup_review
+PASS status is cleared after dept_clear override
+PASS div manager override-clears from div_review
+PASS sysadmin override-clears from sup_review
+PASS div_manager sees div_review doc in state
+PASS test case 1 logged (Region 12, September)
+PASS test case 1 deadline month is October
+PASS test case 1 deadline is the 6th working day of October (8 Oct 2026)
+PASS test case 2 logged (Region 10, August)
+PASS test case 2 deadline month is September
+PASS test case 2 deadline is the 6th working day of September (8 Sep 2026)
+PASS the 6th working day skips weekends (Feb 2026 → 9 Feb)
+PASS holidays are skipped in the working-day count (Mar → 13 Apr 2026)
+PASS invalid reporting period refused
+PASS “Sep” and “SEPTEMBER” normalise to September
+PASS “Banana” is not accepted as a reporting period
+PASS “SeptemberBanana” is not accepted as a reporting period
+PASS “SepBanana” is not accepted as a reporting period
+PASS “13” is not accepted as a reporting period
+PASS “0” is not accepted as a reporting period
+PASS document types carry a threshold, unit, basis and status
+PASS the old regular flag is no longer set
+PASS Consolidated CMR and PPR is configured as 6 working days after the reporting period
+PASS admin can add a document type with a threshold
+PASS the new document type is stored with its threshold
+PASS admin can deactivate a document type
+PASS a deactivated document type cannot be chosen when logging
+PASS admin can activate it again
+PASS communication types carry a description and a status
+PASS every seeded communication type survived the upgrade
+PASS admin can add a communication type
+PASS the new communication type is stored with its description
+PASS admin can deactivate a communication type
+PASS a used communication type cannot be deleted
+PASS a used document type is not required, but removing one that is still referenced is allowed only if unused
+
+56 passed, 0 failed

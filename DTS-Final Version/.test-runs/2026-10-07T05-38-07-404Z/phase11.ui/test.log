@@ -1,0 +1,13 @@
+PASS configured Summary of CMR
+PASS configured PPA to COA
+PASS generated for Feb 2026
+ERR page.waitForSelector: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('.pagehead h1:has-text("Special Reports")') to be visible[22m
+
+    at D:\test server\staging-dts\New folder\dts-final version-workflow\DTS-Final Version\.test-runs\2026-10-07T05-38-07-404Z\phase11.ui\browser.test.cjs:20:80 {
+  log: [
+    `  - waiting for locator('.pagehead h1:has-text("Special Reports")') to be visible`
+  ],
+  name: 'TimeoutError'
+}

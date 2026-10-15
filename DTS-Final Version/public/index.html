@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Document Tracking &amp; Routing System</title>
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="alternate icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/app.css">
+<link rel="stylesheet" href="/schedule.css">
+<link rel="stylesheet" href="/special.css">
+<link rel="stylesheet" href="/workflow.css">
+</head>
+<body>
+<div id="splash" data-state="loading">
+<div class="sp-card">
+<img class="sp-logo" src="/logo-white.png" alt="POSSD">
+<h1 class="sp-title">POSSD DOCUMENT TRACKING AND ROUTING SYSTEM</h1>
+<div class="sp-load" role="status" aria-live="polite">
+<div class="sp-spin" aria-hidden="true"></div>
+<p class="sp-main">System is loading...</p>
+<p class="sp-sub">Please wait while the system starts.</p>
+<p class="sp-slow">This is taking longer than usual. If nothing changes, <a href="/">reload the page</a>.</p>
+</div>
+<div class="sp-err" role="alert">
+<p class="sp-main">Unable to start the application.</p>
+<p class="sp-sub">Please check the server connection and try again.</p>
+<button type="button" class="sp-btn" data-act="splashRetry">Retry</button>
+</div>
+</div>
+</div>
+<div id="app" inert></div>
+<div id="toasts" aria-live="polite"></div>
+<div id="pp" role="dialog" aria-modal="true" aria-label="Print preview"><div class="pp-bar"><b>Print preview</b><div class="row"><span class="hint" id="ppHint"></span><button class="btn primary" data-act="ppPrint">Print</button><button class="btn" data-act="ppClose">Close</button></div></div><div class="sheet" id="ppBody"></div></div>
+<div id="modalRoot"></div>
+<script src="/engine.js"></script>
+<script src="/schedule.js"></script>
+<script src="/special.js"></script>
+<script src="/client.js"></script>
+<script src="/workflow.js"></script>
+</body>
+</html>

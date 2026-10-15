@@ -1,0 +1,75 @@
+PASS "Personnel Schedule" tab is in the sidebar
+PASS page title and subtitle
+PASS opens on the current month (September 2026) with a Today marker
+PASS legend shows the three event types
+PASS view buttons: Month | Week | Day | Agenda
+PASS summary tiles start at zero
+PASS summary title is "Today’s Personnel Schedule"
+PASS Add Schedule opens the form; type selector offers Inspection, Leave, Meeting
+PASS inspection section is showing, leave and meeting hidden
+PASS personnel list is the existing users
+PASS empty inspection is refused with a message (nothing sent)
+PASS new inspection defaults to 8:00 AM - 5:00 PM
+PASS Select all ticks every personnel
+PASS unticking one person clears the Select all box
+PASS unticking Select all clears everyone
+PASS Select all applies only to the people shown by the search
+PASS Test 1: inspection appears on Sept 29
+PASS summary now counts 2 inspection personnel
+PASS chip shows time, first name and title
+PASS leave form shows Personnel, Leave type, dates; inspection fields hidden
+PASS leave types come from the reference list (4 starting types)
+PASS leave end date before start date is refused
+PASS Test 2: leave shows on Sept 30, Oct 1 and Oct 2
+PASS multi-day leave is drawn as one connected bar (start / mid / end)
+PASS leave chip shows name and leave type
+PASS new meeting defaults to 8:00 AM - 5:00 PM
+PASS an invalid meeting link is refused
+PASS meeting end time before start time is refused
+PASS Test 4: "⚠ Scheduling Conflict" warning appears with the person and the leave
+PASS warning offers to go back or save anyway (warn, do not silently block)
+PASS "Go back" returns to the form with everything still filled in
+PASS Test 3: after confirming, the meeting is saved and shows on Sept 30
+PASS meeting detail: title, participants, time, location, link, and a live conflict note
+PASS meeting link opens safely in a new tab
+PASS authorised user sees Edit and Delete
+PASS leave detail: person, leave type, start, end, duration, return date
+PASS edit form is filled with the saved values and the type is locked
+PASS edit saved: still ONE inspection, now three people
+PASS Test 5: a 10-11 meeting inside an 8-5 inspection is flagged
+PASS summary for Sept 29: 3 inspection personnel, 0 on leave, 1 meeting person
+PASS Test 6: personnel filter shows only Torino’s schedules (inspection + meeting, no leave)
+PASS Mojica sees inspection, meetings and 3 days of leave
+PASS Test 6: person + event type combine (Mojica + Inspection = 1 event)
+PASS All Personnel + Inspection = every inspection, nothing else
+PASS filters cleared: everything is back
+PASS clicking a summary tile filters to that type and opens that date’s day view
+PASS Week view: 7 day columns for 28 Sep - 4 Oct 2026
+PASS Week view shows detailed cards
+PASS Day view shows the anchor date (Tuesday, September 29, 2026) with its schedules
+PASS Next moves the day view forward one day
+PASS Today returns to the current date
+PASS Test 7: Agenda lists dates in order with time, type, people, place
+PASS Agenda repeats multi-day leave on every date with "Day n of 3"
+PASS Agenda shows the meeting participant count
+PASS Agenda Next moves to October 2026
+PASS search finds by project and says it covers all dates
+PASS search finds by leave type
+PASS typing in search keeps the cursor in the box
+PASS search finds by location
+PASS search finds by personnel
+PASS Clear search returns to the calendar
+PASS print sheet: module title, period, filters, personnel, event type, details
+PASS print sheet has no navigation controls
+PASS delete asks for confirmation, then removes it
+FAIL Leave types card sits on Reference lists with the 4 starting types
+SCRIPT ERROR page.fill: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('.card:has(h3:text-is("Leave types")) input[name=v]')[22m
+
+    at D:\test server\staging-dts\New folder\dts-final version-workflow\DTS-Final Version\.test-runs\2026-10-07T05-38-07-404Z\schedule.ui\browser.test.cjs:238:14 {
+  log: [
+    `  - waiting for locator('.card:has(h3:text-is("Leave types")) input[name=v]')`
+  ],
+  name: 'TimeoutError'
+}

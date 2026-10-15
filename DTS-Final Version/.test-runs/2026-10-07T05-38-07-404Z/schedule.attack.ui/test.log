@@ -1,0 +1,91 @@
+PASS XSS payloads inert in the month grid
+PASS the hostile title is shown as literal text
+PASS XSS payloads inert in the week view
+PASS XSS payloads inert in the day view
+PASS day view shows the literal <b>bold</b> text, not bold
+PASS XSS payloads inert in the agenda
+PASS XSS payloads inert in search results
+PASS XSS payloads inert in the inspection detail panel
+PASS XSS payloads inert in the inspection edit form
+PASS edit form keeps hostile text as the field value
+PASS XSS payloads inert in the meeting detail panel
+PASS XSS payloads inert in the meeting edit form
+PASS edit form keeps hostile text as the field value
+PASS XSS payloads inert in the leave detail panel
+PASS a link containing a quote cannot break out of its attribute
+PASS XSS payloads inert in the print sheet
+PASS print sheet shows the hostile title as text
+PASS the 3-day inspection is drawn on 3 days
+PASS the 3-day inspection sits at the SAME height on all 3 days (one connected bar)
+PASS the 5-day leave is drawn on 5 days at one height
+PASS the two multi-day bars are on different rows (they do not overlap)
+PASS adjacent bar segments touch (no gaps between the days)
+PASS with 3 lanes full the 4th event on that day says "+n more"
+PASS "+n more" opens that day with every event listed
+PASS agenda: 7:00 AM, 3:00 PM, then Whole Day (matches the spec example)
+PASS day view uses the same order
+PASS long text: no sideways scroll in month view
+PASS long text: no sideways scroll in week view
+PASS long text: no sideways scroll in day view
+PASS long text: no sideways scroll in agenda view
+PASS long text: detail panel stays inside the screen
+PASS Dec 2026 -> Next -> Next = February 2027 (crossing the new year)
+PASS Feb 2027 shows 4 weeks (starts Monday, 28 days)
+PASS Aug 2026 needs 6 weeks (42 cells), first cell is Mon 27 Jul
+PASS leap day 29 Feb 2028 exists
+PASS 31 Jan + Next month lands in February (no jump to March)
+PASS going back two months from Feb 2027 gives December 2026
+PASS a week that crosses months is labelled with both (26 Oct - 01 Nov 2026)
+PASS Day view Next from 31 Oct = 1 November
+PASS Week Next moves exactly 7 days
+PASS Today button in Week view returns to the week of 29 Sep 2026
+PASS today is marked in week view
+PASS double-clicking Save creates ONE schedule, not two
+PASS double-clicking "Save anyway" also creates ONE schedule
+PASS Cancel on the delete confirmation keeps the schedule
+PASS a chip can be opened from the keyboard (Enter)
+PASS Escape closes the detail panel
+PASS typing letters that are app shortcuts (a, d, r, l) into search does NOT trigger them
+PASS every calendar button and field has an accessible name
+PASS after the automatic refresh the view, date and both filters are unchanged
+PASS another user’s new schedule appears on the next refresh, without losing the view
+PASS switching the schedule type back and forth keeps what was typed
+PASS a new form opens on the calendar’s selected date
+PASS meeting defaults 8:00 AM - 5:00 PM and hides the inspection fields
+PASS a changed time is kept when switching type
+PASS a fresh form starts from the defaults again (8:00 AM - 5:00 PM), not from the last one
+PASS with the Leave tile active, Add Schedule opens on Leave
+PASS editing old leave whose type is now inactive still shows that type (marked inactive)
+PASS week print lists only the chosen person and states the filters
+PASS day print lists that day only
+PASS print of an empty search says "Nothing scheduled" and names the search
+PASS America/Los_Angeles: the 6 Oct inspection is on 6 Oct (not shifted a day)
+PASS America/Los_Angeles: the detail shows 06 Oct 2026, 8:00 AM – 5:00 PM
+PASS Pacific/Auckland: the 6 Oct inspection is on 6 Oct (not shifted a day)
+PASS Pacific/Auckland: the detail shows 06 Oct 2026, 8:00 AM – 5:00 PM
+PASS Pacific/Kiritimati: the 6 Oct inspection is on 6 Oct (not shifted a day)
+PASS Pacific/Kiritimati: the detail shows 06 Oct 2026, 8:00 AM – 5:00 PM
+PASS 1024px: no view scrolls sideways (month, week, day, agenda)
+PASS 1024px: the Add Schedule form fits on screen
+PASS 820px: no view scrolls sideways (month, week, day, agenda)
+PASS 820px: the Add Schedule form fits on screen
+PASS 390px: no view scrolls sideways (month, week, day, agenda)
+PASS 390px: the Add Schedule form fits on screen
+PASS 320px: no view scrolls sideways (month, week, day, agenda)
+PASS 320px: the Add Schedule form fits on screen
+PASS Dashboard still opens
+PASS existing page "action" still renders without an error message
+PASS existing page "regular" still renders without an error message
+PASS existing page "analytics" still renders without an error message
+PASS existing page "graphs" still renders without an error message
+PASS existing page "reports" still renders without an error message
+PASS existing page "users" still renders without an error message
+PASS existing page "roles" still renders without an error message
+PASS existing page "divisions" still renders without an error message
+PASS existing page "refs" still renders without an error message
+PASS existing page "settings" still renders without an error message
+PASS existing page "audit" still renders without an error message
+PASS Audit log page lists schedule activity
+PASS no JavaScript errors, no unexpected dialogs and no script execution during the whole run
+
+89 passed, 0 failed
