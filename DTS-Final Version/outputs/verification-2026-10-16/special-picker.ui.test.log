@@ -1,0 +1,24 @@
+PASS personnel search field is available
+PASS search offers native autocomplete suggestions
+PASS autocomplete uses name role and division
+PASS personnel row uses the requested single-line text
+PASS old division and role group headings are removed
+PASS existing selected personnel remain selected
+PASS search matches name and division without case sensitivity
+PASS selecting a match keeps hidden selections
+PASS selected count includes hidden names
+PASS no matches shows an empty state without losing selections
+PASS clear search restores the personnel list
+PASS an autocomplete label narrows the list to its person
+PASS saving a filtered list persists every checked person
+PASS personnel edit preserves report schedule fields
+PASS saved selection survives reopening
+PASS searching alone does not create unsaved changes
+PASS reassignment uses the same searchable picker
+PASS reassignment persists the searched person
+PASS reassignment keeps the prior assignment history
+PASS mobile dialog stays within the viewport
+PASS personnel entries remain one line on mobile
+PASS long names scroll inside the personnel list
+PASS no uncaught JavaScript errors
+23 passed, 0 failed

@@ -162,10 +162,11 @@ async function login(u,p){const c=await client();const r=await c('POST','/api/lo
  /* ---------- 11. backup / restore with damaged data ---------- */
  const bk=await adm('GET','/api/admin/backup');const goodCount=bk.schedules.length;
  const dirty=Object.assign({},bk,{schedules:bk.schedules.concat([null,1,'x',{},{id:'a',type:'leave'},{id:'b',type:'meeting',startDate:'2026-01-01',endDate:'2026-01-01',personnel:'no'},{id:'c',type:'inspection',startDate:'2026-05-05',endDate:'2026-05-01',personnel:[],startTime:'08:00',endTime:'09:00'},{id:'d',type:'inspection',startDate:'2026-05-05',endDate:'2026-05-05',personnel:[],startTime:'10:00',endTime:'09:00'},{id:'e',type:'party',startDate:'2026-05-05',endDate:'2026-05-05',personnel:[]}])});
- ok('restore with damaged schedule rows succeeds',(await adm('POST','/api/admin/restore',dirty)).s===200);
- ok('only the valid schedules were kept',(await state()).schedules.length===goodCount);
+ const beforeRestore=JSON.stringify(await state());
+ ok('restore with damaged schedule rows is rejected',(await adm('POST','/api/admin/restore',dirty)).s===400);
+ ok('rejected restore preserves all current state',JSON.stringify(await state())===beforeRestore);
  ok('every kept schedule has all its text fields (no undefined for the screen)',(await state()).schedules.every(x=>['title','project','location','remarks','link','organizer','leaveTypeId'].every(k=>typeof x[k]==='string')&&Array.isArray(x.personnel)));
- ok('restore with schedules = "oops" (not a list) leaves current schedules alone',(await adm('POST','/api/admin/restore',Object.assign({},bk,{schedules:'oops'}))).s===200&&(await state()).schedules.length===goodCount);
+ ok('restore with schedules = "oops" rejects the backup and leaves current schedules alone',(await adm('POST','/api/admin/restore',Object.assign({},bk,{schedules:'oops'}))).s===400&&(await state()).schedules.length===goodCount);
  ok('users, documents and reference lists survive all restores',(await state()).docs.length>5&&(await state()).users.length>=18);
 
  /* ---------- 12. audit ---------- */

@@ -1,0 +1,50 @@
+PASS administrator lands on department overview
+PASS one reporting entry replaces separate sidebar charts and analytics
+PASS reporting sidebar entry is named Insights
+PASS administration is collapsible
+PASS administration collapses
+PASS administration collapse preference survives reload
+PASS filter and page size survive reload
+PASS personal saved view restores filters
+PASS ready-for-dispatch view has exact status chip
+PASS drawer keeps registry route and filters
+PASS document summary includes responsible desk and next action
+PASS unified files panel contains original draft and revised
+PASS original file URL appears once
+PASS deadline card is no longer nested
+PASS one primary stage action is prominent
+PASS full document opens from drawer
+PASS back restores registry filter
+PASS next document traverses the filtered queue
+PASS previous document returns to prior record
+PASS bulk preview identifies eligible and skipped records
+PASS bulk preview sends no mutations before confirmation
+PASS failed save shows inline error and retains input
+PASS failed save reports failure instead of saved
+PASS rejected permission keeps confirmed local state
+PASS rejected permission does not emit a success toast
+PASS reference modal remains open with its values on failure
+PASS required fields validate before registration
+PASS required fields are marked before submission
+PASS modal traps reverse tab at last control
+PASS modal traps tab at first control
+PASS modal restores usable page focus and removes inert state
+PASS print preview makes its background inert
+PASS closing print preview restores the page
+PASS old save failure does not follow navigation
+PASS reporting routes share navigation tabs
+PASS empty reporting period displays explicit choose-month action
+PASS empty reporting period returns no all-time records
+PASS choose months opens month picker
+PASS released count includes earlier receipts released this month
+PASS age drilldown preserves band and month cohort
+PASS drilldown count matches chart count
+PASS mobile document has no page-wide overflow
+PASS wide monitor registry uses available workspace width
+PASS compact overview keeps horizontal scrolling inside its table
+PASS staff lands on personal work queue
+PASS staff has no administrator navigation
+PASS personal queue print uses personal documents only
+PASS manager lands on department overview
+PASS no uncaught browser errors
+49 passed, 0 failed

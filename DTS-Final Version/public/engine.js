@@ -120,10 +120,9 @@ const monthIndex=m=>MONTHS.indexOf(m);
 function ordinal(n){const s=['th','st','nd','rd'],v=Math.abs(n)%100;return n+(s[(v-20)%10]||s[v]||s[0]);}
 /* The n-th working day of a month: Saturdays, Sundays and every listed holiday are skipped. */
 function nthWorkdayOfMonth(year,mi,n){
- const last=new Date(year,mi+1,0).getDate();
- let c=0;
- for(let day=1;day<=last;day++){const d=new Date(year,mi,day);if(!isWork(d))continue;c++;if(c>=n)return d;}
- return new Date(year,mi,last);
+ let d=new Date(year,mi,1),left=Math.max(1,Math.round(Number(n)||1));
+ while(!(isWork(d)&&--left===0))d=addDays(d,1);
+ return d;
 }
 function firstWorkdayOfMonth(year,mi){
  const last=new Date(year,mi+1,0).getDate();
@@ -187,7 +186,7 @@ function baseState(){
   designations:des,
   holidays:[['2026-01-01',"New Year's Day"],['2026-04-02','Maundy Thursday'],['2026-04-03','Good Friday'],['2026-04-09','Araw ng Kagitingan'],['2026-05-01','Labor Day'],['2026-06-12','Independence Day'],['2026-08-31','National Heroes Day'],['2026-11-30','Bonifacio Day'],['2026-12-25','Christmas Day'],['2026-12-30','Rizal Day']].map(a=>({date:a[0],name:a[1]})),
   oic:{enabled:false,userId:''},
-  settings:{orgName:'Document Tracking & Routing System',prefix:'DTS',dueSoonDays:1,adminDeskDays:1,focalDeskDays:1,resubmit:'returner',idleMinutes:30}
+  settings:{orgName:'Document Tracking & Routing System',prefix:'DTS',dueSoonDays:1,adminDeskDays:1,focalDeskDays:1,resubmit:'returner',idleMinutes:30,cursorTrail:true}
  };
 }
 
@@ -195,6 +194,11 @@ function baseState(){
 const isOIC=u=>!!(u&&S.oic.enabled&&S.oic.userId===u.id);
 const FOCAL_GRANTS=['doc.assign','doc.review_sup','doc.comment'];
 const isDivFocal=u=>!!u&&S.divisions.some(d=>d.focal===u.id);
+function canAccessDivision(u,code){
+ if(!u||u.active===false||!['CMED','CMSD'].includes(code))return false;
+ if(['sysadmin','admin_staff','dept_manager'].includes(u.role))return true;
+ return (['staff','supervisor','focal','div_manager'].includes(u.role)||isDivFocal(u))&&(u.division===code||S.divisions.some(d=>d.code===code&&d.focal===u.id));
+}
 const SUP_OF={salvador:'torino',cruz:'tabilas',cabalfin:'delrosario'};
 const REVIEWER_OF={torino:'cabrera',tabilas:'cabrera',delrosario:'cabrera'};
 const FOCAL_REVIEWER={'cabrera':'martinez'};
@@ -208,7 +212,7 @@ function regionScope(u){
 }
 function has(u,p){if(!u)return false;if(u.role==='sysadmin')return true;if((S.perms[u.role]||[]).includes(p))return true;if(isOIC(u)&&OIC_GRANTS.includes(p))return true;return FOCAL_GRANTS.includes(p)&&isDivFocal(u);}
 const divOf=code=>S.divisions.find(d=>d.code===code)||null;
-const divFocal=code=>{const d=divOf(code);return d&&d.focal?uById(d.focal):null;};
+const divFocal=code=>{const d=divOf(code),u=d&&d.focal?uById(d.focal):null;return u&&u.active?u:null;};
 function divManagers(d){const all=S.users.filter(u=>u.active&&u.role==='div_manager');const same=all.filter(u=>u.division===d.division);return same.length?same:all;}
 function deptApprovers(d){
  const dm=S.users.filter(u=>u.active&&u.role==='dept_manager'&&u.present);
@@ -292,6 +296,33 @@ const isRegularDoc=name=>{const t=docTypeOf(name);return !!t&&docTypeBasis(t)===
 const activeDocTypes=inc=>S.refs.doc.filter(t=>t.active!==false||t.name===inc);
 const activeCommTypes=inc=>S.refs.comm.filter(c=>c.active!==false||c.name===inc);
 const commName=c=>typeof c==='string'?c:((c&&c.name)||'');
+/* Shared by registration and metadata edits. Retired references may be retained on existing records. */
+function documentProblem(o,previous){
+ if(typeof o.subject!=='string'||!o.subject.trim())return 'Enter the subject or particulars of the document.';
+ if(typeof o.source!=='string'||!o.source.trim())return 'Enter who the document was received from.';
+ const dt=docTypeOf(o.docType),comm=S.refs.comm.find(c=>commName(c)===o.commType);
+ if(!dt||(dt.active===false&&(!previous||previous.docType!==o.docType)))return 'Choose a valid document type.';
+ if(!comm||(comm.active===false&&(!previous||previous.commType!==o.commType)))return 'Choose a valid communication type.';
+ if(!S.divisions.some(v=>v.code===o.division))return 'Choose a valid division.';
+ if(o.priority!==undefined&&!['Normal','Urgent'].includes(o.priority))return 'Choose Normal or Urgent priority.';
+ if(o.reportingPeriod&&!normMonth(o.reportingPeriod))return 'Choose the reporting period from the twelve months of the year.';
+ if(isRegularDoc(o.docType)&&!normMonth(o.reportingPeriod))return 'Choose the reporting period: the month covered by this report.';
+ for(const [key,label] of [['url','Document URL'],['draftUrl','Draft File URL'],['revUrl','Revised File URL']])if(o[key]&&!/^https?:\/\/.{3}/.test(o[key]))return label+' must start with http:// or https://';
+ return '';
+}
+/* Reporting ownership is independent of the viewing user and of stored workflow routing. */
+function reportingDivision(record,special=false){
+ const valid=code=>S.divisions.some(d=>d.code===code);
+ let ids;
+ if(special){
+  const assignee=record.workflow&&record.workflow.assignee;
+  ids=assignee?[assignee]:(record.assign||[]).filter(a=>['active','completed'].includes(a.status)).map(a=>a.userId);
+  if(!ids.length&&record.completedBy)ids=[record.completedBy];
+ }else ids=record.assignee?[record.assignee]:[];
+ if(ids.length){const divisions=ids.map(id=>(uById(id)||{}).division||'');return divisions.every(code=>valid(code)&&code===divisions[0])?divisions[0]:'';}
+ const stored=special?((record.workflow||{}).division||record.division||''):record.division;
+ return valid(stored)?stored:'';
+}
 /* THE ONE PLACE A DUE DATE IS WORKED OUT. Order of precedence:
    1. the prescribed threshold configured for the document type — this always governs, so a
       calculated deadline cannot be typed over from the desk,
@@ -311,6 +342,7 @@ function computeDeadline(o){
   out.clockStart=firstWorkdayOfMonth(info.deadlineYear,info.deadlineMonthIndex).toISOString();
   out.dueAt=isoD(due);out.period=info;out.source='document type';
   out.label=(unit==='calendar_days'?plural(thr,'calendar day'):'the '+ordinal(thr)+' working day')+' of '+info.deadlineMonthLabel;
+  if(unit!=='calendar_days'&&(due.getMonth()!==info.deadlineMonthIndex||due.getFullYear()!==info.deadlineYear))out.label='the '+ordinal(thr)+' working day counted from the start of '+info.deadlineMonthLabel+' (falls in '+MONTHS[due.getMonth()]+' '+due.getFullYear()+')';
   return out;
  }
  if(thr>0){
@@ -410,14 +442,13 @@ function logDoc(o,by,at,forward,seed){
     asks for a division. Fill it in here so the record always carries one for the register, the tiles
     and the reports: the division of the staff designated for that region when it is known, otherwise
     the division of the person logging it. Routing itself stays by region and is untouched. */
- if(reg&&!S.divisions.some(x=>x.code===o.division)){
+ if(reg){
   const desig=S.designations.find(x=>x.name===o.region),dst=desig?uById(desig.staff):null;
   const me=by?uById(by):null;
   const pick=[dst&&dst.division,me&&me.division].find(v=>v&&S.divisions.some(x=>x.code===v));
-  o.division=pick||(S.divisions[0]?S.divisions[0].code:'');
+  o.division=(dst&&S.divisions.some(x=>x.code===dst.division)?dst.division:null)||(S.divisions.some(x=>x.code===o.division)?o.division:pick)||(S.divisions[0]?S.divisions[0].code:'');
  }
- if(!o.commType||!o.docType||!o.division||!(o.source||'').trim())return{ok:false,error:'Communication type, source, document type and division are required.'};
- if(!activeCommTypes(o.commType).length)return{ok:false,error:'That communication type is no longer in use. Choose another one.'};
+ const problem=documentProblem(o);if(problem)return{ok:false,error:problem};
  const period=o.reportingPeriod?normMonth(o.reportingPeriod):'';
  if(o.reportingPeriod&&!period)return{ok:false,error:'Choose the reporting period from the twelve months of the year.'};
  let des=null;
@@ -425,11 +456,12 @@ function logDoc(o,by,at,forward,seed){
  const regPeriod=docTypeThreshold(t)>0&&docTypeBasis(t)==='reporting_period';
  if(regPeriod&&!period)return{ok:false,error:'Choose the reporting period: the month covered by this report.'};
  if(!reg&&forward&&!divFocal(o.division))return{ok:false,error:'No Focal / Supervisor is set for '+o.division+'. Ask the System Administrator to set one under Divisions & focals, or save without forwarding.'};
+ const deadline=reg?computeDeadline({docType:o.docType,at:at,reportingPeriod:period}):null;
+ if(deadline&&!deadline.ok)return{ok:false,error:deadline.error};
  const d=createDoc(o,by,at);
  d.reportingPeriod=period;
  if(reg){
-  const x=computeDeadline({docType:o.docType,at:at,reportingPeriod:period});
-  if(!x.ok)return{ok:false,error:x.error};
+  const x=deadline;
   d.txType=TX_REGULAR;d.assignee=des.staff;d.autoRouted=true;
   d.clockStart=x.clockStart||at.toISOString();d.dueAt=x.dueAt||null;
   d.deadlineSource=x.source;d.deadlineLabel=x.label;d.threshold=x.threshold||null;d.deadlineUnit=x.unit||'working_days';
@@ -529,26 +561,23 @@ function act(id,actorId,type,p,at,opts){
   }
   case 'comment':{if(!txt)return bad('Write a note first.');note('Note added',txt);return{ok:true,msg:'Note added.'};}
   case 'edit':{
-   const f=['commType','source','refNo','subject','docType','division','pages','priority','remarks'];
-   if(!(p.subject||'').trim())return bad('Enter the subject or particulars.');
-   if(p.docType&&!docTypeOf(p.docType))return bad('Choose a valid document type.');
-   if(p.reportingPeriod!==undefined&&p.reportingPeriod&&!normMonth(p.reportingPeriod))return bad('Choose the reporting period from the twelve months of the year.');
-   for(const [k,l] of [['draftUrl','Draft File URL'],['revUrl','Revised File URL'],['url','Document URL']])if(p[k]&&!/^https?:\/\/.{3}/.test(String(p[k]).trim()))return bad(l+' must start with http:// or https://');
-   f.forEach(k=>{if(p[k]!==undefined)d[k]=typeof p[k]==='string'?p[k].trim():p[k];});
-   ['draftUrl','url'].forEach(k=>{if(p[k]!==undefined)d[k]=p[k].trim();});
-   if(p.revUrl!==undefined){const nv=p.revUrl.trim();if(d.revUrl&&nv&&nv!==d.revUrl)d.revCount=(d.revCount||0)+1;d.revUrl=nv;}
-   /* the division is not shown for a reporting-period report, so never let it be blanked */
-   if(isRegularDoc(d.docType)&&!S.divisions.some(x=>x.code===d.division))d.division=S.divisions[0]?S.divisions[0].code:'';
-   if(p.reportingPeriod!==undefined)d.reportingPeriod=normMonth(p.reportingPeriod);
-   if(p.receivedAt){const ra=new Date(p.receivedAt);if(!isNaN(ra)){d.receivedAt=ra.toISOString();}}
-   /* the calculated deadline is derived again from the document type configuration and the reporting period */
-   if(!d.stopAt){
-    const x=computeDeadline({docType:d.docType,txType:d.txType,at:d.clockStart?new Date(d.clockStart):new Date(d.receivedAt),special:d.deadlineSource==='transaction type'?d.dueAt:null,reportingPeriod:d.reportingPeriod});
-    if(x.ok&&!(x.source==='none'&&d.dueAt&&d.deadlineSource!=='document type')){
-     d.clockStart=x.clockStart||d.clockStart;d.dueAt=x.dueAt||null;d.deadlineSource=x.source;d.deadlineLabel=x.label;d.threshold=x.threshold||null;d.deadlineUnit=x.unit||'working_days';
-     d.deadlineMonth=x.period?x.period.deadlineMonthLabel:'';if(x.period)d.reportingYear=x.period.year;
+   const next={...d},fields=['commType','source','refNo','subject','docType','division','pages','priority','remarks','url','draftUrl','revUrl','reportingPeriod'];
+   fields.forEach(k=>{if(p[k]!==undefined)next[k]=typeof p[k]==='string'?p[k].trim():p[k];});
+   const problem=documentProblem(next,d);if(problem)return bad(problem);
+   if(isRegularDoc(next.docType)!==isRegularDoc(d.docType))return bad('A metadata edit cannot change regional report routing. Register the report with its region and reporting period instead.');
+   if(p.region!==undefined&&p.region!==d.region&&isRegularDoc(d.docType))return bad('The region of a routed report cannot be changed by a metadata edit.');
+   if(p.reportingPeriod!==undefined)next.reportingPeriod=normMonth(p.reportingPeriod);
+   if(p.receivedAt){const ra=new Date(p.receivedAt);if(isNaN(ra))return bad('Enter a valid received date.');next.receivedAt=ra.toISOString();}
+   if(p.revUrl!==undefined&&d.revUrl&&next.revUrl&&next.revUrl!==d.revUrl)next.revCount=(d.revCount||0)+1;
+   if(!next.stopAt&&(next.clockStart||isRegularDoc(next.docType))){
+    const x=computeDeadline({docType:next.docType,txType:next.txType,at:new Date(next.clockStart||next.receivedAt),special:next.deadlineSource==='transaction type'?next.dueAt:null,reportingPeriod:next.reportingPeriod});
+    if(!x.ok)return bad(x.error);
+    if(!(x.source==='none'&&next.dueAt&&next.deadlineSource!=='document type')){
+     next.clockStart=x.clockStart||next.clockStart;next.dueAt=x.dueAt||null;next.deadlineSource=x.source;next.deadlineLabel=x.label;next.threshold=x.threshold||null;next.deadlineUnit=x.unit||'working_days';
+     next.deadlineMonth=x.period?x.period.deadlineMonthLabel:'';if(x.period)next.reportingYear=x.period.year;
     }
    }
+   Object.assign(d,next);
    note('Details edited','');return{ok:true,msg:'Details updated.'};}
   case 'delete':{S.docs.splice(S.docs.indexOf(d),1);return{ok:true,msg:'Document deleted.',deleted:true};}
  }
@@ -687,18 +716,14 @@ const srTitle=(name,month,year)=>name+' as of '+MONTHS[month-1]+' '+year;
 /* the month after the reporting month: where the report is generated and where its deadline is counted */
 const srGenMonth=(month,year)=>({month:month===12?1:month+1,year:month===12?year+1:year});
 const srGenerationDate=(month,year,day)=>{const g=srGenMonth(month,year),n=Math.max(1,Math.min(31,Number(day)||1));return new Date(g.year,g.month-1,Math.min(n,new Date(g.year,g.month,0).getDate()));};
-function srWorkdaysIn(year,mi){let c=0;const last=new Date(year,mi+1,0).getDate();for(let d=1;d<=last;d++)if(isWork(new Date(year,mi,d)))c++;return c;}
 /* The deadline: the n-th working day counted from the 1st of the month after the reporting month.
    When the threshold fits inside that month (15, 17, 20 working days in practice) this IS the n-th working day
    of that month, worked out by the existing nthWorkdayOfMonth(). When it does not fit (25 working days is more
    than any month has: February 2026 has 20) the count simply carries on into the next month, still skipping
    weekends and listed holidays, so the date is always a real working day (spills is set). */
 function srDeadline(month,year,thr){
- const g=srGenMonth(month,year),mi=g.month-1,avail=srWorkdaysIn(g.year,mi),base=MONTHS[mi]+' '+g.year;
- if(thr<=avail){const due=nthWorkdayOfMonth(g.year,mi,thr);return{dueAt:isoD(due),genYear:g.year,genMonth:g.month,spills:false,label:'the '+ordinal(thr)+' working day of '+base};}
- let d=new Date(g.year,mi+1,1),left=thr-avail;
- while(!(isWork(d)&&--left<=0))d=addDays(d,1);
- return{dueAt:isoD(d),genYear:g.year,genMonth:g.month,spills:true,label:'the '+ordinal(thr)+' working day counted from the start of '+base+' (falls in '+MONTHS[d.getMonth()]+' '+d.getFullYear()+')'};
+ const g=srGenMonth(month,year),mi=g.month-1,base=MONTHS[mi]+' '+g.year,d=nthWorkdayOfMonth(g.year,mi,thr),spills=d.getMonth()!==mi||d.getFullYear()!==g.year;
+ return{dueAt:isoD(d),genYear:g.year,genMonth:g.month,spills,label:spills?'the '+ordinal(thr)+' working day counted from the start of '+base+' (falls in '+MONTHS[d.getMonth()]+' '+d.getFullYear()+')':'the '+ordinal(thr)+' working day of '+base};
 }
 const srParsePeriod=v=>{const m=/^(\d{4})-(0[1-9]|1[0-2])$/.exec(String(v||''));return m?{year:Number(m[1]),month:Number(m[2])}:null;};
 const srPeriodKey=(y,m)=>y+'-'+p2(m);
@@ -766,4 +791,4 @@ const srIsMine=(item,userId)=>{
  return isMyTurn(u,d);
 };
 
-var ENGINE={act,logDoc,baseState,seedDemoDocs,migrateState,canView,has,can,isMyTurn,rebuildHS,uById,createDoc,getTx,isRegularDoc,audit,computeDeadline,computeDue,hasPrescribedDeadline,reportingPeriodInfo,normMonth,nthWorkdayOfMonth,firstWorkdayOfMonth,isWork,addWD,wdBetween,isoD,parseD,docTypeOf,docTypeBasis,docTypeUnit,docTypeThreshold,isDeadlineBasis,activeDocTypes,activeCommTypes,commName,DEADLINE_UNITS,DEADLINE_BASES,MONTHS,REGULAR_DOC,REGULAR_DAYS,PERMS,ROLES,ROLE_ORDER,DEFAULT_PERMS,DEFAULT_PW,ADMIN_PW,isDivFocal,deptApprovers,REVIEW_LINE,pwPolicy:null,SCHED_TYPES,schedPeople,schedOverlap,scheduleConflicts,leaveTypeName,defaultLeaveTypes,SR_FREQ,SR_BASES,SR_SPAN,srFreqName,isSrFreq,isSrBasis,srCleanMonths,srMonthsLabel,srPeriodLabel,srTitle,srGenMonth,srGenerationDate,srDeadline,srParsePeriod,srPeriodKey,srDuePeriods,srValidate,srStatus,srActiveAssign,srIsMine,dl};
+var ENGINE={STAGES,documentProblem,reportingDivision,canAccessDivision,act,logDoc,baseState,seedDemoDocs,migrateState,canView,has,can,isMyTurn,rebuildHS,uById,createDoc,getTx,isRegularDoc,audit,computeDeadline,computeDue,hasPrescribedDeadline,reportingPeriodInfo,normMonth,nthWorkdayOfMonth,firstWorkdayOfMonth,isWork,addWD,wdBetween,isoD,parseD,docTypeOf,docTypeBasis,docTypeUnit,docTypeThreshold,isDeadlineBasis,activeDocTypes,activeCommTypes,commName,DEADLINE_UNITS,DEADLINE_BASES,MONTHS,REGULAR_DOC,REGULAR_DAYS,PERMS,ROLES,ROLE_ORDER,DEFAULT_PERMS,DEFAULT_PW,ADMIN_PW,isDivFocal,deptApprovers,REVIEW_LINE,pwPolicy:null,SCHED_TYPES,schedPeople,schedOverlap,scheduleConflicts,leaveTypeName,defaultLeaveTypes,SR_FREQ,SR_BASES,SR_SPAN,srFreqName,isSrFreq,isSrBasis,srCleanMonths,srMonthsLabel,srPeriodLabel,srTitle,srGenMonth,srGenerationDate,srDeadline,srParsePeriod,srPeriodKey,srDuePeriods,srValidate,srStatus,srActiveAssign,srIsMine,dl};

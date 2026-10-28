@@ -314,12 +314,11 @@ function leaveTypesCard(){
  const list=(S.leaveTypes||[]).filter(t=>!q||(t.name+' '+(t.description||'')).toLowerCase().includes(q)).sort((a,b)=>a.name.localeCompare(b.name));
  const pages=Math.max(1,Math.ceil(list.length/PAGE));if(CAL_LT.page>pages)CAL_LT.page=pages;
  const rows=list.slice((CAL_LT.page-1)*PAGE,CAL_LT.page*PAGE);
- return '<div class="card"><div class="ch"><h3>Leave types</h3><button class="btn sm primary" data-act="ltForm">'+ic('plus')+'Add leave type</button></div>'+
+ return '<div class="card"><div class="ch ref-list-heading"><h3>Leave types</h3><button class="btn sm primary" data-act="ltForm">'+ic('plus')+'Add leave type</button></div>'+
   '<div class="rt"><div class="row" style="flex:1"><input type="search" placeholder="Search leave types" style="max-width:260px" value="'+esc(CAL_LT.q)+'" data-inp="ltQ" aria-label="Search leave types">'+(CAL_LT.q?'<button class="btn sm ghost" data-act="ltClear">Clear</button>':'')+'</div><span class="muted small">Used by the Personnel Schedule</span></div>'+
   '<div class="tw" style="border:0;border-radius:0"><table class="tbl"><thead><tr><th>Leave type</th><th>Description</th><th>Status</th><th class="right">Actions</th></tr></thead><tbody>'+
   (rows.length?rows.map(t=>'<tr'+(t.active===false?' class="muted"':'')+'><td class="b">'+esc(t.name)+'</td><td class="small muted">'+esc(t.description||'—')+'</td><td>'+(t.active!==false?badge('ok','Active'):badge('neu','Inactive'))+'</td><td class="right nowrap"><button class="btn sm" data-act="ltForm" data-id="'+esc(t.id)+'">Edit</button> <button class="btn sm" data-act="ltToggle" data-id="'+esc(t.id)+'">'+(t.active!==false?'Deactivate':'Activate')+'</button></td></tr>').join(''):'<tr><td colspan="4"><div class="empty">No leave types match.</div></td></tr>')+'</tbody></table></div>'+
-  '<div class="pager" style="padding:10px 16px"><span>'+plural(list.length,'record')+'</span><span class="row"><button class="btn sm" data-act="ltPage" data-d="-1"'+(CAL_LT.page<=1?' disabled':'')+'>Previous</button><span>Page '+CAL_LT.page+' of '+pages+'</span><button class="btn sm" data-act="ltPage" data-d="1"'+(CAL_LT.page>=pages?' disabled':'')+'>Next</button></span></div>'+
-  '<div class="pgrid" style="padding:12px 16px;border-top:1px solid var(--line2)"><h4>Add a leave type</h4><div data-panel><div class="row"><input name="v" placeholder="Name of the leave type" style="flex:1;min-width:200px"><input name="description" placeholder="Description (optional)" style="flex:1;min-width:200px"><button class="btn sm primary" data-act="ltAdd">Add</button></div></div><p class="hint" style="margin-top:8px">Deactivating a leave type keeps every existing leave record unchanged; it simply stops being offered for new leave.</p></div></div>';
+  '<div class="pager" style="padding:10px 16px"><span>'+plural(list.length,'record')+'</span><span class="row"><button class="btn sm" data-act="ltPage" data-d="-1"'+(CAL_LT.page<=1?' disabled':'')+'>Previous</button><span>Page '+CAL_LT.page+' of '+pages+'</span><button class="btn sm" data-act="ltPage" data-d="1"'+(CAL_LT.page>=pages?' disabled':'')+'>Next</button></span></div></div>';
 }
 async function calSaveLeaveTypes(list,note){
  const r=await api('PUT','/api/leave-types',{value:list,note:note});
@@ -383,8 +382,7 @@ function calInstall(){
   if((S.leaveTypes||[]).some(x=>x.id!==id&&x.name.toLowerCase()===name.toLowerCase()))return toast('That leave type already exists.','bad');
   const list=calLTList();
   if(id)Object.assign(list.find(x=>x.id===id),{name:name,description:desc,active:act});else list.push({name:name,description:desc,active:act});
-  closeModal();
-  if(await calSaveLeaveTypes(list,(id?'Leave type updated: ':'Leave type added: ')+name))toast('Leave type saved.');
+  if(await calSaveLeaveTypes(list,(id?'Leave type updated: ':'Leave type added: ')+name)){closeModal();toast('Leave type saved.');}
  };
  ACTIONS.ltToggle=async(t)=>{
   const list=calLTList(),x=list.find(y=>y.id===t.dataset.id);if(!x)return;

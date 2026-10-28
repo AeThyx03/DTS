@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "results": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "cards": 32,
+      "images": 32,
+      "brokenImages": 0,
+      "overflow": false,
+      "frameOverlaps": 0
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "cards": 32,
+      "images": 32,
+      "brokenImages": 0,
+      "overflow": false,
+      "frameOverlaps": 0
+    }
+  ],
+  "uncaughtErrors": [],
+  "navigation": "PASS"
+}

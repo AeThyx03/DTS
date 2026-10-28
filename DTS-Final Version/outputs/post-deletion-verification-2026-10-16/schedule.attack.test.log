@@ -1,0 +1,100 @@
+PASS body null -> clean 400 (not 500)
+PASS body array -> clean 400 (not 500)
+PASS body number -> clean 400 (not 500)
+PASS body string -> clean 400 (not 500)
+PASS body true -> clean 400 (not 500)
+PASS body empty object -> clean 400 (not 500)
+PASS broken JSON -> 400
+PASS leave-types body null -> 400
+PASS leave-types body {} -> 400
+PASS leave-types value is an object -> 400
+PASS leave-types with null entries -> 400
+PASS oversized body (1 MB) is refused or the connection is cut, never accepted or a 500
+PASS server still healthy after all that
+PASS personnel as a string is refused
+PASS personnel as an object is refused
+PASS personnel of non-strings is refused (they are dropped, none left)
+PASS title as a number is refused
+PASS title as an array is refused
+PASS whitespace-only title is refused
+PASS date as a number is refused
+PASS impossible date 30 Feb refused
+PASS month 13 refused
+PASS non-padded date refused
+PASS date with a time attached refused
+PASS year 0001 refused
+PASS time 24:00 refused
+PASS unpadded time refused
+PASS time with seconds refused
+PASS minute 60 refused
+PASS zero-length time refused
+PASS no project and no location refused
+PASS type is case-sensitive (unknown type refused)
+PASS type as an array refused
+PASS type __proto__ refused
+PASS prototype pollution attempt in the body is harmless
+PASS leave: personnel as string refused
+PASS leave: leaveTypeId as an object refused
+PASS meeting: link with spaces refused
+PASS meeting: link ftp:// refused
+PASS meeting: link data: URL refused
+PASS meeting: link "https://" alone refused
+PASS meeting: organizer that is not a user refused
+PASS very long text is accepted but trimmed to the limits
+PASS title cut to 200, remarks to 2000, location to 300
+PASS duplicate personnel ids are stored once
+PASS HTML in text is stored as plain text (escaping happens on display)
+PASS setup: 08:00-12:00 saved
+PASS back-to-back 12:00-17:00 is NOT a conflict
+PASS one minute of overlap IS a conflict (against both neighbours)
+PASS a whole-day-covering 00:00-23:59 window overlaps both
+PASS a different person at the same time is NOT a conflict
+PASS setup: multi-day inspection covers two days
+PASS a meeting on its second day is flagged
+PASS the day after the multi-day inspection is free
+PASS setup: leave one day
+PASS overlapping leave for the same person is flagged (shares one day)
+PASS leave starting the day after the previous one ends is fine
+PASS setup: inspection for cabrera
+PASS a meeting where the person is ONLY the organizer conflicts with their inspection
+PASS two people clashing give one warning line each (and the third, free, none)
+PASS an unchanged re-save does not clash with itself
+PASS editing time inside its own old window is fine
+PASS PUT to an id that does not exist is 404
+PASS PUT with a broken body on a real id is 400, and the record is unchanged
+PASS DELETE twice: second is 404
+PASS deactivate a user who has a schedule
+PASS a NEW schedule cannot use an inactive user (and the message says why)
+PASS an existing schedule with that user can still be edited (they stay on it)
+PASS their old schedule still exists and still shows in conflicts
+PASS not signed in: add refused (401)
+PASS not signed in: delete refused (401)
+PASS not signed in: leave types refused (401)
+PASS missing CSRF header: refused (403)
+PASS a plain user cannot add / edit / delete
+PASS a plain user cannot use the permission by putting it in the request
+PASS unsupported method gives 404, not a crash
+PASS GET on the schedule collection is not an API (404)
+PASS a schedule id with odd characters is 404
+PASS the permission cannot be granted by editing your own role unless you can manage roles
+PASS the state version changes on add and on delete (so other screens refresh)
+PASS another user sees the schedule in their state
+PASS 25 simultaneous adds: none crash, all answered 200 or 409
+PASS all saved records have unique ids
+PASS only ONE of the identical simultaneous bookings for the same person was accepted (the rest were flagged)
+PASS the same 25 with confirm=true are all saved (allowed on purpose)
+PASS deleting them all leaves the rest untouched
+PASS 101 leave types refused
+PASS case-insensitive duplicate refused
+PASS a name of only spaces refused
+PASS a client cannot invent an id for a new type (the server issues it)
+PASS a name of 500 characters is trimmed to 100
+PASS deactivating every leave type is allowed (then leave cannot be added, and says why)
+PASS restore with damaged schedule rows is rejected
+PASS rejected restore preserves all current state
+PASS every kept schedule has all its text fields (no undefined for the screen)
+PASS restore with schedules = "oops" rejects the backup and leaves current schedules alone
+PASS users, documents and reference lists survive all restores
+PASS audit shows who did what, without exposing anything sensitive
+
+98 passed, 0 failed

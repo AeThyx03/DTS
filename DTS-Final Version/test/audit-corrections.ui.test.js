@@ -1,0 +1,44 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
+const {chromium}=require('playwright');
+const base='http://127.0.0.1:'+(process.env.PORT||3111);
+(async()=>{
+ const browser=await chromium.launch({headless:true,channel:process.env.WF_BROWSER_CHANNEL||'msedge'});let passed=0;
+ const check=(name,value)=>{assert.ok(value,name);passed++;console.log('PASS '+name);};
+ try{
+  const context=await browser.newContext({viewport:{width:1440,height:1000}});await context.route(/fonts\.(googleapis|gstatic)\.com/,r=>r.abort());
+  const api=async(method,url,data)=>{const r=await context.request.fetch(base+url,{method,headers:{'X-Requested-With':'dts'},data});return{status:r.status(),...await r.json()};};
+  assert.equal((await api('POST','/api/login',{username:'admin',password:'Admin@2026'})).status,200);
+  const backup=await api('GET','/api/admin/backup');backup.users.find(u=>u.id==='cruz').division='CMED';backup.users.find(u=>u.id==='aprochevado').division='CMSD';backup.designations.find(d=>d.name==='Region 1').staff='cruz';
+  const start='2026-02-02T01:00:00Z',out='2026-02-04T01:00:00Z',sample=backup.docs[0];
+  const doc=(id,division,assignee)=>({...sample,id,trackNo:'QA-'+id,subject:id,division,assignee,source:'Test office',docType:'External Communication',txType:'Simple Transaction',region:'',autoRouted:false,receivedAt:start,clockStart:start,dueAt:'2026-02-10',stopAt:out,outAt:out,status:'out',comments:[],history:[]});
+  backup.docs=[doc('=1+1','Admin','cruz'),doc('CMSD item','CMED','aprochevado')];
+  const special=(id,month,people,released=false)=>({id,cfgId:backup.spConfigs[0].id,year:2026,month,title:id,periodLabel:'January 2026',generatedAt:released?'2026-01-26T01:00:00Z':start,clockStart:released?'2026-01-26T01:00:00Z':start,dueAt:'2026-02-10',status:released?'completed':'pending',stopAt:released?out:null,division:'',workflow:{status:released?'out':'processing',division:'',assignee:released?people[0]:'',clockStart:start,stopAt:released?out:null,outAt:released?out:null,comments:[],history:[],stageEnteredAt:start},assign:people.map((userId,i)=>({id:id+'-'+i,itemId:id,userId,status:released?'completed':'active',assignedAt:start}))});
+  backup.spItems=[special('Released Special',1,['cruz'],true),special('Shared Special',2,['cruz','aprochevado'])];
+  const restore=await api('POST','/api/admin/restore',backup);assert.equal(restore.status,200,restore.error);
+  const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('dialog',d=>d.accept());await page.goto(base);await page.waitForSelector('.shell');await page.waitForSelector('#splash',{state:'detached'});
+  await page.evaluate(()=>{UI.gf={division:'CMED',mode:'single',from:'2026-02',to:'2026-02',months:{}};go('analytics');});
+  check('Insights CMED filter follows assigned personnel',await page.evaluate(()=>periodDocs(ME()).length===1&&periodDocs(ME())[0].id==='=1+1'));
+  check('Analytics release total includes earlier Special Report receipts',await page.evaluate(()=>analyticsData(ME()).kpi.find(k=>k[0]==='Released in the reporting period')[1]==='2'));
+  check('Charts release total matches Analytics',await page.evaluate(()=>graphsData(ME()).vol[0].o===2));
+  check('Special Report adapter retains workflow release time',await page.evaluate(()=>spWorkflowDoc(S.spItems.find(i=>i.id==='Released Special'),ME()).outAt==='2026-02-04T01:00:00Z'));
+  check('mixed report ownership is stable for both assigned viewers',await page.evaluate(()=>{const i=S.spItems.find(i=>i.id==='Shared Special');return ['cruz','aprochevado'].every(id=>{const d=spWorkflowDoc(i,S.users.find(u=>u.id===id));return d.reportingDivision===''&&d.division==='';});}));
+  check('mixed report keeps viewer-specific action responsibility',await page.evaluate(()=>{const i=S.spItems.find(i=>i.id==='Shared Special');return ['cruz','aprochevado'].every(id=>spWorkflowDoc(i,S.users.find(u=>u.id===id)).assignee===id);}));
+  await page.evaluate(()=>{UI.gf.division='';render();});
+  check('shared ownership is labelled explicitly in Analytics',await page.evaluate(()=>analyticsData(ME()).tables.find(t=>t.title==='By division').rows.some(r=>r[0]==='Shared / unresolved'&&r[1]===1)));
+  await page.evaluate(()=>{UI.gf.division='CMED';go('graphs');});await page.click('[data-act=dvbar][data-v=CMED]');
+  check('chart drilldown matches effective ownership instead of stored routing',await page.evaluate(()=>UI.filters.reportingOwnership&&listDocs(ME()).length===1&&listDocs(ME())[0].id==='=1+1'));
+  await page.evaluate(()=>go('cmed'));await page.waitForFunction(()=>!!UI.divisionReport?.state);await page.waitForSelector('#regSearch');
+  check('CMED still defaults to its document list',await page.locator('.division-tabs [aria-current=page]').getAttribute('data-k')==='documents');
+  const downloadPromise=page.waitForEvent('download');await page.click('[data-act=exportList]');const download=await downloadPromise,contents=fs.readFileSync(await download.path(),'utf8');
+  check('downloaded registry CSV neutralizes formula text',contents.includes("'=1+1"));
+  check('CSV quotes and numeric values remain correct',await page.evaluate(()=>csvCell('a,"b"')==='"a,""b"""'&&csvCell(-2)==='-2'&&csvCell('  =1+1')==="'  =1+1"));
+  await page.click('[data-act=newDoc]');await page.selectOption('[data-form=doc] select[name=commType]','Letter');await page.fill('[data-form=doc] input[name=source]','Regression office');await page.fill('[data-form=doc] textarea[name=subject]','UI regular ownership regression');await page.selectOption('[data-form=doc] select[name=docType]','Consolidated CMR and PPR');await page.selectOption('[data-form=doc] select[name=region]','Region 1');await page.fill('#dfPeriodInput','September');await page.click('#btnFwd');await page.waitForFunction(()=>!document.querySelector('[data-form=doc]'));
+  const logged=(await api('GET','/api/state')).state.docs.find(d=>d.subject==='UI regular ownership regression');check('browser regular registration uses CMED assignee division',logged?.division==='CMED'&&logged.assignee==='cruz');
+  await page.evaluate(()=>{UI.gf={division:'CMED',mode:'single',from:new Date().getFullYear()+'-'+String(new Date().getMonth()+1).padStart(2,'0'),to:'',months:{}};go('analytics');});
+  check('newly logged regular report appears in matching Insights division',await page.evaluate(id=>periodDocs(ME()).some(d=>d.id===id),logged.id));
+  check('rejected division removal restores authoritative client state',await page.evaluate(async()=>{S.divisions=S.divisions.filter(d=>d.code!=='CMED');const saved=await cfg('divisions','Rejected removal regression');return saved===false&&S.divisions.some(d=>d.code==='CMED');}));
+  await page.screenshot({path:path.join(process.env.SHOTS,'analytics-corrections.png'),fullPage:true});
+  check('no uncaught browser errors',errors.length===0);console.log(passed+' passed, 0 failed');
+ }finally{await browser.close();}
+})().catch(e=>{console.error(e);process.exitCode=1;});

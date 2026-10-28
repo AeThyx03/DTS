@@ -1,0 +1,68 @@
+{
+  "at": "2026-10-16T01:06:44.379Z",
+  "tables": {
+    "users": {
+      "count": 18,
+      "sha256": "4c4177f40cd069d27549ffdfa18a6aa3263bb9c0f3733f093e4c6467372e94f4"
+    },
+    "docs": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "kv": {
+      "count": 10,
+      "sha256": "f39d6e665c8e86f64af31500aad1d4a7543260909bda64905d59ff75b8a854c7"
+    },
+    "schedules": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sr_config": {
+      "count": 5,
+      "sha256": "0145e2f13f5cbb73cd5b4cc84bb5ab65182ed29edb5931a629349f4fc6637794"
+    },
+    "sr_item": {
+      "count": 3,
+      "sha256": "c94389bc49d264e3fe1272104d6a9d2f4030281109f713aba7d2f845abe0654a"
+    },
+    "sr_assign": {
+      "count": 3,
+      "sha256": "81a2e9474f66722c85f435c96ae1d100210789ba63b7f6ca23178096383016ab"
+    },
+    "workflows": {
+      "count": 16,
+      "sha256": "686756d38f314669f93126b141d32160e9f00e5b96ff8a4c35aeca8fddb988eb"
+    },
+    "workflow_versions": {
+      "count": 16,
+      "sha256": "28bda97dd941c20f5f5a2226d533c25e3e30fa42d67f7f6baacebd0cc594712b"
+    },
+    "workflow_nodes": {
+      "count": 55,
+      "sha256": "c44fb179ad4ba53a21c27db2c9f0294235675965bc82c862acb1280f8f730bf7"
+    },
+    "workflow_edges": {
+      "count": 57,
+      "sha256": "8bda93f0099e782415f861dd04b6d60023fef1893ac2d34f8724704cc0d338d0"
+    },
+    "workflow_modes": {
+      "count": 5,
+      "sha256": "9d91a8e79fb1056e214ebbc0261149dace5f8d58ea83124e33366293001f272a"
+    },
+    "workflow_instances": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "workflow_history": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    }
+  },
+  "changedTables": [],
+  "integrity": [
+    {
+      "quick_check": "ok"
+    }
+  ],
+  "foreignKeys": []
+}

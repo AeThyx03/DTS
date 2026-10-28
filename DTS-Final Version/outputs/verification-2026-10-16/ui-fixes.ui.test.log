@@ -1,0 +1,22 @@
+PASS settings save button is disabled during the request
+PASS pending save does not show a success message
+PASS pending save does not overwrite browser settings
+PASS settings save reaches the API exactly once
+PASS settings fields persist on the server
+PASS successful save refreshes browser settings
+PASS settings survive page reload
+PASS rejected save leaves browser and server settings intact
+PASS rejected save does not show success
+PASS rejected save re-enables the button
+PASS network failure preserves settings and enables retry
+PASS new communication type modal starts with an empty name
+PASS new communication type saves through the modal
+PASS edit communication modal displays the actual escaped name
+PASS editing description preserves the communication name
+PASS communication filter renders names instead of objects
+PASS inactive communication types still filter historical records
+PASS document detail displays the saved original URL
+PASS original URL opens safely in a separate tab
+PASS original document URL remains visible after reload
+PASS no browser JavaScript errors
+21 passed, 0 failed

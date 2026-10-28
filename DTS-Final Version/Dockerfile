@@ -3,6 +3,7 @@ WORKDIR /app
 COPY server.js package.json ./
 COPY public ./public
 ENV DATA_DIR=/data PORT=3000 TRUST_PROXY=1
+RUN mkdir -p /data && chown node:node /data
 VOLUME /data
 EXPOSE 3000
 USER node

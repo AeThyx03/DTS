@@ -1,0 +1,32 @@
+'use strict';
+const assert=require('node:assert/strict');
+const base='http://127.0.0.1:'+(process.env.PORT||3119);
+async function client(user,password){let cookie='';return async(method,url,body)=>{const r=await fetch(base+url,{method,headers:{'X-Requested-With':'dts',cookie,'Content-Type':'application/json'},body:body===undefined?undefined:JSON.stringify(body)});if(r.headers.get('set-cookie'))cookie=r.headers.get('set-cookie').split(';')[0];return {status:r.status,...await r.json()};};}
+(async()=>{
+ const admin=await client();assert.equal((await admin('POST','/api/login',{username:'admin',password:'Admin@2026'})).status,200);
+ const graph={nodes:[{id:'start',type:'START',label:'Start',x:64,y:64,config:{}},{id:'review',type:'REVIEW',label:'Review',x:320,y:64,config:{responsibilityType:'ROLE',role:'admin_staff'}},{id:'end',type:'END',label:'End',x:600,y:64,config:{}}],edges:[{id:'received',source:'start',target:'review',label:'Received',condition:{sourceHandle:'next'}},{id:'approved',source:'review',target:'end',label:'Approved',condition:{sourceHandle:'next',field:'status',operator:'equals',value:'received'}}]};
+ const created=await admin('POST','/api/workflows',{name:'Workflow API verification',docType:'Inspection Report',definition:graph});assert.equal(created.status,201);let w=created.workflow;const url='/api/workflows/'+w.id+'/versions/'+w.versionId;
+ assert.deepEqual((await admin('POST',url+'/validate',{})).errors,[]);
+ const before=JSON.stringify((await admin('GET','/api/state')).state.docs);
+ const sim=await admin('POST',url+'/simulate',{});assert.equal(sim.terminated,true);assert.equal(sim.path[1].conditionResults[0].result,true);assert.ok(sim.path[1].responsibleUsers.length);
+ assert.equal(JSON.stringify((await admin('GET','/api/state')).state.docs),before);
+ const stale=w.revision;graph.nodes[1].x=400;
+ const saved=await admin('PUT',url,{name:w.name,docType:w.docType,definition:graph,expectedRevision:stale});assert.equal(saved.status,200);assert.equal(saved.workflow.nodes[1].x,400);assert.equal(saved.workflow.edges[0].condition.sourceHandle,'next');
+ assert.equal((await admin('PUT',url,{name:w.name,docType:w.docType,definition:graph,expectedRevision:stale})).status,409);
+ assert.equal((await admin('POST',url+'/publish',{})).status,200);
+ assert.equal((await admin('PUT',url,{name:w.name,docType:w.docType,definition:graph})).status,409);
+ assert.equal((await admin('POST',url+'/simulate',{})).terminated,true);
+ assert.equal((await admin('POST',url+'/fork',{})).workflow.status,'DRAFT');
+ assert.equal((await admin('PUT','/api/workflow-modes/Inspection%20Report',{mode:'ENGINE'})).status,409);
+ const staff=await client();assert.equal((await staff('POST','/api/login',{username:'dcruz',password:'Track@2026'})).status,200);assert.equal((await staff('GET','/api/workflows')).status,403);
+ const assigneeGraph=JSON.parse(JSON.stringify(graph));assigneeGraph.nodes[1].config={responsibilityType:'CURRENT_ASSIGNEE'};assigneeGraph.edges[1].condition={sourceHandle:'next'};
+ const assignedDoc=(await admin('GET','/api/state')).state.docs.find(d=>d.assignee&&d.status==='processing');assert.ok(assignedDoc);
+ const assignedWorkflow=(await admin('POST','/api/workflows',{name:'Current assignee regression',docType:assignedDoc.docType,definition:assigneeGraph})).workflow;
+ const assignedUrl='/api/workflows/'+assignedWorkflow.id+'/versions/'+assignedWorkflow.versionId;
+ const assignedSim=await admin('POST',assignedUrl+'/simulate',{documentId:assignedDoc.id});
+ assert.deepEqual(assignedSim.path[1].responsibleUsers.map(u=>u.id),[assignedDoc.assignee],'Current assignee simulation must resolve the document assignee');
+ assert.ok(!assignedSim.warnings.some(w=>w.includes('no active responsible user')));
+ const unassignedDoc=(await admin('GET','/api/state')).state.docs.find(d=>!d.assignee);assert.ok(unassignedDoc);
+ const unassignedSim=await admin('POST',assignedUrl+'/simulate',{documentId:unassignedDoc.id});assert.deepEqual(unassignedSim.path[1].responsibleUsers,[]);assert.ok(unassignedSim.warnings.some(w=>w.includes('no active responsible user')));
+ console.log('Workflow API checks passed: validation, handles, positions, conditions, responsibility, current assignee, unassigned warning, read-only simulation, conflicts, publication, fork, migration gate, authorization.');
+})().catch(e=>{console.error(e);process.exitCode=1;});

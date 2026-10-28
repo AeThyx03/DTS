@@ -1,0 +1,68 @@
+/* Workspace and document usability, using the application's existing theme tokens. */
+:focus-visible{outline:3px solid var(--brand);outline-offset:3px}
+.nav a:focus-visible,.ux-admin summary:focus-visible{outline-color:#fff;outline-offset:-3px}
+.ux-admin{margin-top:12px}.ux-admin summary{padding:12px 16px;font-weight:600;cursor:pointer;color:var(--sideink)}
+.ux-admin a{margin-left:8px}
+.ux-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.ux-context{margin:12px 0}.ux-context h2{margin-bottom:4px}
+.ux-views{flex-wrap:wrap;padding:12px 0;margin-bottom:8px;gap:10px}
+.ux-views label{display:flex;gap:8px;align-items:center}.ux-views select{max-width:230px}
+.ux-view-item{padding:10px 0;border-bottom:1px solid var(--line2)}
+/* Every sidebar page uses the available monitor width. */
+.view.ux-page{padding:20px 24px 40px}
+.ux-page>.wrap{max-width:none;width:100%;min-width:0}
+.ux-page>.wrap>.pagehead{margin-bottom:12px}
+.ux-page>.wrap>.tabs,.ux-page .ux-tabs{margin-bottom:12px}
+.ux-page .charts{align-items:start;gap:12px}
+.ux-page .stack{grid-template-columns:minmax(0,1fr)}
+.ux-page .stack,.ux-page .stack>.card{min-width:0}
+.ux-page .cal-tiles{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:12px}
+.ux-page .cal-bar{padding:10px 14px}
+.ux-page .cal-filters{padding:8px 14px}
+.ref-expanded-table{max-height:none;overflow-x:auto}
+.ref-list-heading{align-items:center;gap:12px;flex-wrap:wrap}
+.ref-list-heading>div{flex:1;min-width:200px}
+.ref-list-heading>h3{flex:1;min-width:200px}
+.ref-list-heading .hint{margin:4px 0 0}
+.wrap.ux-workspace{max-width:none;width:100%}
+.view:has(>.ux-workspace){padding:20px 24px 40px}
+.ux-workspace .hello{margin-bottom:12px}
+.ux-workspace>.pagehead{margin-bottom:8px}
+.ux-workspace>.ux-context{margin:0 0 12px}
+.ux-workspace .kts{gap:10px;margin-bottom:12px}
+.ux-workspace .kt{padding:12px 14px;gap:3px}
+.ux-workspace .kt-n{font-size:28px;margin-top:3px}
+.ux-workspace .kt-i{width:30px;height:30px;border-radius:8px}
+.ux-workspace .fp{padding:12px 14px}
+.ux-workspace .ux-views{margin:0 0 10px;padding:0 0 10px;border-bottom:1px solid var(--line2);gap:8px}
+.ux-workspace .fp-row{margin-top:10px;padding-top:10px;gap:10px}
+.ux-workspace .rt{padding:10px 14px;gap:8px}
+.ux-doc-summary{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px;padding:18px;margin-bottom:16px;border-top:3px solid var(--brand)}
+.ux-doc-summary span{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}.ux-doc-summary b{display:block;overflow-wrap:anywhere;font-size:13px}
+.ux-traverse{flex-wrap:wrap;margin-bottom:12px}.ux-primary-action{min-height:44px}
+.ux-secondary{margin-top:12px}.ux-secondary>summary{cursor:pointer;font-weight:600;padding:8px 0}.ux-secondary .more{margin-top:8px}
+.ux-doc-summary+.panel{margin-bottom:18px;border:1px solid var(--brand)}
+.dgrid{grid-template-columns:minmax(0,1fr) minmax(360px,390px)}
+.dgrid .stack{min-width:0}.dgrid .dl{grid-template-columns:minmax(115px,40%) minmax(0,1fr)!important}.dgrid .dl dd{word-break:normal;overflow-wrap:anywhere}
+[data-filelinks] .docurl{overflow-wrap:anywhere}.ux-report-note{margin:0 0 16px;max-width:1000px}
+.ux-error{margin-bottom:14px}.fld [aria-invalid=true]{border:2px solid var(--bad)}
+.ux-required{font-size:10px;font-weight:500;color:var(--muted);margin-left:4px}
+.ux-save{position:fixed;right:20px;bottom:20px;padding:9px 14px;max-width:min(420px,calc(100vw - 40px));border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);box-shadow:var(--shadow);z-index:75;font-size:13px;pointer-events:none}
+.ux-save.bad{color:var(--bad);border-color:var(--bad)}
+.modal-back:has(.ux-drawer){justify-items:end;padding:0;background:rgba(6,18,22,.35)}
+.modal.ux-drawer{width:min(1060px,94vw);height:100%;max-height:100%;border-radius:12px 0 0 12px}
+.ux-drawer .wrap{padding:0;max-width:none}.ux-drawer .dgrid{grid-template-columns:minmax(0,1fr) 330px}.ux-drawer .ux-doc-summary{grid-template-columns:repeat(3,minmax(0,1fr))}
+.ux-drawer .ux-traverse>[data-act=uxBack],.ux-drawer .wrap>p:first-of-type{display:none}
+.ux-drawer .pagehead h1{font-size:21px}
+.kt-info,.kt-pur,.kt-ok,.kt-warn:not(.hot){border-color:var(--line)}
+.kt-neu{--c:var(--neu);--cbg:var(--neubg)}
+.ux-views>label:first-child{white-space:nowrap}
+.tag-routine{background:var(--neubg);color:var(--neu)}
+.tbl tr[tabindex]:focus-visible{outline-offset:-3px}.tbl th[role=button]:focus-visible{outline-offset:-3px}
+.ux-sort{border:0;background:transparent;font:inherit;color:inherit;text-align:left;cursor:pointer;padding:0;min-height:28px;width:100%}
+@media(max-width:1250px){.dgrid{grid-template-columns:1fr}.ux-doc-summary{grid-template-columns:repeat(3,minmax(0,1fr))}.ux-drawer .dgrid{grid-template-columns:1fr}}
+@media(min-width:701px){.ux-page .cal-tile{grid-template-columns:auto 1fr;column-gap:10px;padding:10px 12px}.ux-page .cal-tile .ti{grid-row:1 / span 3;align-self:center}.ux-page .cal-tile .n,.ux-page .cal-tile .l,.ux-page .cal-tile .s{grid-column:2}.ux-page .cal-tile .n{font-size:28px}}
+@media(max-width:700px){.view.ux-page,.view:has(>.ux-workspace){padding:16px 14px 40px}.ux-workspace .kt{padding:12px}.ux-workspace .ux-views>.hint{flex-basis:100%}.ux-doc-summary,.ux-drawer .ux-doc-summary{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.ux-tabs .btn{flex:1}.ux-traverse .grow{display:none}.ux-traverse{gap:8px}.ux-views{align-items:flex-start}.modal.ux-drawer{width:100vw;border-radius:0}.ux-save{bottom:12px;right:12px}.dgrid .dl{grid-template-columns:minmax(105px,38%) minmax(0,1fr)!important}}
+@media(pointer:coarse){.btn,.iconbtn,.nav a,summary,select,input:not([type=checkbox]):not([type=radio]){min-height:44px}.chk{min-height:44px}.chip,.pill{min-height:40px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+@media print{.ux-save,.ux-tabs,.ux-traverse{display:none!important}}

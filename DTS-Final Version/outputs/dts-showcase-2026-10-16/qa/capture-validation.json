@@ -1,0 +1,198 @@
+{
+  "source": "Disposable copy of completed stress database",
+  "captures": [
+    {
+      "id": "S01",
+      "modal": false,
+      "print": false,
+      "route": "dashboard"
+    },
+    {
+      "id": "S02",
+      "modal": false,
+      "print": false,
+      "route": "users"
+    },
+    {
+      "id": "S03",
+      "modal": false,
+      "print": false,
+      "route": "dashboard"
+    },
+    {
+      "id": "S04",
+      "modal": false,
+      "print": false,
+      "route": "action"
+    },
+    {
+      "id": "S05",
+      "modal": false,
+      "print": false,
+      "route": "dashboard"
+    },
+    {
+      "id": "S06",
+      "modal": false,
+      "print": false,
+      "route": "doc"
+    },
+    {
+      "id": "S07",
+      "modal": true,
+      "print": false,
+      "route": "dashboard"
+    },
+    {
+      "id": "S08",
+      "modal": false,
+      "print": false,
+      "route": "doc"
+    },
+    {
+      "id": "S09",
+      "modal": false,
+      "print": false,
+      "route": "dashboard"
+    },
+    {
+      "id": "S10",
+      "modal": false,
+      "print": false,
+      "route": "doc"
+    },
+    {
+      "id": "S11",
+      "modal": false,
+      "print": false,
+      "route": "doc"
+    },
+    {
+      "id": "S12",
+      "modal": false,
+      "print": false,
+      "route": "doc"
+    },
+    {
+      "id": "S13",
+      "modal": false,
+      "print": false,
+      "route": "doc"
+    },
+    {
+      "id": "S14",
+      "modal": false,
+      "print": false,
+      "route": "doc"
+    },
+    {
+      "id": "S15",
+      "modal": false,
+      "print": false,
+      "route": "cmed"
+    },
+    {
+      "id": "S16",
+      "modal": false,
+      "print": false,
+      "route": "cmsd"
+    },
+    {
+      "id": "S17",
+      "modal": false,
+      "print": false,
+      "route": "refs"
+    },
+    {
+      "id": "S18",
+      "modal": false,
+      "print": false,
+      "route": "cmed"
+    },
+    {
+      "id": "S19",
+      "modal": false,
+      "print": false,
+      "route": "schedule"
+    },
+    {
+      "id": "S20",
+      "modal": false,
+      "print": false,
+      "route": "analytics"
+    },
+    {
+      "id": "S21",
+      "modal": false,
+      "print": false,
+      "route": "graphs"
+    },
+    {
+      "id": "S22",
+      "modal": false,
+      "print": true,
+      "route": "dashboard"
+    },
+    {
+      "id": "S23",
+      "modal": false,
+      "print": false,
+      "route": "roles"
+    },
+    {
+      "id": "S24",
+      "modal": false,
+      "print": false,
+      "route": "delegation"
+    },
+    {
+      "id": "S25",
+      "modal": false,
+      "print": false,
+      "route": "refs"
+    },
+    {
+      "id": "S26",
+      "modal": false,
+      "print": false,
+      "route": "settings"
+    },
+    {
+      "id": "S27",
+      "modal": false,
+      "print": false,
+      "route": "audit"
+    },
+    {
+      "id": "S28",
+      "modal": false,
+      "print": false,
+      "route": "settings"
+    },
+    {
+      "id": "S29",
+      "modal": false,
+      "print": false,
+      "route": "workflow"
+    },
+    {
+      "id": "S30",
+      "modal": false,
+      "print": false,
+      "route": "settings"
+    },
+    {
+      "id": "S31",
+      "modal": false,
+      "print": false,
+      "route": null
+    },
+    {
+      "id": "S32",
+      "modal": false,
+      "print": false,
+      "route": "doc"
+    }
+  ],
+  "uncaughtErrors": []
+}

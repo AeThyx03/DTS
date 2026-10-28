@@ -137,7 +137,7 @@ async function firstRun() {
   console.log('Initial sign-in details were written to ' + f + (DEMO ? ' (demo passwords)' : ''));
   console.log('Administrator username: admin\n');
 }
-function loadAll() {
+function loadAll(options = {}) {
   const kv = k => { const r = st.getKV.get(k); return r ? JSON.parse(r.v) : null; };
   const s = { v: 1, users: db.prepare('SELECT j FROM users').all().map(r => JSON.parse(r.j)), docs: db.prepare('SELECT j FROM docs').all().map(r => JSON.parse(r.j)), schedules: db.prepare('SELECT j FROM schedules').all().map(r => { try { return normSchedule(JSON.parse(r.j)); } catch (e) { return null; } }).filter(Boolean), audit: [] };
   CONFIG_KEYS.forEach(k => { s[k] = kv(k); });
@@ -148,6 +148,7 @@ function loadAll() {
   const b = E.baseState();
   s.settings = Object.assign({}, b.settings, s.settings || {});
   s.perms = s.perms || b.perms; s.oic = s.oic || { enabled: false, userId: '' }; s.seq = s.seq || {};
+  s.holidays = s.holidays || b.holidays; s.designations = s.designations || b.designations; s.divisions = s.divisions || b.divisions;
   s.refs = s.refs || b.refs;
   s.refs.comm = Array.isArray(s.refs.comm) ? s.refs.comm : b.refs.comm;
   s.refs.doc = Array.isArray(s.refs.doc) ? s.refs.doc : b.refs.doc;
@@ -158,6 +159,7 @@ function loadAll() {
   ctx.S = s; E.rebuildHS();
   let srWorkflowMigrated = false;
   s.spItems.forEach(it => { if (!it.workflow) { srWorkflowInit(it); srWorkflowMigrated = true; } });
+  if (options.preview) { E.migrateState(); return; }
   if (srWorkflowMigrated) { try { tx(() => s.spItems.forEach(it => st.updSrItem.run(srItemJson(it), it.id))); } catch (e) { console.error('Special Report workflow migration failed:', e.message); } }
   srSeedOnce();
   if (needLeaveTypes) { try { saveKV('leaveTypes'); } catch (e) { console.error('Leave type setup failed:', e.message); } }
@@ -522,12 +524,113 @@ function srDiff(prev, c) {
 const ACT_TYPES = ['forward', 'assign', 'reassign', 'submit', 'sup_return', 'sup_approve', 'div_return', 'div_approve', 'dept_return', 'dept_clear', 'instruct_return', 'logout', 'comment', 'edit', 'delete', 'set_urls'];
 function cleanActPayload(p) {
   const o = {};
-  ['remarks', 'txType', 'docType', 'assignee', 'note', 'reviewer', 'outTo', 'commType', 'source', 'refNo', 'subject', 'division', 'pages', 'priority', 'reportingPeriod'].forEach(k => { if (p[k] !== undefined) o[k] = str(p[k], k === 'subject' ? 2000 : 300); });
+  ['remarks', 'txType', 'docType', 'assignee', 'note', 'reviewer', 'outTo', 'commType', 'source', 'refNo', 'subject', 'division', 'pages', 'priority', 'reportingPeriod', 'region'].forEach(k => { if (p[k] !== undefined) o[k] = str(p[k], k === 'subject' ? 2000 : 300); });
   ['text', 'reason'].forEach(k => { if (p[k] !== undefined) o[k] = str(p[k], 5000); });
   ['url', 'draftUrl', 'revUrl'].forEach(k => { if (p[k] !== undefined) o[k] = str(p[k], 2000); });
   if (typeof p.dueDate === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(p.dueDate)) o.dueDate = p.dueDate;
   ['outAt', 'receivedAt'].forEach(k => { const d = isoOrNull(p[k]); if (d) o[k] = d.toISOString(); });
   return o;
+}
+// Reporting ownership follows responsible personnel without changing stored workflow data.
+// A shared report counts once only when every responsible person resolves to one division.
+const reportingDivision = (record, special = false) => E.reportingDivision(record, special);
+function divisionInUse(code) {
+  const s = S();
+  return s.users.some(u => u.division === code) || s.docs.some(d => d.division === code) ||
+    s.spConfigs.some(c => (c.assignDivisions || []).includes(code)) || s.spItems.some(i => i.division === code || i.workflow?.division === code) ||
+    db.prepare('SELECT config FROM workflow_nodes').all().some(n => JSON.parse(n.config).division === code) ||
+    db.prepare('SELECT condition FROM workflow_edges').all().some(e => { const c = JSON.parse(e.condition); return c.field === 'division' && c.value === code; });
+}
+function documentTypeInUse(name) {
+  return S().docs.some(d => d.docType === name) || S().spConfigs.some(c => c.docType === name) ||
+    !!db.prepare('SELECT 1 FROM workflows WHERE doc_type=? UNION ALL SELECT 1 FROM workflow_modes WHERE doc_type=? LIMIT 1').get(name, name);
+}
+/* Validate an untrusted backup before touching SQLite. Historical inactive users/references are
+   allowed; malformed structures and dangling identities are not. Older optional modules stay intact. */
+function backupProblem(b) {
+  const check = (ok, message) => { if (!ok) throw new Error(message); };
+  const obj = v => !!v && typeof v === 'object' && !Array.isArray(v);
+  const text = v => typeof v === 'string' && !!v.trim();
+  const day = v => typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v) && E.isoD(E.parseD(v)) === v;
+  const date = v => typeof v === 'string' && Number.isFinite(new Date(v).getTime());
+  const list = (v, label, key = 'id') => {
+    check(Array.isArray(v), label + ' must be a list.');
+    check(v.every(obj), label + ' contains an invalid record.');
+    if (key) check(v.every(x => text(x[key])) && new Set(v.map(x => x[key])).size === v.length, label + ' has missing or duplicate ' + key + ' values.');
+  };
+  try {
+    check(obj(b) && b.format === 'dts-backup' && (b.version === undefined || b.version === 1), 'This is not a supported DTS backup.');
+    list(b.users, 'Users'); list(b.docs, 'Documents'); list(b.divisions, 'Divisions', 'code');
+    check(b.divisions.length > 0, 'The backup needs divisions.');
+    const ids = new Set(b.users.map(u => u.id)), divisions = new Set(b.divisions.map(d => d.code));
+    const user = id => !id || id === 'System' || ids.has(id);
+    const division = code => !code || divisions.has(code);
+    check(new Set(b.users.map(u => String(u.username).toLowerCase())).size === b.users.length, 'Usernames must be unique.');
+    check(b.users.every(u => text(u.name) && text(u.username) && /^[a-z0-9._-]{3,}$/i.test(u.username) && E.ROLE_ORDER.includes(u.role) && typeof u.active === 'boolean' && division(u.division) && /^scrypt\$[0-9a-f]{32}\$[0-9a-f]{128}$/i.test(u.pw)), 'A user has invalid identity, role, division or password fields.');
+    check(b.users.some(u => u.active && u.role === 'sysadmin'), 'The backup needs an active System Administrator.');
+    check(b.divisions.every(d => user(d.focal)), 'A division references an unknown focal.');
+    check(obj(b.settings) && text(b.settings.orgName) && text(b.settings.prefix), 'Invalid application settings.');
+    for (const key of ['dueSoonDays','adminDeskDays','focalDeskDays','idleMinutes']) if (b.settings[key] !== undefined) check(Number.isFinite(b.settings[key]) && b.settings[key] >= 0, 'Invalid setting: ' + key);
+    if (b.settings.cursorTrail !== undefined) check(typeof b.settings.cursorTrail === 'boolean', 'Invalid cursor trail setting.');
+    check(obj(b.perms) && Object.values(b.perms).every(a => Array.isArray(a) && a.every(p => E.PERMS.some(x => x[1] === p))), 'Invalid role permissions.');
+    check(obj(b.refs), 'Invalid reference lists.'); list(b.refs.doc, 'Document types', 'name'); list(b.refs.tx, 'Transaction types', 'name');
+    check(Array.isArray(b.refs.comm) && b.refs.comm.every(c => text(E.commName(c))) && new Set(b.refs.comm.map(E.commName)).size === b.refs.comm.length, 'Invalid communication types.');
+    check(b.refs.doc.every(d => (d.threshold == null || d.threshold === '' || (Number.isInteger(d.threshold) && d.threshold >= 1 && d.threshold <= 365)) && (d.basis === undefined || E.isDeadlineBasis(d.basis)) && (d.unit === undefined || ['working_days','calendar_days'].includes(d.unit))), 'Invalid document deadline configuration.');
+    check(b.refs.doc.every(d => d.active === undefined || typeof d.active === 'boolean') && b.refs.comm.every(c => typeof c === 'string' || c.active === undefined || typeof c.active === 'boolean') && b.refs.tx.every(t => t.special === undefined || typeof t.special === 'boolean'), 'Invalid reference status flags.');
+    check(b.refs.tx.every(t => t.days == null || (Number.isInteger(t.days) && t.days >= 1 && t.days <= 365)), 'Invalid transaction deadline configuration.');
+    const docNames = new Set(b.refs.doc.map(d => d.name)), commNames = new Set(b.refs.comm.map(E.commName)), txNames = new Set(b.refs.tx.map(t => t.name));
+    if (b.holidays !== undefined) { list(b.holidays, 'Holidays', null); check(b.holidays.every(h => day(h.date) && text(h.name)), 'Invalid holiday date or name.'); }
+    if (b.designations !== undefined) { list(b.designations, 'Designations', 'name'); check(b.designations.every(d => text(d.staff) && user(d.staff)), 'Unknown designated personnel.'); }
+    if (b.oic !== undefined) check(obj(b.oic) && typeof b.oic.enabled === 'boolean' && user(b.oic.userId) && (!b.oic.enabled || !!b.oic.userId), 'Invalid OIC configuration.');
+    if (b.seq !== undefined) check(obj(b.seq) && Object.values(b.seq).every(n => Number.isSafeInteger(n) && n >= 0), 'Invalid tracking sequence.');
+    const history = (record, label) => {
+      check(Array.isArray(record.history) && record.history.every(h => obj(h) && date(h.at) && text(h.action) && (!h.to || !!E.STAGES[h.to])), label + ' has invalid history.');
+      check(Array.isArray(record.comments) && record.comments.every(c => obj(c) && typeof c.text === 'string' && date(c.at)), label + ' has invalid comments.');
+    };
+    check(new Set(b.docs.map(d => d.trackNo)).size === b.docs.length, 'Duplicate document tracking numbers.');
+    for (const d of b.docs) {
+      check(text(d.trackNo) && text(d.subject) && text(d.source) && !!E.STAGES[d.status] && docNames.has(d.docType) && commNames.has(d.commType) && divisions.has(d.division) && (!d.txType || txNames.has(d.txType)), 'Invalid document identity, status or reference.');
+      check(['Normal','Urgent'].includes(d.priority) && date(d.receivedAt) && date(d.stageEnteredAt) && user(d.assignee) && user(d.reviewer), 'Invalid document personnel, priority or dates.');
+      for (const k of ['clockStart','stopAt','outAt','clearedAt']) check(!d[k] || date(d[k]), 'Invalid document ' + k);
+      check(!d.dueAt || day(d.dueAt), 'Invalid document due date.'); history(d, 'Document');
+    }
+    if (b.leaveTypes !== undefined) { list(b.leaveTypes, 'Leave types'); check(b.leaveTypes.every(t => text(t.name) && typeof t.active === 'boolean'), 'Invalid leave type.'); }
+    if (b.schedules !== undefined) {
+      list(b.schedules, 'Schedules');
+      for (const x of b.schedules) {
+        check(!!normSchedule(x) && day(x.startDate) && day(x.endDate) && x.personnel.every(id => text(id) && user(id)) && user(x.organizer), 'Invalid schedule fields or personnel.');
+        if (x.type === 'leave' && b.leaveTypes) check(b.leaveTypes.some(t => t.id === x.leaveTypeId), 'Unknown schedule leave type.');
+      }
+    }
+    check((b.spConfigs === undefined) === (b.spItems === undefined), 'Special Report schedules and items must be restored together.');
+    if (b.spConfigs !== undefined) {
+      list(b.spConfigs, 'Special Report schedules'); list(b.spItems, 'Special Report items');
+      for (const c of b.spConfigs) {
+        check(text(c.name) && typeof c.active === 'boolean' && E.isSrFreq(c.frequency) && E.isSrBasis(c.basis) && Array.isArray(c.months) && c.months.length > 0 && c.months.every(m => Number.isInteger(m) && m >= 1 && m <= 12) && Number.isInteger(c.threshold) && c.threshold >= 1 && c.threshold <= 60, 'Invalid Special Report schedule.');
+        check(Array.isArray(c.assignUsers) && c.assignUsers.every(id => text(id) && user(id)) && Array.isArray(c.assignDivisions) && c.assignDivisions.every(code => divisions.has(code)) && (!c.docType || docNames.has(c.docType)) && (!c.fromPeriod || E.srParsePeriod(c.fromPeriod)), 'Invalid Special Report schedule references.');
+        if (c.generationDay !== undefined) check(Number.isInteger(c.generationDay) && c.generationDay >= 1 && c.generationDay <= 31, 'Invalid Special Report generation day.');
+      }
+      const cfgIds = new Set(b.spConfigs.map(c => c.id)), obligations = new Set(), assignments = new Set();
+      for (const i of b.spItems) {
+        const key = JSON.stringify([i.cfgId,i.year,i.month]);
+        check(cfgIds.has(i.cfgId) && Number.isInteger(i.year) && i.year >= 1 && i.year <= 9999 && Number.isInteger(i.month) && i.month >= 1 && i.month <= 12 && !obligations.has(key) && ['pending','completed'].includes(i.status) && text(i.title) && day(i.dueAt) && date(i.clockStart), 'Invalid or duplicate Special Report item.'); obligations.add(key);
+        list(i.assign, 'Report assignments'); const live = new Set();
+        for (const a of i.assign) { check(!assignments.has(a.id) && a.itemId === i.id && text(a.userId) && user(a.userId) && ['active','completed','closed','reassigned'].includes(a.status) && date(a.assignedAt), 'Invalid report assignment.'); assignments.add(a.id); if (['active','completed'].includes(a.status)) { check(!live.has(a.userId), 'Duplicate live assignment.'); live.add(a.userId); } }
+        if (i.workflow !== undefined) { const w = i.workflow; check(obj(w) && !!E.STAGES[w.status] && division(w.division) && user(w.assignee) && user(w.reviewer), 'Invalid report workflow.'); history(w, 'Report workflow'); for (const k of ['stopAt','outAt','clearedAt']) check(!w[k] || date(w[k]), 'Invalid report workflow date.'); }
+      }
+    }
+    const workflowKeys = ['workflows','workflowVersions','workflowNodes','workflowEdges'];
+    if (workflowKeys.some(k => b[k] !== undefined)) {
+      workflowKeys.forEach(k => list(b[k], k, ['workflowNodes','workflowEdges'].includes(k) ? null : 'id'));
+      for (const key of ['workflowModes','workflowInstances','workflowHistory']) if (b[key] !== undefined) list(b[key], key, null);
+      for (const row of b.workflows) check(text(row.name) && text(row.doc_type) && date(row.created_at), 'Invalid workflow fields.');
+      for (const row of b.workflowVersions) { check(['DRAFT','PUBLISHED'].includes(row.status) && Number.isInteger(row.version) && row.version > 0 && obj(JSON.parse(row.definition)), 'Invalid workflow version.'); check(Array.isArray(JSON.parse(row.validation || '[]')), 'Invalid workflow validation.'); }
+      for (const row of b.workflowNodes) check(text(row.id) && text(row.version_id) && WF_NODE_TYPES.includes(row.type) && text(row.label) && Number.isFinite(row.x) && Number.isFinite(row.y) && obj(JSON.parse(row.config)), 'Invalid workflow node configuration.');
+      for (const row of b.workflowEdges) check(text(row.id) && text(row.version_id) && text(row.source) && text(row.target) && typeof row.label === 'string' && obj(JSON.parse(row.condition)), 'Invalid workflow transition condition.');
+    }
+    if (b.audit !== undefined) { list(b.audit, 'Audit log', null); check(b.audit.every(a => date(a.at) && typeof a.action === 'string' && typeof a.detail === 'string'), 'Invalid audit log.'); }
+    return '';
+  } catch (e) { return 'Backup rejected: ' + e.message; }
 }
 async function handleApi(req, res, url) {
   const m = req.method, p = url.pathname;
@@ -575,9 +678,16 @@ async function handleApi(req, res, url) {
   if (m === 'GET' && p === '/api/version') return send(res, 200, { ok: true, v: VERSION });
   if (m === 'GET' && p === '/api/state') {
     const s = S(), manage = has(u, 'user.manage');
+    // Optional reporting scope intersects the existing access check. Ownership is
+    // derived on the server; neither stored records nor the default state are changed.
+    const reportDivision = url.searchParams.get('reportDivision');
+    if (reportDivision !== null && !['CMED', 'CMSD'].includes(reportDivision)) return fail(res, 400, 'Choose CMED or CMSD.', 'invalid');
+    if (reportDivision && !E.canAccessDivision(u, reportDivision)) return fail(res, 403, 'You do not have access to this division.', 'forbidden');
+    const docs = s.docs.filter(d => E.canView(u, d) && (!reportDivision || reportingDivision(d) === reportDivision)).map(d => reportDivision ? { ...d, reportingDivision: reportDivision } : d);
+    const spItems = reportDivision ? s.spItems.filter(i => reportingDivision(i, true) === reportDivision && E.canView(u, srWorkflowDoc(i, i.workflow || {}))).map(i => ({ ...i, reportingDivision: reportDivision })) : s.spItems;
     return send(res, 200, {
-      ok: true, v: VERSION, me: u.id, mustChange: false,
-      state: { users: s.users.map(x => pub(x, manage || x.id === u.id)), docs: s.docs.filter(d => E.canView(u, d)), perms: s.perms, divisions: s.divisions, refs: s.refs, designations: s.designations, holidays: s.holidays, oic: s.oic, settings: s.settings, schedules: s.schedules, leaveTypes: s.leaveTypes, spItems: s.spItems, spConfigs: has(u, 'config.manage') ? s.spConfigs : [] }
+      ok: true, v: VERSION, me: u.id, mustChange: false, reportScope: reportDivision,
+      state: { users: s.users.map(x => pub(x, manage || x.id === u.id)), docs, perms: s.perms, divisions: s.divisions, refs: s.refs, designations: s.designations, holidays: s.holidays, oic: s.oic, settings: s.settings, schedules: s.schedules, leaveTypes: s.leaveTypes, spItems, spConfigs: has(u, 'config.manage') ? s.spConfigs : [] }
     });
   }
 
@@ -844,8 +954,13 @@ async function handleApi(req, res, url) {
     if (division && !s.divisions.some(x => x.code === division)) return fail(res, 400, 'Unknown division.', 'invalid');
     if (s.users.some(x => x.username.toLowerCase() === username.toLowerCase())) return fail(res, 400, 'That username is already taken.', 'dup');
     const e = pwProblem(String(b.password || '')); if (e) return fail(res, 400, e, 'weak');
-    const nu = { id: crypto.randomBytes(6).toString('hex'), name, username, role, division, active: true, present: true, pw: await hashPw(String(b.password)), mustChange: true, lastLogin: null };
-    s.users.push(nu); saveUser(nu); audit(u.id, 'User created', name + ' (' + E.ROLES[role] + ')'); flushAudit(); bump();
+    const pw = await hashPw(String(b.password));
+    // Hashing yields to other requests: recheck against the current state before writing.
+    if (!sessionOf(req) || !has(E.uById(u.id), 'user.manage')) return fail(res, 403, 'Not allowed.', 'forbidden');
+    if (S().users.some(x => x.username.toLowerCase() === username.toLowerCase())) return fail(res, 400, 'That username is already taken.', 'dup');
+    if (division && !S().divisions.some(x => x.code === division)) return fail(res, 400, 'Unknown division.', 'invalid');
+    const nu = { id: crypto.randomBytes(6).toString('hex'), name, username, role, division, active: true, present: true, pw, mustChange: true, lastLogin: null };
+    S().users.push(nu); saveUser(nu); audit(u.id, 'User created', name + ' (' + E.ROLES[role] + ')'); flushAudit(); bump();
     return send(res, 200, { ok: true });
   }
   mm = p.match(/^\/api\/users\/([\w-]+)(?:\/(reset|presence))?$/);
@@ -875,6 +990,7 @@ async function handleApi(req, res, url) {
     if (t.role === 'sysadmin' && (role !== 'sysadmin' || !active) && admins.length <= 1) return fail(res, 400, 'At least one active System Administrator is required.', 'rule');
     if (t.id === u.id && !active) return fail(res, 400, 'You cannot deactivate your own account.', 'rule');
     if (t.id === u.id && role !== u.role && u.role === 'sysadmin' && admins.length <= 1) return fail(res, 400, 'At least one active System Administrator is required.', 'rule');
+    if (!active && s.divisions.some(d => d.focal === t.id)) return fail(res, 400, 'Assign a replacement division focal before deactivating this account.', 'rule');
     Object.assign(t, { name, username, role, division, active });
     saveUser(t); if (!active) killSessions(t.id);
     audit(u.id, 'User updated', t.name); flushAudit(); bump();
@@ -900,7 +1016,7 @@ async function handleApi(req, res, url) {
       if (!Array.isArray(v) || !v.length || v.length > 50) err = 'Invalid divisions.'; else {
         clean = v.map(d => ({ code: str(d.code, 40), focal: str(d.focal, 40) }));
         if (clean.some(d => !d.code || !uidOk(d.focal)) || new Set(clean.map(d => d.code)).size !== clean.length) err = 'Division codes must be unique and focals must be active users.';
-        else { const gone = s.divisions.filter(d => !clean.some(c => c.code === d.code)); if (gone.some(d => s.docs.some(x => x.division === d.code))) err = 'A division that has documents cannot be removed.'; }
+        else { const gone = s.divisions.filter(d => !clean.some(c => c.code === d.code)); if (gone.some(d => divisionInUse(d.code))) err = 'A division used by personnel, documents, Special Reports or workflows cannot be removed or renamed. Reassign its dependencies first.'; }
       }
     } else if (sec === 'refs') {
       if (!v || !Array.isArray(v.tx) || !Array.isArray(v.comm) || !Array.isArray(v.doc)) err = 'Invalid lists.'; else {
@@ -922,7 +1038,11 @@ async function handleApi(req, res, url) {
         clean.tx.forEach(t => { if (t.special === undefined) delete t.special; else t.days = null; });
         const commNames = s.refs.comm.map(E.commName);
         const goneComm = commNames.filter(n => !clean.comm.some(c => c.name === n));
+        const goneDoc = s.refs.doc.filter(d => !clean.doc.some(c => c.name === d.name));
+        const goneTx = s.refs.tx.filter(t => !clean.tx.some(c => c.name === t.name));
         if (goneComm.some(n => s.docs.some(x => x.commType === n))) err = 'A communication type that is used by documents cannot be removed. Deactivate it instead.';
+        else if (goneDoc.some(d => documentTypeInUse(d.name))) err = 'A document type used by documents, Special Reports or workflows cannot be removed or renamed. Deactivate it instead.';
+        else if (goneTx.some(t => s.docs.some(d => d.txType === t.name))) err = 'A transaction type used by documents cannot be removed or renamed.';
         else if (clean.tx.some(t => !t.name) || new Set(clean.tx.map(t => t.name)).size !== clean.tx.length || new Set(clean.comm.map(c => c.name)).size !== clean.comm.length || new Set(clean.doc.map(d => d.name)).size !== clean.doc.length) err = 'Names must be filled in and unique.';
         else if (clean.doc.some(d => d.basis === 'reporting_period' && !(d.threshold > 0))) err = 'A document type with a reporting-period basis needs a prescribed threshold of at least 1.';
         else {
@@ -943,7 +1063,8 @@ async function handleApi(req, res, url) {
     } else if (sec === 'settings') {
       if (!v) err = 'Invalid settings.'; else {
         const n = k => Math.max(0, Math.min(1000, parseInt(v[k], 10) || 0));
-        clean = { orgName: str(v.orgName, 150), prefix: str(v.prefix, 12).toUpperCase().replace(/[^A-Z0-9]/g, ''), dueSoonDays: n('dueSoonDays'), adminDeskDays: n('adminDeskDays'), focalDeskDays: n('focalDeskDays'), idleMinutes: n('idleMinutes'), resubmit: v.resubmit === 'restart' ? 'restart' : 'returner' };
+        clean = { orgName: str(v.orgName, 150), prefix: str(v.prefix, 12).toUpperCase().replace(/[^A-Z0-9]/g, ''), dueSoonDays: n('dueSoonDays'), adminDeskDays: n('adminDeskDays'), focalDeskDays: n('focalDeskDays'), idleMinutes: n('idleMinutes'), resubmit: v.resubmit === 'restart' ? 'restart' : 'returner', cursorTrail: v.cursorTrail === undefined ? s.settings.cursorTrail !== false : v.cursorTrail === true };
+        if (v.cursorTrail !== undefined && typeof v.cursorTrail !== 'boolean') err = 'Cursor particle trail must be on or off.';
         if (!clean.orgName || !clean.prefix) err = 'The office name and prefix cannot be empty.';
       }
     }
@@ -972,9 +1093,15 @@ async function handleApi(req, res, url) {
   if (m === 'POST' && p === '/api/admin/restore') {
     if (!has(u, 'data.manage')) return fail(res, 403, 'Not allowed.', 'forbidden');
     const b = await readBody(req, 100 * 1024 * 1024);
-    if (b.format !== 'dts-backup' || !Array.isArray(b.users) || !Array.isArray(b.docs) || !b.settings || !b.refs || !b.perms || !Array.isArray(b.divisions)) return fail(res, 400, 'This is not a backup from this system.', 'invalid');
-    if (!b.users.some(x => x.role === 'sysadmin' && x.active) || b.users.some(x => !x.id || typeof x.pw !== 'string')) return fail(res, 400, 'The backup must contain an active System Administrator.', 'invalid');
-    tx(() => {
+    const problem = backupProblem(b);
+    if (problem) return fail(res, 400, problem, 'invalid');
+    const previous = S();
+    // Recovery copies are independent of the daily backup retention window.
+    const recoveryDir = path.join(DATA, 'backups', 'restore'); fs.mkdirSync(recoveryDir, { recursive: true });
+    const recovery = path.join(recoveryDir, 'pre-restore-' + Date.now() + '-' + crypto.randomBytes(4).toString('hex') + '.sqlite');
+    try { db.exec("VACUUM INTO '" + recovery.replace(/'/g, "''") + "'"); }
+    catch (e) { return fail(res, 500, 'Could not save the recovery backup. Restore was not started.', 'backup_failed'); }
+    try { tx(() => {
       db.exec('DELETE FROM users; DELETE FROM docs; DELETE FROM kv; DELETE FROM audit;');
       b.users.forEach(x => st.setUser.run(x.id, JSON.stringify(x)));
       b.docs.forEach(x => st.setDoc.run(x.id, JSON.stringify(x)));
@@ -1000,8 +1127,15 @@ async function handleApi(req, res, url) {
         (b.workflowHistory||[]).forEach(x=>db.prepare('INSERT INTO workflow_history(id,instance_id,at,by,action,detail) VALUES(?,?,?,?,?,?)').run(x.id,x.instance_id,x.at,x.by,x.action,x.detail));
       }
       (Array.isArray(b.audit) ? b.audit : []).forEach(a => st.addAudit.run(a.at, a.by || '', a.action, a.detail || ''));
-    });
-    loadAll();
+      // Build and migrate the replacement while rollback is still possible. No nested writes.
+      loadAll({ preview: true });
+      CONFIG_KEYS.forEach(saveKV);
+      S().spItems.forEach(it => st.updSrItem.run(srItemJson(it), it.id));
+      if (S().spConfigs.length) st.setKV.run('spSeeded', '1');
+    }); } catch (e) {
+      ctx.S = previous; E.rebuildHS();
+      return fail(res, 400, 'The backup could not be loaded. Existing data was preserved.', 'invalid');
+    }
     db.prepare('DELETE FROM sessions WHERE h<>?').run(sess.hash);
     if (!E.uById(u.id)) db.prepare('DELETE FROM sessions').run();
     audit(u.id, 'Backup restored', b.docs.length + ' documents, ' + b.users.length + ' users'); flushAudit(); bump();
@@ -1018,6 +1152,10 @@ async function handleApi(req, res, url) {
 
 /* ---------- static files ---------- */
 const STATIC = { '/': ['index.html', 'text/html; charset=utf-8'], '/index.html': ['index.html', 'text/html; charset=utf-8'], '/client.js': ['client.js', 'text/javascript; charset=utf-8'], '/engine.js': ['engine.js', 'text/javascript; charset=utf-8'], '/app.css': ['app.css', 'text/css; charset=utf-8'], '/schedule.js': ['schedule.js', 'text/javascript; charset=utf-8'], '/schedule.css': ['schedule.css', 'text/css; charset=utf-8'], '/special.js': ['special.js', 'text/javascript; charset=utf-8'], '/special.css': ['special.css', 'text/css; charset=utf-8'], '/workflow.js': ['workflow.js', 'text/javascript; charset=utf-8'], '/workflow.css': ['workflow.css', 'text/css; charset=utf-8'], '/favicon.svg': ['favicon.svg', 'image/svg+xml'], '/favicon.png': ['favicon.png', 'image/png'], '/logo-black.png': ['logo-black.png', 'image/png'], '/logo-white.png': ['logo-white.png', 'image/png'], '/login-bg.png': ['login-bg.png', 'image/png'] };
+STATIC['/ux.js'] = ['ux.js', 'text/javascript; charset=utf-8'];
+STATIC['/ux.css'] = ['ux.css', 'text/css; charset=utf-8'];
+STATIC['/particle-trail.js'] = ['particle-trail.js', 'text/javascript; charset=utf-8'];
+STATIC['/particle-trail.css'] = ['particle-trail.css', 'text/css; charset=utf-8'];
 const CSP = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'";
 const server = http.createServer(async (req, res) => {
   res.setHeader('X-Content-Type-Options', 'nosniff');

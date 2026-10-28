@@ -1,0 +1,5 @@
+.particle-trail-overlay{position:fixed;inset:0;z-index:250;overflow:hidden;pointer-events:none}
+.particle-trail-layer{position:absolute;inset:0;overflow:hidden;pointer-events:none;contain:strict}
+.particle-trail-dot{position:absolute;top:0;left:0;border-radius:50%;background:#FFFFFF;opacity:0;pointer-events:none;will-change:transform,opacity;box-shadow:0 0 4px #FFFFFF80,0 0 9px #FFFFFF30}
+@media(prefers-reduced-motion:reduce),(pointer:coarse){.particle-trail-layer{display:none}}
+@media print{.particle-trail-layer,.particle-trail-overlay{display:none!important}}

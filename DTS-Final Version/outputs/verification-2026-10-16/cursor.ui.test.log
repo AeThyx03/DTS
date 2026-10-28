@@ -1,0 +1,35 @@
+PASS trail enabled by default in persisted settings
+PASS exactly 48 reusable particles after sign in
+PASS pointer motion emits visible white particles
+PASS trail leaves native cursor and hit testing intact
+PASS setting has associated label and description
+PASS unsaved checkbox does not change confirmed system setting
+PASS Save settings turns effect off and clears active particles
+PASS off setting survives a full browser reload
+PASS system-wide off allocates no particles in a new staff session
+PASS staff cannot change the system-wide setting
+PASS non-boolean setting rejected without changing stored value
+PASS older clients omitting the field preserve the saved value
+PASS failed save retains draft without enabling the effect
+PASS saved enable reaches another signed-in user on refresh
+PASS re-enabling reuses the original pool
+PASS live reduced-motion preference immediately clears particles
+PASS no emission while reduced motion is requested
+PASS restoring motion preference safely resumes the same pool
+PASS touch-only browser never allocates a particle pool
+PASS reduced-motion browser never allocates a particle pool
+PASS standalone preview renders the same visible particle effect
+PASS particles use transforms and remain clipped to preview
+PASS particle layer does not block interactive buttons
+PASS particle layer does not block text input
+PASS animation loop stops after two idle seconds and all particles fade
+PASS pointer movement wakes the idle animation
+PASS hidden tab cancels animation and clears particles
+PASS visible tab waits for pointer motion instead of starting a background loop
+PASS resume resets the path instead of drawing a stale cross-screen trail
+PASS touch input on a fine-pointer device is ignored
+PASS pointer events never add or remove pool elements
+PASS preview On/Off control clears effect
+PASS preview keyboard focus has a visible outline
+PASS no uncaught JavaScript errors
+34 passed, 0 failed

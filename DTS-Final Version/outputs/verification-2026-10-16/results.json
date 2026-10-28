@@ -1,0 +1,154 @@
+{
+  "at": "2026-10-16T01:01:47.452Z",
+  "suites": [
+    {
+      "suite": "api",
+      "exitCode": 0,
+      "summary": "51 passed, 0 failed",
+      "sourceRun": "2026-10-16T00-58-57-858Z"
+    },
+    {
+      "suite": "new-rules",
+      "exitCode": 0,
+      "summary": "12 passed, 0 failed",
+      "sourceRun": "2026-10-16T00-58-57-858Z"
+    },
+    {
+      "suite": "rules4",
+      "exitCode": 0,
+      "summary": "56 passed, 0 failed",
+      "sourceRun": "2026-10-16T00-58-57-858Z"
+    },
+    {
+      "suite": "routing-visibility",
+      "exitCode": 0,
+      "summary": "26 passed, 0 failed",
+      "sourceRun": "2026-10-16T00-58-57-858Z"
+    },
+    {
+      "suite": "schedule",
+      "exitCode": 0,
+      "summary": "76 passed, 0 failed",
+      "sourceRun": "2026-10-16T00-58-57-858Z"
+    },
+    {
+      "suite": "phase10",
+      "exitCode": 0,
+      "summary": "30 passed, 0 failed",
+      "sourceRun": "2026-10-16T00-58-57-858Z"
+    },
+    {
+      "suite": "phase11",
+      "exitCode": 0,
+      "summary": "128 passed, 0 failed",
+      "sourceRun": "2026-10-16T00-58-57-858Z"
+    },
+    {
+      "suite": "workflow",
+      "exitCode": 0,
+      "summary": "Assertions passed",
+      "sourceRun": "2026-10-16T00-58-57-858Z"
+    },
+    {
+      "suite": "audit-corrections",
+      "exitCode": 0,
+      "summary": "81 passed, 0 failed",
+      "sourceRun": "2026-10-16T00-58-57-858Z"
+    },
+    {
+      "suite": "audit-corrections.ui",
+      "exitCode": 0,
+      "summary": "15 passed, 0 failed",
+      "sourceRun": "2026-10-16T00-59-59-111Z"
+    },
+    {
+      "suite": "ux.ui",
+      "exitCode": 0,
+      "summary": "49 passed, 0 failed",
+      "sourceRun": "2026-10-16T00-53-34-700Z"
+    },
+    {
+      "suite": "ui-fixes.ui",
+      "exitCode": 0,
+      "summary": "21 passed, 0 failed",
+      "sourceRun": "2026-10-16T00-53-34-700Z"
+    },
+    {
+      "suite": "reference-ux.ui",
+      "exitCode": 0,
+      "summary": "57 passed, 0 failed",
+      "sourceRun": "2026-10-16T00-53-34-700Z"
+    },
+    {
+      "suite": "document.ui",
+      "exitCode": 0,
+      "summary": "15 passed, 0 failed",
+      "sourceRun": "2026-10-16T00-53-34-700Z"
+    },
+    {
+      "suite": "schedule.attack.ui",
+      "exitCode": 0,
+      "summary": "89 passed, 0 failed",
+      "sourceRun": "2026-10-16T00-53-34-700Z"
+    },
+    {
+      "suite": "sidebar-layout.ui",
+      "exitCode": 0,
+      "summary": "47 passed, 0 failed",
+      "sourceRun": "2026-10-16T00-53-34-700Z"
+    },
+    {
+      "suite": "reporting.ui",
+      "exitCode": 0,
+      "summary": "214 passed, 0 failed",
+      "sourceRun": "2026-10-16T00-55-10-788Z"
+    },
+    {
+      "suite": "special-picker.ui",
+      "exitCode": 0,
+      "summary": "23 passed, 0 failed",
+      "sourceRun": "2026-10-16T00-55-10-788Z"
+    },
+    {
+      "suite": "splash",
+      "exitCode": 0,
+      "summary": "34 passed, 0 failed",
+      "sourceRun": "2026-10-16T00-55-10-788Z"
+    },
+    {
+      "suite": "cursor.ui",
+      "exitCode": 0,
+      "summary": "34 passed, 0 failed",
+      "sourceRun": "2026-10-16T00-55-10-788Z"
+    },
+    {
+      "suite": "schedule.attack",
+      "exitCode": 0,
+      "summary": "98 passed, 0 failed",
+      "sourceRun": "2026-10-16T00-58-57-858Z"
+    },
+    {
+      "suite": "workflow.ui",
+      "exitCode": 0,
+      "summary": "Assertions passed",
+      "sourceRun": "2026-10-16T00-59-59-111Z"
+    },
+    {
+      "suite": "phase11.ui",
+      "exitCode": 0,
+      "summary": "32 passed, 0 failed",
+      "sourceRun": "2026-10-16T00-59-59-111Z"
+    },
+    {
+      "suite": "schedule.ui",
+      "exitCode": 0,
+      "summary": "80 passed, 0 failed",
+      "sourceRun": "2026-10-16T00-59-59-111Z"
+    }
+  ],
+  "assertions": 1268,
+  "workflowSuitesWithoutCounts": [
+    "workflow",
+    "workflow.ui"
+  ]
+}

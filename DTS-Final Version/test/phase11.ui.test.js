@@ -25,7 +25,7 @@ async function api(cookieCtx, m, u, b) { const r = await cookieCtx.request.fetch
   ok('unassigned schedules are flagged', await a.locator('td .badge', { hasText: 'Nobody assigned' }).count() === 3);
   ok('PPA to COA shows its exact months', await a.locator('tr', { hasText: 'PPA to COA' }).locator('text=January, March, June, September, December').count() === 1);
   await a.click('button:has-text("Add Special Report")'); await a.waitForSelector('[data-form=srcfg]');
-  await a.click('[data-act=spCfgSave]'); ok('empty form shows a clear validation message', await a.locator('.toast.bad').first().innerText().then(t => /name/i.test(t)));
+  await a.click('[data-act=spCfgSave]'); ok('empty form shows a clear validation message', await a.locator('.ux-error').first().innerText().then(t => /name/i.test(t)));
   await a.click('[data-act=closeModal]');
   await a.click('button:has-text("Generated reports")'); ok('generated reports tab lists both', await a.locator('table.tbl tbody tr').count() === 2);
   ok('admin has no For My Action entry', await a.locator('.nav a', { hasText: 'For My Action' }).count() === 0);

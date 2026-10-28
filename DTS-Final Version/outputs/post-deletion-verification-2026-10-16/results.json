@@ -1,0 +1,176 @@
+{
+  "at": "2026-10-16T02:25:33.940Z",
+  "suiteCount": 24,
+  "numericalAssertionsPassed": 1268,
+  "failedSuites": 0,
+  "suites": [
+    {
+      "suite": "api",
+      "exitCode": 0,
+      "summary": "51 passed, 0 failed",
+      "testLog": "api.test.log",
+      "serverLog": "api.server.log"
+    },
+    {
+      "suite": "new-rules",
+      "exitCode": 0,
+      "summary": "12 passed, 0 failed",
+      "testLog": "new-rules.test.log",
+      "serverLog": "new-rules.server.log"
+    },
+    {
+      "suite": "rules4",
+      "exitCode": 0,
+      "summary": "56 passed, 0 failed",
+      "testLog": "rules4.test.log",
+      "serverLog": "rules4.server.log"
+    },
+    {
+      "suite": "routing-visibility",
+      "exitCode": 0,
+      "summary": "26 passed, 0 failed",
+      "testLog": "routing-visibility.test.log",
+      "serverLog": "routing-visibility.server.log"
+    },
+    {
+      "suite": "schedule",
+      "exitCode": 0,
+      "summary": "76 passed, 0 failed",
+      "testLog": "schedule.test.log",
+      "serverLog": "schedule.server.log"
+    },
+    {
+      "suite": "schedule.attack",
+      "exitCode": 0,
+      "summary": "98 passed, 0 failed",
+      "testLog": "schedule.attack.test.log",
+      "serverLog": "schedule.attack.server.log"
+    },
+    {
+      "suite": "phase10",
+      "exitCode": 0,
+      "summary": "30 passed, 0 failed",
+      "testLog": "phase10.test.log",
+      "serverLog": "phase10.server.log"
+    },
+    {
+      "suite": "phase11",
+      "exitCode": 0,
+      "summary": "128 passed, 0 failed",
+      "testLog": "phase11.test.log",
+      "serverLog": "phase11.server.log"
+    },
+    {
+      "suite": "workflow",
+      "exitCode": 0,
+      "summary": "PASS (no numerical summary)",
+      "testLog": "workflow.test.log",
+      "serverLog": "workflow.server.log"
+    },
+    {
+      "suite": "audit-corrections",
+      "exitCode": 0,
+      "summary": "81 passed, 0 failed",
+      "testLog": "audit-corrections.test.log",
+      "serverLog": "audit-corrections.server.log"
+    },
+    {
+      "suite": "reporting.ui",
+      "exitCode": 0,
+      "summary": "214 passed, 0 failed",
+      "testLog": "reporting.ui.test.log",
+      "serverLog": "reporting.ui.server.log"
+    },
+    {
+      "suite": "sidebar-layout.ui",
+      "exitCode": 0,
+      "summary": "47 passed, 0 failed",
+      "testLog": "sidebar-layout.ui.test.log",
+      "serverLog": "sidebar-layout.ui.server.log"
+    },
+    {
+      "suite": "ux.ui",
+      "exitCode": 0,
+      "summary": "49 passed, 0 failed",
+      "testLog": "ux.ui.test.log",
+      "serverLog": "ux.ui.server.log"
+    },
+    {
+      "suite": "ui-fixes.ui",
+      "exitCode": 0,
+      "summary": "21 passed, 0 failed",
+      "testLog": "ui-fixes.ui.test.log",
+      "serverLog": "ui-fixes.ui.server.log"
+    },
+    {
+      "suite": "reference-ux.ui",
+      "exitCode": 0,
+      "summary": "57 passed, 0 failed",
+      "testLog": "reference-ux.ui.test.log",
+      "serverLog": "reference-ux.ui.server.log"
+    },
+    {
+      "suite": "document.ui",
+      "exitCode": 0,
+      "summary": "15 passed, 0 failed",
+      "testLog": "document.ui.test.log",
+      "serverLog": "document.ui.server.log"
+    },
+    {
+      "suite": "workflow.ui",
+      "exitCode": 0,
+      "summary": "PASS (no numerical summary)",
+      "testLog": "workflow.ui.test.log",
+      "serverLog": "workflow.ui.server.log"
+    },
+    {
+      "suite": "schedule.ui",
+      "exitCode": 0,
+      "summary": "80 passed, 0 failed",
+      "testLog": "schedule.ui.test.log",
+      "serverLog": "schedule.ui.server.log"
+    },
+    {
+      "suite": "schedule.attack.ui",
+      "exitCode": 0,
+      "summary": "89 passed, 0 failed",
+      "testLog": "schedule.attack.ui.test.log",
+      "serverLog": "schedule.attack.ui.server.log"
+    },
+    {
+      "suite": "phase11.ui",
+      "exitCode": 0,
+      "summary": "32 passed, 0 failed",
+      "testLog": "phase11.ui.test.log",
+      "serverLog": "phase11.ui.server.log"
+    },
+    {
+      "suite": "special-picker.ui",
+      "exitCode": 0,
+      "summary": "23 passed, 0 failed",
+      "testLog": "special-picker.ui.test.log",
+      "serverLog": "special-picker.ui.server.log"
+    },
+    {
+      "suite": "splash",
+      "exitCode": 0,
+      "summary": "34 passed, 0 failed",
+      "testLog": "splash.test.log",
+      "serverLog": "splash.server.log"
+    },
+    {
+      "suite": "cursor.ui",
+      "exitCode": 0,
+      "summary": "34 passed, 0 failed",
+      "testLog": "cursor.ui.test.log",
+      "serverLog": "cursor.ui.server.log"
+    },
+    {
+      "suite": "audit-corrections.ui",
+      "exitCode": 0,
+      "summary": "15 passed, 0 failed",
+      "testLog": "audit-corrections.ui.test.log",
+      "serverLog": "audit-corrections.ui.server.log"
+    }
+  ]
+}

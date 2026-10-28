@@ -1,0 +1,210 @@
+{
+  "at": "2026-10-16T00:39:59.471Z",
+  "dataDir": "D:\\test server\\staging-dts\\New folder\\dts-final version-workflow\\DTS-Final Version\\.test-runs\\audit-20261016\\data-1792111034404",
+  "results": [
+    {
+      "id": "A01",
+      "title": "Metadata-only edit starts an unassigned document clock",
+      "evidence": {
+        "http": 200,
+        "before": {
+          "status": "received",
+          "clockStart": null
+        },
+        "after": {
+          "status": "received",
+          "assignee": "",
+          "clockStart": "2026-10-12T16:00:00.000Z",
+          "dueAt": "2026-10-16"
+        }
+      }
+    },
+    {
+      "id": "A02",
+      "title": "Edit bypasses required-field, reference and reporting-period validation",
+      "evidence": {
+        "invalidEdit": {
+          "http": 200,
+          "source": "",
+          "division": "UNKNOWN",
+          "commType": "UNKNOWN",
+          "priority": "banana"
+        },
+        "conversion": {
+          "http": 200,
+          "type": "Consolidated CMR and PPR",
+          "period": "",
+          "assignee": "",
+          "dueAt": null
+        }
+      }
+    },
+    {
+      "id": "A03",
+      "title": "Renaming a used document type leaves existing records referring to the old name",
+      "evidence": {
+        "http": 200,
+        "oldTypeStillDefined": false,
+        "orphanDocuments": 7
+      }
+    },
+    {
+      "id": "A04",
+      "title": "Forwarding succeeds with an inactive division focal",
+      "evidence": {
+        "status": "at_focal",
+        "focalActive": false
+      }
+    },
+    {
+      "id": "A05",
+      "title": "Concurrent requests create duplicate usernames",
+      "evidence": {
+        "http": [
+          200,
+          200
+        ],
+        "duplicateAccounts": 2
+      }
+    },
+    {
+      "id": "A06",
+      "title": "Browser registration stores logger division and Insights disagrees with assigned-person division reports",
+      "evidence": {
+        "storedDivision": "Admin",
+        "assigneeDivision": "CMED",
+        "inCMEDScopedReports": true,
+        "inCMEDInsights": false,
+        "loggerDivision": "Admin"
+      }
+    },
+    {
+      "id": "A07",
+      "title": "Shared Special Report division in Insights depends on the viewing user",
+      "evidence": {
+        "views": [
+          {
+            "viewerDivision": "CMED",
+            "reportDivision": "CMED"
+          },
+          {
+            "viewerDivision": "CMSD",
+            "reportDivision": "CMSD"
+          }
+        ],
+        "CMEDScopedCount": 0,
+        "CMSDScopedCount": 0
+      }
+    },
+    {
+      "id": "A08",
+      "title": "CSV exports do not neutralize formula-like text cells",
+      "evidence": [
+        {
+          "input": "=1+1",
+          "csv": "=1+1"
+        },
+        {
+          "input": "+1+1",
+          "csv": "+1+1"
+        },
+        {
+          "input": "@SUM(A1:A2)",
+          "csv": "@SUM(A1:A2)"
+        }
+      ]
+    },
+    {
+      "id": "A11",
+      "title": "Released Special Reports are missing from Analytics and Charts release totals",
+      "evidence": {
+        "workflowRelease": "2026-02-06T01:00:00Z",
+        "adapterRelease": null,
+        "analyticsReleased": "0",
+        "chartReleased": 0
+      }
+    },
+    {
+      "id": "VERIFY-AGE",
+      "title": "Current UX override preserves the selected chart age band",
+      "evidence": {
+        "selected": "8 or more working days",
+        "appliedFilter": {
+          "tile": "ongoing",
+          "age": "8 or more working days",
+          "months": "2026-02"
+        }
+      }
+    },
+    {
+      "id": "A13",
+      "title": "Large reporting-period working-day thresholds clamp to non-working month end",
+      "evidence": {
+        "ordinary": "2026-02-28",
+        "ordinaryIsWorkingDay": false,
+        "special": "2026-03-06"
+      }
+    },
+    {
+      "id": "A09",
+      "title": "Division removal ignores personnel and Special Report dependencies",
+      "evidence": {
+        "http": 200,
+        "divisionStillExists": false,
+        "orphanPersonnel": 3,
+        "CMEDScopedSpecialReportsBefore": 1,
+        "CMEDScopedSpecialReportsAfter": 0
+      }
+    },
+    {
+      "id": "P01",
+      "title": "Division tabs restrict access but department data remains globally readable",
+      "evidence": {
+        "oppositeDivisionHTTP": 403,
+        "oppositeDivisionDocumentsInUnscopedState": 10
+      }
+    },
+    {
+      "id": "TEST-SCHEDULE",
+      "title": "Adversarial schedule suite with current discard confirmation handling",
+      "evidence": {
+        "exitCode": 0,
+        "summary": "89 passed, 0 failed"
+      }
+    },
+    {
+      "id": "A10",
+      "title": "Failed malformed restore commits invalid state to SQLite",
+      "evidence": {
+        "http": 500,
+        "persistedHolidays": [
+          null
+        ]
+      }
+    },
+    {
+      "id": "HEALTH",
+      "title": "Read-only live database checks",
+      "evidence": {
+        "integrity": [
+          {
+            "quick_check": "ok"
+          }
+        ],
+        "foreignKeyViolations": 0,
+        "counts": {
+          "users": 18,
+          "docs": 0,
+          "schedules": 0,
+          "sr_config": 5,
+          "sr_item": 3,
+          "sr_assign": 3
+        },
+        "duplicateUsernames": 0,
+        "unknownPersonnelDivisions": 0,
+        "unknownDocumentDivisions": 0,
+        "unknownDocumentAssignees": 0
+      }
+    }
+  ]
+}

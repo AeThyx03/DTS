@@ -1,0 +1,82 @@
+PASS admin signs in
+PASS deadline type saves
+PASS new received document has no clock
+PASS partial metadata edit succeeds
+PASS metadata edit preserves unassigned clock
+PASS invalid edit rejected: {"source":""}
+PASS rejected edit is atomic
+PASS invalid edit rejected: {"division":"UNKNOWN"}
+PASS rejected edit is atomic
+PASS invalid edit rejected: {"commType":"UNKNOWN"}
+PASS rejected edit is atomic
+PASS invalid edit rejected: {"docType":"UNKNOWN"}
+PASS rejected edit is atomic
+PASS invalid edit rejected: {"priority":"banana"}
+PASS rejected edit is atomic
+PASS invalid edit rejected: {"docType":"Consolidated CMR and PPR","reportingPeriod":""}
+PASS rejected edit is atomic
+PASS invalid edit rejected: {"docType":"Consolidated CMR and PPR","reportingPeriod":"September"}
+PASS rejected edit is atomic
+PASS invalid edit rejected: {"draftUrl":"javascript:bad"}
+PASS rejected edit is atomic
+PASS forward succeeds
+PASS assignment starts prescribed clock
+PASS assigned clock exists
+PASS assigned metadata edit succeeds
+PASS assigned clock and due date stay stable
+PASS used type can be deactivated
+PASS existing retired type may be retained in metadata edit
+PASS used type cannot be renamed
+PASS configured focal cannot be deactivated
+PASS concurrent case-insensitive usernames have one success
+PASS only one matching user persisted
+PASS malformed backup rejected
+PASS invalid restore leaves durable data unchanged
+PASS invalid restore keeps the current session usable
+PASS malformed backup rejected
+PASS invalid restore leaves durable data unchanged
+PASS invalid restore keeps the current session usable
+PASS malformed backup rejected
+PASS invalid restore leaves durable data unchanged
+PASS invalid restore keeps the current session usable
+PASS malformed backup rejected
+PASS invalid restore leaves durable data unchanged
+PASS invalid restore keeps the current session usable
+PASS malformed backup rejected
+PASS invalid restore leaves durable data unchanged
+PASS invalid restore keeps the current session usable
+PASS malformed backup rejected
+PASS invalid restore leaves durable data unchanged
+PASS invalid restore keeps the current session usable
+PASS malformed backup rejected
+PASS invalid restore leaves durable data unchanged
+PASS invalid restore keeps the current session usable
+PASS malformed backup rejected
+PASS invalid restore leaves durable data unchanged
+PASS invalid restore keeps the current session usable
+PASS malformed backup rejected
+PASS invalid restore leaves durable data unchanged
+PASS invalid restore keeps the current session usable
+PASS malformed backup rejected
+PASS invalid restore leaves durable data unchanged
+PASS invalid restore keeps the current session usable
+PASS database constraint failure rejects restore
+PASS transaction failure rolls back persisted data
+PASS transaction failure restores in-memory state
+PASS valid backup restores
+PASS valid restore has an independent recovery snapshot
+PASS personnel/report dependency blocks division removal
+PASS division report remains available after rejected removal
+PASS unused reference can be added
+PASS report schedule can reference a type
+PASS report schedule dependency blocks type removal
+PASS workflow draft creates
+PASS workflow dependency blocks type removal
+PASS staff division update saves
+PASS regional responsibility saves
+PASS server overrides logger division with designated personnel division
+PASS large ordinary threshold stays on a working day
+PASS ordinary and recurring reports use the same overflow
+PASS legacy inactive focal cannot receive new forwarded work
+PASS rejected registration creates no record or sequence
+81 passed, 0 failed

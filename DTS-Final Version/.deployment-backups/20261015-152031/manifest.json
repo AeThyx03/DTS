@@ -1,0 +1,38 @@
+{
+  "target": "C:\\Users\\reymo\\Documents\\GitHub\\DTS\\DTS-Final Version",
+  "backup": "D:\\test server\\staging-dts\\New folder\\dts-final version-workflow\\DTS-Final Version\\.deployment-backups\\20261015-152031",
+  "source": "D:\\test server\\staging-dts\\New folder\\dts-final version-workflow\\DTS-Final Version",
+  "processId": 27884,
+  "files": [
+    {
+      "beforeHash": "54B448696A84D28BB1C3F146765AA6681D1F21FC7CFA6FB7F09EE50C7ED2D411",
+      "file": "server.js",
+      "sourceHash": "63A7993167E0FD0E39C687A4B7F4C70B381C438CA3BF4E965B7D37C66A9BE0FD"
+    },
+    {
+      "beforeHash": "83471835E93AA9D78FBB246A44ED96F842C47200338F442068BAE8DDA39FFCC9",
+      "file": "public\\index.html",
+      "sourceHash": "B0458D7C09E9A589B6FA623A6A1DA1E8404DCF8ECE34E4D3369BF7A2128F44BB"
+    },
+    {
+      "beforeHash": "F2D9E9EBBC97E8297B7C651E2564062AA5AB2AC329F8C0ED321AAD3BFFA5A48F",
+      "file": "public\\client.js",
+      "sourceHash": "89E08CACB12C4E5209037C65E06293CE69A4A01A2CCC4365841C869F71B7A687"
+    },
+    {
+      "beforeHash": "A3174AD36FF2C2DD888BADEBB7F8865E5024461BAD120F69F07C6573CA9E7297",
+      "file": "public\\schedule.js",
+      "sourceHash": "B917FEAB6613F4A8E7B37335F8294CF41A79DC5E19EFA5BA123ED7497B02BDFD"
+    },
+    {
+      "beforeHash": null,
+      "file": "public\\ux.js",
+      "sourceHash": "F1EC75B7961A9B0BE407BD1BECE1AF0F1062B4321CA86198BCCEDB5F5CD209E6"
+    },
+    {
+      "beforeHash": null,
+      "file": "public\\ux.css",
+      "sourceHash": "2A33EA53CCDF871813C26457E251F5F7CCBA8344E2499690A89B77661BBEB5A3"
+    }
+  ]
+}

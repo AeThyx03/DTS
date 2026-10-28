@@ -75,7 +75,7 @@ function spActionHTML(u){
 /* ---------- one report: details, completion, reassignment ---------- */
 function spWorkflowDoc(i,u){
  const w=i.workflow||{},active=srActiveAssign(i),mine=active.some(a=>a.userId===u.id),assignee=w.assignee||(w.status==='processing'&&mine?u.id:(active[0]||{}).userId)||'';
- return Object.assign({},i,{id:i.id,trackNo:'SR-'+i.year+'-'+String(i.month).padStart(2,'0'),receivedAt:i.generatedAt||i.clockStart,commType:'Special Report',source:'System generated',refNo:'',subject:i.title,docType:'Special Report',division:w.division||i.division||(S.users.find(x=>x.id===assignee)||{}).division||'',pages:'',priority:'Normal',region:'',reportingPeriod:i.periodLabel,remarks:'',txType:'Special Report',dueAt:i.dueAt,clockStart:i.clockStart,stopAt:w.stopAt||null,status:w.status||(i.status==='completed'?'out':'processing'),stageEnteredAt:w.stageEnteredAt||i.generatedAt,assignee:assignee,assignedBy:w.assignedBy||'System',reviewer:w.reviewer||'',createdBy:'System',history:w.history||[],comments:w.comments||[],cycles:w.cycles||0,returnedFrom:w.returnedFrom||null,clearedBy:w.clearedBy||'',clearedTier:w.clearedTier||'',outBy:w.outBy||'',outTo:w.outTo||'',outType:w.outType||'',outRemarks:w.outRemarks||''});
+ return Object.assign({},i,{id:i.id,trackNo:'SR-'+i.year+'-'+String(i.month).padStart(2,'0'),receivedAt:i.generatedAt||i.clockStart,commType:'Special Report',source:'System generated',refNo:'',subject:i.title,docType:'Special Report',division:w.division||i.division||reportingDivision(i,true),reportingDivision:reportingDivision(i,true),pages:'',priority:'Normal',region:'',reportingPeriod:i.periodLabel,remarks:'',txType:'Special Report',dueAt:i.dueAt,clockStart:i.clockStart,stopAt:w.stopAt||(i.status==='completed'?i.stopAt:null)||null,outAt:w.outAt||(i.status==='completed'?i.stopAt:null)||null,clearedAt:w.clearedAt||null,status:w.status||(i.status==='completed'?'out':'processing'),stageEnteredAt:w.stageEnteredAt||i.generatedAt,assignee:assignee,assignedBy:w.assignedBy||'System',reviewer:w.reviewer||'',createdBy:'System',history:w.history||[],comments:w.comments||[],cycles:w.cycles||0,returnedFrom:w.returnedFrom||null,clearedBy:w.clearedBy||'',clearedTier:w.clearedTier||'',outBy:w.outBy||'',outTo:w.outTo||'',outType:w.outType||'',outRemarks:w.outRemarks||''});
 }
 function spActionPanel(i,u){
  const d=spWorkflowDoc(i,u);
@@ -95,23 +95,28 @@ function spDetail(id){
  <h4 style="margin:14px 0 6px">Assignment history</h4><div class="tw"><table class="tbl"><thead><tr><th>Person</th><th>Status</th><th>Assigned</th><th>Ended</th></tr></thead><tbody>${hist}</tbody></table></div></div>`;
  openModal('Special Report',body,{wide:1,foot:(has(u,'report.print')?`<button class="btn" data-act="printSlip" data-id="sr-${esc(i.id)}">${ic('print')}Print routing slip</button>`:'')+'<button class="btn" data-act="closeModal">Close</button>'+(admin?`<button class="btn" data-act="spReassign" data-id="${esc(i.id)}">Reassign</button>`:'')});
 }
+let spPickerSequence=0;
+const spPersonnelLabel=user=>user.name+' - '+roleName(user.role)+' - '+(user.division||'No division');
 function spPicker(selected,name){
- const users=spActiveUsers(),positions=['staff','focal','supervisor','div_manager','dept_manager','admin_staff'];
- const divisions=[...S.divisions.map(d=>d.code),...new Set(users.map(x=>x.division).filter(d=>d&&!S.divisions.some(v=>v.code===d)).sort((a,b)=>a.localeCompare(b)))];
- if(users.some(x=>!x.division))divisions.push('');
- const list=divisions.map(code=>{
-  const people=users.filter(x=>(x.division||'')===code);if(!people.length)return '';
-  const roles=[...positions.filter(role=>people.some(x=>x.role===role)),...new Set(people.map(x=>x.role).filter(role=>!positions.includes(role)).sort())];
-  return `<section class="sr-pick-division"><h4>${esc(code||'No division')}</h4>${roles.map(role=>`<div class="sr-pick-role"><h5>${esc(roleName(role))}</h5>${people.filter(x=>x.role===role).map(x=>`<label class="sr-pick-person"><input type="checkbox" data-u="${esc(x.id)}"${selected.includes(x.id)?' checked':''}><span>${esc(x.name)}</span></label>`).join('')}</div>`).join('')}</section>`;
- }).join('');
- return `<div class="sr-pick" data-pick="${name}">${list}</div>`;
+ const users=spActiveUsers(),id='srPersonnel'+(++spPickerSequence),count=users.filter(user=>selected.includes(user.id)).length;
+ const list=users.map(user=>{const label=spPersonnelLabel(user);return `<label class="sr-pick-person" data-person-row data-search="${esc(label.toLocaleLowerCase())}"><input type="checkbox" name="sr-person-${esc(user.id)}" data-chg="spPickPerson" data-u="${esc(user.id)}"${selected.includes(user.id)?' checked':''}><span>${esc(label)}</span></label>`;}).join('');
+ return `<div class="sr-personnel" data-pick="${esc(name)}"><div class="sr-pick-search" data-transient><input id="${id}" type="search" list="${id}Suggestions" data-inp="spPickSearch" placeholder="Search name, role or division…" aria-label="Search personnel" aria-describedby="${id}Count" autocomplete="off" spellcheck="false"><button type="button" class="btn sm" data-act="spPickClear" aria-label="Clear personnel search">Clear</button><datalist id="${id}Suggestions">${users.map(user=>`<option value="${esc(spPersonnelLabel(user))}"></option>`).join('')}</datalist></div><p class="hint sr-pick-count" id="${id}Count" data-pick-count role="status" aria-live="polite">${count} selected · ${users.length} personnel</p><div class="sr-pick sr-personnel-list">${list}<p class="hint sr-pick-empty" data-pick-empty${users.length?' hidden':''}>No active personnel available.</p></div><p class="hint">Type to see matching names and suggestions, then tick a person. Selected names stay checked when you search again.</p></div>`;
+}
+function spFilterPersonnel(root){
+ if(!root)return;
+ const input=$('[data-inp=spPickSearch]',root),query=input.value.trim().toLocaleLowerCase(),terms=query.split(/\s+/).filter(Boolean);
+ let matches=0;
+ $$('[data-person-row]',root).forEach(row=>{row.hidden=!terms.every(term=>row.dataset.search.includes(term));if(!row.hidden)matches++;});
+ const selected=$$('input[data-u]:checked',root).length;
+ $('[data-pick-count]',root).textContent=selected+' selected · '+matches+(query?' matching':'')+' personnel';
+ const empty=$('[data-pick-empty]',root);empty.hidden=matches>0;empty.textContent=query?'No personnel match your search. Clear it or try another name.':'No active personnel available.';
 }
 const spPicked=root=>$$('input[data-u]:checked',root).map(x=>x.dataset.u);
 
 /* ---------- administrator: Special Reports ---------- */
 function spSchedRow(c){
  const who=spCfgWho(c),issue=c.issue&&c.issue.text;
- return `<tr><td class="b">${esc(c.name)}${c.docType?'<div class="hint">Document type: '+esc(c.docType)+'</div>':''}${issue?'<div class="hint" style="color:var(--bad)">Not generated: '+esc(issue)+'</div>':''}</td>
+ return `<tr class="click" data-act="spCfgForm" data-id="${esc(c.id)}" tabindex="0" aria-label="Edit ${esc(c.name)}"><td class="b">${esc(c.name)}${c.docType?'<div class="hint">Document type: '+esc(c.docType)+'</div>':''}${issue?'<div class="hint" style="color:var(--bad)">Not generated: '+esc(issue)+'</div>':''}</td>
  <td>${esc(srFreqName(c.frequency))}<div class="hint">Generates day ${Number(c.generationDay)||1}</div></td><td>${esc(srMonthsLabel(c.months))}</td><td>${esc(c.threshold)} working days</td><td>${esc((SR_BASES.find(b=>b[0]===c.basis)||[0,c.basis])[1])}</td>
  <td>${who?esc(who):badge('warn','Nobody assigned')}</td><td>${c.active?badge('ok','Active'):badge('neu','Inactive')}</td>
  <td class="right nowrap"><button class="btn sm" data-act="spCfgForm" data-id="${esc(c.id)}">Edit</button> <button class="btn sm" data-act="spCfgToggle" data-id="${esc(c.id)}">${c.active?'Deactivate':'Activate'}</button></td></tr>`;
@@ -139,7 +144,7 @@ function spConfigPage(embedded=false){
   body=`<div class="fbar" style="margin-bottom:12px"><select data-chg="spFilter" data-k="fStatus" aria-label="Status"><option value="">Any status</option>${opt('pending','Pending',SP.fStatus==='pending')}${opt('over','Overdue',SP.fStatus==='over')}${opt('completed','Completed',SP.fStatus==='completed')}</select><select data-chg="spFilter" data-k="fCfg" aria-label="Special Report"><option value="">All Special Reports</option>${cf.map(c=>opt(c.id,c.name,SP.fCfg===c.id)).join('')}</select></div>
   <div class="tw"><table class="tbl"><thead><tr><th>Report</th><th>Period</th><th>Assigned to</th><th>Generated</th><th>Deadline</th><th>Status</th><th class="right">Actions</th></tr></thead><tbody>${spGenRows(list.slice(0,200))}</tbody></table></div><p class="hint" style="margin-top:10px">${plural(list.length,'report')}${list.length>200?' (latest 200 shown)':''}. Special Reports are created by the system; they cannot be logged or deleted by hand.</p>`;
  }
- const head=embedded?'':`<div class="pagehead"><div><h1>Special Reports</h1><p>Mandatory recurring reports the system creates by itself on the schedules below. Each one appears on the Dashboard and in the For My Action list of the people assigned to it.</p></div></div>`;
+ const head=embedded?'':`<div class="pagehead"><div><h1>Special Reports</h1><p>Mandatory recurring reports the system creates by itself on the schedules below. Each one appears on Department overview and in My work for the people assigned to it.</p></div></div>`;
  return `${embedded?'':'<div class="wrap">'}${head}<div class="row" style="justify-content:flex-end;margin:0 0 10px"><button class="btn" data-act="spRun">${ic('regular')}Run generation now</button><button class="btn primary" data-act="spCfgForm">${ic('plus')}Add Special Report</button></div><div class="tabs" role="tablist">${tab('sched','Schedules')}${tab('gen','Generated reports')}</div>${body}${embedded?'':'</div>'}`;
 }
 const SP_FREQ_HINT={monthly:'Generated every month: all twelve months apply.',quarterly:'Four months, three months apart. Each report covers the three months ending in that month (for example March covers January–March).',specific:'Tick exactly the months that apply. Nothing is generated for the other months.',annual:'One month only. The report covers the twelve months ending in it.'};
@@ -156,7 +161,7 @@ function spCfgFormOpen(c){
  <div class="g2"><div class="fld"><label>Deadline threshold</label><input name="threshold" type="number" min="1" max="60" step="1" value="${esc(cur.threshold)}" placeholder="e.g. 20"></div>
  <div class="fld"><label>Deadline basis</label><select name="basis">${SR_BASES.map(b=>opt(b[0],b[1],b[0]===cur.basis)).join('')}</select></div></div>
  <p class="hint" style="margin:-6px 0 12px">The deadline is that many working days counted from the 1st of the month after the reporting month. Weekends and the holidays under Reference lists are not counted. If the count is longer than the month, it carries into the next month.</p>
- <div class="fld"><label>Assigned to — personnel</label>${spPicker(cur.assignUsers||[],'users')}<p class="hint">Everyone ticked receives the report in For My Action. It is still ONE report; any one of them can complete it.</p></div>
+ <div class="fld"><label>Assigned to — personnel</label>${spPicker(cur.assignUsers||[],'users')}<p class="hint">Everyone ticked receives the report in My work. It is still ONE report; any one of them can complete it.</p></div>
  <div class="fld"><label>Assigned to — division focal (optional)</label><div class="sr-pick sr-pick-s" data-pick="divs">${S.divisions.map(d=>`<label class="chk"><input type="checkbox" data-d="${esc(d.code)}"${(cur.assignDivisions||[]).includes(d.code)?' checked':''}> ${esc(d.code)} <small class="muted">${esc(d.focal?uname(d.focal):'no focal set')}</small></label>`).join('')}</div><p class="hint">The division’s focal at the time each report is generated.</p></div>
  <div class="g2"><div class="fld"><label>First reporting period to generate</label><input name="fromPeriod" type="month" value="${esc(cur.fromPeriod||'')}"><p class="hint">Reports for earlier periods are not created. Leave blank to start with last month. Choose an earlier month to create reports that were missed.</p></div>
  <div class="fld"><label>Related document type (optional)</label><select name="docType"><option value="">None</option>${S.refs.doc.map(d=>opt(d.name,d.name,d.name===cur.docType)).join('')}</select><p class="hint">For reference only. It does not change that type’s own deadline.</p></div></div></div>`;
@@ -169,6 +174,9 @@ function spReadCfg(f){
 }
 
 function spInstall(){
+ INPUTS.spPickSearch=t=>spFilterPersonnel(t.closest('[data-pick]'));
+ CHANGES.spPickPerson=t=>spFilterPersonnel(t.closest('[data-pick]'));
+ ACTIONS.spPickClear=t=>{const root=t.closest('[data-pick]'),input=$('[data-inp=spPickSearch]',root);input.value='';spFilterPersonnel(root);input.focus();};
  VIEWS.spconfig=()=>{UI.refTab='special';return VIEWS.refs();};
  ACTIONS.spTab=(t)=>{SP.tab=t.dataset.k;render();};
  CHANGES.spFilter=(t)=>{SP[t.dataset.k]=t.value;render();};
@@ -224,7 +232,7 @@ function spInstall(){
  };
  ACTIONS.spReassign=(t)=>{
   const i=spItems().find(x=>x.id===t.dataset.id);if(!i||!spCan()||i.status!=='pending')return;
-  openModal('Reassign Special Report',`<div data-form="srre" data-id="${esc(i.id)}"><p style="margin-bottom:10px"><b>${esc(i.title)}</b><br><span class="muted">Now with: ${esc(spWho(i))}</span></p><div class="fld"><label>Responsible personnel</label>${spPicker(srActiveAssign(i).map(a=>a.userId),'users')}<p class="hint">People you untick stop seeing it in For My Action (their history stays). People you tick receive it. It remains the same report.</p></div><div class="fld"><label>Reason (optional)</label><input name="note" maxlength="300" placeholder="e.g. on leave"></div></div>`,
+  openModal('Reassign Special Report',`<div data-form="srre" data-id="${esc(i.id)}"><p style="margin-bottom:10px"><b>${esc(i.title)}</b><br><span class="muted">Now with: ${esc(spWho(i))}</span></p><div class="fld"><label>Responsible personnel</label>${spPicker(srActiveAssign(i).map(a=>a.userId),'users')}<p class="hint">People you untick stop seeing it in My work (their history stays). People you tick receive it. It remains the same report.</p></div><div class="fld"><label>Reason (optional)</label><input name="note" maxlength="300" placeholder="e.g. on leave"></div></div>`,
    {wide:1,foot:'<button class="btn" data-act="closeModal">Cancel</button><button class="btn primary" data-act="spReassignSave">Reassign</button>'});
  };
  ACTIONS.spReassignSave=async(t)=>{

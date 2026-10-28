@@ -22,7 +22,7 @@ async function ctxFor(browser, o) {
 async function openPage(ctx, user, pw, hash) {
   const p = await ctx.newPage();
   p.on('pageerror', e => errors.push('pageerror: ' + e.message));
-  p.on('dialog', d => { errors.push('DIALOG (script ran!): ' + d.message()); d.dismiss(); });
+  p.on('dialog', d => { if (d.type() === 'confirm' && d.message().startsWith('Discard unsaved changes')) return d.accept(); errors.push('DIALOG (script ran!): ' + d.message()); d.dismiss(); });
   p.on('console', m => { if (m.type() === 'error' && !/fonts|ERR_FAILED|Failed to load resource/.test(m.text())) errors.push('console: ' + m.text()); });
   await p.goto(B); await p.fill('#lu', user || 'admin'); await p.fill('#lp', pw || 'Admin@2026'); await p.click('button[type=submit]'); await p.waitForSelector('.shell');
   await p.goto(B + (hash || '/#/schedule')); await p.waitForSelector('#calBody');
@@ -243,7 +243,9 @@ const overflowX = p => p.evaluate(() => { const v = document.querySelector('#vie
   await p.click('.nav a[data-r=dashboard]'); await p.waitForSelector('.tiles, .kts, #regBody, .card');
   ok('Dashboard still opens', /Dashboard|Document|documents/i.test(await p.locator('.view').innerText()));
   for (const r of ['action', 'regular', 'analytics', 'graphs', 'reports', 'users', 'roles', 'divisions', 'refs', 'settings', 'audit']) {
-    await p.click('.nav a[data-r=' + r + ']').catch(() => {}); await p.waitForTimeout(150);
+    if (await p.locator('.nav a[data-r=' + r + ']').count()) await p.click('.nav a[data-r=' + r + ']');
+    else await p.evaluate(route => go(route), r); // Legacy report links resolve through the router.
+    await p.waitForTimeout(150);
     ok('existing page "' + r + '" still renders without an error message', !/could not be displayed/.test(await p.locator('.view').innerText()));
   }
   await p.click('.nav a[data-r=audit]'); await p.waitForTimeout(500);

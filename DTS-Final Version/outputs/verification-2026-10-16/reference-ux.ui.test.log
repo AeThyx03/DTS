@@ -1,0 +1,58 @@
+PASS transactions Add action is above its table
+PASS transactions has no duplicate bottom creation form
+PASS transactions Add opens its dialog
+PASS empty transaction is rejected in the dialog
+PASS transactions dialog saves its record
+PASS documents Add action is above its table
+PASS documents has no duplicate bottom creation form
+PASS documents Add opens its dialog
+PASS documents dialog saves its record
+PASS communications Add action is above its table
+PASS communications has no duplicate bottom creation form
+PASS communications Add opens its dialog
+PASS communications dialog saves its record
+PASS leave Add action is above its table
+PASS leave has no duplicate bottom creation form
+PASS leave Add opens its dialog
+PASS leave dialog saves its record
+PASS holidays Add action is above its table
+PASS holidays has no duplicate bottom creation form
+PASS holidays Add opens its dialog
+PASS rejected holiday save retains entered values
+PASS rejected holiday does not alter confirmed state
+PASS holidays dialog saves its record
+PASS designations Add action is above its table
+PASS designations has no duplicate bottom creation form
+PASS designations Add opens its dialog
+PASS designations dialog saves its record
+PASS holidays table expands without an inner vertical scrollbar
+PASS holidays displays every existing row
+PASS designations table expands without an inner vertical scrollbar
+PASS designations displays every existing row
+PASS Special Report column 1 opens the correct edit dialog
+PASS Special Report column 2 opens the correct edit dialog
+PASS Special Report column 3 opens the correct edit dialog
+PASS Special Report column 4 opens the correct edit dialog
+PASS Special Report column 5 opens the correct edit dialog
+PASS Special Report column 6 opens the correct edit dialog
+PASS Special Report column 7 opens the correct edit dialog
+PASS Special Report column 8 opens the correct edit dialog
+PASS Edit button remains independent and opens only once
+PASS Special Report row supports Enter
+PASS Special Report row supports Space
+PASS Activate/Deactivate changes status without opening edit
+PASS status button still restores the original status
+PASS transactions remains within mobile width
+PASS transactions creation dialog fits mobile
+PASS documents remains within mobile width
+PASS documents creation dialog fits mobile
+PASS communications remains within mobile width
+PASS communications creation dialog fits mobile
+PASS leave remains within mobile width
+PASS leave creation dialog fits mobile
+PASS holidays remains within mobile width
+PASS holidays creation dialog fits mobile
+PASS designations remains within mobile width
+PASS designations creation dialog fits mobile
+PASS no uncaught JavaScript errors
+57 passed, 0 failed

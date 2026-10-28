@@ -1,0 +1,48 @@
+PASS dashboard uses available desktop width
+PASS dashboard desktop overflow stays within its content
+PASS cmed uses available desktop width
+PASS cmed desktop overflow stays within its content
+PASS cmsd uses available desktop width
+PASS cmsd desktop overflow stays within its content
+PASS schedule uses available desktop width
+PASS schedule desktop overflow stays within its content
+PASS reports uses available desktop width
+PASS reports desktop overflow stays within its content
+PASS users uses available desktop width
+PASS users desktop overflow stays within its content
+PASS roles uses available desktop width
+PASS roles desktop overflow stays within its content
+PASS delegation uses available desktop width
+PASS delegation desktop overflow stays within its content
+PASS divisions uses available desktop width
+PASS divisions desktop overflow stays within its content
+PASS refs uses available desktop width
+PASS refs desktop overflow stays within its content
+PASS settings uses available desktop width
+PASS settings desktop overflow stays within its content
+PASS workflow uses available desktop width
+PASS workflow desktop overflow stays within its content
+PASS audit uses available desktop width
+PASS audit desktop overflow stays within its content
+PASS analytics uses available desktop width
+PASS analytics desktop overflow stays within its content
+PASS graphs uses available desktop width
+PASS graphs desktop overflow stays within its content
+PASS schedule summary spans the calendar width
+PASS dashboard fits mobile page width
+PASS cmed fits mobile page width
+PASS cmsd fits mobile page width
+PASS schedule fits mobile page width
+PASS reports fits mobile page width
+PASS users fits mobile page width
+PASS roles fits mobile page width
+PASS delegation fits mobile page width
+PASS divisions fits mobile page width
+PASS refs fits mobile page width
+PASS settings fits mobile page width
+PASS workflow fits mobile page width
+PASS audit fits mobile page width
+PASS analytics fits mobile page width
+PASS graphs fits mobile page width
+PASS no browser JavaScript errors
+47 passed, 0 failed

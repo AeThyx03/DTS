@@ -1,0 +1,27 @@
+{
+  "CompletedAt": "2026-10-16T09:08:32.2636735+08:00",
+  "Removed": [
+    {
+      "Path": "D:\\test server\\staging-dts\\New folder\\dts-final version-workflow\\DTS-Final Version\\.test-runs",
+      "Files": 1957,
+      "Bytes": 351198046.0
+    },
+    {
+      "Path": "D:\\test server\\staging-dts\\New folder\\dts-final version-workflow\\DTS-Final Version\\public\\workflow.before-designer.bak",
+      "Files": 1,
+      "Bytes": 15522.0
+    },
+    {
+      "Path": "D:\\test server\\staging-dts\\New folder\\dts-final version-workflow\\DTS-Final Version\\outputs\\01a13ce9-5764-7a21-9407-956bbec1ab43\\DTS-Partial-and-Missing-Features.xlsx.inspect.ndjson",
+      "Files": 1,
+      "Bytes": 413509.0
+    }
+  ],
+  "Files": 1959.0,
+  "Bytes": 351627077.0,
+  "RemovedJunction": "D:\\test server\\staging-dts\\New folder\\dts-final version-workflow\\DTS-Final Version\\.test-runs\\feature-workbook-20261015\\node_modules",
+  "Verification": "Latest suite logs and results retained in outputs/verification-2026-10-16; runtime data and recovery backups retained.",
+  "ExternalDependencyTargetPresent": true,
+  "ExternalDependencyVerificationFile": "C:\\Users\\reymo\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\node_modules\\playwright\\package.json",
+  "ExternalDependencyVerificationSHA256": "CA170EC143A88ED3043AC953EB3B2377B2B97304104F4E1E23316684CE2C35AF"
+}

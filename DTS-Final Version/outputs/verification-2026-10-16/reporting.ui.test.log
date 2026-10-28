@@ -1,0 +1,215 @@
+PASS anonymous division requests require sign-in
+PASS administrator signs in
+PASS fixture restore uses only isolated data
+PASS CMED server response contains only assigned CMED documents
+PASS CMSD server response follows assignee and unassigned stored ownership
+PASS CMED includes its blank-division Special Report once
+PASS CMSD includes only its own Special Report
+PASS mixed and unresolved ownership is excluded
+PASS scoped response retains stored document division
+PASS invalid division cannot request broader reporting
+PASS empty division is rejected
+PASS shared state retains every record
+PASS report reads do not update stored ownership
+PASS CMED and CMSD each have one distinct sidebar destination
+PASS sidebar has no duplicate Regular Reports or reporting tabs
+PASS CMED has Regular Reports, documents and one combined metric tab
+PASS opening CMED defaults to its document list
+PASS CMED sidebar active state is correct
+PASS Consolidated CMR/PPR tab is retained
+PASS regular region drilldown keeps the division scope
+PASS CMED Special Reports table is scoped
+PASS Special Report workflow detail still opens
+PASS legacy Regular Reports navigation resolves to CMED
+PASS CMED documents includes only its scoped documents and Special Reports
+PASS CMED list initially shows all shared registry columns
+PASS CMED list includes saved views and preview controls
+PASS CMED list cannot change its locked division
+PASS CMED search finds tracking numbers
+PASS CMED list prints the filtered records with its division label
+PASS CMED CSV retains the shared full column set
+PASS CMED CSV excludes CMSD documents
+PASS CMED selection remains scoped
+PASS CMED document details retain the CMED navigation context
+PASS back to CMED restores its search and selection
+PASS CMED preview uses the shared drawer
+PASS CMED search does not expose CMSD records
+PASS clearing CMED filters keeps its scope locked
+PASS CMED advanced filters work
+PASS CMED column visibility is configurable
+PASS CMED search survives reload
+PASS CMSD retains independent search and selections
+PASS CMED restores its own search when switching divisions
+PASS turnaround keeps the original working-day calculation
+PASS CMED report contains no CMSD grouping
+PASS merged report contains both metric columns
+PASS division print output retains both metrics
+PASS division CSV retains division filename
+PASS division CSV does not leak CMSD rows
+PASS legacy metric URLs open the merged report
+PASS on-time rate retains its original numerator and denominator
+PASS metric date filter is applied
+PASS CMSD turnaround excludes CMED
+PASS CMSD on-time calculation is independent
+PASS CMSD has documents and one combined report
+PASS create isolated CMSD registry fixture 0
+PASS create isolated CMSD registry fixture 1
+PASS create isolated CMSD registry fixture 2
+PASS create isolated CMSD registry fixture 3
+PASS create isolated CMSD registry fixture 4
+PASS create isolated CMSD registry fixture 5
+PASS create isolated CMSD registry fixture 6
+PASS create isolated CMSD registry fixture 7
+PASS create isolated CMSD registry fixture 8
+PASS create isolated CMSD registry fixture 9
+PASS create isolated CMSD registry fixture 10
+PASS create isolated CMSD registry fixture 11
+PASS create isolated CMSD registry fixture 12
+PASS create isolated CMSD registry fixture 13
+PASS create isolated CMSD registry fixture 14
+PASS create isolated CMSD registry fixture 15
+PASS create isolated CMSD registry fixture 16
+PASS create isolated CMSD registry fixture 17
+PASS create isolated CMSD registry fixture 18
+PASS create isolated CMSD registry fixture 19
+PASS create isolated CMSD registry fixture 20
+PASS create isolated CMSD registry fixture 21
+PASS create isolated CMSD registry fixture 22
+PASS create isolated CMSD registry fixture 23
+PASS create isolated CMSD registry fixture 24
+PASS CMSD documents defaults to all scoped records
+PASS CMSD registry exposes every existing column
+PASS CMSD registry has the shared saved-view and preview controls
+PASS CMSD source cannot be unlocked with a division selector
+PASS CMSD pagination reaches the next page
+PASS CMSD page size uses the shared control
+PASS CMSD search finds tracking codes
+PASS CMSD registry print remains scoped and labelled
+PASS CMSD registry CSV downloads the complete shared column set
+PASS CMSD selection uses the shared selection controller
+PASS CMSD column visibility is configurable
+PASS CMSD document opens the original workflow view
+PASS CMSD document keeps its sidebar context
+PASS back navigation restores CMSD search and selection
+PASS CMSD preview uses the shared document drawer
+PASS CMSD search never exposes a CMED document
+PASS clearing filters keeps CMSD scope locked
+PASS CMSD advanced status filter works
+PASS CMSD sort uses the existing comparator
+PASS CMSD batch forward reaches the existing workflow API
+PASS CMSD filters and columns do not overwrite the department registry
+PASS CMSD registry state is restored independently
+PASS CMSD search survives reload
+PASS Insights opens Analytics with only Analytics and Charts tabs
+PASS Operational Reports has no navigation entry or redundant view
+PASS legacy Reports URL still opens Analytics
+PASS analytics still includes the complete authorized receipt cohort
+PASS analytics print and CSV controls live in the report toolbar
+PASS desktop report toolbar stays compact
+PASS analytics print still contains tables
+PASS analytics CSV downloads
+PASS charts retain all eight chart panels
+PASS charts print is in the same toolbar
+PASS chart release counts include ordinary and Special Report release dates
+PASS chart print retains volume and legends
+PASS cmed/regular fits 1440px
+PASS cmed/documents fits 1440px
+PASS cmed/performance fits 1440px
+PASS cmsd/documents fits 1440px
+PASS cmsd/performance fits 1440px
+PASS analytics/ fits 1440px
+PASS graphs/ fits 1440px
+PASS schedule/ fits 1440px
+PASS cmed/regular fits 1024px
+PASS cmed/documents fits 1024px
+PASS cmed/performance fits 1024px
+PASS cmsd/documents fits 1024px
+PASS cmsd/performance fits 1024px
+PASS analytics/ fits 1024px
+PASS graphs/ fits 1024px
+PASS schedule/ fits 1024px
+PASS cmed/regular fits 390px
+PASS cmed/documents fits 390px
+PASS cmed/performance fits 390px
+PASS cmsd/documents fits 390px
+PASS cmsd/performance fits 390px
+PASS analytics/ fits 390px
+PASS graphs/ fits 390px
+PASS schedule/ fits 390px
+PASS Personnel Schedule remains accessible
+PASS dcruz signs in
+PASS dcruz server scope CMED
+PASS dcruz server scope CMSD
+PASS dcruz sidebar access CMED
+PASS dcruz sidebar access CMSD
+PASS dcruz direct route is guarded
+PASS caprochevado signs in
+PASS caprochevado server scope CMED
+PASS caprochevado server scope CMSD
+PASS caprochevado sidebar access CMED
+PASS caprochevado sidebar access CMSD
+PASS caprochevado direct route is guarded
+PASS mtabilas signs in
+PASS mtabilas server scope CMED
+PASS mtabilas server scope CMSD
+PASS mtabilas sidebar access CMED
+PASS mtabilas sidebar access CMSD
+PASS mtabilas direct route is guarded
+PASS bnieva signs in
+PASS bnieva server scope CMED
+PASS bnieva server scope CMSD
+PASS bnieva sidebar access CMED
+PASS bnieva sidebar access CMSD
+PASS bnieva direct route is guarded
+PASS acabrera signs in
+PASS acabrera server scope CMED
+PASS acabrera server scope CMSD
+PASS acabrera sidebar access CMED
+PASS acabrera sidebar access CMSD
+PASS acabrera direct route is guarded
+PASS maquino signs in
+PASS maquino server scope CMED
+PASS maquino server scope CMSD
+PASS maquino sidebar access CMED
+PASS maquino sidebar access CMSD
+PASS maquino direct route is guarded
+PASS mmartinez signs in
+PASS mmartinez server scope CMED
+PASS mmartinez server scope CMSD
+PASS mmartinez sidebar access CMED
+PASS mmartinez sidebar access CMSD
+PASS mmartinez direct route is guarded
+PASS jvillarete signs in
+PASS jvillarete server scope CMED
+PASS jvillarete server scope CMSD
+PASS jvillarete sidebar access CMED
+PASS jvillarete sidebar access CMSD
+PASS jvillarete direct route is guarded
+PASS mpaling signs in
+PASS mpaling server scope CMED
+PASS mpaling server scope CMSD
+PASS mpaling sidebar access CMED
+PASS mpaling sidebar access CMSD
+PASS ohanova signs in
+PASS ohanova server scope CMED
+PASS ohanova server scope CMSD
+PASS ohanova sidebar access CMED
+PASS ohanova sidebar access CMSD
+PASS bcabalfin signs in
+PASS bcabalfin server scope CMED
+PASS bcabalfin server scope CMSD
+PASS bcabalfin sidebar access CMED
+PASS bcabalfin sidebar access CMSD
+PASS bcabalfin direct route is guarded
+PASS test role permissions update
+PASS staff signs in
+PASS staff without reports keeps CMED Regular Reports but no CMSD or Reports
+PASS metric tabs respect report.view while keeping both CMED record views
+PASS CMED staff without report.view retains the registry
+PASS direct metric route cannot bypass report.view
+PASS direct Charts route retains its permission guard
+PASS CMED staff cannot query CMSD even with a forged request
+PASS CMSD staff without report.view retains the document registry
+PASS CMSD staff cannot query CMED
+PASS no browser JavaScript errors
+214 passed, 0 failed

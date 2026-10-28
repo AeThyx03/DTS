@@ -1,0 +1,113 @@
+'use strict';
+// Run through run-regression.js so every mutation uses a fresh demo database.
+const assert = require('node:assert/strict');
+const { chromium } = require('playwright');
+const path = require('node:path');
+const fs = require('node:fs');
+const base = 'http://127.0.0.1:' + (process.env.PORT || 3111);
+
+(async () => {
+  const browser = await chromium.launch({ headless: true, ...(process.env.WF_BROWSER_CHANNEL ? { channel: process.env.WF_BROWSER_CHANNEL } : {}) });
+  let passed = 0, releaseSave;
+  const check = (name, value) => { assert.ok(value, name); passed++; console.log('PASS ' + name); };
+  try {
+    const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, timezoneId: 'Asia/Manila' });
+    await context.route(/fonts\.(googleapis|gstatic)\.com/, route => route.abort());
+    const page = await context.newPage(), errors = [];
+    page.on('pageerror', error => errors.push(error.message));
+    await page.goto(base);
+    await page.fill('#lu', 'admin'); await page.fill('#lp', 'Admin@2026');
+    await page.click('button[type=submit]');
+    await page.waitForSelector('.shell');
+    await page.waitForSelector('#splash', { state: 'detached' });
+    const state = async () => (await (await context.request.get(base + '/api/state')).json()).state;
+    const originalSettings = (await state()).settings;
+    await page.click('[data-r=settings]');
+    await page.fill('input[name=orgName]', 'QA Settings Office');
+    await page.fill('input[name=prefix]', 'QAX');
+    await page.fill('input[name=idleMinutes]', '45');
+    await page.fill('input[name=dueSoonDays]', '3');
+
+    let requests = 0;
+    const gate = new Promise(resolve => { releaseSave = resolve; });
+    await page.route('**/api/config/settings', async route => { requests++; await gate; await route.continue(); });
+    const pending = page.waitForRequest(request => request.method() === 'PUT' && request.url().endsWith('/api/config/settings'));
+    await page.click('[data-act=saveSettings]'); await pending;
+    check('settings save button is disabled during the request', await page.locator('[data-act=saveSettings]').isDisabled());
+    check('pending save does not show a success message', !(await page.locator('.toast').allTextContents()).includes('Settings saved.'));
+    check('pending save does not overwrite browser settings', await page.evaluate(() => S.settings.orgName) === originalSettings.orgName);
+    releaseSave(); releaseSave = null;
+    await page.waitForFunction(() => S.settings.orgName === 'QA Settings Office');
+    await page.waitForSelector('[data-act=saveSettings]:not([disabled])');
+    const saved = (await state()).settings;
+    check('settings save reaches the API exactly once', requests === 1);
+    check('settings fields persist on the server', saved.orgName === 'QA Settings Office' && saved.prefix === 'QAX' && saved.idleMinutes === 45 && saved.dueSoonDays === 3);
+    check('successful save refreshes browser settings', await page.evaluate(() => S.settings.prefix === 'QAX' && S.settings.idleMinutes === 45));
+    await page.unroute('**/api/config/settings');
+    await page.reload(); await page.waitForSelector('[data-act=saveSettings]');
+    await page.waitForSelector('#splash', { state: 'detached' });
+    check('settings survive page reload', await page.inputValue('input[name=orgName]') === 'QA Settings Office');
+
+    await page.route('**/api/config/settings', route => route.fulfill({ status: 400, contentType: 'application/json', body: JSON.stringify({ ok: false, error: 'QA rejected settings' }) }));
+    await page.fill('input[name=orgName]', 'Rejected office');
+    await page.click('[data-act=saveSettings]');
+    await page.getByText('QA rejected settings', { exact: true }).waitFor();
+    check('rejected save leaves browser and server settings intact', await page.evaluate(() => S.settings.orgName === 'QA Settings Office') && (await state()).settings.orgName === 'QA Settings Office');
+    check('rejected save does not show success', !(await page.locator('.toast').allTextContents()).includes('Settings saved.'));
+    check('rejected save re-enables the button', await page.locator('[data-act=saveSettings]').isEnabled());
+    await page.unroute('**/api/config/settings');
+    await page.route('**/api/config/settings', route => route.abort());
+    await page.click('[data-act=saveSettings]');
+    await page.getByText('Cannot reach the server. Check your connection and try again.', { exact: true }).waitFor();
+    check('network failure preserves settings and enables retry', await page.evaluate(() => S.settings.orgName === 'QA Settings Office') && await page.locator('[data-act=saveSettings]').isEnabled());
+    await page.unroute('**/api/config/settings');
+
+    const url = 'https://example.com/dts-original.pdf?record=qa&v=1';
+    const logged = await context.request.post(base + '/api/docs', { headers: { 'X-Requested-With': 'dts' }, data: { commType: 'Letter', source: 'QA Origin Office', subject: 'QA original document URL', docType: 'External Communication', division: 'CMED', url } });
+    assert.equal(logged.status(), 200); const id = (await logged.json()).id;
+    const refs = (await state()).refs;
+    const quotedName = 'QA & "Quoted" <Type>';
+    refs.comm.push({ name: quotedName, description: 'Escaping regression', active: false });
+    refs.comm.find(c => c.name === 'Letter').active = false;
+    const configured = await context.request.put(base + '/api/config/refs', { headers: { 'X-Requested-With': 'dts' }, data: { value: refs } });
+    assert.equal(configured.status(), 200);
+    await page.goto(base + '/#/refs'); await page.reload();
+    await page.waitForSelector('[data-act=refTab][data-k=communications]');
+    await page.waitForSelector('#splash', { state: 'detached' });
+    await page.click('[data-act=refTab][data-k=communications]');
+    await page.click('[data-act=commTypeForm]:not([data-i])');
+    check('new communication type modal starts with an empty name', await page.inputValue('[data-form=commtype] input[name=name]') === '');
+    await page.fill('[data-form=commtype] input[name=name]', 'QA New Communication');
+    await page.click('[data-act=saveCommType]');
+    await page.waitForFunction(() => S.refs.comm.some(c => c.name === 'QA New Communication'));
+    check('new communication type saves through the modal', (await state()).refs.comm.some(c => c.name === 'QA New Communication'));
+    await page.locator('tr').filter({ hasText: quotedName }).locator('[data-act=commTypeForm]').click();
+    check('edit communication modal displays the actual escaped name', await page.inputValue('[data-form=commtype] input[name=name]') === quotedName);
+    await page.fill('[data-form=commtype] input[name=description]', 'Updated QA description');
+    await page.click('[data-act=saveCommType]');
+    await page.waitForFunction(name => S.refs.comm.find(c => c.name === name)?.description === 'Updated QA description', quotedName);
+    check('editing description preserves the communication name', (await state()).refs.comm.some(c => c.name === quotedName && c.description === 'Updated QA description'));
+
+    await page.click('[data-r=dashboard]');
+    await page.click('[data-act=toggleMore]');
+    const filter = page.locator('select[data-k=comm]');
+    const options = await filter.locator('option').allTextContents();
+    check('communication filter renders names instead of objects', !options.some(v => v.includes('[object Object]')) && options.includes('Letter') && options.includes(quotedName));
+    await filter.selectOption('Letter');
+    const historical = (await state()).docs.filter(d => d.commType === 'Letter');
+    const shownIds = await page.locator('#regTable tr[data-act=openDoc]').evaluateAll(elements => elements.map(el => el.dataset.id));
+    check('inactive communication types still filter historical records', historical.length > 0 && shownIds.length === historical.length && shownIds.every(id => historical.some(d => d.id === id)));
+
+    await page.locator('#regTable tr[data-act=openDoc][data-id="' + id + '"]').click();
+    const originalLink = page.locator('[data-filelinks] dt').filter({ hasText: /^Original document$/ }).locator('xpath=following-sibling::dd[1]').locator('a');
+    check('document detail displays the saved original URL', await originalLink.getAttribute('href') === url);
+    check('original URL opens safely in a separate tab', await originalLink.getAttribute('target') === '_blank' && (await originalLink.getAttribute('rel')).includes('noopener'));
+    const shots = process.env.SHOTS || path.join(process.cwd(), '.test-runs', 'ui-fixes-shots');
+    fs.mkdirSync(shots, { recursive: true });
+    await page.screenshot({ path: path.join(shots, 'original-document-url.png'), fullPage: true });
+    await page.reload(); await originalLink.waitFor();
+    check('original document URL remains visible after reload', await originalLink.getAttribute('href') === url);
+    check('no browser JavaScript errors', errors.length === 0);
+    console.log(passed + ' passed, 0 failed');
+  } finally { if (releaseSave) releaseSave(); await browser.close(); }
+})().catch(error => { console.error(error); process.exitCode = 1; });

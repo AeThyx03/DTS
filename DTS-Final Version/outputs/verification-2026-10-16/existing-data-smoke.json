@@ -1,0 +1,27 @@
+{
+  "at": "2026-10-16T01:06:54.033Z",
+  "mode": "UI checks on an isolated copy of the existing SQLite database; read-only live login-page check",
+  "routes": [
+    "dashboard",
+    "action",
+    "cmed",
+    "cmsd",
+    "analytics",
+    "graphs",
+    "schedule",
+    "users",
+    "roles",
+    "divisions",
+    "refs",
+    "settings",
+    "workflows",
+    "audit"
+  ],
+  "specialReportDetail": true,
+  "mobileFits": true,
+  "uncaughtErrors": [],
+  "liveStatus": {
+    "loginVisible": true,
+    "reportingHelperLoaded": true
+  }
+}

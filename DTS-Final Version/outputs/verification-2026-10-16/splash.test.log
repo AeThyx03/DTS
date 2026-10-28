@@ -1,0 +1,36 @@
+PASS splash shows title, loading text and wait text
+PASS logo is the existing POSSD logo asset
+PASS spinner present
+PASS splash stays while the server has not answered (no fixed timer)
+PASS nothing of the app is reachable behind the splash (inert)
+PASS error state hidden while loading
+PASS splash removed after the answer
+PASS login page shown when signed out
+PASS no protected content on the login page
+PASS login still works
+PASS reload: splash first
+PASS reload: goes straight to the dashboard (session kept)
+PASS navigation works after the splash
+PASS direct link / hash route survives refresh
+PASS logout works, no splash
+PASS log back in
+PASS error state text
+PASS no technical details or toast shown
+PASS loading text hidden in error state
+PASS Retry button has keyboard focus
+PASS Retry while still failing returns to the error state
+PASS Retry (keyboard) recovers without closing the browser
+PASS unreachable server shows the error state
+PASS Retry works once the server is back
+PASS 1920x1080: card centered and fully inside the window
+PASS 1600x900: card centered and fully inside the window
+PASS 1366x768: card centered and fully inside the window
+PASS reduced motion: spinner is static and the text still explains
+PASS 1280x720: card centered and fully inside the window
+PASS 1024x600: card centered and fully inside the window
+PASS 800x600: card centered and fully inside the window
+PASS splash needs nothing outside localhost (only the fonts link already in the page may be external)
+PASS splash fades (opacity transition), then is removed
+PASS no JavaScript errors
+
+34 passed, 0 failed

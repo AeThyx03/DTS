@@ -1,0 +1,2278 @@
+{
+  "title": "DTS Staff Showcase Script and Storyboard",
+  "language": "Taglish",
+  "audience": "Enrolled staff, supervisors, focals and managers",
+  "date": "2026-10-16",
+  "format": "1920x1080",
+  "fps": 30,
+  "master_duration_seconds": 1920,
+  "short_duration_seconds": 180,
+  "narration_wpm": 130,
+  "status": "Production planning package; video not rendered",
+  "hyperframes_usage": "Unknown: CLI not present in local cache",
+  "scenes": [
+    {
+      "id": "S01",
+      "title": "Ano ang kayang sagutin ng DTS",
+      "chapter": "Orientation",
+      "role": "Presenter",
+      "route": "#/dashboard",
+      "duration": 60,
+      "voiceover": [
+        "Kapag may nagtanong kung nasaan na ang isang document, ano ang una nating ginagawa? Hinahanap ba natin ang huling message, tumatawag sa ibang desk, o chine-check ang isang listahang hindi na updated?",
+        "Sa Document Tracking and Routing System, may isang record na susundan natin mula pagtanggap, assignment, processing at review, hanggang clearance at release. Makikita kung kanino ang current action at ano ang susunod na hakbang.",
+        "Sa demo na ito, actual screens at sample records ang gagamitin natin. Ipapakita rin ang regular reports, personnel schedules, monitoring tools at administrative controls na sumusuporta sa araw-araw na trabaho."
+      ],
+      "actions": [
+        "Show the actual Department overview; hold a sample tracking number in an editorial callout.",
+        "Highlight current desk, deadline and status on one sample record.",
+        "Show the chapter roadmap; keep the same document identifier through the lifecycle scenes."
+      ],
+      "overlay": "Nasaan na ang document at sino ang kikilos",
+      "layout": "hero",
+      "presenter_note": "Use a clearly labelled demonstration record. Do not invent a reduced processing time or savings figure.",
+      "evidence": [
+        "E01",
+        "E02",
+        "E03"
+      ],
+      "start": 0,
+      "end": 60,
+      "timecode": "00:00-01:00",
+      "voiceover_words": 96,
+      "estimated_spoken_seconds": 44,
+      "demo_hold_seconds": 16,
+      "shots": [
+        {
+          "id": "S01-1",
+          "start": 0,
+          "end": 20,
+          "action": "Show the actual Department overview; hold a sample tracking number in an editorial callout.",
+          "voiceover": "Kapag may nagtanong kung nasaan na ang isang document, ano ang una nating ginagawa? Hinahanap ba natin ang huling message, tumatawag sa ibang desk, o chine-check ang isang listahang hindi na updated?",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S01-2",
+          "start": 20,
+          "end": 40,
+          "action": "Highlight current desk, deadline and status on one sample record.",
+          "voiceover": "Sa Document Tracking and Routing System, may isang record na susundan natin mula pagtanggap, assignment, processing at review, hanggang clearance at release. Makikita kung kanino ang current action at ano ang susunod na hakbang.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S01-3",
+          "start": 40,
+          "end": 60,
+          "action": "Show the chapter roadmap; keep the same document identifier through the lifecycle scenes.",
+          "voiceover": "Sa demo na ito, actual screens at sample records ang gagamitin natin. Ipapakita rin ang regular reports, personnel schedules, monitoring tools at administrative controls na sumusuporta sa araw-araw na trabaho.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        }
+      ],
+      "capture_status": "Capture planned; reference stills are not final footage",
+      "reference_image": "assets/capture-S01.png",
+      "generation_prompt": "Create a 16:9 editorial scene using the supplied authentic DTS screen recording for #/dashboard; use assets/capture-S01.png as the framing reference. Focus: Ano ang kayang sagutin ng DTS. Overlay exactly: Nasaan na ang document at sino ang kikilos. Preserve interface text and actual actions. Use a restrained crop or highlight that follows the spoken cue. Narration is the three supplied Taglish paragraphs in order. Reserve the lower 17 percent for captions. Do not synthesize buttons, records, integrations, notifications or successful actions. Required qualification: Use a clearly labelled demonstration record. Do not invent a reduced processing time or savings figure."
+    },
+    {
+      "id": "S02",
+      "title": "Sino ang gumagamit at ano ang responsibilidad",
+      "chapter": "Orientation",
+      "role": "Presenter and role cast",
+      "route": "#/users",
+      "duration": 60,
+      "voiceover": [
+        "May magkakaibang responsibilidad ang bawat account. Ang Admin Staff ang nagla-log, nagfo-forward at nagre-record ng release. Ang Focal ang nag-aassign. Ang Staff ang nagpoproseso at nagsusumite ng output.",
+        "Ang Supervisor at Division Manager ang nagre-review sa kani-kanilang bahagi. Ang Department Manager ang nasa final review at clearance, kasama ang mga applicable acting at OIC rules.",
+        "Ang System Administrator naman ang namamahala sa accounts, permissions at configuration. Hindi ito ang regular processing account at wala itong My work queue. Gagamit tayo ng tamang enrolled account sa bawat operational step."
+      ],
+      "actions": [
+        "Show seven role labels around the document; use verified enrolled names only in the cast panel.",
+        "Trace the ordinary sequence Admin Staff to Focal to Staff to reviewers.",
+        "Separate System Administrator from the operational chain."
+      ],
+      "overlay": "Tamang account para sa tamang action",
+      "layout": "roles",
+      "presenter_note": "Permissions and desk responsibility both matter. A configured focal also receives focal abilities even when their base role differs.",
+      "evidence": [
+        "E01",
+        "E02",
+        "E10"
+      ],
+      "start": 60,
+      "end": 120,
+      "timecode": "01:00-02:00",
+      "voiceover_words": 88,
+      "estimated_spoken_seconds": 41,
+      "demo_hold_seconds": 19,
+      "shots": [
+        {
+          "id": "S02-1",
+          "start": 60,
+          "end": 80,
+          "action": "Show seven role labels around the document; use verified enrolled names only in the cast panel.",
+          "voiceover": "May magkakaibang responsibilidad ang bawat account. Ang Admin Staff ang nagla-log, nagfo-forward at nagre-record ng release. Ang Focal ang nag-aassign. Ang Staff ang nagpoproseso at nagsusumite ng output.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S02-2",
+          "start": 80,
+          "end": 100,
+          "action": "Trace the ordinary sequence Admin Staff to Focal to Staff to reviewers.",
+          "voiceover": "Ang Supervisor at Division Manager ang nagre-review sa kani-kanilang bahagi. Ang Department Manager ang nasa final review at clearance, kasama ang mga applicable acting at OIC rules.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S02-3",
+          "start": 100,
+          "end": 120,
+          "action": "Separate System Administrator from the operational chain.",
+          "voiceover": "Ang System Administrator naman ang namamahala sa accounts, permissions at configuration. Hindi ito ang regular processing account at wala itong My work queue. Gagamit tayo ng tamang enrolled account sa bawat operational step.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        }
+      ],
+      "capture_status": "Capture planned; reference stills are not final footage",
+      "reference_image": "assets/capture-S02.png",
+      "generation_prompt": "Create a 16:9 editorial scene using the supplied authentic DTS screen recording for #/users; use assets/capture-S02.png as the framing reference. Focus: Sino ang gumagamit at ano ang responsibilidad. Overlay exactly: Tamang account para sa tamang action. Preserve interface text and actual actions. Use a restrained crop or highlight that follows the spoken cue. Narration is the three supplied Taglish paragraphs in order. Reserve the lower 17 percent for captions. Do not synthesize buttons, records, integrations, notifications or successful actions. Required qualification: Permissions and desk responsibility both matter. A configured focal also receives focal abilities even when their base role differs."
+    },
+    {
+      "id": "S03",
+      "title": "Sign in at personal workspace",
+      "chapter": "Orientation",
+      "role": "Any enrolled staff account",
+      "route": "/",
+      "duration": 60,
+      "voiceover": [
+        "Mag-sign in gamit ang sariling approved account. Kung temporary password ang ibinigay sa first use, sundin ang prompt para palitan ito. Huwag gumamit ng shared administrator account para sa normal na processing.",
+        "Pagkapasok, ang Staff ay karaniwang dadalhin sa My work. Ang administrators at managers ay sa Department overview. Kung may binuksang direct document link, puwedeng iyon ang unang destination.",
+        "Sa account menu, makikita ang personal options gaya ng password change, theme at sign out. Puwedeng pumili ng light, dark o automatic theme. Takpan ang password habang nire-record at huwag isama ang actual credentials sa final video."
+      ],
+      "actions": [
+        "Capture splash to sign-in; type the approved demo account with password masked.",
+        "Cut to staff My work, then a manager overview from a separate browser context.",
+        "Open the account menu and show theme choices and sign-out location."
+      ],
+      "overlay": "Sariling account at malinaw na workspace",
+      "layout": "login",
+      "presenter_note": "Use a fresh test profile. Do not publish the stress password or initial-credentials file.",
+      "evidence": [
+        "E02",
+        "E03",
+        "E08"
+      ],
+      "start": 120,
+      "end": 180,
+      "timecode": "02:00-03:00",
+      "voiceover_words": 97,
+      "estimated_spoken_seconds": 45,
+      "demo_hold_seconds": 15,
+      "shots": [
+        {
+          "id": "S03-1",
+          "start": 120,
+          "end": 140,
+          "action": "Capture splash to sign-in; type the approved demo account with password masked.",
+          "voiceover": "Mag-sign in gamit ang sariling approved account. Kung temporary password ang ibinigay sa first use, sundin ang prompt para palitan ito. Huwag gumamit ng shared administrator account para sa normal na processing.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S03-2",
+          "start": 140,
+          "end": 160,
+          "action": "Cut to staff My work, then a manager overview from a separate browser context.",
+          "voiceover": "Pagkapasok, ang Staff ay karaniwang dadalhin sa My work. Ang administrators at managers ay sa Department overview. Kung may binuksang direct document link, puwedeng iyon ang unang destination.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S03-3",
+          "start": 160,
+          "end": 180,
+          "action": "Open the account menu and show theme choices and sign-out location.",
+          "voiceover": "Sa account menu, makikita ang personal options gaya ng password change, theme at sign out. Puwedeng pumili ng light, dark o automatic theme. Takpan ang password habang nire-record at huwag isama ang actual credentials sa final video.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        }
+      ],
+      "capture_status": "Capture planned; reference stills are not final footage",
+      "reference_image": "assets/capture-S03.png",
+      "generation_prompt": "Create a 16:9 editorial scene using the supplied authentic DTS screen recording for /; use assets/capture-S03.png as the framing reference. Focus: Sign in at personal workspace. Overlay exactly: Sariling account at malinaw na workspace. Preserve interface text and actual actions. Use a restrained crop or highlight that follows the spoken cue. Narration is the three supplied Taglish paragraphs in order. Reserve the lower 17 percent for captions. Do not synthesize buttons, records, integrations, notifications or successful actions. Required qualification: Use a fresh test profile. Do not publish the stress password or initial-credentials file."
+    },
+    {
+      "id": "S04",
+      "title": "Pagkilala sa navigation at My work",
+      "chapter": "Orientation",
+      "role": "Staff and administrator comparison",
+      "route": "#/action",
+      "duration": 60,
+      "voiceover": [
+        "Ang sidebar ang mapa ng application. Nandito ang Department overview, My work kapag applicable, CMED, CMSD, Personnel Schedule, Insights at mga administration pages na pinapayagan sa account.",
+        "Sa My work, makikita ang ordinary documents at Special Reports na nangangailangan ng action mula sa naka-sign-in na user. Ang bilang sa queue ay para makatulong sa pag-prioritize, kaya tingnan din ang deadline at current stage.",
+        "May in-app action indicator at bell para sa pending work. Ang ibang pagbabago ay lumalabas sa live refresh, karaniwang sa loob ng humigit-kumulang fifteen seconds. Ipakita ang actual queue; huwag ilarawan itong email o text-message notification service."
+      ],
+      "actions": [
+        "Pan through visible sidebar groups in the staff account.",
+        "Open My work; point to an ordinary document and a Special Report action card.",
+        "Show the bell and a staged update from another account; allow time for refresh."
+      ],
+      "overlay": "Unahin ang records na naghihintay sa iyo",
+      "layout": "workspace",
+      "presenter_note": "Open dialogs and unsaved forms can defer refresh. Keep the demonstration free of unsaved edits.",
+      "evidence": [
+        "E02",
+        "E03",
+        "E04",
+        "E08"
+      ],
+      "start": 180,
+      "end": 240,
+      "timecode": "03:00-04:00",
+      "voiceover_words": 100,
+      "estimated_spoken_seconds": 46,
+      "demo_hold_seconds": 14,
+      "shots": [
+        {
+          "id": "S04-1",
+          "start": 180,
+          "end": 200,
+          "action": "Pan through visible sidebar groups in the staff account.",
+          "voiceover": "Ang sidebar ang mapa ng application. Nandito ang Department overview, My work kapag applicable, CMED, CMSD, Personnel Schedule, Insights at mga administration pages na pinapayagan sa account.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S04-2",
+          "start": 200,
+          "end": 220,
+          "action": "Open My work; point to an ordinary document and a Special Report action card.",
+          "voiceover": "Sa My work, makikita ang ordinary documents at Special Reports na nangangailangan ng action mula sa naka-sign-in na user. Ang bilang sa queue ay para makatulong sa pag-prioritize, kaya tingnan din ang deadline at current stage.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S04-3",
+          "start": 220,
+          "end": 240,
+          "action": "Show the bell and a staged update from another account; allow time for refresh.",
+          "voiceover": "May in-app action indicator at bell para sa pending work. Ang ibang pagbabago ay lumalabas sa live refresh, karaniwang sa loob ng humigit-kumulang fifteen seconds. Ipakita ang actual queue; huwag ilarawan itong email o text-message notification service.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        }
+      ],
+      "capture_status": "Capture planned; reference stills are not final footage",
+      "reference_image": "assets/capture-S04.png",
+      "generation_prompt": "Create a 16:9 editorial scene using the supplied authentic DTS screen recording for #/action; use assets/capture-S04.png as the framing reference. Focus: Pagkilala sa navigation at My work. Overlay exactly: Unahin ang records na naghihintay sa iyo. Preserve interface text and actual actions. Use a restrained crop or highlight that follows the spoken cue. Narration is the three supplied Taglish paragraphs in order. Reserve the lower 17 percent for captions. Do not synthesize buttons, records, integrations, notifications or successful actions. Required qualification: Open dialogs and unsaved forms can defer refresh. Keep the demonstration free of unsaved edits."
+    },
+    {
+      "id": "S05",
+      "title": "Department overview at paghahanap ng records",
+      "chapter": "Finding work",
+      "role": "Admin Staff or manager",
+      "route": "#/dashboard",
+      "duration": 60,
+      "voiceover": [
+        "Sa Department overview, puwedeng makita ang monitored documents, ongoing work, action required, Overdue Stay at cleared records. Ang mga tile ay filters na puwedeng piliin para mas mapaliit ang listahan.",
+        "Mag-search gamit ang tracking number, subject o originating office. Pagkatapos, gamitin ang division, priority at available advanced filters, saka ang sorting at pagination. Puwede ring pumili ng columns at mag-save ng sariling view.",
+        "Tandaan na ang Overdue Stay ay kasama ang overdue deadlines at applicable stalled desk records. Hindi lahat ng nandito ay pare-pareho ang dahilan ng delay. Buksan ang record para makita kung deadline ba o desk stay ang kailangang aksiyunan."
+      ],
+      "actions": [
+        "Click total, ongoing and Overdue Stay tiles on the populated registry.",
+        "Search the hero record; show More filters, sorting, columns and page controls.",
+        "Save a named view and reopen it; point to the distinct delay labels."
+      ],
+      "overlay": "Hanapin at i-filter bago mag-follow up",
+      "layout": "registry",
+      "presenter_note": "Saved views and registry preferences are per account and browser. Avoid claiming that they sync across devices.",
+      "evidence": [
+        "E02",
+        "E03"
+      ],
+      "start": 240,
+      "end": 300,
+      "timecode": "04:00-05:00",
+      "voiceover_words": 102,
+      "estimated_spoken_seconds": 47,
+      "demo_hold_seconds": 13,
+      "shots": [
+        {
+          "id": "S05-1",
+          "start": 240,
+          "end": 260,
+          "action": "Click total, ongoing and Overdue Stay tiles on the populated registry.",
+          "voiceover": "Sa Department overview, puwedeng makita ang monitored documents, ongoing work, action required, Overdue Stay at cleared records. Ang mga tile ay filters na puwedeng piliin para mas mapaliit ang listahan.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S05-2",
+          "start": 260,
+          "end": 280,
+          "action": "Search the hero record; show More filters, sorting, columns and page controls.",
+          "voiceover": "Mag-search gamit ang tracking number, subject o originating office. Pagkatapos, gamitin ang division, priority at available advanced filters, saka ang sorting at pagination. Puwede ring pumili ng columns at mag-save ng sariling view.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S05-3",
+          "start": 280,
+          "end": 300,
+          "action": "Save a named view and reopen it; point to the distinct delay labels.",
+          "voiceover": "Tandaan na ang Overdue Stay ay kasama ang overdue deadlines at applicable stalled desk records. Hindi lahat ng nandito ay pare-pareho ang dahilan ng delay. Buksan ang record para makita kung deadline ba o desk stay ang kailangang aksiyunan.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        }
+      ],
+      "capture_status": "Capture planned; reference stills are not final footage",
+      "reference_image": "assets/capture-S05.png",
+      "generation_prompt": "Create a 16:9 editorial scene using the supplied authentic DTS screen recording for #/dashboard; use assets/capture-S05.png as the framing reference. Focus: Department overview at paghahanap ng records. Overlay exactly: Hanapin at i-filter bago mag-follow up. Preserve interface text and actual actions. Use a restrained crop or highlight that follows the spoken cue. Narration is the three supplied Taglish paragraphs in order. Reserve the lower 17 percent for captions. Do not synthesize buttons, records, integrations, notifications or successful actions. Required qualification: Saved views and registry preferences are per account and browser. Avoid claiming that they sync across devices."
+    },
+    {
+      "id": "S06",
+      "title": "Preview at pagbabasa ng document details",
+      "chapter": "Finding work",
+      "role": "Any signed-in user with applicable actions",
+      "route": "#/dashboard then #/doc/{id}",
+      "duration": 60,
+      "voiceover": [
+        "Kung gusto munang sumilip nang hindi iniiwan ang listahan, gamitin ang Preview in drawer. Makikita ang key details at available actions, at puwedeng lumipat sa previous o next record sa kasalukuyang queue.",
+        "Sa full document page, unahin ang status, responsible desk, deadline, desk age at next action. Nasa record din ang source, document type, division, priority at iba pang registration details.",
+        "Sa ibaba, tingnan ang Files and links, review comments at movement history. Ang history ang magpapakita kung ano ang nangyari at sino ang gumawa ng action. Kapag may tanong sa progress, dito tayo bumabalik sa halip na manghula mula sa title lang."
+      ],
+      "actions": [
+        "Enable drawer preview and open the hero record from the registry.",
+        "Highlight summary fields, then Open full document.",
+        "Scroll to files, comments and history; return to the current action panel."
+      ],
+      "overlay": "Status at current desk muna bago mag-action",
+      "layout": "detail",
+      "presenter_note": "Some details are broadly viewable; an available view does not grant permission to perform every action.",
+      "evidence": [
+        "E02",
+        "E03"
+      ],
+      "start": 300,
+      "end": 360,
+      "timecode": "05:00-06:00",
+      "voiceover_words": 103,
+      "estimated_spoken_seconds": 48,
+      "demo_hold_seconds": 12,
+      "shots": [
+        {
+          "id": "S06-1",
+          "start": 300,
+          "end": 320,
+          "action": "Enable drawer preview and open the hero record from the registry.",
+          "voiceover": "Kung gusto munang sumilip nang hindi iniiwan ang listahan, gamitin ang Preview in drawer. Makikita ang key details at available actions, at puwedeng lumipat sa previous o next record sa kasalukuyang queue.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S06-2",
+          "start": 320,
+          "end": 340,
+          "action": "Highlight summary fields, then Open full document.",
+          "voiceover": "Sa full document page, unahin ang status, responsible desk, deadline, desk age at next action. Nasa record din ang source, document type, division, priority at iba pang registration details.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S06-3",
+          "start": 340,
+          "end": 360,
+          "action": "Scroll to files, comments and history; return to the current action panel.",
+          "voiceover": "Sa ibaba, tingnan ang Files and links, review comments at movement history. Ang history ang magpapakita kung ano ang nangyari at sino ang gumawa ng action. Kapag may tanong sa progress, dito tayo bumabalik sa halip na manghula mula sa title lang.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        }
+      ],
+      "capture_status": "Capture planned; reference stills are not final footage",
+      "reference_image": "assets/capture-S06.png",
+      "generation_prompt": "Create a 16:9 editorial scene using the supplied authentic DTS screen recording for #/dashboard then #/doc/{id}; use assets/capture-S06.png as the framing reference. Focus: Preview at pagbabasa ng document details. Overlay exactly: Status at current desk muna bago mag-action. Preserve interface text and actual actions. Use a restrained crop or highlight that follows the spoken cue. Narration is the three supplied Taglish paragraphs in order. Reserve the lower 17 percent for captions. Do not synthesize buttons, records, integrations, notifications or successful actions. Required qualification: Some details are broadly viewable; an available view does not grant permission to perform every action."
+    },
+    {
+      "id": "S07",
+      "title": "Pag-log ng bagong document",
+      "chapter": "Document lifecycle",
+      "role": "Marian Grace Paling / Admin Staff",
+      "route": "New document form",
+      "duration": 60,
+      "voiceover": [
+        "Magsimula tayo sa bagong ordinary document. Ilagay ang date received, communication type, received from, reference number at malinaw na subject. Piliin ang document type at target division, saka ang Normal o Urgent priority.",
+        "Kung may original document sa approved file storage, ilagay ang complete web link. Puwede ring maglagay ng pages at remarks. I-review muna ang details bago i-save; tutulungan ng validation na mahuli ang kulang o invalid na input.",
+        "May choice na i-save muna sa Admin desk o i-forward kung handa na. May generated tracking number ang record. Para sa ordinary assignment-based processing, ang simpleng registration pa lang ay hindi pa pagsisimula ng processing clock."
+      ],
+      "actions": [
+        "Open New document as mpaling; enter a synthetic letter with a meaningful subject.",
+        "Fill current active references and a safe demonstration file URL; show one required-field validation.",
+        "Save without forwarding; show received status, generated tracking number and unstarted clock."
+      ],
+      "overlay": "Maayos na registration ang simula ng tracking",
+      "layout": "form",
+      "presenter_note": "Hero record: DEMO Site inspection coordination request, CMED. Urgent is a label, not a separate automatic deadline rule.",
+      "evidence": [
+        "E01",
+        "E02",
+        "E07"
+      ],
+      "start": 360,
+      "end": 420,
+      "timecode": "06:00-07:00",
+      "voiceover_words": 106,
+      "estimated_spoken_seconds": 49,
+      "demo_hold_seconds": 11,
+      "shots": [
+        {
+          "id": "S07-1",
+          "start": 360,
+          "end": 380,
+          "action": "Open New document as mpaling; enter a synthetic letter with a meaningful subject.",
+          "voiceover": "Magsimula tayo sa bagong ordinary document. Ilagay ang date received, communication type, received from, reference number at malinaw na subject. Piliin ang document type at target division, saka ang Normal o Urgent priority.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S07-2",
+          "start": 380,
+          "end": 400,
+          "action": "Fill current active references and a safe demonstration file URL; show one required-field validation.",
+          "voiceover": "Kung may original document sa approved file storage, ilagay ang complete web link. Puwede ring maglagay ng pages at remarks. I-review muna ang details bago i-save; tutulungan ng validation na mahuli ang kulang o invalid na input.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S07-3",
+          "start": 400,
+          "end": 420,
+          "action": "Save without forwarding; show received status, generated tracking number and unstarted clock.",
+          "voiceover": "May choice na i-save muna sa Admin desk o i-forward kung handa na. May generated tracking number ang record. Para sa ordinary assignment-based processing, ang simpleng registration pa lang ay hindi pa pagsisimula ng processing clock.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        }
+      ],
+      "capture_status": "Capture planned; reference stills are not final footage",
+      "reference_image": "assets/capture-S07.png",
+      "generation_prompt": "Create a 16:9 editorial scene using the supplied authentic DTS screen recording for New document form; use assets/capture-S07.png as the framing reference. Focus: Pag-log ng bagong document. Overlay exactly: Maayos na registration ang simula ng tracking. Preserve interface text and actual actions. Use a restrained crop or highlight that follows the spoken cue. Narration is the three supplied Taglish paragraphs in order. Reserve the lower 17 percent for captions. Do not synthesize buttons, records, integrations, notifications or successful actions. Required qualification: Hero record: DEMO Site inspection coordination request, CMED. Urgent is a label, not a separate automatic deadline rule."
+    },
+    {
+      "id": "S08",
+      "title": "Forwarding at assignment ng Focal",
+      "chapter": "Document lifecycle",
+      "role": "Admin Staff then Aubrey Camille C Cabrera / Focal",
+      "route": "#/doc/{id}",
+      "duration": 60,
+      "voiceover": [
+        "Kapag kumpleto na ang intake details, i-forward ang ordinary document sa configured division focal. Magbabago ang current desk at status, at magkakaroon ng bagong movement entry.",
+        "Sa Focal account, piliin ang transaction type, i-confirm ang document type at italaga ang active staff na magpoproseso. Sa example natin, si Danezel Christian Cruz ang assignee. Dito nagsisimula ang applicable assignment-based clock.",
+        "Ang due date ay galing sa configured rules. May transactions na nangangailangan ng special date kapag walang prescribed document-type deadline. Ang For information only ay para sa eligible focal assignment. Sundin ang available options sa actual form, hindi isang memorized na fixed deadline."
+      ],
+      "actions": [
+        "Forward the hero record as mpaling; show at_focal in history.",
+        "Switch to acabrera and assign to dcruz using an appropriate active transaction type.",
+        "Point to processing status, assignee, clock start and computed deadline."
+      ],
+      "overlay": "Assignment ang simula ng applicable processing clock",
+      "layout": "workflow",
+      "presenter_note": "Use the current configured threshold. Record exact account switches as separate takes; do not make one shared admin account impersonate the whole chain.",
+      "evidence": [
+        "E01",
+        "E02",
+        "E07",
+        "E10"
+      ],
+      "start": 420,
+      "end": 480,
+      "timecode": "07:00-08:00",
+      "voiceover_words": 102,
+      "estimated_spoken_seconds": 47,
+      "demo_hold_seconds": 13,
+      "shots": [
+        {
+          "id": "S08-1",
+          "start": 420,
+          "end": 440,
+          "action": "Forward the hero record as mpaling; show at_focal in history.",
+          "voiceover": "Kapag kumpleto na ang intake details, i-forward ang ordinary document sa configured division focal. Magbabago ang current desk at status, at magkakaroon ng bagong movement entry.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S08-2",
+          "start": 440,
+          "end": 460,
+          "action": "Switch to acabrera and assign to dcruz using an appropriate active transaction type.",
+          "voiceover": "Sa Focal account, piliin ang transaction type, i-confirm ang document type at italaga ang active staff na magpoproseso. Sa example natin, si Danezel Christian Cruz ang assignee. Dito nagsisimula ang applicable assignment-based clock.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S08-3",
+          "start": 460,
+          "end": 480,
+          "action": "Point to processing status, assignee, clock start and computed deadline.",
+          "voiceover": "Ang due date ay galing sa configured rules. May transactions na nangangailangan ng special date kapag walang prescribed document-type deadline. Ang For information only ay para sa eligible focal assignment. Sundin ang available options sa actual form, hindi isang memorized na fixed deadline.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        }
+      ],
+      "capture_status": "Capture planned; reference stills are not final footage",
+      "reference_image": "assets/capture-S08.png",
+      "generation_prompt": "Create a 16:9 editorial scene using the supplied authentic DTS screen recording for #/doc/{id}; use assets/capture-S08.png as the framing reference. Focus: Forwarding at assignment ng Focal. Overlay exactly: Assignment ang simula ng applicable processing clock. Preserve interface text and actual actions. Use a restrained crop or highlight that follows the spoken cue. Narration is the three supplied Taglish paragraphs in order. Reserve the lower 17 percent for captions. Do not synthesize buttons, records, integrations, notifications or successful actions. Required qualification: Use the current configured threshold. Record exact account switches as separate takes; do not make one shared admin account impersonate the whole chain."
+    },
+    {
+      "id": "S09",
+      "title": "Pag-unawa sa deadlines at desk limits",
+      "chapter": "Document lifecycle",
+      "role": "Presenter and Focal",
+      "route": "#/doc/{id} and Reference lists",
+      "duration": 60,
+      "voiceover": [
+        "Hindi iisang deadline ang para sa lahat. Puwedeng prescribed working days, calendar days, o reporting-period basis ang document type. May transaction-based deadline din kapag iyon ang applicable fallback.",
+        "Sa working-day calculations, may epekto ang weekends at configured holidays. Iba rin ang due soon, due today at overdue. Kapag walang applicable deadline, ipapakita iyon nang hiwalay sa record na hindi pa nagsisimula ang clock.",
+        "Bukod sa document deadline, may Admin at Focal desk limits para makita ang sobrang tagal sa isang desk. Kaya mahalagang basahin ang label at context. Ang Urgent priority ay hindi automatic na nagpapalit sa deadline rule."
+      ],
+      "actions": [
+        "Compare labelled examples: unstarted, no deadline, on time, due soon, due today and overdue.",
+        "Show a document-type basis and the Holidays reference tab without changing production values.",
+        "Contrast deadline age with current-desk age using two populated test records."
+      ],
+      "overlay": "Deadline at desk stay ay magkaibang sukatan",
+      "layout": "deadline",
+      "presenter_note": "Use visible dates from the recording day. Label examples rather than promising a particular due date for every document.",
+      "evidence": [
+        "E01",
+        "E02",
+        "E08"
+      ],
+      "start": 480,
+      "end": 540,
+      "timecode": "08:00-09:00",
+      "voiceover_words": 99,
+      "estimated_spoken_seconds": 46,
+      "demo_hold_seconds": 14,
+      "shots": [
+        {
+          "id": "S09-1",
+          "start": 480,
+          "end": 500,
+          "action": "Compare labelled examples: unstarted, no deadline, on time, due soon, due today and overdue.",
+          "voiceover": "Hindi iisang deadline ang para sa lahat. Puwedeng prescribed working days, calendar days, o reporting-period basis ang document type. May transaction-based deadline din kapag iyon ang applicable fallback.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S09-2",
+          "start": 500,
+          "end": 520,
+          "action": "Show a document-type basis and the Holidays reference tab without changing production values.",
+          "voiceover": "Sa working-day calculations, may epekto ang weekends at configured holidays. Iba rin ang due soon, due today at overdue. Kapag walang applicable deadline, ipapakita iyon nang hiwalay sa record na hindi pa nagsisimula ang clock.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S09-3",
+          "start": 520,
+          "end": 540,
+          "action": "Contrast deadline age with current-desk age using two populated test records.",
+          "voiceover": "Bukod sa document deadline, may Admin at Focal desk limits para makita ang sobrang tagal sa isang desk. Kaya mahalagang basahin ang label at context. Ang Urgent priority ay hindi automatic na nagpapalit sa deadline rule.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        }
+      ],
+      "capture_status": "Capture planned; reference stills are not final footage",
+      "reference_image": "assets/capture-S09.png",
+      "generation_prompt": "Create a 16:9 editorial scene using the supplied authentic DTS screen recording for #/doc/{id} and Reference lists; use assets/capture-S09.png as the framing reference. Focus: Pag-unawa sa deadlines at desk limits. Overlay exactly: Deadline at desk stay ay magkaibang sukatan. Preserve interface text and actual actions. Use a restrained crop or highlight that follows the spoken cue. Narration is the three supplied Taglish paragraphs in order. Reserve the lower 17 percent for captions. Do not synthesize buttons, records, integrations, notifications or successful actions. Required qualification: Use visible dates from the recording day. Label examples rather than promising a particular due date for every document."
+    },
+    {
+      "id": "S10",
+      "title": "Staff processing at Files and links",
+      "chapter": "Document lifecycle",
+      "role": "Danezel Christian G Cruz / Staff",
+      "route": "#/action then #/doc/{id}",
+      "duration": 60,
+      "voiceover": [
+        "Sa Staff account, lalabas sa My work ang assigned document. Buksan ito at i-check ang instructions, deadline at source bago gumawa ng output. Ang DTS ang tracking record ng trabaho at review history.",
+        "Sa Files and links, puwedeng ilagay ang original, draft at revised file links ayon sa authority ng user. Ang actual files ay nasa linked storage. Hindi ito direct file upload o isang built-in document editor.",
+        "Kapag handa na ang draft, i-submit para sa review at piliin ang tamang eligible reviewer. Sa example, ang supervisor ni Cruz ay si Maria Urduja Jean Tabilas. Maglagay ng maikling context para mas malinaw kung ano ang kailangang tingnan ng reviewer."
+      ],
+      "actions": [
+        "Sign in as dcruz and open the hero record from My work.",
+        "Save a draft link; point out original, draft and revised link sections.",
+        "Submit to mtabilas and show the supervisor-review status."
+      ],
+      "overlay": "Ihanda ang output at isumite sa tamang reviewer",
+      "layout": "detail",
+      "presenter_note": "A link change and revision counter are not historical file-version storage. Opening external previews depends on the linked service and browser rules.",
+      "evidence": [
+        "E01",
+        "E02",
+        "E03",
+        "E10"
+      ],
+      "start": 540,
+      "end": 600,
+      "timecode": "09:00-10:00",
+      "voiceover_words": 109,
+      "estimated_spoken_seconds": 50,
+      "demo_hold_seconds": 10,
+      "shots": [
+        {
+          "id": "S10-1",
+          "start": 540,
+          "end": 560,
+          "action": "Sign in as dcruz and open the hero record from My work.",
+          "voiceover": "Sa Staff account, lalabas sa My work ang assigned document. Buksan ito at i-check ang instructions, deadline at source bago gumawa ng output. Ang DTS ang tracking record ng trabaho at review history.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S10-2",
+          "start": 560,
+          "end": 580,
+          "action": "Save a draft link; point out original, draft and revised link sections.",
+          "voiceover": "Sa Files and links, puwedeng ilagay ang original, draft at revised file links ayon sa authority ng user. Ang actual files ay nasa linked storage. Hindi ito direct file upload o isang built-in document editor.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S10-3",
+          "start": 580,
+          "end": 600,
+          "action": "Submit to mtabilas and show the supervisor-review status.",
+          "voiceover": "Kapag handa na ang draft, i-submit para sa review at piliin ang tamang eligible reviewer. Sa example, ang supervisor ni Cruz ay si Maria Urduja Jean Tabilas. Maglagay ng maikling context para mas malinaw kung ano ang kailangang tingnan ng reviewer.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        }
+      ],
+      "capture_status": "Capture planned; reference stills are not final footage",
+      "reference_image": "assets/capture-S10.png",
+      "generation_prompt": "Create a 16:9 editorial scene using the supplied authentic DTS screen recording for #/action then #/doc/{id}; use assets/capture-S10.png as the framing reference. Focus: Staff processing at Files and links. Overlay exactly: Ihanda ang output at isumite sa tamang reviewer. Preserve interface text and actual actions. Use a restrained crop or highlight that follows the spoken cue. Narration is the three supplied Taglish paragraphs in order. Reserve the lower 17 percent for captions. Do not synthesize buttons, records, integrations, notifications or successful actions. Required qualification: A link change and revision counter are not historical file-version storage. Opening external previews depends on the linked service and browser rules."
+    },
+    {
+      "id": "S11",
+      "title": "Review comments at compliance cycle",
+      "chapter": "Document lifecycle",
+      "role": "Supervisor then assigned Staff",
+      "route": "#/doc/{id}",
+      "duration": 60,
+      "voiceover": [
+        "Sa Supervisor account, may dalawang karaniwang resulta: puwedeng i-approve ang draft o ibalik sa staff para sa compliance. Kapag ibabalik, ilagay ang malinaw at actionable na comments.",
+        "Makikita ng assigned Staff ang comments sa record. Gawin ang correction, i-update ang revised file link kung kailangan, at ilarawan kung paano na-address ang request bago mag-resubmit.",
+        "Naiiwan sa record ang compliance cycle at history. Ang resubmission behavior ay nakadepende sa configured policy, halimbawa kung babalik sa returning reviewer o magsisimula muli sa supervisor review. Sa demo, ipakita ang actual destination pagkatapos mag-submit."
+      ],
+      "actions": [
+        "As mtabilas, return the hero document with one specific supporting-checklist comment.",
+        "As dcruz, add a revised link and a concrete compliance response.",
+        "Resubmit; show resolved comments, cycle count and the configured returning stage."
+      ],
+      "overlay": "Malinaw na comments at dokumentadong compliance",
+      "layout": "review",
+      "presenter_note": "Resubmission resolves outstanding review comments together; do not imply individual per-comment resolution buttons.",
+      "evidence": [
+        "E01",
+        "E02",
+        "E03"
+      ],
+      "start": 600,
+      "end": 660,
+      "timecode": "10:00-11:00",
+      "voiceover_words": 90,
+      "estimated_spoken_seconds": 42,
+      "demo_hold_seconds": 18,
+      "shots": [
+        {
+          "id": "S11-1",
+          "start": 600,
+          "end": 620,
+          "action": "As mtabilas, return the hero document with one specific supporting-checklist comment.",
+          "voiceover": "Sa Supervisor account, may dalawang karaniwang resulta: puwedeng i-approve ang draft o ibalik sa staff para sa compliance. Kapag ibabalik, ilagay ang malinaw at actionable na comments.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S11-2",
+          "start": 620,
+          "end": 640,
+          "action": "As dcruz, add a revised link and a concrete compliance response.",
+          "voiceover": "Makikita ng assigned Staff ang comments sa record. Gawin ang correction, i-update ang revised file link kung kailangan, at ilarawan kung paano na-address ang request bago mag-resubmit.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S11-3",
+          "start": 640,
+          "end": 660,
+          "action": "Resubmit; show resolved comments, cycle count and the configured returning stage.",
+          "voiceover": "Naiiwan sa record ang compliance cycle at history. Ang resubmission behavior ay nakadepende sa configured policy, halimbawa kung babalik sa returning reviewer o magsisimula muli sa supervisor review. Sa demo, ipakita ang actual destination pagkatapos mag-submit.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        }
+      ],
+      "capture_status": "Capture planned; reference stills are not final footage",
+      "reference_image": "assets/capture-S11.png",
+      "generation_prompt": "Create a 16:9 editorial scene using the supplied authentic DTS screen recording for #/doc/{id}; use assets/capture-S11.png as the framing reference. Focus: Review comments at compliance cycle. Overlay exactly: Malinaw na comments at dokumentadong compliance. Preserve interface text and actual actions. Use a restrained crop or highlight that follows the spoken cue. Narration is the three supplied Taglish paragraphs in order. Reserve the lower 17 percent for captions. Do not synthesize buttons, records, integrations, notifications or successful actions. Required qualification: Resubmission resolves outstanding review comments together; do not imply individual per-comment resolution buttons."
+    },
+    {
+      "id": "S12",
+      "title": "Division review at clearance",
+      "chapter": "Document lifecycle",
+      "role": "Supervisor then Division Manager then Department Manager",
+      "route": "#/doc/{id}",
+      "duration": 60,
+      "voiceover": [
+        "Kapag maayos na ang output, itutuloy ng Supervisor ang document sa Division Manager. Mula roon, mapupunta ito sa Department review para sa final assessment at clearance.",
+        "Puwede pa ring may return for compliance sa applicable review stage. Kung cleared na, i-record ang clearance gamit ang tamang authorized account. Sa ordinary example natin, si Myles Martinez ang CMED Division Manager at si Oscar Hanova ang Department Manager.",
+        "Mahalagang distinction ito: ang Cleared for Out ay hindi pa ang actual release. Humihinto ang applicable processing clock sa clearance, pero may hiwalay pang log-out step para ma-record kung kailan at kanino inilabas ang document."
+      ],
+      "actions": [
+        "Approve as mtabilas, then approve as mmartinez; show each status transition.",
+        "Clear as ohanova and hold the Cleared for Out state.",
+        "Compare clearance timestamp with the still-empty release fields."
+      ],
+      "overlay": "Cleared for Out ay hiwalay sa release",
+      "layout": "workflow",
+      "presenter_note": "The live engine includes authorized early-clear/override cases. Present the standard sequence without claiming every review step is universally mandatory.",
+      "evidence": [
+        "E01",
+        "E02",
+        "E10"
+      ],
+      "start": 660,
+      "end": 720,
+      "timecode": "11:00-12:00",
+      "voiceover_words": 101,
+      "estimated_spoken_seconds": 47,
+      "demo_hold_seconds": 13,
+      "shots": [
+        {
+          "id": "S12-1",
+          "start": 660,
+          "end": 680,
+          "action": "Approve as mtabilas, then approve as mmartinez; show each status transition.",
+          "voiceover": "Kapag maayos na ang output, itutuloy ng Supervisor ang document sa Division Manager. Mula roon, mapupunta ito sa Department review para sa final assessment at clearance.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S12-2",
+          "start": 680,
+          "end": 700,
+          "action": "Clear as ohanova and hold the Cleared for Out state.",
+          "voiceover": "Puwede pa ring may return for compliance sa applicable review stage. Kung cleared na, i-record ang clearance gamit ang tamang authorized account. Sa ordinary example natin, si Myles Martinez ang CMED Division Manager at si Oscar Hanova ang Department Manager.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S12-3",
+          "start": 700,
+          "end": 720,
+          "action": "Compare clearance timestamp with the still-empty release fields.",
+          "voiceover": "Mahalagang distinction ito: ang Cleared for Out ay hindi pa ang actual release. Humihinto ang applicable processing clock sa clearance, pero may hiwalay pang log-out step para ma-record kung kailan at kanino inilabas ang document.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        }
+      ],
+      "capture_status": "Capture planned; reference stills are not final footage",
+      "reference_image": "assets/capture-S12.png",
+      "generation_prompt": "Create a 16:9 editorial scene using the supplied authentic DTS screen recording for #/doc/{id}; use assets/capture-S12.png as the framing reference. Focus: Division review at clearance. Overlay exactly: Cleared for Out ay hiwalay sa release. Preserve interface text and actual actions. Use a restrained crop or highlight that follows the spoken cue. Narration is the three supplied Taglish paragraphs in order. Reserve the lower 17 percent for captions. Do not synthesize buttons, records, integrations, notifications or successful actions. Required qualification: The live engine includes authorized early-clear/override cases. Present the standard sequence without claiming every review step is universally mandatory."
+    },
+    {
+      "id": "S13",
+      "title": "Reassignment at return to sender",
+      "chapter": "Document lifecycle",
+      "role": "Focal or eligible manager and Admin Staff",
+      "route": "#/doc/{alternate-id}",
+      "duration": 60,
+      "voiceover": [
+        "May mga pagkakataong kailangang ilipat ang processing sa ibang eligible staff. Sa allowed stage at account, gamitin ang reassignment at maglagay ng context. Mananatili ang movement history ng naging responsibility.",
+        "Iba naman ang return for compliance sa instruction na ibalik ang document sa sender. Sa return-to-sender path, maglalagay ang authorized reviewer ng reason at mapupunta ang document sa For return na naghihintay ng Admin log out.",
+        "Gumamit tayo ng hiwalay na sample para hindi mawala ang main example. Tingnan ang status, reason at next responsible desk bago magpatuloy. Walang generic cancel o reopen button na dapat ipakita bilang kasalukuyang feature."
+      ],
+      "actions": [
+        "Use a separate processing record to reassign between two current eligible staff.",
+        "Use another allowed record to enter an authorized return-to-sender instruction with a reason.",
+        "Show return_out and its Admin release step beside the compliance example."
+      ],
+      "overlay": "Magkaiba ang compliance at return to sender",
+      "layout": "branch",
+      "presenter_note": "Show manager/override labels if used. Do not claim that reassignment always requires a reason field or resets the deadline.",
+      "evidence": [
+        "E01",
+        "E02"
+      ],
+      "start": 720,
+      "end": 780,
+      "timecode": "12:00-13:00",
+      "voiceover_words": 100,
+      "estimated_spoken_seconds": 46,
+      "demo_hold_seconds": 14,
+      "shots": [
+        {
+          "id": "S13-1",
+          "start": 720,
+          "end": 740,
+          "action": "Use a separate processing record to reassign between two current eligible staff.",
+          "voiceover": "May mga pagkakataong kailangang ilipat ang processing sa ibang eligible staff. Sa allowed stage at account, gamitin ang reassignment at maglagay ng context. Mananatili ang movement history ng naging responsibility.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S13-2",
+          "start": 740,
+          "end": 760,
+          "action": "Use another allowed record to enter an authorized return-to-sender instruction with a reason.",
+          "voiceover": "Iba naman ang return for compliance sa instruction na ibalik ang document sa sender. Sa return-to-sender path, maglalagay ang authorized reviewer ng reason at mapupunta ang document sa For return na naghihintay ng Admin log out.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S13-3",
+          "start": 760,
+          "end": 780,
+          "action": "Show return_out and its Admin release step beside the compliance example.",
+          "voiceover": "Gumamit tayo ng hiwalay na sample para hindi mawala ang main example. Tingnan ang status, reason at next responsible desk bago magpatuloy. Walang generic cancel o reopen button na dapat ipakita bilang kasalukuyang feature.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        }
+      ],
+      "capture_status": "Capture planned; reference stills are not final footage",
+      "reference_image": "assets/capture-S13.png",
+      "generation_prompt": "Create a 16:9 editorial scene using the supplied authentic DTS screen recording for #/doc/{alternate-id}; use assets/capture-S13.png as the framing reference. Focus: Reassignment at return to sender. Overlay exactly: Magkaiba ang compliance at return to sender. Preserve interface text and actual actions. Use a restrained crop or highlight that follows the spoken cue. Narration is the three supplied Taglish paragraphs in order. Reserve the lower 17 percent for captions. Do not synthesize buttons, records, integrations, notifications or successful actions. Required qualification: Show manager/override labels if used. Do not claim that reassignment always requires a reason field or resets the deadline."
+    },
+    {
+      "id": "S14",
+      "title": "Actual release at routing slip",
+      "chapter": "Document lifecycle",
+      "role": "Admin Staff",
+      "route": "#/doc/{id} and registry batch controls",
+      "duration": 60,
+      "voiceover": [
+        "Bumalik tayo sa cleared document. Sa Admin Staff account, ilagay kung kanino ito ire-release at ang applicable remarks. Kapag na-log out, may release timestamp, releasing user at destination na ang record.",
+        "Mananatiling searchable ang released document. Makikita pa rin ang registration details, comments at movement history. Puwede ring mag-print ng routing slip para sa record ng naging proseso.",
+        "May selected-record tools para sa print at CSV, at may eligible batch forwarding at log out. Basahin ang confirmation dahil may records na puwedeng ma-skip. Ang batch log out ay gumagamit ng original sender bilang recipient at current time, kaya individual release ang gamitin kapag iba-iba ang actual destination."
+      ],
+      "actions": [
+        "Log out the hero record individually as mpaling with a specific demonstration destination.",
+        "Open its movement history and print routing slip preview.",
+        "Show batch controls on separate eligible test records and read the confirmation without deleting records."
+      ],
+      "overlay": "Release na may petsa recipient at history",
+      "layout": "release",
+      "presenter_note": "Bulk deletion is administrator-controlled and optional to explain verbally; never demonstrate it against real records.",
+      "evidence": [
+        "E01",
+        "E02",
+        "E03"
+      ],
+      "start": 780,
+      "end": 840,
+      "timecode": "13:00-14:00",
+      "voiceover_words": 107,
+      "estimated_spoken_seconds": 49,
+      "demo_hold_seconds": 11,
+      "shots": [
+        {
+          "id": "S14-1",
+          "start": 780,
+          "end": 800,
+          "action": "Log out the hero record individually as mpaling with a specific demonstration destination.",
+          "voiceover": "Bumalik tayo sa cleared document. Sa Admin Staff account, ilagay kung kanino ito ire-release at ang applicable remarks. Kapag na-log out, may release timestamp, releasing user at destination na ang record.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S14-2",
+          "start": 800,
+          "end": 820,
+          "action": "Open its movement history and print routing slip preview.",
+          "voiceover": "Mananatiling searchable ang released document. Makikita pa rin ang registration details, comments at movement history. Puwede ring mag-print ng routing slip para sa record ng naging proseso.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S14-3",
+          "start": 820,
+          "end": 840,
+          "action": "Show batch controls on separate eligible test records and read the confirmation without deleting records.",
+          "voiceover": "May selected-record tools para sa print at CSV, at may eligible batch forwarding at log out. Basahin ang confirmation dahil may records na puwedeng ma-skip. Ang batch log out ay gumagamit ng original sender bilang recipient at current time, kaya individual release ang gamitin kapag iba-iba ang actual destination.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        }
+      ],
+      "capture_status": "Capture planned; reference stills are not final footage",
+      "reference_image": "assets/capture-S14.png",
+      "generation_prompt": "Create a 16:9 editorial scene using the supplied authentic DTS screen recording for #/doc/{id} and registry batch controls; use assets/capture-S14.png as the framing reference. Focus: Actual release at routing slip. Overlay exactly: Release na may petsa recipient at history. Preserve interface text and actual actions. Use a restrained crop or highlight that follows the spoken cue. Narration is the three supplied Taglish paragraphs in order. Reserve the lower 17 percent for captions. Do not synthesize buttons, records, integrations, notifications or successful actions. Required qualification: Bulk deletion is administrator-controlled and optional to explain verbally; never demonstrate it against real records."
+    },
+    {
+      "id": "S15",
+      "title": "Consolidated CMR and PPR",
+      "chapter": "Reports",
+      "role": "Admin Staff and designated regional staff",
+      "route": "#/cmed/regular",
+      "duration": 60,
+      "voiceover": [
+        "May espesyal na registration flow ang Consolidated CMR and PPR. Pipiliin ang region o office at reporting period, dahil ang responsibility ay galing sa configured report designation.",
+        "Kapag na-log ang reporting-period document, dumidiretso ito sa designated active staff at nilalampasan ang ordinary focal-assignment step. Ang division para sa bagong record ay galing sa configured assignee kapag identifiable ang division niya.",
+        "Ang deadline ay kino-compute mula sa document-type rule para sa reporting period. Ang starting rule para sa consolidated report ay sixth working day ng kasunod na buwan, pero puwedeng baguhin ng administrator ang configuration. Sa Regular Reports, makikita ang regions at status ng kanilang submissions."
+      ],
+      "actions": [
+        "Open CMED Regular Reports and the consolidated-report tab.",
+        "Create a sample for a configured region and reporting month; show designated staff and automatic routing.",
+        "Highlight the computed deadline and a region drilldown."
+      ],
+      "overlay": "Reporting period at designation ang gabay",
+      "layout": "reports",
+      "presenter_note": "Confirm the current prescribed threshold before filming; do not narrate the default six days as an immutable rule.",
+      "evidence": [
+        "E01",
+        "E02",
+        "E08"
+      ],
+      "start": 840,
+      "end": 900,
+      "timecode": "14:00-15:00",
+      "voiceover_words": 105,
+      "estimated_spoken_seconds": 48,
+      "demo_hold_seconds": 12,
+      "shots": [
+        {
+          "id": "S15-1",
+          "start": 840,
+          "end": 860,
+          "action": "Open CMED Regular Reports and the consolidated-report tab.",
+          "voiceover": "May espesyal na registration flow ang Consolidated CMR and PPR. Pipiliin ang region o office at reporting period, dahil ang responsibility ay galing sa configured report designation.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S15-2",
+          "start": 860,
+          "end": 880,
+          "action": "Create a sample for a configured region and reporting month; show designated staff and automatic routing.",
+          "voiceover": "Kapag na-log ang reporting-period document, dumidiretso ito sa designated active staff at nilalampasan ang ordinary focal-assignment step. Ang division para sa bagong record ay galing sa configured assignee kapag identifiable ang division niya.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S15-3",
+          "start": 880,
+          "end": 900,
+          "action": "Highlight the computed deadline and a region drilldown.",
+          "voiceover": "Ang deadline ay kino-compute mula sa document-type rule para sa reporting period. Ang starting rule para sa consolidated report ay sixth working day ng kasunod na buwan, pero puwedeng baguhin ng administrator ang configuration. Sa Regular Reports, makikita ang regions at status ng kanilang submissions.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        }
+      ],
+      "capture_status": "Capture planned; reference stills are not final footage",
+      "reference_image": "assets/capture-S15.png",
+      "generation_prompt": "Create a 16:9 editorial scene using the supplied authentic DTS screen recording for #/cmed/regular; use assets/capture-S15.png as the framing reference. Focus: Consolidated CMR and PPR. Overlay exactly: Reporting period at designation ang gabay. Preserve interface text and actual actions. Use a restrained crop or highlight that follows the spoken cue. Narration is the three supplied Taglish paragraphs in order. Reserve the lower 17 percent for captions. Do not synthesize buttons, records, integrations, notifications or successful actions. Required qualification: Confirm the current prescribed threshold before filming; do not narrate the default six days as an immutable rule."
+    },
+    {
+      "id": "S16",
+      "title": "CMED at CMSD reporting views",
+      "chapter": "Reports",
+      "role": "Authorized division user or department account",
+      "route": "#/cmed and #/cmsd/performance",
+      "duration": 60,
+      "voiceover": [
+        "May magkahiwalay na destination ang CMED at CMSD. Ang default ay List of Documents. Sa CMED, may Regular Reports din; ang available performance tab ay Turnaround Time and On-Time Rate para sa account na may report permission.",
+        "Ang reporting ownership ay sumusunod sa responsible personnel. Kaya mahalaga ang tamang assignment at division ng user. Ang shared report na walang isang identifiable division ay hindi isinasama sa individual division metrics.",
+        "Ang division access ay chine-check din ng server. Pero hindi nito ibig sabihin na confidential na ang lahat ng underlying documents sa Department overview. Ihiwalay natin ang access sa division destination, permission na mag-action, at policy sa pagtingin ng basic records."
+      ],
+      "actions": [
+        "Open CMED List of Documents, then CMED Regular Reports.",
+        "Open CMSD and show its document list and performance tab; do not add a CMSD Regular Reports tab.",
+        "Show a permitted account and a denied direct division route in separate takes."
+      ],
+      "overlay": "Division reports ayon sa responsible personnel",
+      "layout": "division",
+      "presenter_note": "This is reporting scope, not blanket record confidentiality. Keep this qualification in the spoken script.",
+      "evidence": [
+        "E01",
+        "E02",
+        "E07",
+        "E08"
+      ],
+      "start": 900,
+      "end": 960,
+      "timecode": "15:00-16:00",
+      "voiceover_words": 110,
+      "estimated_spoken_seconds": 51,
+      "demo_hold_seconds": 9,
+      "shots": [
+        {
+          "id": "S16-1",
+          "start": 900,
+          "end": 920,
+          "action": "Open CMED List of Documents, then CMED Regular Reports.",
+          "voiceover": "May magkahiwalay na destination ang CMED at CMSD. Ang default ay List of Documents. Sa CMED, may Regular Reports din; ang available performance tab ay Turnaround Time and On-Time Rate para sa account na may report permission.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S16-2",
+          "start": 920,
+          "end": 940,
+          "action": "Open CMSD and show its document list and performance tab; do not add a CMSD Regular Reports tab.",
+          "voiceover": "Ang reporting ownership ay sumusunod sa responsible personnel. Kaya mahalaga ang tamang assignment at division ng user. Ang shared report na walang isang identifiable division ay hindi isinasama sa individual division metrics.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S16-3",
+          "start": 940,
+          "end": 960,
+          "action": "Show a permitted account and a denied direct division route in separate takes.",
+          "voiceover": "Ang division access ay chine-check din ng server. Pero hindi nito ibig sabihin na confidential na ang lahat ng underlying documents sa Department overview. Ihiwalay natin ang access sa division destination, permission na mag-action, at policy sa pagtingin ng basic records.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        }
+      ],
+      "capture_status": "Capture planned; reference stills are not final footage",
+      "reference_image": "assets/capture-S16.png",
+      "generation_prompt": "Create a 16:9 editorial scene using the supplied authentic DTS screen recording for #/cmed and #/cmsd/performance; use assets/capture-S16.png as the framing reference. Focus: CMED at CMSD reporting views. Overlay exactly: Division reports ayon sa responsible personnel. Preserve interface text and actual actions. Use a restrained crop or highlight that follows the spoken cue. Narration is the three supplied Taglish paragraphs in order. Reserve the lower 17 percent for captions. Do not synthesize buttons, records, integrations, notifications or successful actions. Required qualification: This is reporting scope, not blanket record confidentiality. Keep this qualification in the spoken script."
+    },
+    {
+      "id": "S17",
+      "title": "Pag-configure ng Special Reports",
+      "chapter": "Reports",
+      "role": "Administrator with configuration permission",
+      "route": "Reference lists > Special Reports",
+      "duration": 60,
+      "voiceover": [
+        "Para sa recurring obligations, may Special Reports schedules. Sa Reference lists, puwedeng itakda ang report name, frequency, reporting months, generation day, deadline threshold at responsible people o division focals.",
+        "Available ang monthly, quarterly, specific months at annual schedules. Ang generation ay para sa reporting period na natapos, at ang configured generation day ay nasa kasunod na buwan. Ipakita natin ang isang malinaw na monthly example.",
+        "Dapat may eligible responsible person bago i-activate ang schedule. Ang initial starter schedules ay inactive at unassigned. Hindi sapat na may report name lang; kailangang kumpleto ang configuration at responsibility para makabuo ng tamang assignment."
+      ],
+      "actions": [
+        "Open Reference lists, Special Reports, Schedules.",
+        "Show monthly, quarterly, specific-month and annual choices, generation day and working-day threshold.",
+        "Assign current staff on a disposable schedule and show the active-state validation."
+      ],
+      "overlay": "Recurring reports na may malinaw na schedule",
+      "layout": "config",
+      "presenter_note": "Do not activate or change real recurring schedules while recording. Search supports enrolled names, roles and divisions.",
+      "evidence": [
+        "E01",
+        "E04",
+        "E07",
+        "E08"
+      ],
+      "start": 960,
+      "end": 1020,
+      "timecode": "16:00-17:00",
+      "voiceover_words": 100,
+      "estimated_spoken_seconds": 46,
+      "demo_hold_seconds": 14,
+      "shots": [
+        {
+          "id": "S17-1",
+          "start": 960,
+          "end": 980,
+          "action": "Open Reference lists, Special Reports, Schedules.",
+          "voiceover": "Para sa recurring obligations, may Special Reports schedules. Sa Reference lists, puwedeng itakda ang report name, frequency, reporting months, generation day, deadline threshold at responsible people o division focals.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S17-2",
+          "start": 980,
+          "end": 1000,
+          "action": "Show monthly, quarterly, specific-month and annual choices, generation day and working-day threshold.",
+          "voiceover": "Available ang monthly, quarterly, specific months at annual schedules. Ang generation ay para sa reporting period na natapos, at ang configured generation day ay nasa kasunod na buwan. Ipakita natin ang isang malinaw na monthly example.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S17-3",
+          "start": 1000,
+          "end": 1020,
+          "action": "Assign current staff on a disposable schedule and show the active-state validation.",
+          "voiceover": "Dapat may eligible responsible person bago i-activate ang schedule. Ang initial starter schedules ay inactive at unassigned. Hindi sapat na may report name lang; kailangang kumpleto ang configuration at responsibility para makabuo ng tamang assignment.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        }
+      ],
+      "capture_status": "Capture planned; reference stills are not final footage",
+      "reference_image": "assets/capture-S17.png",
+      "generation_prompt": "Create a 16:9 editorial scene using the supplied authentic DTS screen recording for Reference lists > Special Reports; use assets/capture-S17.png as the framing reference. Focus: Pag-configure ng Special Reports. Overlay exactly: Recurring reports na may malinaw na schedule. Preserve interface text and actual actions. Use a restrained crop or highlight that follows the spoken cue. Narration is the three supplied Taglish paragraphs in order. Reserve the lower 17 percent for captions. Do not synthesize buttons, records, integrations, notifications or successful actions. Required qualification: Do not activate or change real recurring schedules while recording. Search supports enrolled names, roles and divisions."
+    },
+    {
+      "id": "S18",
+      "title": "Generated Special Reports at review workflow",
+      "chapter": "Reports",
+      "role": "Assigned staff and reviewers",
+      "route": "CMED Regular Reports > Special Report / My work",
+      "duration": 60,
+      "voiceover": [
+        "Kapag due na ang schedule, ang server ang gumagawa ng report at assignment. Chine-check ito sa startup at periodically; may catch-up para sa missed generation dates at may protection laban sa duplicate obligation para sa parehong schedule at period.",
+        "Sa assigned staff account, lalabas ang report sa My work. Dadaan ito sa submission, review, possible compliance, clearance at log out. Nananatili ang assignment history kahit may allowed reassignment bago pumasok sa review.",
+        "May Special Report tab sa regular reporting area at kasama ang generated records sa relevant monitoring. Ang generation ay hindi automatic submission ng report content. Ang staff pa rin ang kailangang gumawa ng output at kumpletuhin ang review process."
+      ],
+      "actions": [
+        "Show an existing generated report with period, deadline and responsible staff.",
+        "Open it from My work; demonstrate one submission and compliance example.",
+        "Show generated-report assignment history and a released report in reporting."
+      ],
+      "overlay": "Auto generation ay simula ng obligation",
+      "layout": "special",
+      "presenter_note": "Do not claim automatic Drive folders, email delivery or Personnel Schedule events. The generator uses configured working-day deadlines.",
+      "evidence": [
+        "E01",
+        "E04",
+        "E07",
+        "E08"
+      ],
+      "start": 1020,
+      "end": 1080,
+      "timecode": "17:00-18:00",
+      "voiceover_words": 111,
+      "estimated_spoken_seconds": 51,
+      "demo_hold_seconds": 9,
+      "shots": [
+        {
+          "id": "S18-1",
+          "start": 1020,
+          "end": 1040,
+          "action": "Show an existing generated report with period, deadline and responsible staff.",
+          "voiceover": "Kapag due na ang schedule, ang server ang gumagawa ng report at assignment. Chine-check ito sa startup at periodically; may catch-up para sa missed generation dates at may protection laban sa duplicate obligation para sa parehong schedule at period.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S18-2",
+          "start": 1040,
+          "end": 1060,
+          "action": "Open it from My work; demonstrate one submission and compliance example.",
+          "voiceover": "Sa assigned staff account, lalabas ang report sa My work. Dadaan ito sa submission, review, possible compliance, clearance at log out. Nananatili ang assignment history kahit may allowed reassignment bago pumasok sa review.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S18-3",
+          "start": 1060,
+          "end": 1080,
+          "action": "Show generated-report assignment history and a released report in reporting.",
+          "voiceover": "May Special Report tab sa regular reporting area at kasama ang generated records sa relevant monitoring. Ang generation ay hindi automatic submission ng report content. Ang staff pa rin ang kailangang gumawa ng output at kumpletuhin ang review process.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        }
+      ],
+      "capture_status": "Capture planned; reference stills are not final footage",
+      "reference_image": "assets/capture-S18.png",
+      "generation_prompt": "Create a 16:9 editorial scene using the supplied authentic DTS screen recording for CMED Regular Reports > Special Report / My work; use assets/capture-S18.png as the framing reference. Focus: Generated Special Reports at review workflow. Overlay exactly: Auto generation ay simula ng obligation. Preserve interface text and actual actions. Use a restrained crop or highlight that follows the spoken cue. Narration is the three supplied Taglish paragraphs in order. Reserve the lower 17 percent for captions. Do not synthesize buttons, records, integrations, notifications or successful actions. Required qualification: Do not claim automatic Drive folders, email delivery or Personnel Schedule events. The generator uses configured working-day deadlines."
+    },
+    {
+      "id": "S19",
+      "title": "Personnel Schedule para sa availability",
+      "chapter": "Scheduling",
+      "role": "Viewer then user with schedule management permission",
+      "route": "#/schedule",
+      "duration": 60,
+      "voiceover": [
+        "Bukod sa documents, may Personnel Schedule para sa inspections, leave at meetings. Ang personnel ay mula rin sa enrolled user accounts, kaya hindi na kailangan ng hiwalay na pangalanan ulit ang parehong staff.",
+        "May Month, Week, Day at Agenda views. Puwedeng mag-filter at tingnan ang date range at mga taong kasali. Ang pag-add, edit at delete ay para sa account na may schedule-management permission.",
+        "Kapag may overlapping activity para sa parehong tao, may conflict warning. Puwedeng i-review ng authorized user at i-confirm ang Save anyway. Ang leave ay whole-day availability; hindi nito automatic na pinapalitan ang OIC o document assignee."
+      ],
+      "actions": [
+        "Show all four calendar views and a personnel filter.",
+        "Create one test inspection, leave entry and meeting; show shared participants.",
+        "Trigger an overlap warning, explain confirmation, then show the saved schedule details."
+      ],
+      "overlay": "I-check ang availability at conflicts",
+      "layout": "calendar",
+      "presenter_note": "Inspection project is free text with suggestions from prior entries, not a separate project-management module. No automatic leave-to-OIC linkage.",
+      "evidence": [
+        "E01",
+        "E05",
+        "E07",
+        "E08"
+      ],
+      "start": 1080,
+      "end": 1140,
+      "timecode": "18:00-19:00",
+      "voiceover_words": 100,
+      "estimated_spoken_seconds": 46,
+      "demo_hold_seconds": 14,
+      "shots": [
+        {
+          "id": "S19-1",
+          "start": 1080,
+          "end": 1100,
+          "action": "Show all four calendar views and a personnel filter.",
+          "voiceover": "Bukod sa documents, may Personnel Schedule para sa inspections, leave at meetings. Ang personnel ay mula rin sa enrolled user accounts, kaya hindi na kailangan ng hiwalay na pangalanan ulit ang parehong staff.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S19-2",
+          "start": 1100,
+          "end": 1120,
+          "action": "Create one test inspection, leave entry and meeting; show shared participants.",
+          "voiceover": "May Month, Week, Day at Agenda views. Puwedeng mag-filter at tingnan ang date range at mga taong kasali. Ang pag-add, edit at delete ay para sa account na may schedule-management permission.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S19-3",
+          "start": 1120,
+          "end": 1140,
+          "action": "Trigger an overlap warning, explain confirmation, then show the saved schedule details.",
+          "voiceover": "Kapag may overlapping activity para sa parehong tao, may conflict warning. Puwedeng i-review ng authorized user at i-confirm ang Save anyway. Ang leave ay whole-day availability; hindi nito automatic na pinapalitan ang OIC o document assignee.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        }
+      ],
+      "capture_status": "Capture planned; reference stills are not final footage",
+      "reference_image": "assets/capture-S19.png",
+      "generation_prompt": "Create a 16:9 editorial scene using the supplied authentic DTS screen recording for #/schedule; use assets/capture-S19.png as the framing reference. Focus: Personnel Schedule para sa availability. Overlay exactly: I-check ang availability at conflicts. Preserve interface text and actual actions. Use a restrained crop or highlight that follows the spoken cue. Narration is the three supplied Taglish paragraphs in order. Reserve the lower 17 percent for captions. Do not synthesize buttons, records, integrations, notifications or successful actions. Required qualification: Inspection project is free text with suggestions from prior entries, not a separate project-management module. No automatic leave-to-OIC linkage."
+    },
+    {
+      "id": "S20",
+      "title": "Analytics at tamang pagbasa ng metrics",
+      "chapter": "Monitoring",
+      "role": "User with report permission",
+      "route": "#/analytics",
+      "duration": 60,
+      "voiceover": [
+        "Sa Insights, buksan ang Analytics at piliin ang reporting period at division. Makikita ang document volume, open at finished work, on-time rate, average turnaround at supporting breakdowns.",
+        "May kahulugan ang bawat date basis. Ang receipt cohort ay batay sa date received. Ang released-in-period ay batay sa release date, kahit mas maaga natanggap ang document. Ang current backlog ay open records ngayon mula sa lahat ng receipt dates.",
+        "Ang turnaround na ipinapakita ay working days mula assignment hanggang clearance, hindi simpleng receipt-to-dispatch time. Basahin din ang cohort at threshold bago mag-compare ng staff o division. Hindi natin tatawaging productivity score ang isang number na walang context."
+      ],
+      "actions": [
+        "Open Analytics and set a visible month range and division.",
+        "Highlight the receipt, release and current-backlog KPI notes.",
+        "Point to turnaround and on-time labels, then staff/document/transaction breakdown tables."
+      ],
+      "overlay": "Basahin ang date basis bago mag-compare",
+      "layout": "analytics",
+      "presenter_note": "Finished metrics can include records with a stopped clock at clearance. Retain the distinction from final release.",
+      "evidence": [
+        "E02",
+        "E03",
+        "E08"
+      ],
+      "start": 1140,
+      "end": 1200,
+      "timecode": "19:00-20:00",
+      "voiceover_words": 105,
+      "estimated_spoken_seconds": 48,
+      "demo_hold_seconds": 12,
+      "shots": [
+        {
+          "id": "S20-1",
+          "start": 1140,
+          "end": 1160,
+          "action": "Open Analytics and set a visible month range and division.",
+          "voiceover": "Sa Insights, buksan ang Analytics at piliin ang reporting period at division. Makikita ang document volume, open at finished work, on-time rate, average turnaround at supporting breakdowns.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S20-2",
+          "start": 1160,
+          "end": 1180,
+          "action": "Highlight the receipt, release and current-backlog KPI notes.",
+          "voiceover": "May kahulugan ang bawat date basis. Ang receipt cohort ay batay sa date received. Ang released-in-period ay batay sa release date, kahit mas maaga natanggap ang document. Ang current backlog ay open records ngayon mula sa lahat ng receipt dates.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S20-3",
+          "start": 1180,
+          "end": 1200,
+          "action": "Point to turnaround and on-time labels, then staff/document/transaction breakdown tables.",
+          "voiceover": "Ang turnaround na ipinapakita ay working days mula assignment hanggang clearance, hindi simpleng receipt-to-dispatch time. Basahin din ang cohort at threshold bago mag-compare ng staff o division. Hindi natin tatawaging productivity score ang isang number na walang context.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        }
+      ],
+      "capture_status": "Capture planned; reference stills are not final footage",
+      "reference_image": "assets/capture-S20.png",
+      "generation_prompt": "Create a 16:9 editorial scene using the supplied authentic DTS screen recording for #/analytics; use assets/capture-S20.png as the framing reference. Focus: Analytics at tamang pagbasa ng metrics. Overlay exactly: Basahin ang date basis bago mag-compare. Preserve interface text and actual actions. Use a restrained crop or highlight that follows the spoken cue. Narration is the three supplied Taglish paragraphs in order. Reserve the lower 17 percent for captions. Do not synthesize buttons, records, integrations, notifications or successful actions. Required qualification: Finished metrics can include records with a stopped clock at clearance. Retain the distinction from final release."
+    },
+    {
+      "id": "S21",
+      "title": "Charts at drilldown sa actual records",
+      "chapter": "Monitoring",
+      "role": "User with report permission",
+      "route": "#/graphs",
+      "duration": 60,
+      "voiceover": [
+        "Sa Charts, mas madaling makita ang volume by month, received at released records, finished on time o late, status mix at deadline health. May view rin ng workload at time sa current desk.",
+        "Kapag may malaking overdue o desk-age group, puwedeng piliin ang applicable chart bar o desk para buksan ang matching registry records. Nananatili ang relevant reporting filters para may malinaw na koneksiyon ang chart at underlying list.",
+        "Gamitin natin ang drilldown para mag-verify. Hindi sapat ang mataas na bar lang; tingnan kung anong documents ang nasa likod nito, sino ang current assignee, at anong action ang kailangan. Mas nagiging specific ang follow-up kapag record-level na ang usapan."
+      ],
+      "actions": [
+        "Show monthly volume, status mix, deadline health and staff workload.",
+        "Click an age band or desk and inspect the filtered registry.",
+        "Open one matching document, then return to the selected chart context."
+      ],
+      "overlay": "Mula summary papunta sa matching documents",
+      "layout": "charts",
+      "presenter_note": "Some charts show the selected receipt cohort while release totals use release dates. Keep visible period labels in every capture.",
+      "evidence": [
+        "E02",
+        "E03"
+      ],
+      "start": 1200,
+      "end": 1260,
+      "timecode": "20:00-21:00",
+      "voiceover_words": 109,
+      "estimated_spoken_seconds": 50,
+      "demo_hold_seconds": 10,
+      "shots": [
+        {
+          "id": "S21-1",
+          "start": 1200,
+          "end": 1220,
+          "action": "Show monthly volume, status mix, deadline health and staff workload.",
+          "voiceover": "Sa Charts, mas madaling makita ang volume by month, received at released records, finished on time o late, status mix at deadline health. May view rin ng workload at time sa current desk.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S21-2",
+          "start": 1220,
+          "end": 1240,
+          "action": "Click an age band or desk and inspect the filtered registry.",
+          "voiceover": "Kapag may malaking overdue o desk-age group, puwedeng piliin ang applicable chart bar o desk para buksan ang matching registry records. Nananatili ang relevant reporting filters para may malinaw na koneksiyon ang chart at underlying list.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S21-3",
+          "start": 1240,
+          "end": 1260,
+          "action": "Open one matching document, then return to the selected chart context.",
+          "voiceover": "Gamitin natin ang drilldown para mag-verify. Hindi sapat ang mataas na bar lang; tingnan kung anong documents ang nasa likod nito, sino ang current assignee, at anong action ang kailangan. Mas nagiging specific ang follow-up kapag record-level na ang usapan.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        }
+      ],
+      "capture_status": "Capture planned; reference stills are not final footage",
+      "reference_image": "assets/capture-S21.png",
+      "generation_prompt": "Create a 16:9 editorial scene using the supplied authentic DTS screen recording for #/graphs; use assets/capture-S21.png as the framing reference. Focus: Charts at drilldown sa actual records. Overlay exactly: Mula summary papunta sa matching documents. Preserve interface text and actual actions. Use a restrained crop or highlight that follows the spoken cue. Narration is the three supplied Taglish paragraphs in order. Reserve the lower 17 percent for captions. Do not synthesize buttons, records, integrations, notifications or successful actions. Required qualification: Some charts show the selected receipt cohort while release totals use release dates. Keep visible period labels in every capture."
+    },
+    {
+      "id": "S22",
+      "title": "Print CSV at selected outputs",
+      "chapter": "Monitoring",
+      "role": "User with print and export permission",
+      "route": "Registry / Analytics / Charts / Audit",
+      "duration": 60,
+      "voiceover": [
+        "Kung kailangan ng offline copy o supporting list para sa meeting, may print at CSV tools sa relevant pages. Sa registry, puwedeng current filtered records o selected records ang output, depende sa kasalukuyang selection.",
+        "May routing slip para sa document history, registry printout, analytics summary, division performance output at chart printing. I-check ang heading, period, division at record count bago mag-print o mag-share.",
+        "Ang exported CSV ay para sa spreadsheet analysis; hindi ito CSV import feature. Kapag may selection, siguraduhing iyon talaga ang gustong i-export. Ipakita natin ang preview at file contents para makita na tugma ang output sa scope na pinili."
+      ],
+      "actions": [
+        "Filter the registry and export a CSV; verify headers, count and scope.",
+        "Show a routing slip, analytics print preview and a division-performance export.",
+        "Show chart print and audit output controls only under authorized accounts."
+      ],
+      "overlay": "I-verify ang scope bago mag-share",
+      "layout": "exports",
+      "presenter_note": "A printable chart page may depend on browser print settings. Do not portray exports as automatic scheduled distribution.",
+      "evidence": [
+        "E02",
+        "E03",
+        "E07"
+      ],
+      "start": 1260,
+      "end": 1320,
+      "timecode": "21:00-22:00",
+      "voiceover_words": 102,
+      "estimated_spoken_seconds": 47,
+      "demo_hold_seconds": 13,
+      "shots": [
+        {
+          "id": "S22-1",
+          "start": 1260,
+          "end": 1280,
+          "action": "Filter the registry and export a CSV; verify headers, count and scope.",
+          "voiceover": "Kung kailangan ng offline copy o supporting list para sa meeting, may print at CSV tools sa relevant pages. Sa registry, puwedeng current filtered records o selected records ang output, depende sa kasalukuyang selection.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S22-2",
+          "start": 1280,
+          "end": 1300,
+          "action": "Show a routing slip, analytics print preview and a division-performance export.",
+          "voiceover": "May routing slip para sa document history, registry printout, analytics summary, division performance output at chart printing. I-check ang heading, period, division at record count bago mag-print o mag-share.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S22-3",
+          "start": 1300,
+          "end": 1320,
+          "action": "Show chart print and audit output controls only under authorized accounts.",
+          "voiceover": "Ang exported CSV ay para sa spreadsheet analysis; hindi ito CSV import feature. Kapag may selection, siguraduhing iyon talaga ang gustong i-export. Ipakita natin ang preview at file contents para makita na tugma ang output sa scope na pinili.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        }
+      ],
+      "capture_status": "Capture planned; reference stills are not final footage",
+      "reference_image": "assets/capture-S22.png",
+      "generation_prompt": "Create a 16:9 editorial scene using the supplied authentic DTS screen recording for Registry / Analytics / Charts / Audit; use assets/capture-S22.png as the framing reference. Focus: Print CSV at selected outputs. Overlay exactly: I-verify ang scope bago mag-share. Preserve interface text and actual actions. Use a restrained crop or highlight that follows the spoken cue. Narration is the three supplied Taglish paragraphs in order. Reserve the lower 17 percent for captions. Do not synthesize buttons, records, integrations, notifications or successful actions. Required qualification: A printable chart page may depend on browser print settings. Do not portray exports as automatic scheduled distribution."
+    },
+    {
+      "id": "S23",
+      "title": "Users roles at division focals",
+      "chapter": "Administration",
+      "role": "System Administrator",
+      "route": "#/users > #/roles > #/divisions",
+      "duration": 60,
+      "voiceover": [
+        "Sa Users, makikita ang enrolled accounts, role, division, active state at last sign-in information. Ang administrator ang may control sa account creation, maintenance at password reset ayon sa available permissions.",
+        "Sa Roles and permissions, nakikita kung anong actions ang pinapayagan sa bawat role. May desk conditions pa rin: halimbawa, assignment para sa tamang focal at submission para sa assigned staff. Ang System Administrator ay may broad administrative authority.",
+        "Sa Divisions and focals, itinatakda kung sino ang receiving focal ng bawat division. Hindi dapat basta i-deactivate ang configured focal nang walang kapalit. Ang changes sa role at assignment ay dapat sinasadya, dahil nakaaapekto ang mga ito sa queues, routing at reporting ownership."
+      ],
+      "actions": [
+        "Open the current 18-account roster; highlight role/division/active columns.",
+        "Show the permission matrix without changing real permissions.",
+        "Open Divisions and focals and show the current CMED/CMSD focal mappings."
+      ],
+      "overlay": "Configuration na nakaaapekto sa actual work",
+      "layout": "admin",
+      "presenter_note": "Explain account deactivation and reset verbally or in an isolated copy. General viewing policy is distinct from action permissions.",
+      "evidence": [
+        "E01",
+        "E02",
+        "E07",
+        "E10"
+      ],
+      "start": 1320,
+      "end": 1380,
+      "timecode": "22:00-23:00",
+      "voiceover_words": 111,
+      "estimated_spoken_seconds": 51,
+      "demo_hold_seconds": 9,
+      "shots": [
+        {
+          "id": "S23-1",
+          "start": 1320,
+          "end": 1340,
+          "action": "Open the current 18-account roster; highlight role/division/active columns.",
+          "voiceover": "Sa Users, makikita ang enrolled accounts, role, division, active state at last sign-in information. Ang administrator ang may control sa account creation, maintenance at password reset ayon sa available permissions.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S23-2",
+          "start": 1340,
+          "end": 1360,
+          "action": "Show the permission matrix without changing real permissions.",
+          "voiceover": "Sa Roles and permissions, nakikita kung anong actions ang pinapayagan sa bawat role. May desk conditions pa rin: halimbawa, assignment para sa tamang focal at submission para sa assigned staff. Ang System Administrator ay may broad administrative authority.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S23-3",
+          "start": 1360,
+          "end": 1380,
+          "action": "Open Divisions and focals and show the current CMED/CMSD focal mappings.",
+          "voiceover": "Sa Divisions and focals, itinatakda kung sino ang receiving focal ng bawat division. Hindi dapat basta i-deactivate ang configured focal nang walang kapalit. Ang changes sa role at assignment ay dapat sinasadya, dahil nakaaapekto ang mga ito sa queues, routing at reporting ownership.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        }
+      ],
+      "capture_status": "Capture planned; reference stills are not final footage",
+      "reference_image": "assets/capture-S23.png",
+      "generation_prompt": "Create a 16:9 editorial scene using the supplied authentic DTS screen recording for #/users > #/roles > #/divisions; use assets/capture-S23.png as the framing reference. Focus: Users roles at division focals. Overlay exactly: Configuration na nakaaapekto sa actual work. Preserve interface text and actual actions. Use a restrained crop or highlight that follows the spoken cue. Narration is the three supplied Taglish paragraphs in order. Reserve the lower 17 percent for captions. Do not synthesize buttons, records, integrations, notifications or successful actions. Required qualification: Explain account deactivation and reset verbally or in an isolated copy. General viewing policy is distinct from action permissions."
+    },
+    {
+      "id": "S24",
+      "title": "Delegation presence at OIC",
+      "chapter": "Administration",
+      "role": "Manager and authorized OIC administrator",
+      "route": "#/delegation",
+      "duration": 60,
+      "voiceover": [
+        "Kapag wala ang usual approving manager, may Delegation and OIC page para makita ang configured availability at final-review responsibility. Nandito ang manager presence at nominated OIC.",
+        "Ang resolver ay tumitingin sa present Department Manager, applicable Division Managers at enabled eligible OIC ayon sa current rules. May authorized clearance paths din sa operational engine, kaya sundin ang actual account permissions at action panel.",
+        "Manually maintained ang manager presence at OIC setup. Hindi ito automatic na ine-enable dahil lang may leave entry sa Personnel Schedule, at walang automatic delegation-expiry workflow na dapat i-assume. Sa demo, ibalik ang test configuration pagkatapos ipakita ang fallback."
+      ],
+      "actions": [
+        "Show the current final-review responsibility banner.",
+        "On a disposable copy, demonstrate present/away states and OIC nomination/enable controls.",
+        "Restore original test presence/OIC settings and point back to the applicable document action."
+      ],
+      "overlay": "Malinaw na authority kapag may absent",
+      "layout": "delegation",
+      "presenter_note": "Avoid claiming that all clearance is universally blocked whenever a manager is away; existing authorized exceptions must remain explicit.",
+      "evidence": [
+        "E01",
+        "E02",
+        "E07"
+      ],
+      "start": 1380,
+      "end": 1440,
+      "timecode": "23:00-24:00",
+      "voiceover_words": 101,
+      "estimated_spoken_seconds": 47,
+      "demo_hold_seconds": 13,
+      "shots": [
+        {
+          "id": "S24-1",
+          "start": 1380,
+          "end": 1400,
+          "action": "Show the current final-review responsibility banner.",
+          "voiceover": "Kapag wala ang usual approving manager, may Delegation and OIC page para makita ang configured availability at final-review responsibility. Nandito ang manager presence at nominated OIC.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S24-2",
+          "start": 1400,
+          "end": 1420,
+          "action": "On a disposable copy, demonstrate present/away states and OIC nomination/enable controls.",
+          "voiceover": "Ang resolver ay tumitingin sa present Department Manager, applicable Division Managers at enabled eligible OIC ayon sa current rules. May authorized clearance paths din sa operational engine, kaya sundin ang actual account permissions at action panel.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S24-3",
+          "start": 1420,
+          "end": 1440,
+          "action": "Restore original test presence/OIC settings and point back to the applicable document action.",
+          "voiceover": "Manually maintained ang manager presence at OIC setup. Hindi ito automatic na ine-enable dahil lang may leave entry sa Personnel Schedule, at walang automatic delegation-expiry workflow na dapat i-assume. Sa demo, ibalik ang test configuration pagkatapos ipakita ang fallback.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        }
+      ],
+      "capture_status": "Capture planned; reference stills are not final footage",
+      "reference_image": "assets/capture-S24.png",
+      "generation_prompt": "Create a 16:9 editorial scene using the supplied authentic DTS screen recording for #/delegation; use assets/capture-S24.png as the framing reference. Focus: Delegation presence at OIC. Overlay exactly: Malinaw na authority kapag may absent. Preserve interface text and actual actions. Use a restrained crop or highlight that follows the spoken cue. Narration is the three supplied Taglish paragraphs in order. Reserve the lower 17 percent for captions. Do not synthesize buttons, records, integrations, notifications or successful actions. Required qualification: Avoid claiming that all clearance is universally blocked whenever a manager is away; existing authorized exceptions must remain explicit."
+    },
+    {
+      "id": "S25",
+      "title": "Reference lists at business rules",
+      "chapter": "Administration",
+      "role": "User with configuration permission",
+      "route": "#/refs",
+      "duration": 60,
+      "voiceover": [
+        "Sa Reference lists nakalagay ang options at rules na paulit-ulit ginagamit sa system. Kasama ang Transactions, Document types, Communication types, Leave types, Holidays, Report designations at Special Reports.",
+        "Sa document types, puwedeng i-configure ang prescribed threshold, unit at deadline basis. Sa report designations, itinatakda ang responsible staff ng bawat region o office. Sa holidays, nakasalalay ang working-day calculations.",
+        "Ang active o inactive na state ay mahalaga para sa bagong entries at historical records. May dependency checks sa ilang ginagamit nang references. Bago magbago ng business rule, i-review ang epekto at sundin ang authorized configuration process."
+      ],
+      "actions": [
+        "Walk through all seven Reference list tabs with their actual labels.",
+        "Open a document-type dialog; highlight threshold, basis, unit and active state.",
+        "Show Holidays and Report designations, then a protected used-reference example on the test copy."
+      ],
+      "overlay": "Dito nanggagaling ang maraming operational rules",
+      "layout": "config",
+      "presenter_note": "Do not delete historical references for cosmetic cleanup. Changes generally govern subsequent computation/generation rather than rewriting all historical workflow records.",
+      "evidence": [
+        "E01",
+        "E02",
+        "E07",
+        "E08"
+      ],
+      "start": 1440,
+      "end": 1500,
+      "timecode": "24:00-25:00",
+      "voiceover_words": 95,
+      "estimated_spoken_seconds": 44,
+      "demo_hold_seconds": 16,
+      "shots": [
+        {
+          "id": "S25-1",
+          "start": 1440,
+          "end": 1460,
+          "action": "Walk through all seven Reference list tabs with their actual labels.",
+          "voiceover": "Sa Reference lists nakalagay ang options at rules na paulit-ulit ginagamit sa system. Kasama ang Transactions, Document types, Communication types, Leave types, Holidays, Report designations at Special Reports.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S25-2",
+          "start": 1460,
+          "end": 1480,
+          "action": "Open a document-type dialog; highlight threshold, basis, unit and active state.",
+          "voiceover": "Sa document types, puwedeng i-configure ang prescribed threshold, unit at deadline basis. Sa report designations, itinatakda ang responsible staff ng bawat region o office. Sa holidays, nakasalalay ang working-day calculations.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S25-3",
+          "start": 1480,
+          "end": 1500,
+          "action": "Show Holidays and Report designations, then a protected used-reference example on the test copy.",
+          "voiceover": "Ang active o inactive na state ay mahalaga para sa bagong entries at historical records. May dependency checks sa ilang ginagamit nang references. Bago magbago ng business rule, i-review ang epekto at sundin ang authorized configuration process.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        }
+      ],
+      "capture_status": "Capture planned; reference stills are not final footage",
+      "reference_image": "assets/capture-S25.png",
+      "generation_prompt": "Create a 16:9 editorial scene using the supplied authentic DTS screen recording for #/refs; use assets/capture-S25.png as the framing reference. Focus: Reference lists at business rules. Overlay exactly: Dito nanggagaling ang maraming operational rules. Preserve interface text and actual actions. Use a restrained crop or highlight that follows the spoken cue. Narration is the three supplied Taglish paragraphs in order. Reserve the lower 17 percent for captions. Do not synthesize buttons, records, integrations, notifications or successful actions. Required qualification: Do not delete historical references for cosmetic cleanup. Changes generally govern subsequent computation/generation rather than rewriting all historical workflow records."
+    },
+    {
+      "id": "S26",
+      "title": "Settings at everyday usability",
+      "chapter": "Administration",
+      "role": "Administrator and ordinary staff comparison",
+      "route": "#/settings and account menu",
+      "duration": 60,
+      "voiceover": [
+        "Sa System Admin Settings, may office name, tracking prefix, inactivity timeout, due-soon threshold, desk limits, resubmission policy at cursor particle trail. Ang mga ito ay system behavior settings na kailangang i-review bago i-save.",
+        "Sa ordinary use, may keyboard shortcuts, responsive tables, clear saving feedback at protection kapag may unsaved changes. May focus handling sa dialogs para mas maayos ang keyboard navigation.",
+        "Puwedeng itoggle ang decorative cursor effect, at may respect ito sa reduced-motion preference. Ang theme at saved registry preferences ay browser-level conveniences. Ang system settings naman ay server-saved at lumalabas sa ibang users sa normal refresh cycle."
+      ],
+      "actions": [
+        "Show each settings field without changing the live configuration.",
+        "Open keyboard shortcuts; show an unsaved-change prompt on a disposable form.",
+        "Show light/dark theme and reduced-motion-friendly cursor settings briefly."
+      ],
+      "overlay": "Mas malinaw na feedback sa araw-araw na use",
+      "layout": "settings",
+      "presenter_note": "Keep cursor effects subtle in the recording. Do not claim a formal accessibility certification.",
+      "evidence": [
+        "E02",
+        "E03",
+        "E08"
+      ],
+      "start": 1500,
+      "end": 1560,
+      "timecode": "25:00-26:00",
+      "voiceover_words": 98,
+      "estimated_spoken_seconds": 45,
+      "demo_hold_seconds": 15,
+      "shots": [
+        {
+          "id": "S26-1",
+          "start": 1500,
+          "end": 1520,
+          "action": "Show each settings field without changing the live configuration.",
+          "voiceover": "Sa System Admin Settings, may office name, tracking prefix, inactivity timeout, due-soon threshold, desk limits, resubmission policy at cursor particle trail. Ang mga ito ay system behavior settings na kailangang i-review bago i-save.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S26-2",
+          "start": 1520,
+          "end": 1540,
+          "action": "Open keyboard shortcuts; show an unsaved-change prompt on a disposable form.",
+          "voiceover": "Sa ordinary use, may keyboard shortcuts, responsive tables, clear saving feedback at protection kapag may unsaved changes. May focus handling sa dialogs para mas maayos ang keyboard navigation.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S26-3",
+          "start": 1540,
+          "end": 1560,
+          "action": "Show light/dark theme and reduced-motion-friendly cursor settings briefly.",
+          "voiceover": "Puwedeng itoggle ang decorative cursor effect, at may respect ito sa reduced-motion preference. Ang theme at saved registry preferences ay browser-level conveniences. Ang system settings naman ay server-saved at lumalabas sa ibang users sa normal refresh cycle.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        }
+      ],
+      "capture_status": "Capture planned; reference stills are not final footage",
+      "reference_image": "assets/capture-S26.png",
+      "generation_prompt": "Create a 16:9 editorial scene using the supplied authentic DTS screen recording for #/settings and account menu; use assets/capture-S26.png as the framing reference. Focus: Settings at everyday usability. Overlay exactly: Mas malinaw na feedback sa araw-araw na use. Preserve interface text and actual actions. Use a restrained crop or highlight that follows the spoken cue. Narration is the three supplied Taglish paragraphs in order. Reserve the lower 17 percent for captions. Do not synthesize buttons, records, integrations, notifications or successful actions. Required qualification: Keep cursor effects subtle in the recording. Do not claim a formal accessibility certification."
+    },
+    {
+      "id": "S27",
+      "title": "Audit log para sa traceability",
+      "chapter": "Administration",
+      "role": "User with audit permission",
+      "route": "#/audit",
+      "duration": 60,
+      "voiceover": [
+        "Bukod sa movement history ng isang document, may Audit log para sa system activity. Kasama rito ang sign-ins, document actions at administrative changes na nire-record ng server.",
+        "Puwedeng mag-search ng relevant entries at gumamit ng available print o export controls. Ang screen ay nagpapakita ng latest matching entries sa supported limit; hindi ito unlimited full-history search sa bawat lumang event.",
+        "Para sa isang concern, magsimula sa document history, saka i-correlate sa audit entry kung kailangan. May user, time, action at detail para mas madaling ma-review ang nangyari. Hindi natin ilalarawan itong tamper-proof compliance certification o legal electronic-signature system."
+      ],
+      "actions": [
+        "Search the audit log using the hero tracking number or a distinctive action detail.",
+        "Point to timestamp, user, action and detail columns.",
+        "Compare one audit action with the hero document movement entry; show export permission."
+      ],
+      "overlay": "Document history at system activity may sariling view",
+      "layout": "audit",
+      "presenter_note": "Current audit query searches a recent server-side window and displays up to 200 matches. Use current visible labels rather than claiming unlimited audit retention.",
+      "evidence": [
+        "E02",
+        "E07"
+      ],
+      "start": 1560,
+      "end": 1620,
+      "timecode": "26:00-27:00",
+      "voiceover_words": 98,
+      "estimated_spoken_seconds": 45,
+      "demo_hold_seconds": 15,
+      "shots": [
+        {
+          "id": "S27-1",
+          "start": 1560,
+          "end": 1580,
+          "action": "Search the audit log using the hero tracking number or a distinctive action detail.",
+          "voiceover": "Bukod sa movement history ng isang document, may Audit log para sa system activity. Kasama rito ang sign-ins, document actions at administrative changes na nire-record ng server.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S27-2",
+          "start": 1580,
+          "end": 1600,
+          "action": "Point to timestamp, user, action and detail columns.",
+          "voiceover": "Puwedeng mag-search ng relevant entries at gumamit ng available print o export controls. Ang screen ay nagpapakita ng latest matching entries sa supported limit; hindi ito unlimited full-history search sa bawat lumang event.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S27-3",
+          "start": 1600,
+          "end": 1620,
+          "action": "Compare one audit action with the hero document movement entry; show export permission.",
+          "voiceover": "Para sa isang concern, magsimula sa document history, saka i-correlate sa audit entry kung kailangan. May user, time, action at detail para mas madaling ma-review ang nangyari. Hindi natin ilalarawan itong tamper-proof compliance certification o legal electronic-signature system.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        }
+      ],
+      "capture_status": "Capture planned; reference stills are not final footage",
+      "reference_image": "assets/capture-S27.png",
+      "generation_prompt": "Create a 16:9 editorial scene using the supplied authentic DTS screen recording for #/audit; use assets/capture-S27.png as the framing reference. Focus: Audit log para sa traceability. Overlay exactly: Document history at system activity may sariling view. Preserve interface text and actual actions. Use a restrained crop or highlight that follows the spoken cue. Narration is the three supplied Taglish paragraphs in order. Reserve the lower 17 percent for captions. Do not synthesize buttons, records, integrations, notifications or successful actions. Required qualification: Current audit query searches a recent server-side window and displays up to 200 matches. Use current visible labels rather than claiming unlimited audit retention."
+    },
+    {
+      "id": "S28",
+      "title": "Backup restore at recovery",
+      "chapter": "Administration",
+      "role": "Administrator with data permission",
+      "route": "#/settings > Settings and data",
+      "duration": 60,
+      "voiceover": [
+        "May administrator tools para sa full JSON backup at restore. Naka-include ang core configuration at supported records, kaya iba ito sa isang filtered CSV report.",
+        "Sa restore, vini-validate ang supplied data at may recovery copy bago palitan ang stored state. Sa server, may daily SQLite backups at retention para sa recent backup files. Kailangan pa rin ng approved off-machine backup routine.",
+        "Sa showcase, ipapakita natin ang controls at prepared results sa isolated test copy. Hindi tayo magre-restore o mag-clear ng real records habang nagpe-present. Pagkatapos ng authorized recovery, i-verify ang users, documents, schedules, reports at ability na mag-sign in."
+      ],
+      "actions": [
+        "Show Backup and Restore controls, keeping reset/clear actions visually separate.",
+        "Use a labelled test-only insert showing valid restore and rejected invalid restore results.",
+        "Show recovered counts and successful sign-in from the stress-test evidence."
+      ],
+      "overlay": "Backup ay kailangan ding ma-verify",
+      "layout": "backup",
+      "presenter_note": "Backups contain sensitive application/account data. Use approved storage; do not expose backup contents or password hashes in footage.",
+      "evidence": [
+        "E07",
+        "E08",
+        "E09"
+      ],
+      "start": 1620,
+      "end": 1680,
+      "timecode": "27:00-28:00",
+      "voiceover_words": 99,
+      "estimated_spoken_seconds": 46,
+      "demo_hold_seconds": 14,
+      "shots": [
+        {
+          "id": "S28-1",
+          "start": 1620,
+          "end": 1640,
+          "action": "Show Backup and Restore controls, keeping reset/clear actions visually separate.",
+          "voiceover": "May administrator tools para sa full JSON backup at restore. Naka-include ang core configuration at supported records, kaya iba ito sa isang filtered CSV report.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S28-2",
+          "start": 1640,
+          "end": 1660,
+          "action": "Use a labelled test-only insert showing valid restore and rejected invalid restore results.",
+          "voiceover": "Sa restore, vini-validate ang supplied data at may recovery copy bago palitan ang stored state. Sa server, may daily SQLite backups at retention para sa recent backup files. Kailangan pa rin ng approved off-machine backup routine.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S28-3",
+          "start": 1660,
+          "end": 1680,
+          "action": "Show recovered counts and successful sign-in from the stress-test evidence.",
+          "voiceover": "Sa showcase, ipapakita natin ang controls at prepared results sa isolated test copy. Hindi tayo magre-restore o mag-clear ng real records habang nagpe-present. Pagkatapos ng authorized recovery, i-verify ang users, documents, schedules, reports at ability na mag-sign in.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        }
+      ],
+      "capture_status": "Capture planned; reference stills are not final footage",
+      "reference_image": "assets/capture-S28.png",
+      "generation_prompt": "Create a 16:9 editorial scene using the supplied authentic DTS screen recording for #/settings > Settings and data; use assets/capture-S28.png as the framing reference. Focus: Backup restore at recovery. Overlay exactly: Backup ay kailangan ding ma-verify. Preserve interface text and actual actions. Use a restrained crop or highlight that follows the spoken cue. Narration is the three supplied Taglish paragraphs in order. Reserve the lower 17 percent for captions. Do not synthesize buttons, records, integrations, notifications or successful actions. Required qualification: Backups contain sensitive application/account data. Use approved storage; do not expose backup contents or password hashes in footage."
+    },
+    {
+      "id": "S29",
+      "title": "Workflow Designer at simulation",
+      "chapter": "Administration",
+      "role": "System Administrator",
+      "route": "#/workflow",
+      "duration": 60,
+      "voiceover": [
+        "May visual Workflow Designer para gumawa at mag-review ng workflow definitions. Puwedeng maglagay ng Start, Action, Decision at End, ayusin ang connectors, labels, properties at layout, at mag-save ng draft.",
+        "May validation, versioning, publish at simulation. Sa simulation, puwedeng gumamit ng sample document at makita ang branch path at candidate responsibility nang hindi binabago ang actual document workflow.",
+        "Sa current version, ang designer ay para sa drafting, publishing at simulation. Ang live document actions ay gumagamit pa rin ng existing operational engine; hindi pa enabled ang generic designer execution. Kaya huwag nating sabihing automatic nang magro-route ang documents dahil lang na-publish ang diagram."
+      ],
+      "actions": [
+        "Open a prepared draft with Start, Action, Decision and End; show properties and connector labels.",
+        "Show Arrange, fit, zoom, minimap, undo/redo, save state and a version selector.",
+        "Run validation and read-only simulation; place a visible current-scope label beside the result."
+      ],
+      "overlay": "Draft validate publish at simulate",
+      "layout": "designer",
+      "presenter_note": "Label the scene Designer and simulation. Do not animate a notification node as if it actually sends email or changes live assignments.",
+      "evidence": [
+        "E06",
+        "E07",
+        "E08"
+      ],
+      "start": 1680,
+      "end": 1740,
+      "timecode": "28:00-29:00",
+      "voiceover_words": 103,
+      "estimated_spoken_seconds": 48,
+      "demo_hold_seconds": 12,
+      "shots": [
+        {
+          "id": "S29-1",
+          "start": 1680,
+          "end": 1700,
+          "action": "Open a prepared draft with Start, Action, Decision and End; show properties and connector labels.",
+          "voiceover": "May visual Workflow Designer para gumawa at mag-review ng workflow definitions. Puwedeng maglagay ng Start, Action, Decision at End, ayusin ang connectors, labels, properties at layout, at mag-save ng draft.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S29-2",
+          "start": 1700,
+          "end": 1720,
+          "action": "Show Arrange, fit, zoom, minimap, undo/redo, save state and a version selector.",
+          "voiceover": "May validation, versioning, publish at simulation. Sa simulation, puwedeng gumamit ng sample document at makita ang branch path at candidate responsibility nang hindi binabago ang actual document workflow.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S29-3",
+          "start": 1720,
+          "end": 1740,
+          "action": "Run validation and read-only simulation; place a visible current-scope label beside the result.",
+          "voiceover": "Sa current version, ang designer ay para sa drafting, publishing at simulation. Ang live document actions ay gumagamit pa rin ng existing operational engine; hindi pa enabled ang generic designer execution. Kaya huwag nating sabihing automatic nang magro-route ang documents dahil lang na-publish ang diagram.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        }
+      ],
+      "capture_status": "Capture planned; reference stills are not final footage",
+      "reference_image": "assets/capture-S29.png",
+      "generation_prompt": "Create a 16:9 editorial scene using the supplied authentic DTS screen recording for #/workflow; use assets/capture-S29.png as the framing reference. Focus: Workflow Designer at simulation. Overlay exactly: Draft validate publish at simulate. Preserve interface text and actual actions. Use a restrained crop or highlight that follows the spoken cue. Narration is the three supplied Taglish paragraphs in order. Reserve the lower 17 percent for captions. Do not synthesize buttons, records, integrations, notifications or successful actions. Required qualification: Label the scene Designer and simulation. Do not animate a notification node as if it actually sends email or changes live assignments."
+    },
+    {
+      "id": "S30",
+      "title": "Security deployment at practical boundaries",
+      "chapter": "Operations",
+      "role": "Presenter",
+      "route": "Sign-in / settings / architecture visual",
+      "duration": 60,
+      "voiceover": [
+        "Sa operational side, server-checked ang sign-in at action permissions. May hashed password storage, protected session cookie, failed-login throttling at configurable inactivity timeout. Ang account deactivation at password reset ay may session effects.",
+        "Para sa real deployment, kailangan ang HTTPS at maayos na server access at backup setup. Ang staff ay bumubukas ng browser sa approved DTS address; ang shared database ay nasa server.",
+        "May malinaw ding current boundaries: external file links ang ginagamit, walang direct binary upload, walang built-in email reminder service, at hindi parallel workflow execution ang kasalukuyang operational flow. Ang mga ito ay planning considerations, hindi features na dapat idagdag sa demonstration graphics."
+      ],
+      "actions": [
+        "Use a simple labelled browser-to-server diagram, not an invented cloud integration dashboard.",
+        "Show security controls conceptually without exposing keys, cookies or stored hashes.",
+        "Present three current boundaries as small factual labels beside real screen captures."
+      ],
+      "overlay": "Server checked actions at controlled deployment",
+      "layout": "architecture",
+      "presenter_note": "Avoid absolute claims such as impossible to hack, fully compliant or encrypted file storage. Session and permission controls do not establish blanket division confidentiality.",
+      "evidence": [
+        "E07",
+        "E08"
+      ],
+      "start": 1740,
+      "end": 1800,
+      "timecode": "29:00-30:00",
+      "voiceover_words": 105,
+      "estimated_spoken_seconds": 48,
+      "demo_hold_seconds": 12,
+      "shots": [
+        {
+          "id": "S30-1",
+          "start": 1740,
+          "end": 1760,
+          "action": "Use a simple labelled browser-to-server diagram, not an invented cloud integration dashboard.",
+          "voiceover": "Sa operational side, server-checked ang sign-in at action permissions. May hashed password storage, protected session cookie, failed-login throttling at configurable inactivity timeout. Ang account deactivation at password reset ay may session effects.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S30-2",
+          "start": 1760,
+          "end": 1780,
+          "action": "Show security controls conceptually without exposing keys, cookies or stored hashes.",
+          "voiceover": "Para sa real deployment, kailangan ang HTTPS at maayos na server access at backup setup. Ang staff ay bumubukas ng browser sa approved DTS address; ang shared database ay nasa server.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S30-3",
+          "start": 1780,
+          "end": 1800,
+          "action": "Present three current boundaries as small factual labels beside real screen captures.",
+          "voiceover": "May malinaw ding current boundaries: external file links ang ginagamit, walang direct binary upload, walang built-in email reminder service, at hindi parallel workflow execution ang kasalukuyang operational flow. Ang mga ito ay planning considerations, hindi features na dapat idagdag sa demonstration graphics.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        }
+      ],
+      "capture_status": "Capture planned; reference stills are not final footage",
+      "reference_image": "assets/capture-S30.png",
+      "generation_prompt": "Create a 16:9 editorial scene using the supplied authentic DTS screen recording for Sign-in / settings / architecture visual; use assets/capture-S30.png as the framing reference. Focus: Security deployment at practical boundaries. Overlay exactly: Server checked actions at controlled deployment. Preserve interface text and actual actions. Use a restrained crop or highlight that follows the spoken cue. Narration is the three supplied Taglish paragraphs in order. Reserve the lower 17 percent for captions. Do not synthesize buttons, records, integrations, notifications or successful actions. Required qualification: Avoid absolute claims such as impossible to hack, fully compliant or encrypted file storage. Session and permission controls do not establish blanket division confidentiality."
+    },
+    {
+      "id": "S31",
+      "title": "Performance proof gamit ang stress test",
+      "chapter": "Operations",
+      "role": "Presenter and stress-test operator",
+      "route": "Port 3500 / saved report.html",
+      "duration": 60,
+      "voiceover": [
+        "May hiwalay tayong stress-test launcher para makita ang behavior ng DTS sa mas maraming records. Sa verified run noong October sixteen, twenty twenty-six, may six thousand documents, twelve hundred schedules at two hundred forty-one Special Reports pagkatapos ng scenario checks.",
+        "Kasama ang eighteen enrolled accounts, two thousand eight hundred eighty account-stage-action probes at one hundred fifty thousand four hundred eighty reference combinations. Pumasa rin ang twenty-four maintained regression suites.",
+        "Sa thirty concurrent full-state requests, ang measured p95 latency ay about two point nine seconds, with zero HTTP errors sa load measurements. Resulta ito sa tested machine at workload, hindi guarantee ng unlimited capacity. Ipakita ang dated report at actual measurements para malinaw ang context."
+      ],
+      "actions": [
+        "Open the saved PASS report; show the dated dataset and account count.",
+        "Show the action-matrix and reference-combination totals plus maintained-suite results.",
+        "Highlight the 30-request p95 row, zero errors, resource figures and original-data comparison."
+      ],
+      "overlay": "6000 documents at measured results",
+      "layout": "proof",
+      "presenter_note": "p95 is not average or per-user screen time. Distinguish 30 concurrent requests from six concurrent enrolled-role browser sessions. Earlier development latency reached 3.37 seconds.",
+      "evidence": [
+        "E09"
+      ],
+      "start": 1800,
+      "end": 1860,
+      "timecode": "30:00-31:00",
+      "voiceover_words": 114,
+      "estimated_spoken_seconds": 53,
+      "demo_hold_seconds": 7,
+      "shots": [
+        {
+          "id": "S31-1",
+          "start": 1800,
+          "end": 1820,
+          "action": "Open the saved PASS report; show the dated dataset and account count.",
+          "voiceover": "May hiwalay tayong stress-test launcher para makita ang behavior ng DTS sa mas maraming records. Sa verified run noong October sixteen, twenty twenty-six, may six thousand documents, twelve hundred schedules at two hundred forty-one Special Reports pagkatapos ng scenario checks.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S31-2",
+          "start": 1820,
+          "end": 1840,
+          "action": "Show the action-matrix and reference-combination totals plus maintained-suite results.",
+          "voiceover": "Kasama ang eighteen enrolled accounts, two thousand eight hundred eighty account-stage-action probes at one hundred fifty thousand four hundred eighty reference combinations. Pumasa rin ang twenty-four maintained regression suites.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S31-3",
+          "start": 1840,
+          "end": 1860,
+          "action": "Highlight the 30-request p95 row, zero errors, resource figures and original-data comparison.",
+          "voiceover": "Sa thirty concurrent full-state requests, ang measured p95 latency ay about two point nine seconds, with zero HTTP errors sa load measurements. Resulta ito sa tested machine at workload, hindi guarantee ng unlimited capacity. Ipakita ang dated report at actual measurements para malinaw ang context.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        }
+      ],
+      "capture_status": "Capture planned; reference stills are not final footage",
+      "reference_image": "assets/capture-S31.png",
+      "generation_prompt": "Create a 16:9 editorial scene using the supplied authentic DTS screen recording for Port 3500 / saved report.html; use assets/capture-S31.png as the framing reference. Focus: Performance proof gamit ang stress test. Overlay exactly: 6000 documents at measured results. Preserve interface text and actual actions. Use a restrained crop or highlight that follows the spoken cue. Narration is the three supplied Taglish paragraphs in order. Reserve the lower 17 percent for captions. Do not synthesize buttons, records, integrations, notifications or successful actions. Required qualification: p95 is not average or per-user screen time. Distinguish 30 concurrent requests from six concurrent enrolled-role browser sessions. Earlier development latency reached 3.37 seconds."
+    },
+    {
+      "id": "S32",
+      "title": "Recap at guided staff practice",
+      "chapter": "Closing",
+      "role": "Presenter",
+      "route": "#/dashboard and #/action",
+      "duration": 60,
+      "voiceover": [
+        "Balikan natin ang ordinary flow: log, forward, assign, process, review, comply kung kailangan, clear at release. Sa bawat step, may current responsibility at history na puwedeng balikan.",
+        "Para sa daily work, magsimula sa My work, i-check ang deadline at instructions, panatilihing tama ang file links, at magbigay ng malinaw na comments o compliance response. Para sa monitoring, gamitin ang filters at drilldowns bago magbigay ng conclusion.",
+        "Ang susunod nating activity ay isang guided practice sa approved test environment. Bawat role ay gagawa ng sariling step sa isang sample document. Pagkatapos, i-check natin kung tugma ang final status, recipient at movement history. Mula rito, puwede nang pag-usapan ang rollout questions at actual office procedures."
+      ],
+      "actions": [
+        "Return to the same hero record now released; show a concise chronological path.",
+        "Show the role-based practice checklist and the test-environment label.",
+        "Hold a simple closing frame with the proposed next activity; leave space for questions."
+      ],
+      "overlay": "Mag-practice gamit ang tamang account",
+      "layout": "closing",
+      "presenter_note": "Leave the CTA actionable and internal. Do not invent deployment dates, sponsor endorsements or a public support contact.",
+      "evidence": [
+        "E01",
+        "E02",
+        "E03"
+      ],
+      "start": 1860,
+      "end": 1920,
+      "timecode": "31:00-32:00",
+      "voiceover_words": 113,
+      "estimated_spoken_seconds": 52,
+      "demo_hold_seconds": 8,
+      "shots": [
+        {
+          "id": "S32-1",
+          "start": 1860,
+          "end": 1880,
+          "action": "Return to the same hero record now released; show a concise chronological path.",
+          "voiceover": "Balikan natin ang ordinary flow: log, forward, assign, process, review, comply kung kailangan, clear at release. Sa bawat step, may current responsibility at history na puwedeng balikan.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S32-2",
+          "start": 1880,
+          "end": 1900,
+          "action": "Show the role-based practice checklist and the test-environment label.",
+          "voiceover": "Para sa daily work, magsimula sa My work, i-check ang deadline at instructions, panatilihing tama ang file links, at magbigay ng malinaw na comments o compliance response. Para sa monitoring, gamitin ang filters at drilldowns bago magbigay ng conclusion.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        },
+        {
+          "id": "S32-3",
+          "start": 1900,
+          "end": 1920,
+          "action": "Hold a simple closing frame with the proposed next activity; leave space for questions.",
+          "voiceover": "Ang susunod nating activity ay isang guided practice sa approved test environment. Bawat role ay gagawa ng sariling step sa isang sample document. Pagkatapos, i-check natin kung tugma ang final status, recipient at movement history. Mula rito, puwede nang pag-usapan ang rollout questions at actual office procedures.",
+          "transition": "Straight cut or short dissolve after the result is readable"
+        }
+      ],
+      "capture_status": "Capture planned; reference stills are not final footage",
+      "reference_image": "assets/capture-S32.png",
+      "generation_prompt": "Create a 16:9 editorial scene using the supplied authentic DTS screen recording for #/dashboard and #/action; use assets/capture-S32.png as the framing reference. Focus: Recap at guided staff practice. Overlay exactly: Mag-practice gamit ang tamang account. Preserve interface text and actual actions. Use a restrained crop or highlight that follows the spoken cue. Narration is the three supplied Taglish paragraphs in order. Reserve the lower 17 percent for captions. Do not synthesize buttons, records, integrations, notifications or successful actions. Required qualification: Leave the CTA actionable and internal. Do not invent deployment dates, sponsor endorsements or a public support contact."
+    }
+  ],
+  "cast": [
+    [
+      "Admin Staff",
+      "Marian Grace Paling",
+      "mpaling",
+      "Log, forward and record release"
+    ],
+    [
+      "CMED Focal",
+      "Aubrey Camille C. Cabrera",
+      "acabrera",
+      "Assign and monitor division work"
+    ],
+    [
+      "Staff",
+      "Danezel Christian G. Cruz",
+      "dcruz",
+      "Process, link outputs and submit"
+    ],
+    [
+      "Supervisor",
+      "Maria Urduja Jean V. Tabilas",
+      "mtabilas",
+      "Review and request compliance"
+    ],
+    [
+      "CMED Division Manager",
+      "Myles Rovi P. Martinez",
+      "mmartinez",
+      "Division review"
+    ],
+    [
+      "Department Manager",
+      "Oscar B. Hanova Jr.",
+      "ohanova",
+      "Final review and clearance"
+    ],
+    [
+      "System Administrator",
+      "System Administrator",
+      "admin",
+      "Configuration and administration"
+    ]
+  ],
+  "short_script": [
+    [
+      "00:00-00:20",
+      "S01 S06",
+      "Kapag may nagtanong kung nasaan na ang isang document, puwedeng buksan ang DTS para makita ang status, current desk, deadline at movement history. Isang record ang sinusundan mula pagtanggap hanggang release."
+    ],
+    [
+      "00:20-00:40",
+      "S07 S08",
+      "Sa Admin Staff nagsisimula ang registration. Pagkatapos, ifo-forward ito sa configured Focal, na mag-aassign ng transaction, document type at responsible staff. Ang applicable processing clock ay nagsisimula sa assignment."
+    ],
+    [
+      "00:40-01:00",
+      "S10 S11",
+      "Sa My work, makikita ng staff ang assigned records. Dito bubuksan ang instructions, ilalagay ang external draft o revised file links, at isusumite ang output sa reviewer. Kapag may comments, may documented compliance cycle."
+    ],
+    [
+      "01:00-01:20",
+      "S12 S14",
+      "Dadaan ang standard example sa supervisor, division at department review. Ang clearance ay hiwalay sa actual release. Sa log out, itinatala ang recipient, releasing user at oras, habang nananatiling searchable ang history."
+    ],
+    [
+      "01:20-01:40",
+      "S15 S17 S18",
+      "Para sa reporting, may designated regional processing ng Consolidated CMR and PPR at configured recurring Special Reports. Ang automatic generation ay gumagawa ng obligation; staff pa rin ang kailangang mag-submit at kumumpleto ng review."
+    ],
+    [
+      "01:40-02:00",
+      "S19 S20 S21",
+      "Makakatulong ang Personnel Schedule sa availability at conflict checks. Sa Analytics at Charts, puwedeng tingnan ang workload, deadlines at turnaround, saka mag-drill down sa matching records para ma-verify ang summary."
+    ],
+    [
+      "02:00-02:20",
+      "S23 S25 S27 S28",
+      "Sinusuportahan ito ng account permissions, division focals, reference lists, audit log at backup tools. Ang key actions ay chine-check ng server. Sa configuration changes, kailangang malinaw ang authority at epekto sa existing work."
+    ],
+    [
+      "02:20-02:40",
+      "S29 S31",
+      "May workflow drafting at read-only simulation; hindi pa ito generic live execution. Sa verified six-thousand-document stress run, walang HTTP request errors at about two point nine seconds ang p95 full-state latency sa thirty concurrent requests sa tested machine."
+    ],
+    [
+      "02:40-03:00",
+      "S32",
+      "Para sa staff, ang practical routine ay simple: gamitin ang sariling account, buksan ang My work, basahin ang deadline at instructions, at i-record nang tama ang bawat action. Simulan natin ang guided practice sa approved test environment."
+    ]
+  ],
+  "evidence": [
+    {
+      "id": "E01",
+      "file": "public/engine.js",
+      "locations": [
+        {
+          "anchor": "const STAGES=",
+          "line": 75
+        },
+        {
+          "anchor": "function can(",
+          "line": 230
+        },
+        {
+          "anchor": "function computeDeadline",
+          "line": 333
+        },
+        {
+          "anchor": "function act(",
+          "line": 476
+        },
+        {
+          "anchor": "function srDeadline",
+          "line": 724
+        }
+      ],
+      "sha256": "386bd902db4c368f654cc5256bcb4da4b41aeda05ca67ee940869bcd595ec513"
+    },
+    {
+      "id": "E02",
+      "file": "public/client.js",
+      "locations": [
+        {
+          "anchor": "function navItems",
+          "line": 135
+        },
+        {
+          "anchor": "VIEWS.dashboard",
+          "line": 608
+        },
+        {
+          "anchor": "function listDocs",
+          "line": 411
+        },
+        {
+          "anchor": "function actionPanel",
+          "line": 843
+        },
+        {
+          "anchor": "VIEWS.analytics",
+          "line": 814
+        },
+        {
+          "anchor": "VIEWS.graphs",
+          "line": 747
+        },
+        {
+          "anchor": "VIEWS.roles",
+          "line": 1185
+        },
+        {
+          "anchor": "VIEWS.settings",
+          "line": 1440
+        }
+      ],
+      "sha256": "3322a2747cc67da274692a061a2da28bf2842ee6ce167822cf7d2081f81b58d1"
+    },
+    {
+      "id": "E03",
+      "file": "public/ux.js",
+      "locations": [
+        {
+          "anchor": "VIEWS.dashboard=",
+          "line": 106
+        },
+        {
+          "anchor": "VIEWS.action=",
+          "line": 123
+        },
+        {
+          "anchor": "ACTIONS.uxFullDocument",
+          "line": 167
+        },
+        {
+          "anchor": "const sidebarPages",
+          "line": 317
+        }
+      ],
+      "sha256": "5646419b5db42593014319c2364175cdef767ed136e09a9e64556b8a564f6635"
+    },
+    {
+      "id": "E04",
+      "file": "public/special.js",
+      "locations": [
+        {
+          "anchor": "function spWorkflowDoc",
+          "line": 76
+        },
+        {
+          "anchor": "function spConfigPage",
+          "line": 132
+        }
+      ],
+      "sha256": "ea453e64ad8d24caa6ba9041189b05a8830c315a67de07c5066c76aa2d72377c"
+    },
+    {
+      "id": "E05",
+      "file": "public/schedule.js",
+      "locations": [
+        {
+          "anchor": "VIEWS.schedule",
+          "line": 332
+        }
+      ],
+      "sha256": "2058f33162676492c678c802db0dac430064a4557badf9d452fac484d6d361cf"
+    },
+    {
+      "id": "E06",
+      "file": "public/workflow.js",
+      "locations": [
+        {
+          "anchor": "VIEWS.workflow",
+          "line": 38
+        },
+        {
+          "anchor": "function wfAction",
+          "line": 46
+        },
+        {
+          "anchor": "function wfEditor",
+          "line": 37
+        }
+      ],
+      "sha256": "3bdd8ccfd5a723563007ed2ad0c06b8c5956c959877aedf376c119fa5988ede8"
+    },
+    {
+      "id": "E07",
+      "file": "server.js",
+      "locations": [
+        {
+          "anchor": "const ACT_TYPES",
+          "line": 524
+        },
+        {
+          "anchor": "function backupProblem",
+          "line": 550
+        },
+        {
+          "anchor": "/api/admin/restore",
+          "line": 1093
+        },
+        {
+          "anchor": "/api/special-reports/generate",
+          "line": 851
+        },
+        {
+          "anchor": "/api/state",
+          "line": 674
+        },
+        {
+          "anchor": "const CSP",
+          "line": 1159
+        }
+      ],
+      "sha256": "0e24fd3c8dc19dda0e42c8174d8d4d4d3ee23a08a50ba91079a5f5be2744b3b3"
+    },
+    {
+      "id": "E08",
+      "file": "README.md",
+      "locations": [
+        {
+          "anchor": "## Deadlines",
+          "line": 92
+        },
+        {
+          "anchor": "## Special Reports",
+          "line": 111
+        },
+        {
+          "anchor": "## Personnel Schedule",
+          "line": 141
+        },
+        {
+          "anchor": "## Security notes",
+          "line": 157
+        },
+        {
+          "anchor": "## Division reporting",
+          "line": 172
+        }
+      ],
+      "sha256": "1f7daa022c39cc404016b7ca041035be66d1954624c3abc4ea7d4f0d259a41c3"
+    },
+    {
+      "id": "E09",
+      "file": "outputs/STRESS-TEST-VALIDATION-2026-10-16.md",
+      "locations": [
+        {
+          "anchor": "Final result",
+          "line": 3
+        },
+        {
+          "anchor": "2,880",
+          "line": 9
+        },
+        {
+          "anchor": "2,886",
+          "line": 22
+        }
+      ],
+      "sha256": "3e1b320a397bb7c988813b376532bca3c309803d038e2332d9acfd300ae29b65"
+    },
+    {
+      "id": "E10",
+      "file": "data/dts.sqlite",
+      "locations": [],
+      "scope": "Read-only roster fields only; no passwords or session values exported."
+    }
+  ]
+}

@@ -67,7 +67,7 @@ function DocumentFileLinks(d,editable){
  const row=(lbl,url,open)=>'<dt>'+lbl+'</dt><dd>'+(url?renderUrl(url,open):'<span class="muted">Not provided</span>')+'</dd>';
  const fld=(lbl,name,val,hint)=>'<div class="fld"><label>'+lbl+'</label><input type="url" name="'+name+'" placeholder="https://" value="'+esc(val||'')+'">'+(hint?'<p class="hint">'+hint+'</p>':'')+'</div>';
  return '<div class="card pad" data-filelinks><div class="row sp"><h3>Files / Document Links</h3>'+(d.revCount?'<span class="badge b-pur">'+d.revCount+' revision'+(d.revCount>1?'s':'')+'</span>':'')+'</div>'+
-  '<dl class="dl" style="margin-bottom:12px">'+row('Draft File',d.draftUrl,'Open Draft File')+row('Revised File',d.revUrl,'Open Revised File')+'</dl>'+
+  '<p class="hint">Original: received document. Draft: work in progress. Revised: response after review.</p><dl class="dl" style="margin-bottom:12px">'+row('Original document',d.url,'Open original document')+row('Draft file',d.draftUrl,'Open Draft File')+row('Revised file',d.revUrl,'Open Revised File')+'</dl>'+
   (editable?'<div data-form="urls">'+fld('Draft File URL','draftUrl',d.draftUrl)+fld('Revised File URL','revUrl',d.revUrl,'Both are optional. Clear a box and save to remove that link. Replacing an existing Revised File URL increments the revision counter.')+'<button class="btn" data-act="saveUrls" data-id="'+d.id+'">Save links</button></div>':'')+'</div>';
 }
 const badge=(tone,text,title)=>'<span class="badge b-'+tone+'"'+(title?' title="'+esc(title)+'"':'')+'>'+esc(text)+'</span>';
@@ -86,7 +86,7 @@ function openPP(html){$('#ppBody').innerHTML=html;$('#ppHint').textContent='If t
 function closePP(){$('#pp').classList.remove('on');document.body.classList.remove('printing');}
 
 /* downloads */
-function csvCell(v){const s=String(v==null?'':v);return /[",\n\r]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;}
+function csvCell(v){let s=String(v==null?'':v);if(typeof v==='string'&&/^[\s\x00-\x1f]*[=+@-]/.test(s))s="'"+s;return /[",\n\r]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;}
 function saveFile(filename,data,mime){
  try{const blob=new Blob([data],{type:mime||'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=filename;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1500);toast('Saved '+filename);}
  catch(e){toast('Could not save the file.','bad');}
@@ -94,8 +94,8 @@ function saveFile(filename,data,mime){
 function exportCSV(name,cols,rows){saveFile(name+'-'+isoD(new Date())+'.csv','\ufeff'+[cols].concat(rows).map(r=>r.map(csvCell).join(',')).join('\r\n'),'text/csv;charset=utf-8');}
 
 /* =====================  ROUTER  ===================== */
-function parseHash(){const a=String(location.hash||'').replace(/^#\/?/,'').split('/');UI.route=a[0]||'dashboard';if(UI.route==='documents')UI.route='dashboard';UI.param=a[1]||null;}
-function go(route,param){if(route==='documents')route='dashboard';UI.route=route;UI.param=param||null;UI.menu=null;UI.side=false;const h='#/'+route+(param?'/'+param:'');if(location.hash!==h){UI.silent=true;try{location.hash=h;}catch(e){UI.silent=false;}}render();}
+function parseHash(){const a=String(location.hash||'').replace(/^#\/?/,'').split('/');UI.route=a[0]||'dashboard';if(UI.route==='documents')UI.route='dashboard';if(UI.route==='reports')UI.route='analytics';UI.param=a[1]||null;if(UI.route==='regular'){UI.route='cmed';UI.param='regular';}}
+function go(route,param){if(route==='documents')route='dashboard';if(route==='reports')route='analytics';if(route==='regular'){route='cmed';param='regular';}UI.route=route;UI.param=param||null;UI.menu=null;UI.side=false;const h='#/'+route+(param?'/'+param:'');if(location.hash!==h){UI.silent=true;try{location.hash=h;}catch(e){UI.silent=false;}}render();}
 window.addEventListener('hashchange',()=>{if(UI.silent){UI.silent=false;return;}parseHash();render();});
 
 /* =====================  SIGN-IN  ===================== */
@@ -135,9 +135,10 @@ function forcePasswordChange(){
 function navItems(u){
  const w=[['dashboard','Dashboard','dashboard']];
  if(u.role!=='sysadmin')w.push(['action','For My Action','alertc']);
- w.push(['regular','Regular reports','regular']);
+ if(canAccessDivision(u,'CMED'))w.push(['cmed','CMED','regular']);
+ if(canAccessDivision(u,'CMSD'))w.push(['cmsd','CMSD','building']);
  w.push(['schedule','Personnel Schedule','calendar']);
- if(has(u,'report.view')){w.push(['analytics','Analytics','reports']);w.push(['graphs','Graphs','graph']);w.push(['reports','Reports','docs']);}
+ if(has(u,'report.view')){w.push(['analytics','Analytics','reports']);w.push(['graphs','Graphs','graph']);w.push(['reports','Insights','reports']);}
  const a=[];
  if(has(u,'user.manage'))a.push(['users','Users','users']);
  if(has(u,'role.manage'))a.push(['roles','Roles & permissions','shield']);
@@ -147,7 +148,7 @@ function navItems(u){
  if(has(u,'audit.view'))a.push(['audit','Audit log','clock']);
  return{w:w,a:a};
 }
-const ROUTE_OK={dashboard:()=>true,documents:()=>true,analytics:u=>has(u,'report.view'),graphs:u=>has(u,'report.view'),doc:()=>true,action:u=>u.role!=='sysadmin',regular:()=>true,schedule:()=>true,reports:u=>has(u,'report.view'),users:u=>has(u,'user.manage'),roles:u=>has(u,'role.manage'),delegation:u=>has(u,'oic.manage')||u.role==='dept_manager'||u.role==='div_manager',divisions:u=>has(u,'config.manage'),refs:u=>has(u,'config.manage'),spconfig:u=>has(u,'config.manage'),settings:u=>has(u,'config.manage'),workflow:u=>u.role==='sysadmin',audit:u=>has(u,'audit.view')};
+const ROUTE_OK={dashboard:()=>true,documents:()=>true,cmed:u=>canAccessDivision(u,'CMED'),cmsd:u=>canAccessDivision(u,'CMSD'),analytics:u=>has(u,'report.view'),graphs:u=>has(u,'report.view'),doc:()=>true,action:u=>u.role!=='sysadmin',regular:u=>canAccessDivision(u,'CMED'),schedule:()=>true,reports:u=>has(u,'report.view'),users:u=>has(u,'user.manage'),roles:u=>has(u,'role.manage'),delegation:u=>has(u,'oic.manage')||u.role==='dept_manager'||u.role==='div_manager',divisions:u=>has(u,'config.manage'),refs:u=>has(u,'config.manage'),spconfig:u=>has(u,'config.manage'),settings:u=>has(u,'config.manage'),workflow:u=>u.role==='sysadmin',audit:u=>has(u,'audit.view')};
 function myQueue(u){return visibleDocs(u).filter(d=>isMyTurn(u,d));}
 const actionDocs=myQueue; // "For My Action" is exactly: every document where it is this user's turn to act (isMyTurn), for every role and every stage. No stage/role special-casing here — that was the root cause of the previous bug (assignees, dept managers and admin staff were excluded from this list even though isMyTurn already correctly recognised their turn).
 
@@ -193,7 +194,7 @@ function render(){
   else h=VIEWS[UI.route](ME(),UI.param);
  }catch(e){console.error(e);h='<div class="wrap"><div class="card empty"><b>This page could not be displayed.</b>'+esc(e.message)+'</div></div>';}
  v.innerHTML=h;v.scrollTop=st;UI._key=key;
- if(UI.route==='dashboard')refreshReg();
+ if(UI.route==='dashboard'||isDivisionDocuments())refreshReg();
  markSeen();
  if(UI.route==='audit'&&ME())setTimeout(loadAudit,0);
 }
@@ -228,7 +229,7 @@ ACTIONS.ppPrint=()=>{try{window.print();}catch(e){toast('Use Ctrl/Cmd + P to pri
 ACTIONS.menu=(t)=>{UI.menu=UI.menu===t.dataset.m?null:t.dataset.m;render();};
 ACTIONS.theme=(t)=>{UI.theme=t.dataset.t;tSet(UI.theme);applyTheme();render();};
 ACTIONS.signout=()=>signOut('');
-ACTIONS.myQueue=()=>{UI.filters={tile:'action'};UI.page=1;UI.sel.clear();go('dashboard');};
+ACTIONS.myQueue=()=>{const state=REGISTRY_STATE.department;state.filters={tile:'action'};state.page=1;state.sel.clear();go('dashboard');};
 CHANGES.showpw=(t)=>{$('#lp').type=t.checked?'text':'password';};
 ACTIONS.login=async(f)=>{
  const v=formVals(f),e=$('#lerr'),btn=$('button[type=submit]',f);
@@ -238,7 +239,7 @@ ACTIONS.login=async(f)=>{
  if(!r.ok){e.hidden=false;e.innerHTML=ic('alert')+'<div>'+esc(r.error||'Could not sign in.')+'</div>';return;}
  UI.notice='';UI.lastAct=Date.now();parseHash();await refresh();
 };
-ACTIONS.topSearch=(f)=>{const q=formVals(f).q.trim();UI.filters={tile:'total',q:q};UI.page=1;UI.sel.clear();go('dashboard');};
+ACTIONS.topSearch=(f)=>{const q=formVals(f).q.trim(),state=REGISTRY_STATE.department;state.filters={tile:'total',q:q};state.page=1;state.sel.clear();go('dashboard');};
 ACTIONS.togglePresence=async(t)=>{
  const u=uById(t.dataset.id);if(!u)return;UI.menu=null;
  const r=await api('POST','/api/users/'+u.id+'/presence',{present:!u.present});
@@ -387,7 +388,7 @@ function matchDoc(d,f,u){
  if(f.priority&&d.priority!==f.priority)return false;
  if(f.node&&STAGES[d.status].node!==f.node)return false;
  if(f.status&&d.status!==f.status)return false;
- if(f.division&&d.division!==f.division)return false;
+ if(f.division&&(f.reportingOwnership?(reportingDivision(d,!!d.specialReport)||'Shared / unresolved'):d.division)!==f.division)return false;
  if(f.txType&&d.txType!==f.txType)return false;
  if(f.docType&&d.docType!==f.docType)return false;
  if(f.comm&&d.commType!==f.comm)return false;
@@ -405,13 +406,13 @@ function matchDoc(d,f,u){
 }
 const SORTERS={receivedAt:d=>d.receivedAt,trackNo:d=>d.trackNo,subject:d=>d.subject.toLowerCase(),source:d=>d.source.toLowerCase(),division:d=>d.division,stage:d=>STAGES[d.status].ord,tx:d=>d.txType||'~',due:d=>d.dueAt||'9999',desk:d=>+new Date(d.stageEnteredAt)};
 const SORT_LABELS=[['receivedAt','Date Inflow'],['trackNo','Tracking Code'],['due','Deadline'],['desk','Time in Desk'],['stage','Lifecycle Stage'],['subject','Title']];
-function specialDocRows(){return spItems().map(i=>{const d=spWorkflowDoc(i,ME());return Object.assign(d,{id:'sr-'+i.id,specialReport:true,specialId:i.id,source:'System generated',reportingPeriod:i.periodLabel,autoRouted:false});});}
-function baseDocs(u){const f=UI.filters;return visibleDocs(u).concat(specialDocRows()).filter(d=>(!f.division||d.division===f.division)&&(!f.priority||d.priority===f.priority));}
+function specialDocRows(items=spItems()){return items.map(i=>{const d=spWorkflowDoc(i,ME());return Object.assign(d,{id:'sr-'+i.id,specialReport:true,specialId:i.id,source:'System generated',reportingPeriod:i.periodLabel,autoRouted:false});});}
+function baseDocs(u){const f=UI.filters,division=isDivisionDocuments()?UI.route.toUpperCase():f.reportDivision,scoped=division?divisionReportState(u,division).state:null,docs=division?(scoped?scoped.docs.concat(specialDocRows(scoped.spItems)):[]):visibleDocs(u).concat(specialDocRows());return docs.filter(d=>(!f.division||(f.reportingOwnership?(reportingDivision(d,!!d.specialReport)||'Shared / unresolved'):d.division)===f.division)&&(!f.priority||d.priority===f.priority));}
 function listDocs(u){
  const f=UI.filters,fn=SORTERS[UI.sort.k]||SORTERS.receivedAt,dir=UI.sort.dir;
  return baseDocs(u).filter(d=>matchDoc(d,f,u)).sort((a,b)=>{const x=fn(a),y=fn(b);return (x<y?-1:x>y?1:0)*dir;});
 }
-const FILTER_LABELS={node:'Desk',status:'Status',txType:'Transaction',docType:'Document type',comm:'Communication',assignee:'Assigned to',region:'Region',dl:'Deadline',stalled:'Stalled at desk',from:'Received from',to:'Received to',outFrom:'Released from',regular:'Regular reports',open:'Open only'};
+const FILTER_LABELS={reportDivision:'Reporting division',node:'Desk',status:'Status',txType:'Transaction',docType:'Document type',comm:'Communication',assignee:'Assigned to',region:'Region',dl:'Deadline',stalled:'Stalled at desk',from:'Received from',to:'Received to',outFrom:'Released from',regular:'Regular reports',open:'Open only'};
 function filterChips(){
  const f=UI.filters,out=[];
  Object.keys(FILTER_LABELS).forEach(k=>{
@@ -431,6 +432,14 @@ const COLS=[
 ];
 try{UI.hidden=JSON.parse(localStorage.getItem('dts.colsHidden')||'[]');}catch(e){UI.hidden=[];}
 UI.sel=new Set();UI.batch='';UI.sig=undefined;
+// One registry controller serves department and division views, with independent state.
+function isDivisionDocuments(){return ['cmed','cmsd'].includes(UI.route)&&(!UI.param||UI.param==='documents');}
+const newDivisionRegistry=()=>({filters:{tile:'total'},sort:{k:'receivedAt',dir:-1},page:1,hidden:[],pageSize:25,sel:new Set(),batch:''});
+const REGISTRY_STATE={department:{},cmed:newDivisionRegistry(),cmsd:newDivisionRegistry()};
+for(const key of ['filters','sort','page','hidden','pageSize','sel','batch']){
+ REGISTRY_STATE.department[key]=UI[key];
+ Object.defineProperty(UI,key,{get(){return REGISTRY_STATE[isDivisionDocuments()?UI.route:'department'][key];},set(value){REGISTRY_STATE[isDivisionDocuments()?UI.route:'department'][key]=value;}});
+}
 const prLabel=p=>p==='Urgent'?'Urgent':'Routine';
 function cell(k,d){
  const di=deskInfo(d),x=dl(d);
@@ -551,7 +560,7 @@ const BATCH={
  logout:{type:'logout',title:'Log out documents',verb:'Logged out',ok:d=>!d.specialReport&&(d.status==='cleared'||d.status==='return_out'),pl:d=>({outTo:d.source,outAt:new Date().toISOString(),remarks:'Batch log out'}),why:'not a regular document cleared or for return'},
  'delete':{type:'delete',title:'Delete documents',verb:'Deleted',ok:d=>!d.specialReport,pl:()=>({}),why:'Special Reports cannot be deleted with document actions'}
 };
-function selectedDocs(){const all=visibleDocs(ME()).concat(specialDocRows());return [...UI.sel].map(id=>all.find(d=>d.id===id)||S.docs.find(d=>d.id===id)).filter(Boolean);}
+function selectedDocs(){const all=isDivisionDocuments()?baseDocs(ME()):visibleDocs(ME()).concat(specialDocRows());return [...UI.sel].map(id=>all.find(d=>d.id===id)||(!isDivisionDocuments()&&S.docs.find(d=>d.id===id))).filter(Boolean);}
 ACTIONS.batchExec=()=>{
  const docs=selectedDocs(),a=UI.batch;
  if(!a||!docs.length)return;
@@ -584,6 +593,18 @@ function listSheet(title,sub,list){
 function kpiTile(k,tone,icon,label,n,sub,on,hot){
  return '<button class="kt kt-'+tone+(on?' on':'')+(hot?' hot':'')+'" data-act="tile" data-k="'+k+'" aria-pressed="'+(on?'true':'false')+'"><span class="kt-h"><span class="kt-l">'+esc(label)+'</span><span class="kt-i">'+ic(icon)+'</span></span><span class="kt-n">'+n+'</span><span class="kt-s">'+esc(sub)+'</span></button>';
 }
+function registryPanel(u,division=''){
+ const f=UI.filters,adv=Object.keys(FILTER_LABELS).some(k=>f[k]);
+ const sel=(k,label,items,full)=>'<select data-chg="'+(full?'filterFull':'filter')+'" data-k="'+k+'" aria-label="'+label+'"><option value="">'+label+'</option>'+items.map(i=>opt(i[0],i[1],f[k]===i[0])).join('')+'</select>';
+ const people=S.users.filter(x=>x.active&&['staff','supervisor','focal'].includes(x.role)&&(!division||x.division===division));
+ return '<section class="card fp"><div class="fp-top"><label class="srch">'+ic('search')+'<input id="regSearch" type="search" placeholder="Search tracking number, subject, originating office, custodian..." aria-label="Search the registry" value="'+esc(f.q||'')+'" data-inp="filter" data-k="q"><kbd>/</kbd></label>'+
+ '<div class="pills" role="group" aria-label="Filter by status"><span class="fp-l">Filter:</span>'+PILLS.map(p=>'<button class="pill" data-act="pill" data-g="'+p[0]+'" aria-pressed="'+((f.group||'')===p[0])+'">'+p[1]+'</button>').join('')+'</div></div>'+
+ '<div class="fp-row"><label class="fsel">Priority '+sel('priority','All Priorities',[['Normal','Routine'],['Urgent','Urgent']],true)+'</label>'+(division?'<span class="pilldiv">'+esc(division)+'</span>':'<label class="fsel">Target Division '+sel('division','All Divisions',S.divisions.map(d=>[d.code,d.code]),true)+'</label>')+'<button class="btn sm ghost" data-act="toggleMore">'+ic('columns')+' More filters</button><div class="grow"></div><div class="meta" id="regMeta"></div></div>'+
+ '<div id="moreF" class="fbar" style="margin:12px 0 0"'+(adv?'':' hidden')+'>'+sel('txType','All transactions',S.refs.tx.map(t=>[t.name,t.name]))+sel('docType','All document types',S.refs.doc.map(t=>[t.name,t.name]))+sel('comm','All communication types',S.refs.comm.map(c=>[commName(c),commName(c)]))+sel('assignee','Anyone assigned',people.map(p=>[p.id,p.name]))+
+ sel('dl','Any deadline',[['over','Overdue'],['soon','Due soon'],['ok','On track'],['done_ok','Completed on time'],['done_late','Completed late'],['none','No deadline'],['pending','Clock not started']])+sel('status','Any status',Object.keys(STAGES).map(s=>[s,STAGES[s].short]))+
+ '<input type="date" aria-label="Received from" title="Received from" value="'+esc(f.from||'')+'" data-chg="filter" data-k="from"><input type="date" aria-label="Received to" title="Received to" value="'+esc(f.to||'')+'" data-chg="filter" data-k="to"></div><div id="regChips"></div></section>'+
+ '<div id="regTable" style="margin-top:16px"></div>';
+}
 VIEWS.dashboard=(u)=>{
  const f=UI.filters;if(!f.tile)f.tile='total';
  const base=baseDocs(u),open=base.filter(isOpen);
@@ -591,23 +612,14 @@ VIEWS.dashboard=(u)=>{
  const overdueN=new Set(over.concat(stall).map(d=>d.id)).size,mine=base.filter(d=>isMyTurn(u,d)),clr=base.filter(d=>d.status==='cleared');
  const ap=deptApprovers({division:''});
  const banner=(ap.tier!=='Department Manager')?'<div class="banner warn">'+ic('alert')+'<div><b>The Department Manager is away.</b> Final review and clearance currently go to: '+(ap.tier==='none'?'no one. Nominate an OIC (System Administrator) so documents can be cleared.':esc(ap.tier)+' - '+esc(ap.users.map(x=>x.name).join(', '))+'.')+'</div></div>':'';
- const hr=new Date().getHours(),adv=Object.keys(FILTER_LABELS).some(k=>f[k]);
- const sel=(k,label,items,full)=>'<select data-chg="'+(full?'filterFull':'filter')+'" data-k="'+k+'" aria-label="'+label+'"><option value="">'+label+'</option>'+items.map(i=>opt(i[0],i[1],f[k]===i[0])).join('')+'</select>';
- const people=S.users.filter(x=>x.active&&['staff','supervisor','focal'].includes(x.role));
+ const hr=new Date().getHours();
  return '<div class="wrap"><div class="hello"><div><h1>Good '+(hr<12?'morning':hr<18?'afternoon':'evening')+', '+esc(firstName(u.name))+'</h1><p>'+esc(new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'}))+'. '+(mine.length?'You have '+plural(mine.length,'document')+' waiting for action.':'Nothing is waiting on you.')+'</p></div></div>'+banner+
  '<div class="kts">'+
  kpiTile('total','info','docs','Total Monitored',base.length,'Documents in the registry',f.tile==='total')+
  kpiTile('ongoing','warn','inbox','Ongoing',open.length,'Under desk routing & action',f.tile==='ongoing')+
  kpiTile('action','pur','alertc','Action Required',mine.length,'Waiting on my desk',f.tile==='action')+
  kpiTile('overdue','bad','timer','Overdue Stay',overdueN,soon.length?'Past threshold or stalled; '+soon.length+' due soon':'Exceeded desk or deadline threshold',f.tile==='overdue',overdueN>0)+
- kpiTile('cleared','ok','shieldcheck','Cleared for Out',clr.length,'Manager sign-off authorized',f.tile==='cleared')+'</div>'+
- '<section class="card fp"><div class="fp-top"><label class="srch">'+ic('search')+'<input id="regSearch" type="search" placeholder="Search tracking number, subject, originating office, custodian..." aria-label="Search the registry" value="'+esc(f.q||'')+'" data-inp="filter" data-k="q"><kbd>/</kbd></label>'+
- '<div class="pills" role="group" aria-label="Filter by status"><span class="fp-l">Filter:</span>'+PILLS.map(p=>'<button class="pill" data-act="pill" data-g="'+p[0]+'" aria-pressed="'+((f.group||'')===p[0])+'">'+p[1]+'</button>').join('')+'</div></div>'+
- '<div class="fp-row"><label class="fsel">Priority '+sel('priority','All Priorities',[['Normal','Routine'],['Urgent','Urgent']],true)+'</label><label class="fsel">Target Division '+sel('division','All Divisions',S.divisions.map(d=>[d.code,d.code]),true)+'</label><button class="btn sm ghost" data-act="toggleMore">'+ic('columns')+' More filters</button><div class="grow"></div><div class="meta" id="regMeta"></div></div>'+
- '<div id="moreF" class="fbar" style="margin:12px 0 0"'+(adv?'':' hidden')+'>'+sel('txType','All transactions',S.refs.tx.map(t=>[t.name,t.name]))+sel('docType','All document types',S.refs.doc.map(t=>[t.name,t.name]))+sel('comm','All communication types',S.refs.comm.map(t=>[t,t]))+sel('assignee','Anyone assigned',people.map(p=>[p.id,p.name]))+
- sel('dl','Any deadline',[['over','Overdue'],['soon','Due soon'],['ok','On track'],['done_ok','Completed on time'],['done_late','Completed late'],['none','No deadline'],['pending','Clock not started']])+sel('status','Any status',Object.keys(STAGES).map(s=>[s,STAGES[s].short]))+
- '<input type="date" aria-label="Received from" title="Received from" value="'+esc(f.from||'')+'" data-chg="filter" data-k="from"><input type="date" aria-label="Received to" title="Received to" value="'+esc(f.to||'')+'" data-chg="filter" data-k="to"></div><div id="regChips"></div></section>'+
- '<div id="regTable" style="margin-top:16px"></div></div>';
+ kpiTile('cleared','ok','shieldcheck','Cleared for Out',clr.length,'Manager sign-off authorized',f.tile==='cleared')+'</div>'+registryPanel(u)+'</div>';
 };
 VIEWS.documents=VIEWS.dashboard;
 VIEWS.action=(u)=>{
@@ -673,11 +685,16 @@ function chartFilters(){
  return '<div class="filters">'+mode+ctl+'<select data-chg="gfDiv" aria-label="Division"><option value="">All divisions</option>'+S.divisions.map(d=>opt(d.code,d.code,g.division===d.code)).join('')+'</select></div>'+
   '<div class="periodline small">Reporting period: <b>'+esc(periodLabel())+'</b></div>';
 }
+function reportToolbar(u,kind){
+ const actions=has(u,'report.print')?'<div class="report-actions"><button class="btn" data-act="print'+kind+'">'+ic('print')+'Print</button>'+(kind==='Analytics'?'<button class="btn" data-act="exportAnalytics">'+ic('download')+'Export to CSV</button>':'')+'</div>':'';
+ return '<section class="report-toolbar" aria-label="Report toolbar"><div class="report-period">'+chartFilters()+'</div>'+actions+'</section>';
+}
+function reportingDocs(u){return visibleDocs(u).concat(specialDocRows()).map(d=>({...d,division:reportingDivision(d,!!d.specialReport)||'Shared / unresolved'}));}
 function periodDocs(u){
- let docs=visibleDocs(u).concat(specialDocRows());const g=UI.gf;
+ let docs=reportingDocs(u);const g=UI.gf;
  if(g.division)docs=docs.filter(d=>d.division===g.division);
  const ms=periodMonths();
- if(ms.length)docs=docs.filter(d=>ms.includes(isoD(d.receivedAt).slice(0,7)));
+ docs=docs.filter(d=>ms.includes(isoD(d.receivedAt).slice(0,7)));
  return docs;
 }
 CHANGES.gfDiv=(t)=>{UI.gf.division=t.value;render();};
@@ -703,16 +720,16 @@ function donut(parts,centre){
 }
 /* Everything the Graphs page shows, worked out once and shared with its Print output. */
 function graphsData(u){
- const docs=periodDocs(u),open=docs.filter(isOpen),ms=periodMonths();
- const months=ms.length?ms:[monthKey(new Date())];
+ const docs=periodDocs(u),open=docs.filter(isOpen),ms=periodMonths(),all=reportingDocs(u).filter(d=>!UI.gf.division||d.division===UI.gf.division);
+ const months=ms;
  const nodeHtml=NODES.map(n=>{const ds=docs.filter(d=>STAGES[d.status].node===n.k),hot=ds.some(d=>isClockActive(d)&&dl(d).key==='over');
   return '<button class="rn'+(ds.length?' has':'')+(hot?' hot':'')+'" data-act="node" data-k="'+n.k+'" title="Open the documents at '+esc(n.label)+'"><span class="cir">'+ds.length+'</span>'+(hot?'<span class="fl">overdue</span>':'')+'<b>'+esc(n.label)+'</b><span>'+esc(n.sub)+'</span></button>';}).join('');
  const inMonth=(iso,k)=>!!iso&&isoD(iso).slice(0,7)===k;
  const vol=months.map(k=>({l:keyLabel(k,true),full:keyLabel(k),
   r:docs.filter(d=>inMonth(d.receivedAt,k)).length,
-  o:docs.filter(d=>inMonth(d.outAt,k)).length,
-  ok:docs.filter(d=>d.stopAt&&d.dueAt&&inMonth(d.stopAt,k)&&dl(d).key==='done_ok').length,
-  late:docs.filter(d=>d.stopAt&&d.dueAt&&inMonth(d.stopAt,k)&&dl(d).key==='done_late').length}));
+  o:all.filter(d=>inMonth(d.outAt,k)).length,
+  ok:all.filter(d=>d.stopAt&&d.dueAt&&inMonth(d.stopAt,k)&&dl(d).key==='done_ok').length,
+  late:all.filter(d=>d.stopAt&&d.dueAt&&inMonth(d.stopAt,k)&&dl(d).key==='done_late').length}));
  const vb=(rows,a,b,ca,cb)=>{const m=Math.max(1,...rows.map(w=>Math.max(w[a],w[b])));return '<div class="vb">'+rows.map(w=>'<div class="col" title="'+esc(w.full||w.l)+'"><div class="pair"><i class="seg-'+ca+'" style="height:'+(w[a]/m*100)+'%"><em>'+(w[a]||'')+'</em></i><i class="seg-'+cb+'" style="height:'+(w[b]/m*100)+'%"><em>'+(w[b]||'')+'</em></i></div><span class="x">'+esc(w.l)+'</span></div>').join('')+'</div>';};
  const wl={};open.forEach(d=>{if(!d.assignee)return;const k=dl(d).key;const o=wl[d.assignee]||(wl[d.assignee]={ok:0,soon:0,over:0});if(isClockActive(d)&&k==='over')o.over++;else if(isClockActive(d)&&k==='soon')o.soon++;else o.ok++;});
  const wlItems=Object.keys(wl).map(k=>({key:k,label:uname(k),total:wl[k].ok+wl[k].soon+wl[k].over,segs:[{n:wl[k].over,c:'bad'},{n:wl[k].soon,c:'warn'},{n:wl[k].ok,c:'ok'}]})).sort((a,b)=>b.total-a.total);
@@ -729,7 +746,7 @@ function graphsData(u){
 }
 VIEWS.graphs=(u)=>{
  const g=graphsData(u);
- return '<div class="wrap"><div class="pagehead"><div><h1>Graphs</h1><p>Visual view of volume, workload and delays for the reporting period below. Select a bar or a desk to open those documents in the registry.</p></div><div class="row">'+chartFilters()+(has(u,'report.print')?'<button class="btn" data-act="printGraphs">'+ic('print')+'Print</button>':'')+'</div></div>'+
+ return '<div class="wrap reporting-page charts-page"><div class="pagehead"><div><h1>Charts</h1><p>Volume, workload and delays. Select a bar or a desk to open the matching documents in the registry.</p></div></div>'+reportToolbar(u,'Graphs')+
  '<div class="card pad"><div class="row sp"><h2>Where documents are right now</h2><span class="hint">Select a desk</span></div><div class="route">'+g.nodeHtml+'</div></div>'+
  '<div class="charts" style="margin-top:16px">'+
  '<div class="card pad"><div class="row sp"><h3>Volume by month</h3><span class="legend"><span><i class="seg-brand"></i>Received</span><span><i class="seg-ok"></i>Released</span></span></div>'+g.vb(g.vol,'r','o','brand','ok')+'</div>'+
@@ -748,7 +765,7 @@ ACTIONS.printGraphs=()=>{
  const numbers=(rows,cols)=>({cols:cols,rows:rows});
  const volTable=numbers(g.vol.map(w=>[w.full,w.r,w.o,w.ok,w.late]),['Month','Received','Released','Finished on time','Finished late']);
  const printTable=t=>'<table><thead><tr>'+t.cols.map(c=>'<th>'+esc(c)+'</th>').join('')+'</tr></thead><tbody>'+t.rows.map(r=>'<tr>'+r.map(c=>'<td>'+esc(c)+'</td>').join('')+'</tr>').join('')+'</tbody></table>';
- openPP(sheetHead('Graphs','Reporting period: '+periodLabel()+(UI.gf.division?' • Division '+UI.gf.division:''))+
+ openPP(sheetHead('Charts','Reporting period: '+periodLabel()+(UI.gf.division?' • Division '+UI.gf.division:''))+
   block('Where documents are right now','<span class="hint">Number of documents at each desk</span>','<div class="route">'+g.nodeHtml+'</div>')+
   block('Volume by month',L('Received','brand')+L('Released','ok'),g.vb(g.vol,'r','o','brand','ok')+printTable(volTable))+
   block('Finished on time or late, by month',L('On time','ok')+L('Late','bad'),g.vb(g.vol,'ok','late','ok','bad'))+
@@ -756,7 +773,7 @@ ACTIONS.printGraphs=()=>{
   block('Open documents by assigned staff',L('Overdue','bad')+L('Due soon','warn')+L('Other','ok'),hbars(g.wlItems.slice(0,10)))+
   block('Time at the current desk (open documents)','',hbars(g.ageItems))+
   block('By type of transaction','',hbars(g.txItems))+block('By division','',hbars(g.dvItems))+
-  '<div class="foot"><span>'+plural(g.docs.length,'document')+' received in '+esc(periodLabel())+'</span><span>End of graphs</span></div>');
+  '<div class="foot"><span>'+plural(g.docs.length,'document')+' received in '+esc(periodLabel())+'</span><span>End of charts</span></div>');
 };
 function goFilter(f){UI.filters=Object.assign({tile:'total'},f);UI.page=1;clearSel();go('dashboard');}
 ACTIONS.node=(t)=>{const k=t.dataset.k;goFilter(k==='out'?{node:'out'}:{tile:'ongoing',node:k});};
@@ -771,16 +788,17 @@ function analyticsData(u){
  const docs=periodDocs(u),fin=docs.filter(d=>d.clockStart&&d.stopAt),act=docs.filter(isClockActive);
  const over=act.filter(d=>dl(d).key==='over').length,stall=docs.filter(d=>isOpen(d)&&stalled(d)).length;
  const ms=periodMonths();
- const released=ms.length?docs.filter(d=>d.outAt&&ms.includes(isoD(d.outAt).slice(0,7))).length:docs.filter(d=>d.outAt).length;
+ const released=reportingDocs(u).filter(d=>(!UI.gf.division||d.division===UI.gf.division)&&d.outAt&&ms.includes(isoD(d.outAt).slice(0,7))).length;
  const kpi=[
   ['On-time rate',ontimePct(docs),'Finished within the threshold','ok'],['Average turnaround',avgTat(docs)==='—'?'—':avgTat(docs)+' days','Working days, assignment to clearance','info'],
   ['Completed late',String(docs.filter(d=>dl(d).key==='done_late').length),'Cleared after the due date','bad'],['Overdue now',String(over),'Running clocks past due','bad'],
   ['Stalled at a desk',String(stall),'Too long at Admin or Focal','warn'],['Compliance returns',fin.length?(fin.reduce((a,d)=>a+(d.cycles||0),0)/fin.length).toFixed(1):'—','Average per finished document','pur'],
-  ['Released in the reporting period',String(released),'Logged out during the selected month or months','ok'],['Documents',String(docs.length),'Received in the selected month or months','info']
+  ['Released in the reporting period',String(released),'Logged out during the selected month or months','ok'],['Documents',String(docs.length),'Received in the selected month or months','info'],
+  ['Current backlog',String(reportingDocs(u).filter(d=>isOpen(d)&&(!UI.gf.division||d.division===UI.gf.division)).length),'Open now across all receipt dates','neu']
  ];
  const grp=(title,label,fn,names)=>({title:title,cols:[label,'Documents','Open','Finished','Avg. turnaround (working days)','On-time rate'],rows:names.map(n=>{const ds=docs.filter(d=>fn(d)===n);return [n,ds.length,ds.filter(isOpen).length,ds.filter(d=>d.stopAt).length,avgTat(ds),ontimePct(ds)];}).filter(r=>r[1]>0)});
  const tx=grp('By type of transaction','Type of transaction',d=>d.txType||'Not yet classified',S.refs.tx.map(t=>t.name).concat(['Not yet classified']));
- const dv=grp('By division','Division',d=>d.division,S.divisions.map(d=>d.code));
+ const dv=grp('By division','Division',d=>d.division,S.divisions.map(d=>d.code).concat(['Shared / unresolved']));
  const dts=[...new Set(docs.map(d=>d.docType))].sort((a,b)=>docs.filter(d=>d.docType===b).length-docs.filter(d=>d.docType===a).length).slice(0,10);
  const dt=grp('By document type (top 10)','Document type',d=>d.docType,dts);
  const staff={title:'Staff performance',cols:['Name','Role','Open','Overdue','Finished','Avg. turnaround (working days)','On-time rate','Comments received'],rows:S.users.filter(x=>x.active&&['staff','supervisor','focal'].includes(x.role)).map(x=>{const ds=docs.filter(d=>d.assignee===x.id),op=ds.filter(isOpen);return[x.name,roleName(x.role),op.length,op.filter(d=>isClockActive(d)&&dl(d).key==='over').length,ds.filter(d=>d.stopAt).length,avgTat(ds),ontimePct(ds),ds.reduce((a,d)=>a+d.comments.filter(c=>c.level!=='instruction').length,0)];}).filter(r=>r[2]||r[4]||r[7])};
@@ -795,7 +813,7 @@ function tableHTML(t){
 }
 VIEWS.analytics=(u)=>{
  const a=analyticsData(u);
- return '<div class="wrap"><div class="pagehead"><div><h1>Analytics</h1><p>Figures behind the workflow for the reporting period below: who is on time, how the work is spread and where documents are held up.</p></div><div class="row">'+chartFilters()+(has(u,'report.print')?'<button class="btn" data-act="printAnalytics">'+ic('print')+'Print</button><button class="btn" data-act="exportAnalytics">'+ic('download')+'Export CSV</button>':'')+'</div></div>'+
+ return '<div class="wrap reporting-page analytics-page"><div class="pagehead"><div><h1>Analytics</h1><p>Performance, workload and workflow delays for the selected reporting period.</p></div></div>'+reportToolbar(u,'Analytics')+
  '<div class="tiles" style="grid-template-columns:repeat(auto-fill,minmax(210px,1fr))">'+a.kpi.map(k=>'<div class="tile '+k[3]+'"><span class="n">'+esc(k[1])+'</span><span class="l">'+esc(k[0])+'</span><span class="s">'+esc(k[2])+'</span></div>').join('')+'</div>'+
  '<div class="stack" style="margin-top:18px">'+a.tables.map(tableHTML).join('')+'</div></div>';
 };
@@ -894,7 +912,7 @@ VIEWS.doc=(u,id)=>{
  // route progress
  const fm=divFocal(d.division);
  const people=[['Logged by',uname(d.createdBy)],['Division focal',fm?fm.name:'Not set'],['Assigned to',d.assignee?uname(d.assignee):'—'],['Assigned by',d.assignedBy?uname(d.assignedBy):(d.autoRouted?'Automatic (report designation)':'—')],['Reviewer',d.reviewer?uname(d.reviewer):'—'],['Division Manager',divManagers(d).map(m=>m.name).join(', ')||'—'],['Cleared by',d.clearedBy?uname(d.clearedBy)+' ('+d.clearedTier+')':'—'],['Logged out by',d.outBy?uname(d.outBy):'—']];
- const det=[['Date received',fmtDT(d.receivedAt)],['Communication type',d.commType],['Received from',d.source],['Reference no.',d.refNo||'—'],['Document type',d.docType],['Division',d.division]];
+ const det=[['Date received',fmtDT(d.receivedAt)],['Communication type',d.commType],['Received from',d.source],['Reference no.',d.refNo||'—'],['Document type',d.docType],['Division',d.division],['Document URL',d.url?'__URL__':'—']];
  if(d.reportingPeriod)det.push(['Reporting period',d.reportingPeriod+(d.reportingYear?' '+d.reportingYear:'')]);
  det.push(['Region / office',d.region||'—'],['Pages / attachments',d.pages||'—'],['Priority',d.priority],['Remarks at logging',d.remarks||'—']);
  if(d.outAt)det.push(['Logged out',fmtDT(d.outAt)+' to '+d.outTo],['Out type',d.outType+(d.outRemarks&&d.outRemarks!==d.outType?'. '+d.outRemarks:'')]);
@@ -1020,10 +1038,10 @@ ACTIONS.saveDoc=async(t)=>{
  if(v.reportingPeriod&&!month)return toast('Choose the reporting period from the twelve months of the year.','bad');
  if(month){v.reportingPeriod=month;$('#dfPeriodInput').value=month;}
  else v.reportingPeriod='';
- /* a reporting-period report is routed by region, so no division is asked for on screen; the field
-    still has to carry a division for the register, so it is filled from the reporting type */
- if(isRegularDoc(v.docType)&&!S.divisions.some(x=>x.code===v.division))v.division=(ME()&&S.divisions.some(x=>x.code===ME().division))?ME().division:(S.divisions[0]?S.divisions[0].code:'');
- if(v.reportingPeriod&&isRegularDoc(v.docType)&&!v.division)return toast('No division is available for this report. Ask the System Administrator to check Divisions & focals.','bad');
+ /* Registration derives the division from the designated person on the server. Metadata edits
+    keep the stored workflow division instead of silently rerouting an existing report. */
+ if(isRegularDoc(v.docType)&&mode!=='edit')v.division='';
+ 
  t.disabled=true;
  if(mode==='edit'){
   const r=await api('POST','/api/docs/'+f.dataset.id+'/act',{type:'edit',payload:Object.assign({},v,{receivedAt:iso})});
@@ -1055,16 +1073,16 @@ ACTIONS.printSlip=(t)=>{const d=t.dataset.id.startsWith('sr-')?specialDocRows().
 /* =====================  REGULAR REPORTS  ===================== */
 const isOver=d=>isClockActive(d)&&dl(d).key==='over';
 UI.regTab=UI.regTab||'consolidated';
-VIEWS.regular=(u)=>{
+VIEWS.regular=(u,state=S)=>{
  const tabs='<div class="tabs" role="tablist"><button class="tab" role="tab" data-act="regularTab" data-k="consolidated" aria-selected="'+(UI.regTab==='consolidated')+'">Consolidated CMR and PPR</button><button class="tab" role="tab" data-act="regularTab" data-k="special" aria-selected="'+(UI.regTab==='special')+'">Special Report</button></div>';
  if(UI.regTab==='special'){
-  const items=spItems().slice().sort((a,b)=>String(b.genDate).localeCompare(String(a.genDate)));
+  const items=state.spItems.slice().sort((a,b)=>String(b.genDate).localeCompare(String(a.genDate)));
   return '<div class="wrap"><div class="pagehead"><div><h1>Regular reports</h1><p>System generated Special Reports in the document tracking workflow.</p></div></div>'+tabs+'<div class="tw"><table class="tbl"><thead><tr><th>Special Report Name</th><th>Reporting Period</th><th>Assigned To</th><th>Generation Date</th><th>Deadline</th><th>Status</th><th>Action</th></tr></thead><tbody>'+spGenRows(items)+'</tbody></table></div></div>';
  }
  const scope=regionScope(u);
- const desigs=scope?S.designations.filter(des=>scope.has(des.staff)):S.designations;
+ const desigs=S.designations.filter(des=>(!scope||scope.has(des.staff))&&((S.users.find(x=>x.id===des.staff)||{}).division==='CMED'||state.docs.some(d=>isRegularDoc(d.docType)&&d.region===des.name)));
  const rows=desigs.map(des=>{
-  const ds=visibleDocs(u).filter(d=>isRegularDoc(d.docType)&&d.region===des.name),op=ds.filter(isOpen),ov=op.filter(isOver),rev=REVIEW_LINE[des.staff];
+  const ds=state.docs.filter(d=>isRegularDoc(d.docType)&&d.region===des.name),op=ds.filter(isOpen),ov=op.filter(isOver),rev=REVIEW_LINE[des.staff];
   return{des,op,ov,rel:ds.filter(d=>!isOpen(d)).length,rev};
  });
  const totOpen=rows.reduce((a,r)=>a+r.op.length,0),totOver=rows.reduce((a,r)=>a+r.ov.length,0);
@@ -1074,47 +1092,71 @@ VIEWS.regular=(u)=>{
  return '<div class="wrap"><div class="pagehead"><div><h1>Regular reports</h1><p>'+esc(ruleTxt)+' '+plural(totOpen,'report')+' open'+(totOver?', '+totOver+' overdue':'')+'.'+(scope?' Showing the regions assigned to you or your team.':'')+'</p></div></div>'+tabs+
  (rows.length?'<div class="tw"><table class="tbl"><thead><tr><th>Region / office</th><th>Designated staff</th><th>Reviewer</th><th>Open</th><th>Overdue</th><th>Released</th></tr></thead><tbody>'+trs+'</tbody></table></div>':'<div class="card empty"><b>No regions are assigned to you.</b>Ask the System Administrator if this looks wrong.</div>')+'</div>';
 };
-ACTIONS.regRow=(t)=>{UI.filters={tile:'total',region:t.dataset.v};UI.page=1;UI.sel.clear();go('dashboard');};
+ACTIONS.regRow=(t)=>{UI.filters={tile:'total',region:t.dataset.v,regular:true,reportDivision:'CMED'};UI.page=1;UI.sel.clear();go('dashboard');};
  ACTIONS.regularTab=(t)=>{UI.regTab=t.dataset.k;render();};
 ACTIONS.regNew=()=>openDocForm(null,'',true);
 
 /* =====================  REPORTS  ===================== */
-const REPORTS=[['register','Document register'],['overdue','Overdue and due soon'],['workload','Staff workload'],['regular','Regular reports by region'],['turnaround','Turnaround and on-time rate']];
 const avgTat=ds=>{const a=ds.filter(d=>d.clockStart&&d.stopAt).map(d=>wdBetween(d.clockStart,d.stopAt));return a.length?(a.reduce((x,y)=>x+y,0)/a.length).toFixed(1):'—';};
 const ontimePct=ds=>{const c=ds.filter(d=>d.stopAt&&d.dueAt);if(!c.length)return '—';return Math.round(c.filter(d=>dl(d).key==='done_ok').length/c.length*100)+'%';};
+function divisionReportState(u,division){
+ if(!canAccessDivision(u,division))return{state:null,error:'You do not have access to this division.'};
+ const key=u.id+':'+division+':'+API.v;
+ if(UI.divisionReport?.key!==key){
+  const request={key,state:null,error:''};UI.divisionReport=request;
+  api('GET','/api/state?reportDivision='+encodeURIComponent(division)).then(r=>{
+   if(ME()?.id!==u.id||UI.divisionReport!==request)return;
+   if(r.ok&&r.reportScope===division)request.state=r.state;else request.error=r.ok?'Restart the DTS server to load division reporting.':r.error||'Could not load division reports.';
+   render();
+  }).catch(()=>{if(UI.divisionReport===request){request.error='Could not load division reports.';render();}});
+ }
+ return UI.divisionReport;
+}
+const reportDivision=()=>UI.route==='cmsd'?'CMSD':UI.route==='cmed'?'CMED':'';
+const divisionSection=()=>['turnaround','ontime'].includes(UI.param)?'performance':UI.param||'documents';
+function divisionTabs(u,division){
+ const items=[['documents','List of Documents']].concat(division==='CMED'?[['regular','Regular Reports']]:[],has(u,'report.view')?[['performance','Turnaround Time & On-Time Rate']]:[]),route=division.toLowerCase(),selected=divisionSection();
+ return '<nav class="ux-tabs division-tabs" aria-label="'+division+' sections">'+items.map(([key,label])=>'<a class="btn'+(key===selected?' primary':'')+'" href="#/'+route+'/'+key+'" data-act="divisionTab" data-k="'+key+'"'+(key===selected?' aria-current="page"':'')+'>'+label+'</a>').join('')+'</nav>';
+}
+function divisionPage(u,division){
+ const section=divisionSection(),head='<div class="pagehead"><div><h1>'+division+'</h1><p>Division reports and performance, scoped to responsible personnel.</p></div></div>',tabs=divisionTabs(u,division);
+ if(!canAccessDivision(u,division))return '<div class="wrap"><div class="card empty"><b>You do not have access to this division.</b></div></div>';
+ if(!['documents','performance',...(division==='CMED'?['regular']:[])].includes(section))return VIEWS.notfound();
+ if(section==='performance'&&!has(u,'report.view'))return '<div class="wrap">'+head+tabs+'<div class="card empty"><b>You do not have access to this report.</b></div></div>';
+ const data=divisionReportState(u,division);
+ if(!data.state)return '<div class="wrap reporting-page division-page">'+head+tabs+'<div class="card empty" role="status">'+(data.error?esc(data.error)+' <button class="btn" data-act="retryDivision">Retry</button>':'Loading '+division+' reports…')+'</div></div>';
+ const content=section==='regular'?VIEWS.regular(u,data.state):section==='documents'?'<div class="wrap ux-workspace"><div class="division-content-head"><h2>List of Documents</h2><p>All documents assigned to '+division+'. Search, filter, and open a record to continue its existing workflow.</p></div>'+registryPanel(u,division)+'</div>':divisionReportHTML(u);
+ return '<div class="wrap reporting-page division-page'+(section==='documents'?' ux-workspace':'')+'">'+head+tabs+'<p class="hint division-note">'+division+' records only. Ownership follows assigned personnel; shared assignments without one identifiable division are excluded.</p>'+content.replace(/^<div class="wrap(?: [^"]*)?">/,'').replace(/<\/div>$/,'').replace('class="pagehead"','class="division-content-head"').replace('<h1>Regular reports</h1>','<h2>Regular reports</h2>')+'</div>';
+}
+VIEWS.cmed=u=>divisionPage(u,'CMED');
+VIEWS.cmsd=u=>divisionPage(u,'CMSD');
+ACTIONS.divisionTab=t=>go(UI.route,t.dataset.k);
+ACTIONS.retryDivision=()=>{UI.divisionReport=null;render();};
 function buildReport(u){
- const rf=UI.rf;let docs=visibleDocs(u);
- if(rf.division)docs=docs.filter(d=>d.division===rf.division);
+ const division=reportDivision();
+ if(!division||divisionSection()!=='performance'||!canAccessDivision(u,division)||!has(u,'report.view'))return null;
+ const state=divisionReportState(u,division).state;if(!state)return null;
+ const rf=UI.rf;let docs=state.docs.map(d=>({...d,division:d.reportingDivision})).concat(specialDocRows(state.spItems).map(d=>({...d,division})));
  if(rf.from)docs=docs.filter(d=>isoD(d.receivedAt)>=rf.from);
  if(rf.to)docs=docs.filter(d=>isoD(d.receivedAt)<=rf.to);
- const sub=(rf.division?rf.division+'. ':'All divisions. ')+(rf.from||rf.to?'Received '+(rf.from?'from '+fmtD(parseD(rf.from)):'')+(rf.to?' to '+fmtD(parseD(rf.to)):'')+'.':'All dates.');
- switch(UI.report){
-  case 'overdue':{const l=docs.filter(d=>isClockActive(d)&&['over','soon'].includes(dl(d).key)).sort((a,b)=>(a.dueAt||'').localeCompare(b.dueAt||''));
-   return{title:'Overdue and due-soon documents',sub,cols:['Tracking no.','Subject','Division','Assigned to','Current desk','Due','Status'],rows:l.map(d=>[d.trackNo,d.subject,d.division,uname(d.assignee),deskText(d),fmtD(parseD(d.dueAt)),dl(d).label])};}
-  case 'workload':{const us=S.users.filter(x=>x.active&&['staff','supervisor','focal'].includes(x.role));
-   return{title:'Staff workload',sub,cols:['Name','Role','Open','Overdue','Due soon','Finished','Avg. turnaround (working days)','On-time rate'],rows:us.map(x=>{const ds=docs.filter(d=>d.assignee===x.id),op=ds.filter(isOpen);return[x.name,roleName(x.role),op.length,op.filter(isOver).length,op.filter(d=>isClockActive(d)&&dl(d).key==='soon').length,ds.filter(d=>d.stopAt).length,avgTat(ds),ontimePct(ds)];})};}
-  case 'regular':{const rd=docs.filter(d=>isRegularDoc(d.docType));
-   return{title:'Regular reports (Consolidated CMR and PPR) by region',sub,cols:['Region or office','Designated staff','Received','Open','Overdue','Released','Avg. turnaround (working days)','On-time rate'],rows:S.designations.map(x=>{const ds=rd.filter(d=>d.region===x.name);return[x.name,uname(x.staff),ds.length,ds.filter(isOpen).length,ds.filter(isOver).length,ds.filter(d=>!isOpen(d)).length,avgTat(ds),ontimePct(ds)];})};}
-  case 'turnaround':{const rows=[];S.refs.tx.forEach(t=>{const ds=docs.filter(d=>d.txType===t.name);if(ds.length)rows.push(['Transaction',t.name,t.days?String(t.days):'—',ds.length,ds.filter(d=>d.stopAt).length,avgTat(ds),ontimePct(ds)]);});
+ const sub=division+'. '+(rf.from||rf.to?'Received '+(rf.from?'from '+fmtD(parseD(rf.from)):'')+(rf.to?' to '+fmtD(parseD(rf.to)):'')+'.':'All dates.');
+ const rows=[];S.refs.tx.forEach(t=>{const ds=docs.filter(d=>d.txType===t.name);if(ds.length)rows.push(['Transaction',t.name,t.days?String(t.days):'—',ds.length,ds.filter(d=>d.stopAt).length,avgTat(ds),ontimePct(ds)]);});
    S.divisions.forEach(v=>{const ds=docs.filter(d=>d.division===v.code);if(ds.length)rows.push(['Division',v.code,'—',ds.length,ds.filter(d=>d.stopAt).length,avgTat(ds),ontimePct(ds)]);});
-   return{title:'Turnaround and on-time rate',sub,cols:['Group','Name','Threshold (working days)','Documents','Finished','Avg. turnaround (working days)','On-time rate'],rows};}
-  default:return{title:'Document register',sub,cols:DOC_COLS,rows:docExportRows(docs.sort((a,b)=>a.receivedAt.localeCompare(b.receivedAt)))};
- }
+ const cols=['Group','Name','Threshold (working days)','Documents','Finished','Avg. turnaround (working days)','On-time rate'];
+ return{title:division+' — Turnaround Time & On-Time Rate',sub,cols,rows};
 }
-VIEWS.reports=(u)=>{
- const r=buildReport(u),rf=UI.rf,wide=r.cols.length>9;
- return '<div class="wrap"><div class="pagehead"><div><h1>Reports</h1><p>Choose a report, narrow it, then print it or export it.</p></div><div class="row">'+(has(u,'report.print')?'<button class="btn" data-act="printReport">'+ic('print')+'Print</button><button class="btn" data-act="exportReport">'+ic('download')+'Export CSV</button>':'')+'</div></div>'+
- '<div class="tabs" role="tablist">'+REPORTS.map(x=>'<button class="tab" role="tab" data-act="repTab" data-k="'+x[0]+'" aria-selected="'+(UI.report===x[0])+'">'+x[1]+'</button>').join('')+'</div>'+
- '<div class="fbar" style="max-width:640px"><select data-chg="repF" data-k="division" aria-label="Division"><option value="">All divisions</option>'+S.divisions.map(d=>opt(d.code,d.code,rf.division===d.code)).join('')+'</select><input type="date" data-chg="repF" data-k="from" value="'+esc(rf.from||'')+'" aria-label="Received from" title="Received from"><input type="date" data-chg="repF" data-k="to" value="'+esc(rf.to||'')+'" aria-label="Received to" title="Received to"></div>'+
+function divisionReportHTML(u){
+ const r=buildReport(u),rf=UI.rf;
+ return '<div class="wrap"><section class="report-toolbar" aria-label="Report toolbar"><div class="report-period"><div class="filters"><label>Received from <input type="date" data-chg="repF" data-k="from" value="'+esc(rf.from||'')+'" aria-label="Received from"></label><label>Received to <input type="date" data-chg="repF" data-k="to" value="'+esc(rf.to||'')+'" aria-label="Received to"></label></div></div>'+(has(u,'report.print')?'<div class="report-actions"><button class="btn" data-act="printReport">'+ic('print')+'Print</button><button class="btn" data-act="exportReport">'+ic('download')+'Export to CSV</button></div>':'')+'</section>'+
  '<div class="card pad"><h2>'+esc(r.title)+'</h2><p class="muted">'+esc(r.sub)+' '+plural(r.rows.length,'row')+'.</p><div class="tw"><table class="tbl"><thead><tr>'+r.cols.map(c=>'<th>'+esc(c)+'</th>').join('')+'</tr></thead><tbody>'+(r.rows.length?r.rows.map(x=>'<tr>'+x.map(c=>'<td>'+esc(c)+'</td>').join('')+'</tr>').join(''):'<tr><td colspan="'+r.cols.length+'"><div class="empty">No data for these filters.</div></td></tr>')+'</tbody></table></div></div></div>';
 };
-ACTIONS.repTab=(t)=>{UI.report=t.dataset.k;render();};
+VIEWS.reports=u=>VIEWS.analytics(u);
 CHANGES.repF=(t)=>{UI.rf[t.dataset.k]=t.value;render();};
-ACTIONS.printReport=()=>{const r=buildReport(ME());openPP(sheetHead(r.title,r.sub)+'<table><thead><tr>'+r.cols.map(c=>'<th>'+esc(c)+'</th>').join('')+'</tr></thead><tbody>'+r.rows.map(x=>'<tr>'+x.map(c=>'<td>'+esc(c)+'</td>').join('')+'</tr>').join('')+'</tbody></table><div class="foot"><span>'+plural(r.rows.length,'row')+'</span><span>End of report</span></div>');};
-ACTIONS.exportReport=()=>{const r=buildReport(ME());exportCSV(UI.report,r.cols,r.rows);};
+ACTIONS.printReport=()=>{if(!has(ME(),'report.print'))return;const r=buildReport(ME());if(r)openPP(sheetHead(r.title,r.sub)+'<table><thead><tr>'+r.cols.map(c=>'<th>'+esc(c)+'</th>').join('')+'</tr></thead><tbody>'+r.rows.map(x=>'<tr>'+x.map(c=>'<td>'+esc(c)+'</td>').join('')+'</tr>').join('')+'</tbody></table><div class="foot"><span>'+plural(r.rows.length,'row')+'</span><span>End of report</span></div>');};
+ACTIONS.exportReport=()=>{if(!has(ME(),'report.print'))return;const r=buildReport(ME());if(r)exportCSV(reportDivision().toLowerCase()+'-'+divisionSection(),r.cols,r.rows);};
 
 /* =====================  ADMIN: USERS  ===================== */
-async function cfg(sec,a,d){const r=await api('PUT','/api/config/'+sec,{value:S[sec],note:a+(d?': '+d:'')});if(!r.ok)toast(r.error||'Could not save that change.','bad');await refresh();}
+async function cfg(sec,a,d){const r=await api('PUT','/api/config/'+sec,{value:S[sec],note:a+(d?': '+d:'')});if(!r.ok){toast(r.error||'Could not save that change.','bad');await refresh();return false;}await refresh();return true;}
 const sysAdmins=()=>S.users.filter(u=>u.active&&u.role==='sysadmin');
 VIEWS.users=(u)=>{
  return '<div class="wrap"><div class="pagehead"><div><h1>Users</h1><p>Accounts, roles and sign-in details. Deactivate an account rather than deleting it so document history stays intact.</p></div><button class="btn primary" data-act="userForm">'+ic('plus')+'Add user</button></div>'+
@@ -1146,8 +1188,8 @@ VIEWS.roles=()=>{
   return h+'<tr><td>'+esc(p[2])+'</td>'+ROLE_ORDER.map(r=>'<td><input type="checkbox" aria-label="'+esc(ROLES[r]+': '+p[2])+'" data-chg="perm" data-r="'+r+'" data-p="'+p[1]+'"'+((S.perms[r]||[]).includes(p[1])||r==='sysadmin'?' checked':'')+(r==='sysadmin'?' disabled':'')+'></td>').join('')+'</tr>';}).join('');
  return '<div class="wrap"><div class="pagehead"><div><h1>Roles &amp; permissions</h1><p>Tick what each role may do. The System Administrator always has everything. Everyone can already open any document to see its basic details and print it; these permissions control who can act on a document, not who can see it. Some actions also depend on the desk: for example, only the assigned staff can submit a document, and only the division’s focal can assign it. Anyone named as a division’s focal also receives the focal abilities (assign, review) whatever their role.</p></div><button class="btn" data-act="resetPerms">Restore defaults</button></div><div class="tw"><table class="tbl matrix"><thead><tr><th>Permission</th>'+ROLE_ORDER.map(r=>'<th>'+esc(ROLES[r])+'</th>').join('')+'</tr></thead><tbody>'+rows+'</tbody></table></div></div>';
 };
-CHANGES.perm=(t)=>{const r=t.dataset.r,p=t.dataset.p,a=S.perms[r]||(S.perms[r]=[]);const i=a.indexOf(p);if(t.checked&&i<0)a.push(p);if(!t.checked&&i>=0)a.splice(i,1);cfg('perms','Permission changed',ROLES[r]+': '+p+' '+(t.checked?'granted':'removed'));toast('Permission updated.');};
-ACTIONS.resetPerms=()=>confirmBox('Restore default permissions','Every role goes back to the starting permissions.','Restore',()=>{S.perms=JSON.parse(JSON.stringify(DEFAULT_PERMS));cfg('perms','Permissions reset','');toast('Defaults restored.');render();});
+CHANGES.perm=(t)=>{const r=t.dataset.r,p=t.dataset.p,a=S.perms[r]||(S.perms[r]=[]);const i=a.indexOf(p);if(t.checked&&i<0)a.push(p);if(!t.checked&&i>=0)a.splice(i,1);return cfg('perms','Permission changed',ROLES[r]+': '+p+' '+(t.checked?'granted':'removed'));};
+ACTIONS.resetPerms=()=>confirmBox('Restore default permissions','Every role goes back to the starting permissions.','Restore',()=>{S.perms=JSON.parse(JSON.stringify(DEFAULT_PERMS));return cfg('perms','Permissions reset','');});
 
 /* =====================  ADMIN: DELEGATION & OIC  ===================== */
 VIEWS.delegation=(u)=>{
@@ -1159,7 +1201,7 @@ VIEWS.delegation=(u)=>{
  '<div class="charts"><div class="card pad"><h3 style="margin-bottom:10px">Presence of managers</h3>'+mgrs.map(m=>'<div class="row sp" style="padding:8px 0;border-bottom:1px solid var(--line2)"><div><b>'+esc(m.name)+'</b><div class="small muted">'+esc(roleName(m.role))+(m.division?' – '+esc(m.division):'')+'</div></div>'+((can2||m.id===u.id)?'<button class="btn sm" data-act="togglePresence" data-id="'+m.id+'">'+(m.present?'Present. Mark away':'Away. Mark present')+'</button>':badge(m.present?'ok':'warn',m.present?'Present':'Away'))+'</div>').join('')+'</div>'+
  '<div class="card pad"><h3 style="margin-bottom:10px">Officer-in-Charge (OIC)</h3>'+(can2?'<div data-panel><div class="fld"><label>Nominee</label><select name="oic">'+opt('','No nominee',!S.oic.userId)+cand.map(x=>opt(x.id,x.name+' ('+ROLES[x.role]+')',S.oic.userId===x.id)).join('')+'</select></div><label class="chk" style="margin-bottom:12px"><input type="checkbox" name="on"'+(S.oic.enabled?' checked':'')+'> Enable OIC authority</label><button class="btn primary" data-act="saveOic">Save OIC</button></div><p class="hint" style="margin-top:10px">While enabled, the nominee can clear documents for out, but only when the Department Manager and the Division Managers are all away.</p>':'<p>'+(S.oic.enabled&&o?esc(o.name)+' is the enabled OIC.':'No OIC is enabled. Only the System Administrator can enable one.')+'</p>')+'</div></div></div>';
 };
-ACTIONS.saveOic=(t)=>{const v=formVals(t.closest('[data-panel]'));if(v.on&&!v.oic)return toast('Choose a nominee before enabling the OIC.','bad');S.oic={enabled:!!v.on,userId:v.oic||''};cfg('oic','OIC updated',(v.on?'Enabled: ':'Disabled: ')+uname(v.oic));toast(v.on?'OIC enabled.':'OIC settings saved.');render();};
+ACTIONS.saveOic=(t)=>{const v=formVals(t.closest('[data-panel]'));if(v.on&&!v.oic)return toast('Choose a nominee before enabling the OIC.','bad');S.oic={enabled:!!v.on,userId:v.oic||''};return cfg('oic','OIC updated',(v.on?'Enabled: ':'Disabled: ')+uname(v.oic));};
 
 /* =====================  ADMIN: DIVISIONS  ===================== */
 VIEWS.divisions=()=>{
@@ -1168,9 +1210,9 @@ VIEWS.divisions=()=>{
  S.divisions.map(d=>{const n=S.docs.filter(x=>x.division===d.code).length;return '<tr><td class="b">'+esc(d.code)+'</td><td><select data-chg="divFocal" data-code="'+esc(d.code)+'" aria-label="Focal for '+esc(d.code)+'">'+opt('','Not set',!d.focal)+foc.map(x=>opt(x.id,x.name+' ('+roleName(x.role)+')',d.focal===x.id)).join('')+'</select></td><td>'+esc(S.users.filter(x=>x.active&&x.role==='div_manager'&&x.division===d.code).map(x=>x.name).join(', ')||'None. Any Division Manager may review.')+'</td><td>'+n+'</td><td class="right">'+(n?'':'<button class="btn sm" data-act="delDiv" data-code="'+esc(d.code)+'">Remove</button>')+'</td></tr>';}).join('')+'</tbody></table></div>'+
  '<div class="card pad" style="margin-top:16px" data-panel><h3 style="margin-bottom:8px">Add a division</h3><div class="row"><input name="code" placeholder="Division code" style="max-width:240px"><button class="btn" data-act="addDiv">Add division</button></div></div><p class="hint" style="margin-top:12px">Any active user can be named focal. Naming someone gives them the focal abilities for that division. Set a user’s own division and role under Users.</p></div>';
 };
-CHANGES.divFocal=(t)=>{const d=divOf(t.dataset.code);d.focal=t.value;cfg('divisions','Focal set',d.code+': '+uname(t.value));toast('Focal saved for '+d.code+'.');};
-ACTIONS.addDiv=(t)=>{const c=formVals(t.closest('[data-panel]')).code.trim();if(!c)return toast('Enter a division code.','bad');if(divOf(c))return toast('That division already exists.','bad');S.divisions.push({code:c,focal:''});cfg('divisions','Division added',c);render();};
-ACTIONS.delDiv=(t)=>confirmBox('Remove division','Remove '+t.dataset.code+'? It has no documents.','Remove',()=>{S.divisions=S.divisions.filter(d=>d.code!==t.dataset.code);cfg('divisions','Division removed',t.dataset.code);render();},true);
+CHANGES.divFocal=(t)=>{const d=divOf(t.dataset.code);d.focal=t.value;return cfg('divisions','Focal set',d.code+': '+uname(t.value));};
+ACTIONS.addDiv=(t)=>{const c=formVals(t.closest('[data-panel]')).code.trim();if(!c)return toast('Enter a division code.','bad');if(divOf(c))return toast('That division already exists.','bad');S.divisions.push({code:c,focal:''});return cfg('divisions','Division added',c);};
+ACTIONS.delDiv=(t)=>confirmBox('Remove division','Remove '+t.dataset.code+'? Personnel, reports and workflows must be reassigned before a division can be removed.','Remove',()=>{S.divisions=S.divisions.filter(d=>d.code!==t.dataset.code);return cfg('divisions','Division removed',t.dataset.code);},true);
 
 /* =====================  ADMIN: REFERENCE LISTS  ===================== */
 const addRow=(name,ph,extra)=>'<div class="row" data-panel style="margin-top:12px"><input name="v" placeholder="'+ph+'" style="flex:1;min-width:160px">'+(extra||'')+'<button class="btn sm" data-act="'+name+'">Add</button></div>';
@@ -1212,46 +1254,78 @@ function docTypesCard(){
    if(s.sort==='active')return ((a.active!==false?1:0)-(b.active!==false?1:0))*s.dir;
    const x=v(s.sort),y=w(s.sort);return (x<y?-1:x>y?1:0)*s.dir;});
  const pg=refsPager('doc',list);
- return '<div class="card"><div class="ch"><h3>Document types &amp; prescribed deadlines</h3><button class="btn sm primary" data-act="docTypeForm">'+ic('plus')+'Add document type</button></div>'+
+ return '<div class="card"><div class="ch ref-list-heading"><h3>Document types &amp; prescribed deadlines</h3><button class="btn sm primary" data-act="docTypeForm">'+ic('plus')+'Add document type</button></div>'+
   refsHead('doc','Document type')+
   '<div class="tw" style="border:0;border-radius:0"><table class="tbl"><thead><tr><th class="sortable" data-act="refSort" data-t="doc" data-k="name" aria-sort="'+(s.sort==='name'?(s.dir>0?'ascending':'descending'):'none')+'">Document type'+(s.sort==='name'?(s.dir>0?' &uarr;':' &darr;'):'')+'</th><th>Description</th><th class="sortable" data-act="refSort" data-t="doc" data-k="term">Prescribed deadline threshold'+(s.sort==='term'?(s.dir>0?' &uarr;':' &darr;'):'')+'</th><th class="sortable" data-act="refSort" data-t="doc" data-k="basis">Deadline unit / basis'+(s.sort==='basis'?(s.dir>0?' &uarr;':' &darr;'):'')+'</th><th class="sortable" data-act="refSort" data-t="doc" data-k="active">Status'+(s.sort==='active'?(s.dir>0?' &uarr;':' &darr;'):'')+'</th><th class="right">Actions</th></tr></thead><tbody>'+
   (pg.rows.length?pg.rows.map(t=>'<tr'+(t.active===false?' class="muted"':'')+'><td class="b">'+esc(t.name)+'</td><td class="small muted">'+esc(t.description||'—')+'</td><td>'+docTypeTerm(t)+'</td><td class="small">'+esc(unitText(docTypeUnit(t)))+'<div class="muted">'+esc(basisText(docTypeBasis(t)))+'</div></td><td>'+(t.active!==false?badge('ok','Active'):badge('neu','Inactive'))+'</td>'+
    '<td class="right nowrap"><button class="btn sm" data-act="docTypeForm" data-i="'+t.i+'">Edit</button> <button class="btn sm" data-act="docTypeToggle" data-i="'+t.i+'">'+(t.active!==false?'Deactivate':'Activate')+'</button> <button class="btn ghost sm" data-act="delDocType" data-i="'+t.i+'" aria-label="Remove">'+ic('x')+'</button></td></tr>').join(''):'<tr><td colspan="6"><div class="empty">No document types match.</div></td></tr>')+'</tbody></table></div>'+
-  refsPagerHTML('doc',list,pg.pages)+
-  '<div class="pgrid" style="padding:12px 16px;border-top:1px solid var(--line2)"><h4>Add a document type</h4><p class="hint">The prescribed threshold is used for every deadline of this type. No deadline is written into the application itself.</p><div data-panel><input name="v" placeholder="Name of the document type" style="width:100%;max-width:420px"><input name="description" placeholder="Description (optional)" style="margin-top:8px;width:100%;max-width:520px"><div class="row" style="margin-top:8px"><input name="threshold" type="number" min="1" max="365" placeholder="Threshold" style="width:120px"><select name="basis">'+DEADLINE_BASES.map(b=>opt(b[0],b[1],b[0]==='working_days')).join('')+'</select><select name="unit">'+DEADLINE_UNITS.map(u=>opt(u[0],u[1],u[0]==='working_days')).join('')+'</select><button class="btn sm primary" data-act="addDocType">Add</button></div></div></div></div>';
+  refsPagerHTML('doc',list,pg.pages)+'</div>';
 }
 function commTypesCard(){
  const s=UI.rfPages.comm;
  const list=refsFilterRows(S.refs.comm.map((c,i)=>({i:i,name:commName(c),description:(c&&c.description)||'',active:!(c&&c.active===false)})),s.q.toLowerCase())
   .sort((a,b)=>{const v=k=>String(a[k]||''),w=k=>String(b[k]||'');if(s.sort==='active')return ((a.active?1:0)-(b.active?1:0))*s.dir;const x=v(s.sort),y=w(s.sort);return (x<y?-1:x>y?1:0)*s.dir;});
  const pg=refsPager('comm',list);
- return '<div class="card"><div class="ch"><h3>Communication types</h3><button class="btn sm primary" data-act="commTypeForm">'+ic('plus')+'Add communication type</button></div>'+
+ return '<div class="card"><div class="ch ref-list-heading"><h3>Communication types</h3><button class="btn sm primary" data-act="commTypeForm">'+ic('plus')+'Add communication type</button></div>'+
   refsHead('comm','Communication type')+
   '<div class="tw" style="border:0;border-radius:0"><table class="tbl"><thead><tr><th class="sortable" data-act="refSort" data-t="comm" data-k="name">Communication type'+(s.sort==='name'?(s.dir>0?' &uarr;':' &darr;'):'')+'</th><th>Description</th><th class="sortable" data-act="refSort" data-t="comm" data-k="active">Status'+(s.sort==='active'?(s.dir>0?' &uarr;':' &darr;'):'')+'</th><th class="right">Actions</th></tr></thead><tbody>'+
   (pg.rows.length?pg.rows.map(c=>'<tr'+(c.active?'':' class="muted"')+'><td class="b">'+esc(c.name)+'</td><td class="small muted">'+esc(c.description||'—')+'</td><td>'+(c.active?badge('ok','Active'):badge('neu','Inactive'))+'</td>'+
    '<td class="right nowrap"><button class="btn sm" data-act="commTypeForm" data-i="'+c.i+'">Edit</button> <button class="btn sm" data-act="commTypeToggle" data-i="'+c.i+'">'+(c.active?'Deactivate':'Activate')+'</button> <button class="btn ghost sm" data-act="delComm" data-i="'+c.i+'" aria-label="Remove">'+ic('x')+'</button></td></tr>').join(''):'<tr><td colspan="4"><div class="empty">No communication types match.</div></td></tr>')+'</tbody></table></div>'+
-  refsPagerHTML('comm',list,pg.pages)+
-  '<div class="pgrid" style="padding:12px 16px;border-top:1px solid var(--line2)"><h4>Add a communication type</h4><div data-panel><div class="row"><input name="v" placeholder="Name of the communication type" style="flex:1;min-width:200px"><input name="description" placeholder="Description (optional)" style="flex:1;min-width:200px"><button class="btn sm primary" data-act="addComm">Add</button></div></div></div></div>';
+  refsPagerHTML('comm',list,pg.pages)+'</div>';
 }
 UI.refTab=UI.refTab||'transactions';
 VIEWS.refs=()=>{
  const staff=S.users.filter(x=>x.active&&['staff','supervisor','focal'].includes(x.role));
  const tabs=[['transactions','Transactions'],['documents','Document types'],['communications','Communication types'],['leave','Leave types'],['holidays','Holidays'],['designations','Report designations'],['special','Special Reports']];
+ const card=(title,hint,kind,addLabel,body)=>'<div class="card"><div class="ch ref-list-heading"><div><h3>'+title+'</h3><p class="hint">'+hint+'</p></div><button class="btn sm primary" data-act="refAddForm" data-kind="'+kind+'">'+ic('plus')+addLabel+'</button></div>'+body+'</div>';
  let content='';
- if(UI.refTab==='transactions')content='<div class="card pad"><h3>Types of transaction</h3><p class="hint">Working days from assignment to clearance. Leave blank for no deadline.</p><table class="tbl"><tbody>'+S.refs.tx.map((t,i)=>'<tr><td>'+esc(t.name)+(t.special?' '+badge('neu','date set by focal'):'')+'</td><td style="width:90px">'+(t.special?'—':'<input type="number" min="1" data-chg="txDays" data-i="'+i+'" value="'+(t.days||'')+'" aria-label="Days for '+esc(t.name)+'">')+'</td><td class="right" style="width:70px"><button class="btn ghost sm" data-act="delTx" data-i="'+i+'" aria-label="Remove">'+ic('x')+'</button></td></tr>').join('')+'</tbody></table>'+addRow('addTx','New type of transaction','<input name="days" type="number" min="1" placeholder="Days" style="width:90px">')+'</div>';
+ if(UI.refTab==='transactions')content=card('Types of transaction','Working days from assignment to clearance. Leave blank for no deadline.','transaction','Add transaction type','<div class="ref-expanded-table"><table class="tbl"><tbody>'+S.refs.tx.map((t,i)=>'<tr><td>'+esc(t.name)+(t.special?' '+badge('neu','date set by focal'):'')+'</td><td style="width:90px">'+(t.special?'—':'<input type="number" min="1" data-chg="txDays" data-i="'+i+'" value="'+(t.days||'')+'" aria-label="Days for '+esc(t.name)+'">')+'</td><td class="right" style="width:70px"><button class="btn ghost sm" data-act="delTx" data-i="'+i+'" aria-label="Remove">'+ic('x')+'</button></td></tr>').join('')+'</tbody></table></div>');
  else if(UI.refTab==='documents')content=docTypesCard();
  else if(UI.refTab==='communications')content=commTypesCard();
  else if(UI.refTab==='leave')content=leaveTypesCard();
- else if(UI.refTab==='holidays')content='<div class="card pad"><h3>Holidays</h3><p class="hint">Excluded from working-day counts and from every prescribed deadline. Check these against the official calendar each year.</p><div style="max-height:300px;overflow:auto"><table class="tbl"><tbody>'+S.holidays.slice().sort((a,b)=>a.date.localeCompare(b.date)).map(h=>'<tr><td class="nowrap">'+fmtD(parseD(h.date))+'</td><td>'+esc(h.name)+'</td><td class="right"><button class="btn ghost sm" data-act="delHol" data-d="'+h.date+'" aria-label="Remove">'+ic('x')+'</button></td></tr>').join('')+'</tbody></table></div><div class="row" data-panel style="margin-top:12px"><input type="date" name="date" style="width:auto"><input name="v" placeholder="Holiday name" style="flex:1;min-width:140px"><button class="btn sm" data-act="addHol">Add</button></div></div>';
- else if(UI.refTab==='designations')content='<div class="card pad"><h3>Report designations</h3><p class="hint">Each region or office has one staff member who processes its Consolidated CMR and PPR.</p><div style="max-height:380px;overflow:auto"><table class="tbl"><tbody>'+S.designations.map((d,i)=>'<tr><td>'+esc(d.name)+'</td><td><select data-chg="desStaff" data-i="'+i+'" aria-label="Staff for '+esc(d.name)+'">'+staff.map(x=>opt(x.id,x.name,d.staff===x.id)).join('')+'</select></td><td class="right" style="width:60px"><button class="btn ghost sm" data-act="delDes" data-i="'+i+'" aria-label="Remove">'+ic('x')+'</button></td></tr>').join('')+'</tbody></table></div><div class="row" data-panel style="margin-top:12px"><input name="v" placeholder="New region or office" style="flex:1;min-width:160px"><select name="staff" style="width:auto">'+staff.map(x=>opt(x.id,x.name)).join('')+'</select><button class="btn sm" data-act="addDes">Add</button></div></div>';
+ else if(UI.refTab==='holidays')content=card('Holidays','Excluded from working-day counts and from every prescribed deadline. Check these against the official calendar each year.','holiday','Add holiday','<div class="ref-expanded-table" data-ref-list="holidays"><table class="tbl"><tbody>'+S.holidays.slice().sort((a,b)=>a.date.localeCompare(b.date)).map(h=>'<tr><td class="nowrap">'+fmtD(parseD(h.date))+'</td><td>'+esc(h.name)+'</td><td class="right"><button class="btn ghost sm" data-act="delHol" data-d="'+h.date+'" aria-label="Remove">'+ic('x')+'</button></td></tr>').join('')+'</tbody></table></div>');
+ else if(UI.refTab==='designations')content=card('Report designations','Each region or office has one staff member who processes its Consolidated CMR and PPR.','designation','Add report designation','<div class="ref-expanded-table" data-ref-list="designations"><table class="tbl"><tbody>'+S.designations.map((d,i)=>'<tr><td>'+esc(d.name)+'</td><td><select data-chg="desStaff" data-i="'+i+'" aria-label="Staff for '+esc(d.name)+'">'+staff.map(x=>opt(x.id,x.name,d.staff===x.id)).join('')+'</select></td><td class="right" style="width:60px"><button class="btn ghost sm" data-act="delDes" data-i="'+i+'" aria-label="Remove">'+ic('x')+'</button></td></tr>').join('')+'</tbody></table></div>');
  else if(UI.refTab==='special')content=spConfigPage(true);
  return '<div class="wrap"><div class="pagehead"><div><h1>Reference lists</h1><p>Manage the options and schedules used across document tracking and reporting.</p></div></div><div class="tabs" role="tablist" aria-label="Reference list categories">'+tabs.map(x=>'<button class="tab" role="tab" data-act="refTab" data-k="'+x[0]+'" aria-selected="'+(UI.refTab===x[0])+'">'+x[1]+'</button>').join('')+'</div>'+content+'</div>';
 };
 ACTIONS.refTab=t=>{UI.refTab=t.dataset.k;render();};
 const pval=t=>formVals(t.closest('[data-panel]'));
-CHANGES.txDays=(t)=>{S.refs.tx[t.dataset.i].days=t.value?Number(t.value):null;cfg('refs','Threshold changed',S.refs.tx[t.dataset.i].name+': '+(t.value||'none'));toast('Threshold saved. It applies to documents assigned from now on.');};
-ACTIONS.addTx=(t)=>{const v=pval(t);if(!v.v.trim())return toast('Enter a name.','bad');if(getTx(v.v.trim()))return toast('That already exists.','bad');S.refs.tx.push({name:v.v.trim(),days:v.days?Number(v.days):null});cfg('refs','Transaction type added',v.v);render();};
-ACTIONS.delTx=(t)=>{const x=S.refs.tx[t.dataset.i];confirmBox('Remove transaction type','Remove “'+x.name+'”? Existing documents keep it.','Remove',()=>{S.refs.tx.splice(t.dataset.i,1);cfg('refs','Transaction type removed',x.name);render();},true);};
+ACTIONS.refAddForm=t=>{
+ if(!has(ME(),'config.manage'))return;
+ const kind=t.dataset.kind,titles={transaction:'Add transaction type',holiday:'Add holiday',designation:'Add report designation'};
+ if(!titles[kind])return;
+ const nameLabel={transaction:'Transaction type name',holiday:'Holiday name',designation:'Region or office'}[kind];
+ let fields='<div class="fld"><label for="refNewName">'+nameLabel+' <span class="ux-required">Required</span></label><input id="refNewName" name="name" maxlength="120" aria-required="true" autocomplete="off"></div>';
+ if(kind==='transaction')fields+='<div class="fld"><label for="refNewDays">Deadline threshold (working days)</label><input id="refNewDays" type="number" name="days" min="1" max="365"><p class="hint">Counted from assignment to clearance. Leave blank for no deadline.</p></div>';
+ if(kind==='holiday')fields+='<div class="fld"><label for="refNewDate">Holiday date <span class="ux-required">Required</span></label><input id="refNewDate" type="date" name="date" aria-required="true"><p class="hint">This date is excluded from working-day calculations.</p></div>';
+ if(kind==='designation')fields+='<div class="fld"><label for="refNewStaff">Designated staff <span class="ux-required">Required</span></label><select id="refNewStaff" name="staff" aria-required="true"><option value="">Choose staff</option>'+S.users.filter(u=>u.active&&['staff','supervisor','focal'].includes(u.role)).map(u=>opt(u.id,u.name+' - '+roleName(u.role)+' - '+(u.division||'No division'))).join('')+'</select><p class="hint">Processes Consolidated CMR and PPR for this region or office.</p></div>';
+ openModal(titles[kind],'<div data-form="refnew" data-kind="'+kind+'">'+fields+'</div>',{foot:'<button class="btn" data-act="closeModal">Cancel</button><button class="btn primary" data-act="refAddSave">Add</button>'});
+};
+ACTIONS.refAddSave=async t=>{
+ if(t.disabled||!has(ME(),'config.manage'))return;
+ const root=$('[data-form=refnew]');if(!root)return;
+ const v=formVals(root),kind=root.dataset.kind,name=(v.name||'').trim();
+ if(!name){$('#refNewName',root).focus();return toast('Enter a name.','bad');}
+ let section,note;
+ if(kind==='transaction'){
+  if(S.refs.tx.some(x=>x.name.toLowerCase()===name.toLowerCase()))return toast('That transaction type already exists.','bad');
+  const days=v.days===''?null:Number(v.days);
+  if(days!==null&&(!Number.isInteger(days)||days<1||days>365))return toast('Enter a whole number of working days from 1 to 365, or leave it blank.','bad');
+  S.refs.tx.push({name,days});section='refs';note='Transaction type added';
+ }else if(kind==='holiday'){
+  if(!v.date){$('#refNewDate',root).focus();return toast('Choose the holiday date.','bad');}
+  if(S.holidays.some(x=>x.date===v.date))return toast('That holiday date is already listed.','bad');
+  S.holidays.push({date:v.date,name});section='holidays';note='Holiday added';
+ }else if(kind==='designation'){
+  if(S.designations.some(x=>x.name.toLowerCase()===name.toLowerCase()))return toast('That region or office already exists.','bad');
+  if(!S.users.some(u=>u.id===v.staff&&u.active&&['staff','supervisor','focal'].includes(u.role))){$('#refNewStaff',root).focus();return toast('Choose designated staff.','bad');}
+  S.designations.push({name,staff:v.staff});section='designations';note='Report designation added';
+ }else return;
+ t.disabled=true;try{if(await cfg(section,note,name))closeModal();}finally{t.disabled=false;}
+};
+CHANGES.txDays=(t)=>{S.refs.tx[t.dataset.i].days=t.value?Number(t.value):null;return cfg('refs','Threshold changed',S.refs.tx[t.dataset.i].name+': '+(t.value||'none'));};
+ACTIONS.addTx=(t)=>{const v=pval(t);if(!v.v.trim())return toast('Enter a name.','bad');if(getTx(v.v.trim()))return toast('That already exists.','bad');S.refs.tx.push({name:v.v.trim(),days:v.days?Number(v.days):null});return cfg('refs','Transaction type added',v.v);};
+ACTIONS.delTx=(t)=>{const x=S.refs.tx[t.dataset.i];confirmBox('Remove transaction type','Remove “'+x.name+'”? Existing documents keep it.','Remove',()=>{S.refs.tx.splice(t.dataset.i,1);return cfg('refs','Transaction type removed',x.name);},true);};
 /* Saves the reference lists on the server. The server validates everything and refuses a change that
    would break a document, so what the screen shows is always what is stored. */
 async function saveRefs(note){
@@ -1268,9 +1342,9 @@ ACTIONS.refPage=(t)=>{const s=UI.rfPages[t.dataset.t];s.page=Math.max(1,s.page+N
 /* --- communication types --- */
 ACTIONS.commTypeForm=(t)=>{
  const i=t.dataset.i,idx=i===undefined?null:Number(i),c=idx==null?null:S.refs.comm[idx];
- const name=input=>'<div class="fld"><label>Communication type name</label><input name="name" value="'+esc(name)+'" autocomplete="off"></div>';
+ const nameField=value=>'<div class="fld"><label>Communication type name</label><input name="name" value="'+esc(value)+'" autocomplete="off"></div>';
  openModal(c?'Edit communication type':'Add a communication type','<div data-form="commtype" data-i="'+(idx==null?'':idx)+'">'+
-  name(c?commName(c):'')+
+  nameField(c?commName(c):'')+
   '<div class="fld"><label>Description (optional)</label><input name="description" value="'+esc(c&&c.description||'')+'"></div>'+
   '<div class="fld"><label>Status</label><select name="active">'+opt('1','Active',!c||c.active!==false)+opt('0','Inactive',!!c&&c.active===false)+'</select></div>'+
   '<p class="hint">Deactivating keeps every existing document unchanged; the type simply stops being offered.</p></div>',
@@ -1285,8 +1359,7 @@ ACTIONS.saveCommType=async(t)=>{
  const now=new Date().toISOString();
  if(idx==null)S.refs.comm.push({name:name,description:v.description||'',active:v.active==='1',createdAt:now,updatedAt:now});
  else Object.assign(S.refs.comm[idx],{name:name,description:v.description||'',active:v.active==='1',updatedAt:now});
- closeModal();
- if(await saveRefs((idx==null?'Communication type added: ':'Communication type updated: ')+name))toast('Communication type saved.');
+ if(await saveRefs((idx==null?'Communication type added: ':'Communication type updated: ')+name)){closeModal();toast('Communication type saved.');}
 };
 ACTIONS.commTypeToggle=async(t)=>{
  const i=Number(t.dataset.i),c=S.refs.comm[i],now=new Date().toISOString();
@@ -1333,8 +1406,7 @@ ACTIONS.saveDocType=async(t)=>{
  const rec={name:name,description:v.description||'',threshold:thr,unit:v.unit==='calendar_days'?'calendar_days':'working_days',basis:DEADLINE_BASES.some(b=>b[0]===v.basis)?v.basis:'working_days',active:v.active==='1',regular:false,
   createdAt:idx==null?now:(S.refs.doc[idx].createdAt||now),updatedAt:now};
  if(idx==null)S.refs.doc.push(rec);else S.refs.doc[idx]=Object.assign({},S.refs.doc[idx],rec);
- closeModal();
- if(await saveRefs((idx==null?'Document type added: ':'Document type updated: ')+name))toast('Document type saved.');
+ if(await saveRefs((idx==null?'Document type added: ':'Document type updated: ')+name)){closeModal();toast('Document type saved.');}
 };
 ACTIONS.docTypeToggle=(t)=>{
  const i=Number(t.dataset.i),d=S.refs.doc[i],now=new Date().toISOString();
@@ -1353,16 +1425,16 @@ ACTIONS.addDocType=async(t)=>{
 };
 ACTIONS.delDocType=(t)=>{
  const i=Number(t.dataset.i),d=S.refs.doc[i];
- confirmBox('Remove document type','Remove “'+d.name+'”? Existing documents keep it, but it can no longer be chosen. Deactivating keeps it in the list instead.','Remove',async()=>{
+ confirmBox('Remove document type','Remove “'+d.name+'”? Types used by documents, report schedules or workflows must be retained. Deactivate a used type to stop new registrations.','Remove',async()=>{
   S.refs.doc.splice(i,1);
   if(await saveRefs('Document type removed: '+d.name))toast('Document type removed.');
  },true);
 };
-ACTIONS.addHol=(t)=>{const v=pval(t);if(!v.date||!v.v.trim())return toast('Enter the date and the name.','bad');if(S.holidays.some(h=>h.date===v.date))return toast('That date is already listed.','bad');S.holidays.push({date:v.date,name:v.v.trim()});rebuildHS();cfg('holidays','Holiday added',v.date);render();};
-ACTIONS.delHol=(t)=>{S.holidays=S.holidays.filter(h=>h.date!==t.dataset.d);rebuildHS();cfg('holidays','Holiday removed',t.dataset.d);render();};
-CHANGES.desStaff=(t)=>{S.designations[t.dataset.i].staff=t.value;cfg('designations','Designation changed',S.designations[t.dataset.i].name+': '+uname(t.value));toast('Saved.');};
-ACTIONS.addDes=(t)=>{const v=pval(t);if(!v.v.trim())return toast('Enter the region or office.','bad');if(S.designations.some(d=>d.name===v.v.trim()))return toast('That already exists.','bad');S.designations.push({name:v.v.trim(),staff:v.staff});cfg('designations','Designation added',v.v);render();};
-ACTIONS.delDes=(t)=>{const x=S.designations[t.dataset.i];S.designations.splice(t.dataset.i,1);cfg('designations','Designation removed',x.name);render();};
+ACTIONS.addHol=(t)=>{const v=pval(t);if(!v.date||!v.v.trim())return toast('Enter the date and the name.','bad');if(S.holidays.some(h=>h.date===v.date))return toast('That date is already listed.','bad');S.holidays.push({date:v.date,name:v.v.trim()});return cfg('holidays','Holiday added',v.date);};
+ACTIONS.delHol=(t)=>{S.holidays=S.holidays.filter(h=>h.date!==t.dataset.d);return cfg('holidays','Holiday removed',t.dataset.d);};
+CHANGES.desStaff=(t)=>{S.designations[t.dataset.i].staff=t.value;return cfg('designations','Designation changed',S.designations[t.dataset.i].name+': '+uname(t.value));};
+ACTIONS.addDes=(t)=>{const v=pval(t);if(!v.v.trim())return toast('Enter the region or office.','bad');if(S.designations.some(d=>d.name===v.v.trim()))return toast('That already exists.','bad');S.designations.push({name:v.v.trim(),staff:v.staff});return cfg('designations','Designation added',v.v);};
+ACTIONS.delDes=(t)=>{const x=S.designations[t.dataset.i];S.designations.splice(t.dataset.i,1);return cfg('designations','Designation removed',x.name);};
 
 /* =====================  ADMIN: SETTINGS & DATA  ===================== */
 VIEWS.settings=()=>{
@@ -1370,13 +1442,18 @@ VIEWS.settings=()=>{
  return '<div class="wrap"><div class="pagehead"><div><h1>System Admin Settings</h1><p>Configure system behavior.</p></div></div><div class="charts"><div class="card pad" data-panel><h3 style="margin-bottom:10px">System settings</h3>'+ 
  '<div class="fld"><label>Office name (shown on printouts)</label><input name="orgName" value="'+esc(s.orgName)+'"></div><div class="g2"><div class="fld"><label>Tracking number prefix</label><input name="prefix" value="'+esc(s.prefix)+'"></div><div class="fld"><label>Sign out after inactivity (minutes, 0 = never)</label><input type="number" min="0" name="idleMinutes" value="'+s.idleMinutes+'"></div></div>'+
  '<div class="g3"><div class="fld"><label>Due soon (working days)</label><input type="number" min="0" name="dueSoonDays" value="'+s.dueSoonDays+'"></div><div class="fld"><label>Admin desk limit (working days)</label><input type="number" min="0" name="adminDeskDays" value="'+s.adminDeskDays+'"></div><div class="fld"><label>Focal desk limit (working days)</label><input type="number" min="0" name="focalDeskDays" value="'+s.focalDeskDays+'"></div></div>'+
- '<div class="fld"><label>After staff comply with comments, the document goes to</label><select name="resubmit">'+opt('returner','The reviewer who returned it',s.resubmit==='returner')+opt('restart','The Supervisor review again (restart the chain)',s.resubmit==='restart')+'</select></div><button class="btn primary" data-act="saveSettings">Save settings</button></div>'+
+ '<div class="fld"><label>After staff comply with comments, the document goes to</label><select name="resubmit">'+opt('returner','The reviewer who returned it',s.resubmit==='returner')+opt('restart','The Supervisor review again (restart the chain)',s.resubmit==='restart')+'</select></div>'+
+ '<div class="fld"><label class="chk" for="cursorTrail"><input id="cursorTrail" name="cursorTrail" type="checkbox"'+(s.cursorTrail!==false?' checked':'')+' aria-describedby="cursorTrailHelp"> Cursor particle trail</label><p class="hint" id="cursorTrailHelp">Show white particles behind the pointer for signed-in users. Applies system-wide after saving. Always disabled on touch-only devices and when reduced motion is preferred. Your normal cursor stays visible.</p></div><button class="btn primary" data-act="saveSettings">Save settings</button></div>'+
  '<div class="card pad"><h3 style="margin-bottom:10px">Backup and data</h3><p class="muted">The server keeps a daily copy of the database for 14 days. You can also export a full backup here. It contains password hashes, so keep it private.</p><div class="row"><button class="btn" data-act="backup">'+ic('download')+'Export backup (JSON)</button><label class="btn" style="cursor:pointer">Restore from backup<input type="file" accept=".json,application/json" data-chg="restore" hidden></label></div><hr style="border:0;border-top:1px solid var(--line2);margin:16px 0"><div class="row"><button class="btn danger" data-act="clearDocs">Delete all documents</button></div></div></div>'+
  '<div class="banner" style="margin-top:16px">'+ic('info')+'<div><b>Accounts and sessions.</b> Sign-in is checked by the server, passwords are stored as salted hashes, and every action is authorised on the server, not just hidden in the screen. Deactivating a user ends their sessions immediately.</div></div></div>';
 };
-ACTIONS.saveSettings=(t)=>{const v=formVals(t.closest('[data-panel]')),s=S.settings,n=k=>Math.max(0,parseInt(v[k],10)||0);
+ACTIONS.saveSettings=async(t)=>{if(t.disabled)return;const v=formVals(t.closest('[data-panel]')),n=k=>Math.max(0,parseInt(v[k],10)||0);
  if(!v.orgName.trim()||!v.prefix.trim())return toast('The office name and prefix cannot be empty.','bad');
- Object.assign(s,{orgName:v.orgName.trim(),prefix:v.prefix.trim().toUpperCase(),idleMinutes:n('idleMinutes'),dueSoonDays:n('dueSoonDays'),adminDeskDays:n('adminDeskDays'),focalDeskDays:n('focalDeskDays'),resubmit:v.resubmit});adminAct('Settings saved','');toast('Settings saved.');render();};
+ const value=Object.assign({},S.settings,{orgName:v.orgName.trim(),prefix:v.prefix.trim().toUpperCase(),idleMinutes:n('idleMinutes'),dueSoonDays:n('dueSoonDays'),adminDeskDays:n('adminDeskDays'),focalDeskDays:n('focalDeskDays'),resubmit:v.resubmit,cursorTrail:v.cursorTrail===true});
+ t.disabled=true;
+ try{const r=await api('PUT','/api/config/settings',{value,note:'Settings saved'});if(!r.ok)return toast(r.error||'Could not save settings.','bad');toast('Settings saved.');await refresh();}
+ finally{t.disabled=false;}
+};
 ACTIONS.backup=async()=>{try{const res=await fetch('/api/admin/backup',{credentials:'same-origin'});if(!res.ok){toast('Could not create the backup.','bad');return;}saveFile('dts-backup-'+isoD(new Date())+'.json',await res.text(),'application/json');}catch(e){toast('Could not reach the server.','bad');}};
 CHANGES.restore=(t)=>{const f=t.files[0];if(!f)return;const r=new FileReader();
  r.onload=()=>{let o;try{o=JSON.parse(r.result);}catch(e){toast('That file could not be read.','bad');return;}

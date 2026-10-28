@@ -1,0 +1,16 @@
+PASS Insights CMED filter follows assigned personnel
+PASS Analytics release total includes earlier Special Report receipts
+PASS Charts release total matches Analytics
+PASS Special Report adapter retains workflow release time
+PASS mixed report ownership is stable for both assigned viewers
+PASS mixed report keeps viewer-specific action responsibility
+PASS shared ownership is labelled explicitly in Analytics
+PASS chart drilldown matches effective ownership instead of stored routing
+PASS CMED still defaults to its document list
+PASS downloaded registry CSV neutralizes formula text
+PASS CSV quotes and numeric values remain correct
+PASS browser regular registration uses CMED assignee division
+PASS newly logged regular report appears in matching Insights division
+PASS rejected division removal restores authoritative client state
+PASS no uncaught browser errors
+15 passed, 0 failed

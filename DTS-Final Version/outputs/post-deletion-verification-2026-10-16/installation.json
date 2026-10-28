@@ -1,0 +1,262 @@
+{
+  "at": "2026-10-16T02:25:54.004Z",
+  "node": "v24.21.0",
+  "failures": [],
+  "sourceComparison": [
+    {
+      "file": "server.js",
+      "sha256": "0e24fd3c8dc19dda0e42c8174d8d4d4d3ee23a08a50ba91079a5f5be2744b3b3",
+      "matchesVerifiedBaseline": true
+    },
+    {
+      "file": "public/engine.js",
+      "sha256": "386bd902db4c368f654cc5256bcb4da4b41aeda05ca67ee940869bcd595ec513",
+      "matchesVerifiedBaseline": true
+    },
+    {
+      "file": "public/client.js",
+      "sha256": "3322a2747cc67da274692a061a2da28bf2842ee6ce167822cf7d2081f81b58d1",
+      "matchesVerifiedBaseline": true
+    },
+    {
+      "file": "public/special.js",
+      "sha256": "ea453e64ad8d24caa6ba9041189b05a8830c315a67de07c5066c76aa2d72377c",
+      "matchesVerifiedBaseline": true
+    },
+    {
+      "file": "public/ux.js",
+      "sha256": "5646419b5db42593014319c2364175cdef767ed136e09a9e64556b8a564f6635",
+      "matchesVerifiedBaseline": true
+    },
+    {
+      "file": "package.json",
+      "sha256": "cead155fea067f0eac1e9a7eeffe92ae492e11f9395976130068eb2726c2cd87",
+      "matchesVerifiedBaseline": true
+    }
+  ],
+  "staticAssets": [
+    {
+      "file": "index.html",
+      "status": 200,
+      "matchesDisk": true
+    },
+    {
+      "file": "client.js",
+      "status": 200,
+      "matchesDisk": true
+    },
+    {
+      "file": "engine.js",
+      "status": 200,
+      "matchesDisk": true
+    },
+    {
+      "file": "app.css",
+      "status": 200,
+      "matchesDisk": true
+    },
+    {
+      "file": "schedule.js",
+      "status": 200,
+      "matchesDisk": true
+    },
+    {
+      "file": "schedule.css",
+      "status": 200,
+      "matchesDisk": true
+    },
+    {
+      "file": "special.js",
+      "status": 200,
+      "matchesDisk": true
+    },
+    {
+      "file": "special.css",
+      "status": 200,
+      "matchesDisk": true
+    },
+    {
+      "file": "workflow.js",
+      "status": 200,
+      "matchesDisk": true
+    },
+    {
+      "file": "workflow.css",
+      "status": 200,
+      "matchesDisk": true
+    },
+    {
+      "file": "favicon.svg",
+      "status": 200,
+      "matchesDisk": true
+    },
+    {
+      "file": "favicon.png",
+      "status": 200,
+      "matchesDisk": true
+    },
+    {
+      "file": "logo-black.png",
+      "status": 200,
+      "matchesDisk": true
+    },
+    {
+      "file": "logo-white.png",
+      "status": 200,
+      "matchesDisk": true
+    },
+    {
+      "file": "login-bg.png",
+      "status": 200,
+      "matchesDisk": true
+    },
+    {
+      "file": "ux.js",
+      "status": 200,
+      "matchesDisk": true
+    },
+    {
+      "file": "ux.css",
+      "status": 200,
+      "matchesDisk": true
+    },
+    {
+      "file": "particle-trail.js",
+      "status": 200,
+      "matchesDisk": true
+    },
+    {
+      "file": "particle-trail.css",
+      "status": 200,
+      "matchesDisk": true
+    }
+  ],
+  "missingReferencedAssets": [],
+  "deploymentFiles": [
+    {
+      "file": "server.js",
+      "exists": true
+    },
+    {
+      "file": "package.json",
+      "exists": true
+    },
+    {
+      "file": "public/index.html",
+      "exists": true
+    },
+    {
+      "file": "start-dts.bat",
+      "exists": true
+    },
+    {
+      "file": "Dockerfile",
+      "exists": true
+    },
+    {
+      "file": "docker-compose.yml",
+      "exists": true
+    },
+    {
+      "file": "dts.service",
+      "exists": true
+    },
+    {
+      "file": "Caddyfile.example",
+      "exists": true
+    }
+  ],
+  "database": {
+    "quickCheck": [
+      {
+        "quick_check": "ok"
+      }
+    ],
+    "foreignKeyViolations": [],
+    "tables": {
+      "users": {
+        "count": 18,
+        "sha256": "bdbfc5d1c752be7049c707a336bcc645659a526d257bf8c9ad1cdef1a9495b67",
+        "matchesBeforeCleanup": false
+      },
+      "docs": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "matchesBeforeCleanup": true
+      },
+      "kv": {
+        "count": 10,
+        "sha256": "0053b1f1eb23982f4a46976672fdd43f5e47d65e275b90a1f2470000daae629c",
+        "matchesBeforeCleanup": true
+      },
+      "schedules": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "matchesBeforeCleanup": true
+      },
+      "sr_config": {
+        "count": 5,
+        "sha256": "4da9c5ebc671c732f3a11c26fbaebf6ccfabf0bea05d8a51038e5a211d3591b4",
+        "matchesBeforeCleanup": true
+      },
+      "sr_item": {
+        "count": 3,
+        "sha256": "959d1fa2ae9302d0711ef7837389e0405e63fe9cfbf7377ba44d2203c956e5f3",
+        "matchesBeforeCleanup": true
+      },
+      "sr_assign": {
+        "count": 3,
+        "sha256": "4e415005f2b5c117344341c4a506a9feba0f0b195cc5b8f53a5f3af93348b2c8",
+        "matchesBeforeCleanup": true
+      },
+      "workflows": {
+        "count": 16,
+        "sha256": "0fc7c203cc192df20c878d414dd661b86a80537a99be4ebaab5aedbc3f421b76",
+        "matchesBeforeCleanup": true
+      },
+      "workflow_versions": {
+        "count": 16,
+        "sha256": "910d73c7c9b878b58835cadbae69b6573929de9b8ed6751984388e466301911b",
+        "matchesBeforeCleanup": true
+      },
+      "workflow_nodes": {
+        "count": 55,
+        "sha256": "6daeaddf30eb653342afa3b0789260798b9cde391b88a206af841d4f2c6f3b48",
+        "matchesBeforeCleanup": true
+      },
+      "workflow_edges": {
+        "count": 57,
+        "sha256": "7486a6bc9977fb303ccdc70cbbe9ec27740af5bdb0644c6fb65b2e4df359ac4d",
+        "matchesBeforeCleanup": true
+      },
+      "workflow_modes": {
+        "count": 5,
+        "sha256": "c1100a79c4ffee84e83b70b638636fcf6d53ba1a44c834b1a6a586844f160e78",
+        "matchesBeforeCleanup": true
+      },
+      "workflow_instances": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "matchesBeforeCleanup": true
+      },
+      "workflow_history": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "matchesBeforeCleanup": true
+      }
+    },
+    "comparisonSnapshot": "D:\\test server\\staging-dts\\New folder\\dts-final version-workflow\\DTS-Final Version\\data\\backups\\corrections\\before-corrections-1792112537057.sqlite",
+    "userChangesSincePreviousAudit": [
+      {
+        "id": "sysadmin",
+        "changedFields": [
+          "lastLogin"
+        ]
+      }
+    ],
+    "invalidJSON": []
+  },
+  "health": {
+    "ok": true
+  }
+}

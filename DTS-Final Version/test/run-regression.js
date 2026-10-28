@@ -8,12 +8,12 @@ const run = path.join(root, '.test-runs', new Date().toISOString().replace(/[:.]
 fs.mkdirSync(run, { recursive: true });
 const suites = process.argv.slice(2).length ? process.argv.slice(2) : [
   'api', 'new-rules', 'rules4', 'routing-visibility', 'schedule',
-  'schedule.attack', 'phase10', 'phase11', 'workflow'
+  'schedule.attack', 'phase10', 'phase11', 'workflow', 'audit-corrections'
 ];
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const results = [];
 async function ready(server, port) {
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 450; i++) {
     if (server.exitCode !== null) throw new Error('Server exited before becoming ready');
     try { if ((await fetch('http://127.0.0.1:' + port + '/healthz')).ok) return; } catch {}
     await sleep(100);
